@@ -29,10 +29,14 @@ a {
 .container {
   display: flex;
   width: 100%;
-  padding: 10px;
+  padding: 10px 37px;
 }
 
 button {
   border: 0;
   cursor: pointer;
+}
+
+.text-center {
+  text-align: center;
 }
