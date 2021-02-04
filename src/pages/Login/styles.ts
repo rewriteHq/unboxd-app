@@ -5,7 +5,7 @@ export const Main = styled.div`
 
   .container {
     flex-direction: column;
-    min-height: 80vh;
+    min-height: 75vh;
   }
 `;
 
