@@ -2,6 +2,7 @@ import { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 const HomePage = lazy(() => import('./pages/Home'));
+const Register = lazy(() => import('./pages/Register'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/" component={HomePage} />
+          <Route exact path="/create-account" component={Register} />
           <Route component={NotFound} />
         </Switch>
       </Router>
