@@ -1,5 +1,4 @@
 import Styled from 'styled-components';
-import Colors from '../../constants/Colors';
 import Sizes from '../../constants/Sizes';
 
 export const FooterWrapper = Styled.div`

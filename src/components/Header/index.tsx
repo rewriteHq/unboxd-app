@@ -8,7 +8,7 @@ const Header: React.FC<HeaderComponentProps> = () => {
       <div className="container">
         <h2>unboxd</h2>
         <Auth>
-          Got account? <Link to="/login">Sign in</Link>
+          Got account? <Link to="/login"> Sign in</Link>
         </Auth>
       </div>
     </HeadWrapper>
