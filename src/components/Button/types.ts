@@ -6,6 +6,6 @@ export interface ButtonComponentProps extends ButtonHTMLAttributes<HTMLButtonEle
   round?: boolean;
   outline?: boolean;
   loading?: boolean;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  onClick?: (e: React.MouseEventHandler<HTMLButtonElement>) => void;
   disabled?: boolean;
 }
