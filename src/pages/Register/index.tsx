@@ -88,7 +88,7 @@ const Register = () => {
               register={register}
               require={true}
             />
-            <Button>Create account</Button>
+            <Button loading>Create account</Button>
           </Form>
         </div>
       </Main>
