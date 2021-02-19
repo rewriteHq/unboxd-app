@@ -1,13 +1,12 @@
-import { useState, useEffect } from 'react';
-import { Main, Form } from './styles';
+import { Form, Main } from './styles';
+import { connect, useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+
+import Button from '../../components/Button';
 import Input from '../../components/Input';
 import Layout from '../../Layout';
-import Button from '../../components/Button';
-
-import { connect, useDispatch } from 'react-redux';
-import { loginUser } from './redux/actions';
-
 import { PageHeadingSmall } from '../../commons/Heading';
+import { loginUser } from './redux/actions';
 
 const Login = (props: any) => {
   const [values, setValues] = useState({
@@ -25,9 +24,7 @@ const Login = (props: any) => {
     }));
   };
 
-  useEffect(() => {
-
-  });
+  useEffect(() => {});
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -43,7 +40,7 @@ const Login = (props: any) => {
     const result = await props.loginHandler(userData, props.history);
 
     console.log(result);
-  }
+  };
 
   return (
     <Layout>
@@ -73,13 +70,13 @@ const Login = (props: any) => {
   );
 };
 
-const mapStateToProps = (state: any) => {
-  user: state.user;
-};
+const mapStateToProps = (state: any) => ({
+  user: state.user,
+});
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: any) => ({
   loginHandler: (payload: any, history: any) =>
-    dispatch(loginUser(payload, history));
-};
+    dispatch(loginUser(payload, history)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
