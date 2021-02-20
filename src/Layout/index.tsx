@@ -1,7 +1,8 @@
 import React from 'react';
-import Header from '../components/Header';
+
+import { ComponentProps } from './types';
 import Footer from '../components/Footer';
-import {ComponentProps} from './types';
+import Header from '../components/Header';
 
 const Layout: React.FC<ComponentProps> = ({ children }) => {
   return (
