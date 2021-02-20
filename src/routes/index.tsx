@@ -1,33 +1,28 @@
-import { Suspense, useMemo } from 'react';
+import { Suspense } from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import routes from './routes';
 import PrivateRoutes from './PrivateRoute';
 import PublicRoutes from './PublicRoutes';
 
+/**
+ * Creates an array of routes distinguished into
+ * authenticated or unauthenticated.
+ */
+const routesArray = routes.map((route) =>
+  route.auth ? (
+    <PrivateRoutes key={route.path} {...route} />
+  ) : (
+    <PublicRoutes key={route.path} {...route} />
+  )
+);
+
 const RoutesHandler: React.FC = () => {
-  /**
-   * Creates an array of routes distinguished into
-   * authenticated or not.
-   *
-   * Memoized to prevent rerender on store update
-   */
-
-  const renderRoutes = useMemo(() => {
-    return routes.map((route) =>
-      route.auth ? (
-        <PrivateRoutes key={route.path} {...route} />
-      ) : (
-        <PublicRoutes key={route.path} {...route} />
-      )
-    );
-  }, []);
-
   return (
     <Router>
       <Suspense fallback={() => <h1>Loading...</h1>}>
         <Switch>
-          {renderRoutes}
+          {routesArray}
           {/* <Route component={NotFound} /> */}
         </Switch>
       </Suspense>

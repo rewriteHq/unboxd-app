@@ -1,7 +1,8 @@
 import { Route, RouteProps } from 'react-router';
+import { LazyComponent } from './types';
 
 interface MyRouteProps extends RouteProps {
-  component: any;
+  component: LazyComponent;
   rest?: any;
 }
 

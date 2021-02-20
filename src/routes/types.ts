@@ -1,6 +1,6 @@
 import React from 'react';
 
-type LazyComponent = React.LazyExoticComponent<React.ComponentType<any>>;
+export type LazyComponent = React.LazyExoticComponent<React.ComponentType<any>>;
 
 export default interface RouteType {
   path: string;
