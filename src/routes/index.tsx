@@ -20,7 +20,7 @@ const routesArray = routes.map((route) =>
 const RoutesHandler: React.FC = () => {
   return (
     <Router>
-      <Suspense fallback={() => <h1>Loading...</h1>}>
+      <Suspense fallback={<h1>Loading...</h1>}>
         <Switch>
           {routesArray}
           {/* <Route component={NotFound} /> */}

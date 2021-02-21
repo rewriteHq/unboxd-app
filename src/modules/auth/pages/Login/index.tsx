@@ -2,10 +2,10 @@ import { Form, Main } from './styles';
 import { connect, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 
-import Button from '../../components/Button';
-import Input from '../../components/Input';
-import Layout from '../../Layout';
-import { PageHeadingSmall } from '../../commons/Heading';
+import Button from '../../../../components/Button';
+import Input from '../../../../components/Input';
+import Layout from '../../../../Layout';
+import { PageHeadingSmall } from '../../../../commons/Heading';
 import { loginUser } from './redux/actions';
 
 const Login = (props: any) => {

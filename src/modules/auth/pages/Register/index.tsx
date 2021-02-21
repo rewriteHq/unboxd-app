@@ -1,17 +1,16 @@
 import { useState } from 'react';
 import { IRegisterState } from './types';
 import { Main, Form } from './styles';
-import Input from '../../components/Input';
-import Layout from '../../Layout';
-import { PageHeadingSmall } from '../../commons/Heading';
-import Button from '../../components/Button';
-import {useHistory} from 'react-router-dom';
-import API from '../../api';
+import Input from '../../../../components/Input';
+import Layout from '../../../../Layout';
+import { PageHeadingSmall } from '../../../../commons/Heading';
+import Button from '../../../../components/Button';
+import { useHistory } from 'react-router-dom';
+import API from '../../../../api';
 import toaster from 'toasted-notes';
 import 'toasted-notes/src/styles.css'; // optional styles
 
 import { useForm } from 'react-hook-form';
-
 
 const Register = () => {
   const [loading, setLoading] = useState(false);
@@ -25,10 +24,7 @@ const Register = () => {
     restFormData.signType = 'direct';
 
     try {
-      const response = await API.post(
-        'v1/auth/signup',
-        restFormData
-      );
+      const response = await API.post('v1/auth/signup', restFormData);
 
       toaster.notify(response.data.message, {
         position: 'bottom',
@@ -36,7 +32,7 @@ const Register = () => {
       });
       // setUser((prevUser) => ({ ...prevUser, ...response.data.payload }));
       history.push('/login');
-    } catch ({message}) {
+    } catch ({ message }) {
       toaster.notify(
         message ? message : 'Something happened. Kindly try again',
         {
@@ -47,7 +43,7 @@ const Register = () => {
     } finally {
       setLoading(false);
     }
-  }
+  };
   return (
     <Layout>
       <Main>
