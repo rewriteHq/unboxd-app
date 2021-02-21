@@ -7,4 +7,5 @@ export default interface RouteType {
   exact: boolean;
   auth: boolean;
   component: LazyComponent;
+  header?: LazyComponent;
 }

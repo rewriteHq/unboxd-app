@@ -44,6 +44,7 @@ const Register = () => {
       setLoading(false);
     }
   };
+
   return (
     <Layout>
       <Main>
@@ -84,7 +85,7 @@ const Register = () => {
               register={register}
               require={true}
             />
-            <Button loading>Create account</Button>
+            <Button loading={loading}>Create account</Button>
           </Form>
         </div>
       </Main>
