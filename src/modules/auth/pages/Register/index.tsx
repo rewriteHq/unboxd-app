@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { IRegisterState } from './types';
-import { Main, Form } from './styles';
+import { Form, FooterText } from './styles';
 import Input from '../../../../components/Input';
 import Layout from '../../../../Layout';
 import { PageHeadingSmall } from '../../../../commons/Heading';
 import Button from '../../../../components/Button';
 import { useHistory } from 'react-router-dom';
-import API from '../../../../api';
+import * as API from '../../../../utils/api/service';
 import toaster from 'toasted-notes';
 import 'toasted-notes/src/styles.css'; // optional styles
 
@@ -17,21 +17,28 @@ const Register = () => {
   const { handleSubmit, errors, register } = useForm();
   const history = useHistory();
 
+  console.log(process.env);
+
   const onHandleSubmit = async (restFormData: IRegisterState, event: any) => {
     event.preventDefault();
 
     setLoading(true);
-    restFormData.signType = 'direct';
+    console.log(restFormData);
 
     try {
-      const response = await API.post('v1/auth/signup', restFormData);
+      const response = await API.postReq(
+        '/auth/signup',
+        restFormData,
+        (res) => console.log(res),
+        (err) => console.log(err)
+      );
 
-      toaster.notify(response.data.message, {
-        position: 'bottom',
-        duration: 5000,
-      });
+      // toaster.notify(response.data.message, {
+      //   position: 'bottom',
+      //   duration: 5000,
+      // });
       // setUser((prevUser) => ({ ...prevUser, ...response.data.payload }));
-      history.push('/login');
+      // history.push('/login');
     } catch ({ message }) {
       toaster.notify(
         message ? message : 'Something happened. Kindly try again',
@@ -87,7 +94,11 @@ const Register = () => {
           <Button loading={loading}>Create account</Button>
         </Form>
       </div>
-      namaste wahala
+      <FooterText>
+        <div className="info">
+          By continuing, you agree to our Terms of Service and Privacy Policy
+        </div>
+      </FooterText>
     </Layout>
   );
 };

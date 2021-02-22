@@ -9,7 +9,7 @@ import cookie from 'js-cookie';
 
 // UNBOXD BASE_URL LINK
 export const ENV_VARIABLES = {
-  UNBOXD_BASE_URL: process.env.NEXT_PUBLIC_UNBOXD_BASE_URL,
+  UNBOXD_BASE_URL: process.env.REACT_APP_PUBLIC_UNBOXD_BASE_URL,
   AUTH_TOKEN: process.env.NEXT_PUBLIC_AUTH_TOKEN,
 };
 

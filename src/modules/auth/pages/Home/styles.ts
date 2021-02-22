@@ -17,5 +17,5 @@ export const Image = Styled.div`
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  margin: 2rem auto 3rem;
+  margin: 2rem auto;
 `;

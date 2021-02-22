@@ -5,6 +5,7 @@ import { HomeComponentProps } from './types';
 import Layout from '../../../../Layout';
 import { Paragraph, Image } from './styles';
 import { BTNLink } from '../../../../components/Button/styles';
+import PageBottom from '../../../../commons/PageBottom';
 
 const Home: React.FC<HomeComponentProps> = () => {
   return (
@@ -20,9 +21,10 @@ const Home: React.FC<HomeComponentProps> = () => {
         </Paragraph>
 
         <Image />
-
-        <BTNLink to="/register">Get Started</BTNLink>
       </div>
+      <PageBottom>
+        <BTNLink to="/register">Get Started</BTNLink>
+      </PageBottom>
     </Layout>
   );
 };

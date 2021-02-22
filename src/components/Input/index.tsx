@@ -13,7 +13,12 @@ const Input: React.FC<InputComponentProps> = (props) => {
   return (
     <InputField>
       <Label ref={labelRef}>{props.label}</Label>
-      <input {...props} onFocus={handleFocus} onBlur={handleFocus} />
+      <input
+        {...props}
+        ref={props.register}
+        onFocus={handleFocus}
+        onBlur={handleFocus}
+      />
     </InputField>
   );
 };

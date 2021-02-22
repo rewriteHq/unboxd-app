@@ -1,14 +1,6 @@
 import styled from 'styled-components';
+import { Bottom } from '../../../../commons/PageBottom/styles';
 import Sizes from '../../../../constants/Sizes';
-
-export const Main = styled.div`
-  display: flex;
-
-  .container {
-    flex-direction: column;
-    min-height: 80vh;
-  }
-`;
 
 export const Form = styled.form`
   display: flex;
@@ -20,5 +12,15 @@ export const Auth = styled.p`
 
   a {
     font-weight: ${Sizes.mediumWeight};
+  }
+`;
+
+export const FooterText = styled(Bottom)`
+  padding: 0rem 5rem;
+  .info {
+    font-size: ${Sizes.fourteen}px;
+    line-height: ${Sizes.fourteen}px;
+    font-weight: ${Sizes.normalWeight};
+    text-align: center;
   }
 `;
