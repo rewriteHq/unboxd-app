@@ -47,48 +47,47 @@ const Register = () => {
 
   return (
     <Layout>
-      <Main>
-        <div className="container">
-          <PageHeadingSmall className="text-center">
-            Create an account to continue
-          </PageHeadingSmall>
-          <Form onSubmit={handleSubmit(onHandleSubmit)}>
-            <Input
-              label="First name"
-              type="text"
-              name="firstname"
-              error={errors}
-              register={register}
-              require={true}
-            />
-            <Input
-              label="Last name"
-              type="text"
-              name="lastname"
-              error={errors}
-              register={register}
-              require={true}
-            />
-            <Input
-              label="Email address"
-              type="text"
-              name="email"
-              error={errors}
-              register={register}
-              require={true}
-            />
-            <Input
-              label="Password"
-              type="password"
-              name="password"
-              error={errors}
-              register={register}
-              require={true}
-            />
-            <Button loading={loading}>Create account</Button>
-          </Form>
-        </div>
-      </Main>
+      <div className="container">
+        <PageHeadingSmall className="text-center">
+          Create an account to continue
+        </PageHeadingSmall>
+        <Form onSubmit={handleSubmit(onHandleSubmit)}>
+          <Input
+            label="First name"
+            type="text"
+            name="firstname"
+            error={errors}
+            register={register}
+            require={true}
+          />
+          <Input
+            label="Last name"
+            type="text"
+            name="lastname"
+            error={errors}
+            register={register}
+            require={true}
+          />
+          <Input
+            label="Email address"
+            type="text"
+            name="email"
+            error={errors}
+            register={register}
+            require={true}
+          />
+          <Input
+            label="Password"
+            type="password"
+            name="password"
+            error={errors}
+            register={register}
+            require={true}
+          />
+          <Button loading={loading}>Create account</Button>
+        </Form>
+      </div>
+      namaste wahala
     </Layout>
   );
 };

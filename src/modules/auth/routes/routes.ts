@@ -2,8 +2,12 @@ import { lazy } from 'react';
 import RouteType from '../../../routes/types';
 
 const home = lazy(() => import('../pages/Home'));
+const homeHeader = lazy(() => import('../pages/Home/header'));
+
 const login = lazy(() => import('../pages/Login'));
+
 const register = lazy(() => import('../pages/Register'));
+const registerHeader = lazy(() => import('../pages/Register/header'));
 
 const routes: RouteType[] = [
   {
@@ -11,6 +15,7 @@ const routes: RouteType[] = [
     exact: true,
     auth: false,
     component: home,
+    header: homeHeader,
   },
   {
     path: '/login',
@@ -23,6 +28,7 @@ const routes: RouteType[] = [
     exact: true,
     auth: false,
     component: register,
+    header: registerHeader,
   },
 ];
 

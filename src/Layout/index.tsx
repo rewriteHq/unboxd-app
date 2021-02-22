@@ -1,17 +1,10 @@
 import React from 'react';
 
 import { ComponentProps } from './types';
-import Footer from '../components/Footer';
-import Header from '../components/Header';
+import { PageMain } from './styles';
 
 const Layout: React.FC<ComponentProps> = ({ children }) => {
-  return (
-    <>
-      <Header />
-      {children}
-      <Footer />
-    </>
-  );
+  return <PageMain>{children}</PageMain>;
 };
 
 export default Layout;
