@@ -37,14 +37,13 @@ export const postReq = (
   params: any,
   success: ResponseActionType,
   failed: ResponseActionType
-) => {
+) =>
   API.post(url, params)
     .then((res) => success(res.data))
     .catch((err) => {
       const error = apiErrorHandler(err);
       failed(error);
     });
-};
 
 /**
  * TODO:
