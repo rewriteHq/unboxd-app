@@ -6,34 +6,33 @@ import {
   SET_UNAUTHENTICATED,
   LOADING_USER,
 } from './types';
-import axios from 'axios';
+import API from '../../../../../utils/api';
+import Notify from '../../../../../utils/notify/notify';
 
 export const loginUser = (userData: any, history: any) => (dispatch: any) => {
   dispatch({ type: LOADING_UI });
-  axios
-    .post('login', userData)
+  API.post('login', userData)
     .then((res) => {
       const token = `Bearer ${res.data.token}`;
       localStorage.setItem('token', token); //setting token to local storage
-      axios.defaults.headers.common['Authorization'] = token; //setting authorize token to header in axios
+      API.defaults.headers.common['Authorization'] = token; //setting authorize token to header in axios
       dispatch(getUserData());
       dispatch({ type: CLEAR_ERRORS });
       console.log('success');
       history.push('/dashboard'); //redirecting to index page after login success
     })
     .catch((err) => {
-      console.log(err);
       dispatch({
         type: SET_ERRORS,
         payload: err.response.data,
       });
+      Notify.bottom(err.response.data.message);
     });
 };
 //for fetching authenticated user information
 export const getUserData = () => (dispatch: any) => {
   dispatch({ type: LOADING_USER });
-  axios
-    .get('/user')
+  API.get('/user')
     .then((res) => {
       console.log('user data', res.data);
       dispatch({
@@ -47,7 +46,7 @@ export const getUserData = () => (dispatch: any) => {
 };
 export const logoutUser = () => (dispatch: any) => {
   localStorage.removeItem('token');
-  delete axios.defaults.headers.common['Authorization'];
+  delete API.defaults.headers.common['Authorization'];
   dispatch({
     type: SET_UNAUTHENTICATED,
   });

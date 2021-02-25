@@ -22,6 +22,7 @@ const routes: RouteType[] = [
     exact: true,
     auth: false,
     component: login,
+    header: homeHeader,
   },
   {
     path: '/register',

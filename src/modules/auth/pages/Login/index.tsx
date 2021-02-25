@@ -14,7 +14,6 @@ const Login = (props: any) => {
     password: '',
   });
   const [errors, setErrors] = useState({});
-  const [loading, setLoading] = useState(false);
 
   const handleChange = (e: any) => {
     e.persist();
@@ -28,7 +27,6 @@ const Login = (props: any) => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    setLoading(true);
 
     //your client side validation here
     //after success validation
@@ -62,7 +60,9 @@ const Login = (props: any) => {
               name="password"
               onChange={handleChange}
             />
-            <Button>Login</Button>
+            <Button loading={props.loading} disabled={props.loading}>
+              Login
+            </Button>
           </Form>
         </div>
       </Main>
@@ -72,6 +72,7 @@ const Login = (props: any) => {
 
 const mapStateToProps = (state: any) => ({
   user: state.user,
+  loading: state.user.loading,
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
