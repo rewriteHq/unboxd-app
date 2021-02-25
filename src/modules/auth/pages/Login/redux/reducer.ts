@@ -15,7 +15,7 @@ const initialState = {
   errors: null,
 };
 
-export default function (state = initialState, action: any) {
+function reducer(state = initialState, action: any) {
   switch (action.type) {
     case SET_AUTHENTICATED:
       return {
@@ -56,3 +56,5 @@ export default function (state = initialState, action: any) {
       return state;
   }
 }
+
+export default reducer;

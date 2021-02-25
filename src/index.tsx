@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
+import 'toasted-notes/src/styles.css'; // optional styles
+
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 

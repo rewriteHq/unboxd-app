@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { InputField, Label } from './styles';
 import { InputComponentProps } from './types';
 
-const Input: React.FC<InputComponentProps> = (props) => {
+const Input: React.FC<InputComponentProps> = ({ register, ...props }) => {
   const labelRef = useRef<HTMLLabelElement>(null);
 
   const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -15,7 +15,7 @@ const Input: React.FC<InputComponentProps> = (props) => {
       <Label ref={labelRef}>{props.label}</Label>
       <input
         {...props}
-        ref={props.register}
+        ref={register}
         onFocus={handleFocus}
         onBlur={handleFocus}
       />

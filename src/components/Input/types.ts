@@ -5,7 +5,7 @@ export interface InputComponentProps
   label?: string;
   checkLabel?: string;
   error?: any;
-  require?: boolean;
+  require?: 'true' | 'false' | 'undefined';
   value?: string | number;
   type?: string;
   name?: string;

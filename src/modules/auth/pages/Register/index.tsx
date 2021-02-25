@@ -6,47 +6,31 @@ import Layout from '../../../../Layout';
 import { PageHeadingSmall } from '../../../../commons/Heading';
 import Button from '../../../../components/Button';
 import { useHistory } from 'react-router-dom';
-import * as API from '../../../../utils/api/service';
-import toaster from 'toasted-notes';
-import 'toasted-notes/src/styles.css'; // optional styles
 
 import { useForm } from 'react-hook-form';
+import API from '../../../../utils/api';
+import Notify from '../../../../utils/notify/notify';
 
 const Register = () => {
   const [loading, setLoading] = useState(false);
   const { handleSubmit, errors, register } = useForm();
   const history = useHistory();
 
-  console.log(process.env);
-
   const onHandleSubmit = async (restFormData: IRegisterState, event: any) => {
     event.preventDefault();
 
     setLoading(true);
-    console.log(restFormData);
+    restFormData.signType = 'direct';
 
     try {
-      const response = await API.postReq(
-        '/auth/signup',
-        restFormData,
-        (res) => console.log(res),
-        (err) => console.log(err)
-      );
+      const response = await API.post('/auth/signup', restFormData);
 
-      // toaster.notify(response.data.message, {
-      //   position: 'bottom',
-      //   duration: 5000,
-      // });
-      // setUser((prevUser) => ({ ...prevUser, ...response.data.payload }));
-      // history.push('/login');
-    } catch ({ message }) {
-      toaster.notify(
-        message ? message : 'Something happened. Kindly try again',
-        {
-          position: 'bottom',
-          duration: 5000,
-        }
-      );
+      Notify.bottom(response.data.message);
+
+      setTimeout(() => history.push('/login'), 500);
+    } catch (err) {
+      const message = err.response.data.message;
+      Notify.bottom(message ? message : 'Something happened. Kindly try again');
     } finally {
       setLoading(false);
     }
@@ -65,7 +49,7 @@ const Register = () => {
             name="firstname"
             error={errors}
             register={register}
-            require={true}
+            require="true"
           />
           <Input
             label="Last name"
@@ -73,7 +57,7 @@ const Register = () => {
             name="lastname"
             error={errors}
             register={register}
-            require={true}
+            require="true"
           />
           <Input
             label="Email address"
@@ -81,7 +65,7 @@ const Register = () => {
             name="email"
             error={errors}
             register={register}
-            require={true}
+            require="true"
           />
           <Input
             label="Password"
@@ -89,9 +73,11 @@ const Register = () => {
             name="password"
             error={errors}
             register={register}
-            require={true}
+            require="true"
           />
-          <Button loading={loading}>Create account</Button>
+          <Button loading={loading} disabled={loading}>
+            Create account
+          </Button>
         </Form>
       </div>
       <FooterText>
