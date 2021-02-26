@@ -1,23 +1,29 @@
 import { Suspense } from 'react';
+import { connect } from 'react-redux';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import { checkAuth } from './modules/auth/pages/Login/redux/actions';
 import RoutesHandler from './routes';
 
-function App() {
+interface ComponentProps {
+  checkAuthenticated: () => void;
+}
+
+const App: React.FC<ComponentProps> = ({ checkAuthenticated }) => {
+  checkAuthenticated();
+
   return (
     <Suspense fallback={() => <h1>Loading...</h1>}>
       <Router>
         <Switch>
-          {/* <Route exact path="/" component={HomePage} />
-          <Route path="/create-account" component={Register} />
-          <Route path="/login" component={Login} />
-          <Route path="/event" component={Event} />
-          <PrivateRoute path="/dashboard" component={Dashboard} />
-          <Route component={NotFound} /> */}
           <RoutesHandler />
         </Switch>
       </Router>
     </Suspense>
   );
-}
+};
 
-export default App;
+const mapDispatchToProps = (dispatch: any) => ({
+  checkAuthenticated: () => dispatch(checkAuth()),
+});
+
+export default connect(null, mapDispatchToProps)(App);

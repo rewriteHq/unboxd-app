@@ -9,9 +9,9 @@ import {
 } from './types';
 import API from '../../../../../utils/api';
 import Notify from '../../../../../utils/notify/notify';
+import { AppDispatch } from '../../../../../store/types';
 
 export const loginUser = (userData: any, history: any) => (dispatch: any) => {
-  console.log(process.env);
   dispatch({ type: LOADING_UI });
   API.post('/auth/signin', userData)
     .then((res) => {
@@ -31,6 +31,7 @@ export const loginUser = (userData: any, history: any) => (dispatch: any) => {
       Notify.bottom(err.response.data.message);
     });
 };
+
 //for fetching authenticated user information
 export const getUserData = () => (dispatch: any) => {
   dispatch({ type: LOADING_USER });
@@ -46,6 +47,7 @@ export const getUserData = () => (dispatch: any) => {
       console.log(err);
     });
 };
+
 export const logoutUser = () => (dispatch: any) => {
   localStorage.removeItem('token');
   delete API.defaults.headers.common['Authorization'];
@@ -53,6 +55,17 @@ export const logoutUser = () => (dispatch: any) => {
     type: SET_UNAUTHENTICATED,
   });
   window.location.href = '/login'; //redirect to login page
+};
+
+//check user authetication status
+export const checkAuth = () => (dispatch: AppDispatch) => {
+  const token = localStorage.getItem('token');
+
+  if (token) {
+    API.defaults.headers.common['Authorization'] = token; //setting authorize token to header in axios
+    dispatch(getUserData());
+    dispatch({ type: SET_AUTHENTICATED });
+  }
 };
 
 // NOTE: your server must return response like as follow for getting the authenticated user information getUserData function must return response as

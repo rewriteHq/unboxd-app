@@ -31,7 +31,9 @@ const PrivateRoute: React.FC<MyRouteProps> = ({
     }
   />
 );
+
 const mapStateToProps = (state: any) => ({
   authenticated: state.user.authenticated,
 });
+
 export default connect(mapStateToProps)(PrivateRoute);
