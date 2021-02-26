@@ -5,6 +5,7 @@ import {
   CLEAR_ERRORS,
   SET_UNAUTHENTICATED,
   LOADING_USER,
+  SET_AUTHENTICATED,
 } from './types';
 import API from '../../../../../utils/api';
 import Notify from '../../../../../utils/notify/notify';
@@ -19,7 +20,7 @@ export const loginUser = (userData: any, history: any) => (dispatch: any) => {
       API.defaults.headers.common['Authorization'] = token; //setting authorize token to header in axios
       dispatch(getUserData());
       dispatch({ type: CLEAR_ERRORS });
-      console.log('success');
+      dispatch({ type: SET_AUTHENTICATED });
       history.push('/dashboard'); //redirecting to index page after login success
     })
     .catch((err) => {

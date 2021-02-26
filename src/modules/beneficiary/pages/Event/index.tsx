@@ -1,5 +1,5 @@
 import React from 'react';
-import DashboardLayout from '../../commons/DashboardLayout';
+import DashboardLayout from '../../../../commons/DashboardLayout';
 
 const Event = () => {
   const navItems = [() => <a>Finish</a>];
