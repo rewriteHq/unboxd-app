@@ -37,7 +37,6 @@ export const getUserData = () => (dispatch: any) => {
   dispatch({ type: LOADING_USER });
   API.get('/user')
     .then((res) => {
-      console.log('user data', res.data);
       dispatch({
         type: SET_USER,
         payload: res.data,

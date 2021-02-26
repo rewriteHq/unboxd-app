@@ -35,9 +35,7 @@ const Login = (props: any) => {
       password: values.password,
     };
 
-    const result = await props.loginHandler(userData, props.history);
-
-    console.log(result);
+    await props.loginHandler(userData, props.history);
   };
 
   return (
