@@ -15,7 +15,7 @@ const Login = (props: any) => {
   });
   const [errors, setErrors] = useState({});
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.persist();
     setValues((values: any) => ({
       ...values,
