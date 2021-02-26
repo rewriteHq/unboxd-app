@@ -76,7 +76,7 @@ const mapStateToProps = (state: any) => ({
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-  loginHandler: (payload: any, history: any) =>
+  loginHandler: async (payload: any, history: any) =>
     dispatch(loginUser(payload, history)),
 });
 

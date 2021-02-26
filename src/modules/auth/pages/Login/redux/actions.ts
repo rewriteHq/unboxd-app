@@ -10,8 +10,9 @@ import API from '../../../../../utils/api';
 import Notify from '../../../../../utils/notify/notify';
 
 export const loginUser = (userData: any, history: any) => (dispatch: any) => {
+  console.log(process.env);
   dispatch({ type: LOADING_UI });
-  API.post('login', userData)
+  API.post('/auth/signin', userData)
     .then((res) => {
       const token = `Bearer ${res.data.token}`;
       localStorage.setItem('token', token); //setting token to local storage
