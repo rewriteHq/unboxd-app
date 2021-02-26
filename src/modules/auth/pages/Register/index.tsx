@@ -49,7 +49,7 @@ const Register = () => {
             name="firstname"
             error={errors}
             register={register}
-            require="true"
+            required
           />
           <Input
             label="Last name"
@@ -57,7 +57,7 @@ const Register = () => {
             name="lastname"
             error={errors}
             register={register}
-            require="true"
+            required
           />
           <Input
             label="Email address"
@@ -65,7 +65,7 @@ const Register = () => {
             name="email"
             error={errors}
             register={register}
-            require="true"
+            required
           />
           <Input
             label="Password"
@@ -73,7 +73,7 @@ const Register = () => {
             name="password"
             error={errors}
             register={register}
-            require="true"
+            required
           />
           <Button loading={loading} disabled={loading}>
             Create account
