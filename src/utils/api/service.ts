@@ -20,7 +20,7 @@ const apiErrorHandler = (err: AxiosError) => {
       //handle unauthorized errors
     } else if (statusCode === 404) {
       //handle not found errors
-    } else if (statusCode === 500) {
+    } else if (statusCode === 50) {
       //handle server errors
     } else {
       data.error = response.data.error
@@ -37,14 +37,13 @@ export const postReq = (
   params: any,
   success: ResponseActionType,
   failed: ResponseActionType
-) => {
+) =>
   API.post(url, params)
     .then((res) => success(res.data))
     .catch((err) => {
       const error = apiErrorHandler(err);
       failed(error);
     });
-};
 
 /**
  * TODO:

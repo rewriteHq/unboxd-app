@@ -1,9 +1,11 @@
 import { Suspense } from 'react';
-import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import routes from './routes';
 import PrivateRoutes from './PrivateRoute';
 import PublicRoutes from './PublicRoutes';
+
+import NotFound from '../modules/auth/pages/NotFound';
 
 /**
  * Creates an array of routes distinguished into
@@ -20,10 +22,10 @@ const routesArray = routes.map((route) =>
 const RoutesHandler: React.FC = () => {
   return (
     <Router>
-      <Suspense fallback={() => <h1>Loading...</h1>}>
+      <Suspense fallback={<h1>Loading...</h1>}>
         <Switch>
           {routesArray}
-          {/* <Route component={NotFound} /> */}
+          <Route component={NotFound} />
         </Switch>
       </Suspense>
     </Router>

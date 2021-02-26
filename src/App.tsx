@@ -1,29 +1,29 @@
-import { Suspense, lazy } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import PrivateRoute from './auth/PrivateRoute';
+import { Suspense } from 'react';
+import { connect } from 'react-redux';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import { checkAuth } from './modules/auth/pages/Login/redux/actions';
+import RoutesHandler from './routes';
 
-const HomePage = lazy(() => import('./pages/Home'));
-const Register = lazy(() => import('./pages/Register'));
-const Login = lazy(() => import('./pages/Login'));
-const Event = lazy(() => import('./pages/Event'));
-const Dashboard = lazy(() => import('./pages/Dashboard'));
-const NotFound = lazy(() => import('./pages/NotFound'));
+interface ComponentProps {
+  checkAuthenticated: () => void;
+}
 
-function App() {
+const App: React.FC<ComponentProps> = ({ checkAuthenticated }) => {
+  checkAuthenticated();
+
   return (
     <Suspense fallback={() => <h1>Loading...</h1>}>
       <Router>
         <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route path="/create-account" component={Register} />
-          <Route path="/login" component={Login} />
-          <Route path="/event" component={Event} />
-          <PrivateRoute path="/dashboard" component={Dashboard} />
-          <Route component={NotFound} />
+          <RoutesHandler />
         </Switch>
       </Router>
     </Suspense>
   );
-}
+};
 
-export default App;
+const mapDispatchToProps = (dispatch: any) => ({
+  checkAuthenticated: () => dispatch(checkAuth()),
+});
+
+export default connect(null, mapDispatchToProps)(App);

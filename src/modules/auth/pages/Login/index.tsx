@@ -2,10 +2,10 @@ import { Form, Main } from './styles';
 import { connect, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 
-import Button from '../../components/Button';
-import Input from '../../components/Input';
-import Layout from '../../Layout';
-import { PageHeadingSmall } from '../../commons/Heading';
+import Button from '../../../../components/Button';
+import Input from '../../../../components/Input';
+import Layout from '../../../../Layout';
+import { PageHeadingSmall } from '../../../../commons/Heading';
 import { loginUser } from './redux/actions';
 
 const Login = (props: any) => {
@@ -14,9 +14,8 @@ const Login = (props: any) => {
     password: '',
   });
   const [errors, setErrors] = useState({});
-  const [loading, setLoading] = useState(false);
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.persist();
     setValues((values: any) => ({
       ...values,
@@ -28,7 +27,6 @@ const Login = (props: any) => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    setLoading(true);
 
     //your client side validation here
     //after success validation
@@ -37,9 +35,7 @@ const Login = (props: any) => {
       password: values.password,
     };
 
-    const result = await props.loginHandler(userData, props.history);
-
-    console.log(result);
+    await props.loginHandler(userData, props.history);
   };
 
   return (
@@ -62,7 +58,9 @@ const Login = (props: any) => {
               name="password"
               onChange={handleChange}
             />
-            <Button>Login</Button>
+            <Button loading={props.loading} disabled={props.loading}>
+              Login
+            </Button>
           </Form>
         </div>
       </Main>
@@ -72,10 +70,11 @@ const Login = (props: any) => {
 
 const mapStateToProps = (state: any) => ({
   user: state.user,
+  loading: state.user.loading,
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-  loginHandler: (payload: any, history: any) =>
+  loginHandler: async (payload: any, history: any) =>
     dispatch(loginUser(payload, history)),
 });
 
