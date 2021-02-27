@@ -2,11 +2,19 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import DashboardLayout from '../../../../commons/DashboardLayout';
 import { getCategories } from './redux/actions';
+import { Category } from './redux/types';
 
-const Event = () => {
+interface ComponentProps {
+  categories: Category[] | undefined;
+  getCategories: () => void;
+}
+
+const Event: React.FC<ComponentProps> = ({ getCategories, categories }) => {
   const navItems = [() => <a>Finish</a>];
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    getCategories();
+  }, [getCategories]);
 
   return (
     <DashboardLayout

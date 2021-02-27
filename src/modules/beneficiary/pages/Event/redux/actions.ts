@@ -5,7 +5,12 @@ import { SET_CATEGORIES } from './types';
 
 export const getCategories = () => (dispatch: Dispatch) => {
   dispatch({ type: LOADING_UI });
-  API.post('/category')
-    .then((res) => console.log(res))
+  API.get('/category')
+    .then((res) =>
+      dispatch({
+        type: SET_CATEGORIES,
+        payload: res.data.payload,
+      })
+    )
     .catch((err) => console.log(err.response));
 };
