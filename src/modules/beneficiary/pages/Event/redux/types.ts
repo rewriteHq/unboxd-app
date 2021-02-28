@@ -17,4 +17,8 @@ interface AddCategory {
   payload: Category;
 }
 
+export interface InititalState {
+  categories: Category[];
+}
+
 export type EventActionTypes = SetCategories | AddCategory;
