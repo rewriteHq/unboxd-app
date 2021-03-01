@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import Colors from '../../constants/Colors';
 
-const button = css`
+export const button = css`
   display: flex;
   justify-content: center;
   align-items: center;
