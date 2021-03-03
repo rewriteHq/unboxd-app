@@ -1,6 +1,5 @@
 import React from 'react';
-import { PageMain } from '../../Layout/styles';
-import { Head, HeaderTitle, ModalWrapper } from './styles';
+import { Head, HeaderTitle, ModalMain, ModalWrapper } from './styles';
 import { ModalComponentProps, ModalHeaderComponentProps } from './types';
 
 const Modal = ({ show, children }: ModalComponentProps) => {
@@ -10,16 +9,17 @@ const Modal = ({ show, children }: ModalComponentProps) => {
 const Header: React.FC<ModalHeaderComponentProps> = ({ goBack, children }) => {
   return (
     <Head>
-      <a href="/" onClick={goBack}>
+      <a href="#0" onClick={goBack}>
         ←
       </a>
       <HeaderTitle>{children}</HeaderTitle>
+      <div>Finish</div>
     </Head>
   );
 };
 
 const Main: React.FC = ({ children }) => {
-  return <PageMain>{children}</PageMain>;
+  return <ModalMain>{children}</ModalMain>;
 };
 
 Modal.Header = Header;

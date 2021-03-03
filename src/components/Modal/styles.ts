@@ -17,6 +17,7 @@ export const Head = styled.div`
   height: 70px;
   width: 100%;
   padding: 0 20px;
+  background: white;
 `;
 
 export const HeaderTitle = styled.div`
@@ -29,4 +30,12 @@ export const HeaderTitle = styled.div`
     color: ${Colors.grey};
     font-size: ${Sizes.small};
   }
+`;
+
+export const ModalMain = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+  background: ${Colors.white};
+  min-height: 75vh;
 `;
