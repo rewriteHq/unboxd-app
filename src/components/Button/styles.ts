@@ -23,3 +23,10 @@ export const BTNLink = styled(Link)`
 export const Spinner = styled.span`
   max-width: 20px;
 `;
+
+export const PlainButton = styled.button`
+  background: transparent;
+  border: none;
+  padding: 1rem 0;
+  white-space: nowrap;
+`;

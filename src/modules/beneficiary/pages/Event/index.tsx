@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import DashboardLayout from '../../../../commons/DashboardLayout';
 import { DashboardContainer } from '../../../../commons/DashboardLayout/styles';
 import { SpaceBetween } from '../../../../commons/UtilityStyles/Flex';
+import { PlainButton } from '../../../../components/Button/styles';
 import { getCategories } from './redux/actions';
 import { Category } from './redux/types';
 
@@ -31,6 +32,7 @@ const Event: React.FC<ComponentProps> = ({ getCategories, categories }) => {
         <ImageHolder>Choose cover image</ImageHolder>
         <SpaceBetween>
           <HeadlineInput placeholder="Type headline here" />
+          <PlainButton>See examples</PlainButton>
         </SpaceBetween>
       </DashboardContainer>
     </DashboardLayout>
