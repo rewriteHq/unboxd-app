@@ -10,7 +10,11 @@ interface ComponentProps {
   fromUnsplash: (imageUrl: string) => void;
 }
 
-const ImageUploadModal = ({ show, fromGallery }: ComponentProps) => {
+const ImageUploadModal = ({
+  show,
+  fromGallery,
+  fromUnsplash,
+}: ComponentProps) => {
   const [unsplashModal, setUnsplashModal] = useState(false);
 
   const changeFile = useCallback(
@@ -20,6 +24,14 @@ const ImageUploadModal = ({ show, fromGallery }: ComponentProps) => {
       }
     },
     [fromGallery]
+  );
+
+  const selectImage = useCallback(
+    (url: string) => {
+      setUnsplashModal(false);
+      fromUnsplash(url);
+    },
+    [fromUnsplash]
   );
 
   return (
@@ -43,7 +55,7 @@ const ImageUploadModal = ({ show, fromGallery }: ComponentProps) => {
           </Container>
         </Modal.Bottom>
       </Modal>
-      <UnsplashModal show={unsplashModal} />
+      <UnsplashModal show={unsplashModal} selectImage={selectImage} />
     </>
   );
 };

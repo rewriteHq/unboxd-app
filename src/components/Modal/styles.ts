@@ -56,4 +56,6 @@ export const ModalBottom = styled.div`
   bottom: 0;
   left: 0;
   width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
 `;
