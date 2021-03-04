@@ -1,5 +1,11 @@
 import React from 'react';
-import { Head, HeaderTitle, ModalMain, ModalWrapper } from './styles';
+import {
+  Head,
+  HeaderTitle,
+  ModalBottom,
+  ModalMain,
+  ModalWrapper,
+} from './styles';
 import { ModalComponentProps, ModalHeaderComponentProps } from './types';
 
 const Modal = ({ show, children }: ModalComponentProps) => {
@@ -22,6 +28,11 @@ const Main: React.FC = ({ children }) => {
   return <ModalMain>{children}</ModalMain>;
 };
 
+const Bottom: React.FC = ({ children }) => {
+  return <ModalBottom>{children}</ModalBottom>;
+};
+
 Modal.Header = Header;
 Modal.Main = Main;
+Modal.Bottom = Bottom;
 export default Modal;

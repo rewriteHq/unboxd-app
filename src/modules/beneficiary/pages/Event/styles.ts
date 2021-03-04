@@ -5,6 +5,12 @@ export const ImageHolder = styled(BTN)`
   height: 30vh;
 `;
 
+export const CoverImage = styled.img`
+  height: 30vh;
+  width: 100%;
+  object-fit: cover;
+`;
+
 export const HeadlineInput = styled.textarea`
   border: none;
   padding: 1rem 0;

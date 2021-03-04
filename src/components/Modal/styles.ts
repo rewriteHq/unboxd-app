@@ -7,7 +7,18 @@ export const ModalWrapper = styled.div`
   top: 0;
   left: 0;
   width: 100%;
+  height: 100%;
   z-index: 100;
+
+  &::before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.8);
+  }
 `;
 
 export const Head = styled.div`
@@ -35,7 +46,14 @@ export const HeaderTitle = styled.div`
 export const ModalMain = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 0 20px;
+  padding: 20px;
   background: ${Colors.white};
   min-height: 75vh;
+`;
+
+export const ModalBottom = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
 `;

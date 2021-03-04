@@ -22,4 +22,10 @@ export const PageHeadingSmall = styled.h3`
   font-size: ${Sizes.twenty}px;
   color: ${Colors.black};
   padding: 10px 0;
+
+  ${({ centered }: { centered?: boolean }) =>
+    centered &&
+    css`
+      text-align: center;
+    `}
 `;

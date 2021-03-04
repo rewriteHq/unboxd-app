@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import DashboardLayout from '../../../../commons/DashboardLayout';
 import { DashboardContainer } from '../../../../commons/DashboardLayout/styles';
+import ImageUploadModal from '../../../../commons/ImageUploadModal';
 import PageBottom from '../../../../commons/PageBottom';
 import { SpaceBetween } from '../../../../commons/UtilityStyles/Flex';
 import Button from '../../../../components/Button';
@@ -12,14 +13,13 @@ import HeadlinesModal from './components/HeadlinesModal';
 import { getCategories } from './redux/actions';
 import { Category } from './redux/types';
 
-import { HeadlineInput, ImageHolder } from './styles';
+import { CoverImage, HeadlineInput, ImageHolder } from './styles';
 
 const ModalsIndex = {
   NONE: 0,
   CATEGORY: 1,
   HEADLINES: 2,
   IMAGE: 3,
-  UNSPLASH: 4,
 };
 
 interface ComponentProps {
@@ -30,6 +30,7 @@ interface ComponentProps {
 const Event: React.FC<ComponentProps> = ({ getCategories, categories }) => {
   const navItems = [() => <a>Finish</a>];
   const [image, setImage] = useState('');
+  const [file, setFile] = useState<File | string>('');
   const [headline, setHeadline] = useState('');
   const [category, setCategory] = useState<Category | ''>('');
   const [date, setDate] = useState('');
@@ -50,11 +51,34 @@ const Event: React.FC<ComponentProps> = ({ getCategories, categories }) => {
     setModal(ModalsIndex.NONE);
   }, []);
 
+  const fromGallery = useCallback((file: File) => {
+    setFile(file);
+    setImage(URL.createObjectURL(file));
+    setModal(ModalsIndex.NONE);
+  }, []);
+
+  const fromUnsplash = useCallback((imageUrl: string) => {
+    setImage(imageUrl);
+    setFile(imageUrl);
+    setModal(ModalsIndex.NONE);
+  }, []);
+
   return (
     <>
       <DashboardLayout pageTitle="Setup Event" navItems={navItems}>
         <DashboardContainer>
-          <ImageHolder>Choose cover image</ImageHolder>
+          {image ? (
+            <CoverImage
+              onClick={() => setModal(ModalsIndex.IMAGE)}
+              src={image}
+              alt="cover photo"
+            />
+          ) : (
+            <ImageHolder onClick={() => setModal(ModalsIndex.IMAGE)}>
+              Choose cover image
+            </ImageHolder>
+          )}
+
           <SpaceBetween>
             <HeadlineInput
               placeholder="Type headline here"
@@ -98,6 +122,12 @@ const Event: React.FC<ComponentProps> = ({ getCategories, categories }) => {
           select={selectHeadline}
         />
       )}
+
+      <ImageUploadModal
+        show={modal === ModalsIndex.IMAGE}
+        fromGallery={fromGallery}
+        fromUnsplash={fromUnsplash}
+      />
     </>
   );
 };
