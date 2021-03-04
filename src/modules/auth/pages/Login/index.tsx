@@ -1,5 +1,5 @@
 import { Form, Main } from './styles';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { useEffect, useState } from 'react';
 
 import Button from '../../../../components/Button';
@@ -13,7 +13,6 @@ const Login = (props: any) => {
     email: '',
     password: '',
   });
-  const [errors, setErrors] = useState({});
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.persist();

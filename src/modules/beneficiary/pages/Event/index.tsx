@@ -12,6 +12,7 @@ import CategoriesModal from './components/CategoriesModal';
 import HeadlinesModal from './components/HeadlinesModal';
 import { getCategories } from './redux/actions';
 import { Category } from './redux/types';
+import { createEvent } from './service';
 
 import { CoverImage, HeadlineInput, ImageHolder } from './styles';
 
@@ -28,7 +29,7 @@ interface ComponentProps {
 }
 
 const Event: React.FC<ComponentProps> = ({ getCategories, categories }) => {
-  const navItems = [() => <a>Finish</a>];
+  const navItems = [() => <a href="#0">Finish</a>];
   const [image, setImage] = useState('');
   const [file, setFile] = useState<File | string>('');
   const [headline, setHeadline] = useState('');
@@ -62,6 +63,20 @@ const Event: React.FC<ComponentProps> = ({ getCategories, categories }) => {
     setFile(imageUrl);
     setModal(ModalsIndex.NONE);
   }, []);
+
+  const handleSubmit = async () => {
+    console.log('Oommmo');
+    const payload = {
+      title: headline,
+      categoryID: category && category._id,
+      coverImage: file,
+      date,
+    };
+
+    const [err, data] = await createEvent(payload);
+
+    console.log(err, data);
+  };
 
   return (
     <>
@@ -104,7 +119,7 @@ const Event: React.FC<ComponentProps> = ({ getCategories, categories }) => {
           />
         </DashboardContainer>
         <PageBottom>
-          <Button>Save</Button>
+          <Button onClick={handleSubmit}>Save</Button>
         </PageBottom>
       </DashboardLayout>
 

@@ -18,7 +18,7 @@ const PhotoCard = ({
           target="_blank"
           rel="noreferrer noopener"
         >
-          {photo.user.username}
+          @{photo.user.username}
         </a>
       </PhotoAuthor>
     </PhotoThumb>
@@ -35,7 +35,7 @@ const PhotoGroup = ({
   return (
     <PhotoGrid>
       {photos.map((photo) => (
-        <PhotoCard photo={photo} selectImage={selectImage} />
+        <PhotoCard photo={photo} selectImage={selectImage} key={photo.id} />
       ))}
     </PhotoGrid>
   );

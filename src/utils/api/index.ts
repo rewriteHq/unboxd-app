@@ -5,7 +5,6 @@
  */
 
 import axios from 'axios';
-import cookie from 'js-cookie';
 
 // UNBOXD BASE_URL LINK
 export const ENV_VARIABLES = {
