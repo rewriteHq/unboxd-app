@@ -5,12 +5,12 @@ export const ImageHolder = styled(BTN)`
   height: 30vh;
 `;
 
-export const HeadlineInput = styled.input`
+export const HeadlineInput = styled.textarea`
   border: none;
   padding: 1rem 0;
   width: 100%;
   font-weight: bold;
-  font-size: 25px;
+  font-size: 20px;
 
   &::placeholder {
     opacity: 0.5;

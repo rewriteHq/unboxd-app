@@ -5,5 +5,5 @@ export const Bottom = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   width: 100%;
-  padding: 5px 37px;
+  padding: 5px 20px;
 `;

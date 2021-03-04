@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import DashboardLayout from '../../../../commons/DashboardLayout';
 import { DashboardContainer } from '../../../../commons/DashboardLayout/styles';
+import PageBottom from '../../../../commons/PageBottom';
 import { SpaceBetween } from '../../../../commons/UtilityStyles/Flex';
+import Button from '../../../../components/Button';
 import { PlainButton } from '../../../../components/Button/styles';
+import Input from '../../../../components/Input';
 import CategoriesModal from './components/CategoriesModal';
+import HeadlinesModal from './components/HeadlinesModal';
 import { getCategories } from './redux/actions';
 import { Category } from './redux/types';
 
@@ -29,16 +33,22 @@ const Event: React.FC<ComponentProps> = ({ getCategories, categories }) => {
   const [headline, setHeadline] = useState('');
   const [category, setCategory] = useState<Category | ''>('');
   const [date, setDate] = useState('');
-  const [modal, setModal] = useState(0);
+  const [modal, setModal] = useState(ModalsIndex.NONE);
+  const [note, setNote] = useState('');
 
   useEffect(() => {
     getCategories();
   }, [getCategories]);
 
-  const selectCategory = (cat: Category) => {
+  const selectCategory = useCallback((cat: Category) => {
     setCategory(cat);
     setModal(ModalsIndex.HEADLINES);
-  };
+  }, []);
+
+  const selectHeadline = useCallback((headline: string) => {
+    setHeadline(headline);
+    setModal(ModalsIndex.NONE);
+  }, []);
 
   return (
     <>
@@ -46,12 +56,32 @@ const Event: React.FC<ComponentProps> = ({ getCategories, categories }) => {
         <DashboardContainer>
           <ImageHolder>Choose cover image</ImageHolder>
           <SpaceBetween>
-            <HeadlineInput placeholder="Type headline here" />
-            <PlainButton onClick={() => setModal(ModalsIndex.CATEGORY)}>
-              See examples
-            </PlainButton>
+            <HeadlineInput
+              placeholder="Type headline here"
+              value={headline}
+              onChange={(e) => setHeadline(e.target.value)}
+            />
+            {!headline && (
+              <PlainButton onClick={() => setModal(ModalsIndex.CATEGORY)}>
+                See examples
+              </PlainButton>
+            )}
           </SpaceBetween>
+          <Input
+            type="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+          />
+          <Input
+            type="text"
+            value={note}
+            onChange={(e) => setNote(e.target.value)}
+            label="Type welcome note"
+          />
         </DashboardContainer>
+        <PageBottom>
+          <Button>Save</Button>
+        </PageBottom>
       </DashboardLayout>
 
       <CategoriesModal
@@ -59,6 +89,15 @@ const Event: React.FC<ComponentProps> = ({ getCategories, categories }) => {
         goBack={() => setModal(ModalsIndex.NONE)}
         select={selectCategory}
       />
+
+      {category && (
+        <HeadlinesModal
+          show={modal === ModalsIndex.HEADLINES}
+          goBack={() => setModal(ModalsIndex.CATEGORY)}
+          category={category}
+          select={selectHeadline}
+        />
+      )}
     </>
   );
 };

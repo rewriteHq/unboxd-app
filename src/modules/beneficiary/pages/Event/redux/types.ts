@@ -7,6 +7,10 @@ export interface Category {
   _id: string;
 }
 
+interface CategoryGroup {
+  [key: string]: Category;
+}
+
 interface SetCategories {
   type: typeof SET_CATEGORIES;
   payload: Category[];
@@ -19,6 +23,7 @@ interface AddCategory {
 
 export interface InititalState {
   categories: Category[];
+  categoryGroup: CategoryGroup;
 }
 
 export type EventActionTypes = SetCategories | AddCategory;

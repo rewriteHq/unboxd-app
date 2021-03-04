@@ -22,10 +22,10 @@ const API = axios.create({
   },
 });
 
-API.interceptors.request.use((config) => {
-  const token = cookie.get(ENV_VARIABLES.AUTH_TOKEN!);
-  config.headers['Authorization'] = `Bearer ${token}`;
-  return config;
-});
+// API.interceptors.request.use((config) => {
+//   const token = cookie.get(ENV_VARIABLES.AUTH_TOKEN!);
+//   config.headers['Authorization'] = `Bearer ${token}`;
+//   return config;
+// });
 
 export default API;
