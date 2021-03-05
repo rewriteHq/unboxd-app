@@ -8,7 +8,7 @@ import {
 } from './styles';
 import { ModalComponentProps, ModalHeaderComponentProps } from './types';
 
-const Modal = ({ show, children }: ModalComponentProps) => {
+const Modal: React.FC<ModalComponentProps> | null = ({ show, children }) => {
   return show ? <ModalWrapper>{children}</ModalWrapper> : null;
 };
 
