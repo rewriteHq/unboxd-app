@@ -32,11 +32,13 @@ const Event: React.FC<ComponentProps> = ({ getCategories, categories }) => {
   const navItems = [() => <a href="#0">Finish</a>];
   const [image, setImage] = useState('');
   const [file, setFile] = useState<File | string>('');
-  const [headline, setHeadline] = useState('');
   const [category, setCategory] = useState<Category | ''>('');
-  const [date, setDate] = useState('');
   const [modal, setModal] = useState(ModalsIndex.NONE);
-  const [note, setNote] = useState('');
+  const [data, setData] = useState({
+    headline: '',
+    date: '',
+    note: '',
+  });
 
   useEffect(() => {
     getCategories();
@@ -47,10 +49,13 @@ const Event: React.FC<ComponentProps> = ({ getCategories, categories }) => {
     setModal(ModalsIndex.HEADLINES);
   }, []);
 
-  const selectHeadline = useCallback((headline: string) => {
-    setHeadline(headline);
-    setModal(ModalsIndex.NONE);
-  }, []);
+  const selectHeadline = useCallback(
+    (headline: string) => {
+      setData({ ...data, headline });
+      setModal(ModalsIndex.NONE);
+    },
+    [data]
+  );
 
   const fromGallery = useCallback((file: File) => {
     setFile(file);
@@ -64,18 +69,24 @@ const Event: React.FC<ComponentProps> = ({ getCategories, categories }) => {
     setModal(ModalsIndex.NONE);
   }, []);
 
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
+
   const handleSubmit = async () => {
-    console.log('Oommmo');
     const payload = {
-      title: headline,
+      title: data.headline,
       categoryID: category && category._id,
       coverImage: file,
-      date,
+      note: data.note,
+      date: data.date,
     };
 
-    const [err, data] = await createEvent(payload);
+    const [err, result] = await createEvent(payload);
 
-    console.log(err, data);
+    console.log(err, result);
   };
 
   return (
@@ -97,10 +108,11 @@ const Event: React.FC<ComponentProps> = ({ getCategories, categories }) => {
           <SpaceBetween>
             <HeadlineInput
               placeholder="Type headline here"
-              value={headline}
-              onChange={(e) => setHeadline(e.target.value)}
+              value={data.headline}
+              name="headline"
+              onChange={handleChange}
             />
-            {!headline && (
+            {!data.headline && (
               <PlainButton onClick={() => setModal(ModalsIndex.CATEGORY)}>
                 See examples
               </PlainButton>
@@ -108,13 +120,15 @@ const Event: React.FC<ComponentProps> = ({ getCategories, categories }) => {
           </SpaceBetween>
           <Input
             type="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
+            name="date"
+            value={data.date}
+            onChange={handleChange}
           />
           <Input
             type="text"
-            value={note}
-            onChange={(e) => setNote(e.target.value)}
+            name="note"
+            value={data.note}
+            onChange={handleChange}
             label="Type welcome note"
           />
         </DashboardContainer>
