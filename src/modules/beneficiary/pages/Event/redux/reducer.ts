@@ -1,13 +1,8 @@
-import {
-  ADD_CATEGORY,
-  EventActionTypes,
-  InititalState,
-  SET_CATEGORIES,
-} from './types';
+import { EventActionTypes, InititalState, SET_CATEGORIES } from './types';
 
 const inititalState: InititalState = {
-  categories: [],
-  categoryGroup: {},
+  data: [],
+  error: null,
 };
 
 function reducer(state = inititalState, action: EventActionTypes) {
@@ -15,15 +10,7 @@ function reducer(state = inititalState, action: EventActionTypes) {
     case SET_CATEGORIES:
       return {
         ...state,
-        categories: action.payload,
-      };
-    case ADD_CATEGORY:
-      return {
-        ...state,
-        categoryGroup: {
-          ...state.categoryGroup,
-          [action.payload._id]: action.payload,
-        },
+        data: action.payload,
       };
     default:
       return state;

@@ -1,7 +1,5 @@
-import { connect } from 'react-redux';
 import ListLink from '../../../../../components/List';
 import Modal from '../../../../../components/Modal';
-import { getCategory } from '../redux/actions';
 import { Category } from '../redux/types';
 
 interface ComponentProps {
@@ -44,14 +42,4 @@ const HeadlinesModal: React.FC<ComponentProps> = ({
   );
 };
 
-const mapStateToProps = (state: any, ownProps: ComponentProps) => {
-  return {
-    // category: state.event.categoryGroup[ownProps.category._id],
-  };
-};
-
-const mapDispatchToProps = (dispatch: any, ownProps: ComponentProps) => ({
-  getCategory: async () => dispatch(getCategory({ id: ownProps.category._id })),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(HeadlinesModal);
+export default HeadlinesModal;

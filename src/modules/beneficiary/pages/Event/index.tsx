@@ -162,7 +162,7 @@ const Event: React.FC<ComponentProps> = ({ getCategories, categories }) => {
 };
 
 const mapStateToProps = (state: any) => ({
-  categories: state.event?.categories,
+  categories: state.event?.data,
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
