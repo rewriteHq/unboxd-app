@@ -3,7 +3,7 @@ import { ButtonComponentProps } from './types';
 
 const Button: React.FC<ButtonComponentProps> = (props) => {
   return (
-    <BTN>
+    <BTN {...props}>
       {props.loading ? (
         <Spinner>
           <img src="/assets/icons/rolling.svg" alt="loading spinner" />

@@ -18,8 +18,14 @@ export const PageHeading = styled.h1<{ large?: boolean; centered?: boolean }>`
     `}
 `;
 
-export const PageHeadingSmall = styled.h3`
+export const PageHeadingSmall = styled.h3<{ centered?: boolean }>`
   font-size: ${Sizes.twenty}px;
   color: ${Colors.black};
   padding: 10px 0;
+
+  ${({ centered }) =>
+    centered &&
+    css`
+      text-align: center;
+    `}
 `;
