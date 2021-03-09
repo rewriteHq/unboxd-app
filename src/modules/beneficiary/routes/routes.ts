@@ -5,6 +5,7 @@ const dashboard = lazy(() => import('../pages/Dashboard'));
 
 const event = lazy(() => import('../pages/Event'));
 const addEvent = lazy(() => import('../pages/Event/add'));
+const addGift = lazy(() => import('../pages/gift/add'));
 
 const routes: RouteType[] = [
   {
@@ -24,6 +25,12 @@ const routes: RouteType[] = [
     exact: true,
     auth: false,
     component: addEvent,
+  },
+  {
+    path: '/event/add-gift/:id',
+    exact: true,
+    auth: false,
+    component: addGift,
   },
 ];
 

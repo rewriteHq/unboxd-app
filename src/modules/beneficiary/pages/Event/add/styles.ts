@@ -1,7 +1,8 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Colors from '../../../../../constants/Colors';
 
-export const AddItemButton = styled.button`
+export const AddItem = styled(Link)`
   border-radius: 50%;
   padding: 1.5rem 1.8rem;
   background-color: ${Colors.grey};
