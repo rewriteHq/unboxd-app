@@ -12,7 +12,7 @@ const unsplashApi = createApi({
   accessKey: process.env.REACT_APP_UNSPLASH_ACCESS_KEY as string,
 });
 
-const UnsplashModal = ({ show, selectImage }: ModalComponentProps) => {
+const UnsplashModal = ({ show, selectImage, close }: ModalComponentProps) => {
   const [query, setQuery] = useState('');
   const [photos, setPhotos] = useState<Photo[]>([]);
 
@@ -36,7 +36,7 @@ const UnsplashModal = ({ show, selectImage }: ModalComponentProps) => {
   }, [query]);
 
   return (
-    <Modal show={show}>
+    <Modal show={show} onClose={close}>
       <Modal.Bottom>
         <Modal.Main>
           <PageHeadingSmall centered>Unsplash</PageHeadingSmall>

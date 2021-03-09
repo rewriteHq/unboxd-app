@@ -3,6 +3,7 @@ export type SelectImage = (url: string) => void;
 export type ModalComponentProps = {
   show: boolean;
   selectImage: SelectImage;
+  close: () => void;
 };
 
 export type Photo = {

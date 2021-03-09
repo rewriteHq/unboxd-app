@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import DashboardLayout from '../../../../commons/DashboardLayout';
 import { DashboardContainer } from '../../../../commons/DashboardLayout/styles';
 import ImageUploadModal from '../../../../commons/ImageUploadModal';
@@ -29,7 +30,6 @@ interface ComponentProps {
 }
 
 const Event: React.FC<ComponentProps> = ({ getCategories, categories }) => {
-  const navItems = [() => <a href="#0">Finish</a>];
   const [image, setImage] = useState('');
   const [file, setFile] = useState<File | string>('');
   const [category, setCategory] = useState<Category | ''>('');
@@ -39,6 +39,8 @@ const Event: React.FC<ComponentProps> = ({ getCategories, categories }) => {
     date: '',
     note: '',
   });
+
+  const history = useHistory();
 
   useEffect(() => {
     getCategories();
@@ -80,18 +82,24 @@ const Event: React.FC<ComponentProps> = ({ getCategories, categories }) => {
       title: data.headline,
       categoryID: category && category._id,
       coverImage: file,
-      note: data.note,
+      description: data.note,
       date: data.date,
     };
 
     const [err, result] = await createEvent(payload);
 
-    console.log(err, result);
+    if (err) {
+      return err;
+    }
+
+    history.push(`/event/add/${result._id}`);
   };
+
+  const closeModals = () => setModal(ModalsIndex.NONE);
 
   return (
     <>
-      <DashboardLayout pageTitle="Setup Event" navItems={navItems}>
+      <DashboardLayout pageTitle="Setup Event">
         <DashboardContainer>
           {image ? (
             <CoverImage
@@ -156,6 +164,7 @@ const Event: React.FC<ComponentProps> = ({ getCategories, categories }) => {
         show={modal === ModalsIndex.IMAGE}
         fromGallery={fromGallery}
         fromUnsplash={fromUnsplash}
+        close={closeModals}
       />
     </>
   );
