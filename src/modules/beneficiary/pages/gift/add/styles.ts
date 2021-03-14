@@ -1,10 +1,14 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { BTN } from '../../../../../components/Button/styles';
 import Colors from '../../../../../constants/Colors';
 
-export const ImageHolder = styled.div`
+const imageStyle = css`
   height: 40vh;
   position: relative;
+`;
+
+export const ImageHolder = styled.div`
+  ${imageStyle}
   background-color: ${Colors.grey};
 `;
 
@@ -16,4 +20,10 @@ export const UploadButton = styled(BTN)`
   left: 50%;
   transform: translateX(-50%);
   width: unset;
+`;
+
+export const CoverImage = styled.img`
+  ${imageStyle}
+  width: 100%;
+  object-fit: cover;
 `;
