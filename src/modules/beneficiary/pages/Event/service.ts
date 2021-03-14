@@ -14,7 +14,6 @@ export const createEvent = async (data: EventData) => {
     Notify.bottom(response.data.message);
     return [null, response.data.payload];
   } catch (err) {
-    console.log(err.response);
     const message = err.response.data.message;
     Notify.bottom(message ? message : 'Something happened. Kindly try again');
     return [err.response.data];

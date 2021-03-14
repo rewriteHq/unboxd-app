@@ -1,5 +1,6 @@
 import { useCallback, useState } from 'react';
 import { NumberFormatValues } from 'react-number-format';
+import { useHistory, useParams } from 'react-router';
 import DashboardLayout from '../../../../../commons/DashboardLayout';
 import { DashboardContainer } from '../../../../../commons/DashboardLayout/styles';
 import ImageUploadModal from '../../../../../commons/ImageUploadModal';
@@ -7,6 +8,7 @@ import PageBottom from '../../../../../commons/PageBottom';
 import Button from '../../../../../components/Button';
 import Input from '../../../../../components/Input';
 import PriceInput from '../../../../../components/Input/price';
+import { addGift } from './service';
 import { CoverImage, ImageHolder, UploadButton } from './styles';
 
 interface ImageType {
@@ -14,7 +16,14 @@ interface ImageType {
   url: string;
 }
 
+interface ParamTypes {
+  id: string;
+}
+
 const AddGift = () => {
+  const { id } = useParams<ParamTypes>();
+  const history = useHistory();
+
   const [data, setData] = useState({ price: '', title: '' });
   const [showImageModal, setImageModal] = useState(false);
   const [image, setImage] = useState<ImageType>({ file: '', url: '' });
@@ -24,16 +33,33 @@ const AddGift = () => {
 
   const fromGallery = useCallback((file: File) => {
     setImage({ file, url: URL.createObjectURL(file) });
+    setImageModal(false);
   }, []);
 
   const fromUnsplash = useCallback((imageUrl: string) => {
     setImage({ file: imageUrl, url: imageUrl });
+    setImageModal(false);
   }, []);
 
   const toggleImageModal = useCallback(
     () => setImageModal((prev) => !prev),
     []
   );
+
+  const createGift = async () => {
+    const payload = new FormData();
+
+    payload.append('name', data.title);
+    payload.append('cost', data.price);
+    payload.append('image', image.file);
+
+    const [err, result] = await addGift({ data: payload, id });
+    if (err) {
+      return err;
+    }
+
+    history.push(`/event/add/${result.wishlistId}`);
+  };
 
   return (
     <DashboardLayout pageTitle="Add item" showBack>
@@ -60,7 +86,7 @@ const AddGift = () => {
         <PriceInput label="Price" value={data.price} onChange={changePrice} />
       </DashboardContainer>
       <PageBottom>
-        <Button>Save</Button>
+        <Button onClick={createGift}>Save</Button>
       </PageBottom>
       <ImageUploadModal
         show={showImageModal}
