@@ -10,7 +10,7 @@ import Input from '../../../../../components/Input';
 import PriceInput from '../../../../../components/Input/price';
 import { GiftType } from '../../../../../typings';
 import { updateGift, getGift } from '../service';
-import { CoverImage, ImageHolder, UploadButton } from '../styles';
+import { CoverImage, ImageHolder } from '../styles';
 
 interface ImageType {
   file: File | string;
@@ -93,11 +93,7 @@ const EditGift = () => {
             onClick={toggleImageModal}
           />
         ) : (
-          <ImageHolder>
-            <UploadButton onClick={toggleImageModal}>
-              Upload Item Image
-            </UploadButton>
-          </ImageHolder>
+          <ImageHolder />
         )}
 
         <Input

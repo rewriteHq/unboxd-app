@@ -39,7 +39,12 @@ const Bottom: React.FC = ({ children }) => {
   return <ModalBottom>{children}</ModalBottom>;
 };
 
+const Full: React.FC = ({ children }) => {
+  return <ModalMain full>{children}</ModalMain>;
+};
+
 Modal.Header = Header;
 Modal.Main = Main;
+Modal.Full = Full;
 Modal.Bottom = Bottom;
 export default Modal;

@@ -66,3 +66,10 @@ export const GiftThumbText = styled.div`
     margin-top: 5px;
   }
 `;
+
+export const Hold = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+`;

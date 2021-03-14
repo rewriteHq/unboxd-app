@@ -3,7 +3,8 @@ import RouteType from '../../../routes/types';
 
 const dashboard = lazy(() => import('../pages/Dashboard'));
 
-const event = lazy(() => import('../pages/Event'));
+// const event = lazy(() => import('../pages/Event'));
+const createEvent = lazy(() => import('../pages/Event/create'));
 const addEvent = lazy(() => import('../pages/Event/add'));
 const addGift = lazy(() => import('../pages/gift/add'));
 const editGift = lazy(() => import('../pages/gift/edit'));
@@ -19,7 +20,7 @@ const routes: RouteType[] = [
     path: '/event/create',
     exact: true,
     auth: false,
-    component: event,
+    component: createEvent,
   },
   {
     path: '/event/add/:id',

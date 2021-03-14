@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import shortid from 'shortid';
 import * as R from 'ramda';
-import { useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import DashboardLayout from '../../../../../commons/DashboardLayout';
 import NoItem from '../../../../../components/NoItem';
 import { DashboardFilm, DashboardWrapper } from '../../Dashboard/styles';
-import { AddItem, Explainer } from './styles';
+import { AddItem, Explainer, Hold } from './styles';
 import { getWishlist } from './service';
 import { WishList } from '../../../../../typings';
 import GiftList from './components/GiftList';
+import HoldModal from './components/HoldModal';
 
 type ParamTypes = {
   id: string;
@@ -23,14 +24,36 @@ const explainerTextTitle = [
 
 const AddEvent = () => {
   const { id } = useParams<ParamTypes>();
+  const history = useHistory();
+
+  const [holdModal, setHoldModal] = useState(false);
   const [data, setData] = useState<WishList | null>(null);
+
+  const finish = () => setHoldModal(true);
+
   const navItems = [
     () => (
-      <a href="#0" key={shortid.generate()}>
+      <a href="#0" key={shortid.generate()} onClick={finish}>
         Finish
       </a>
     ),
   ];
+
+  const toggleHoldModal = () => setHoldModal((prev) => !prev);
+
+  useEffect(() => {
+    if (holdModal) {
+      const timer = setTimeout(() => {
+        toggleHoldModal();
+        history.push({
+          pathname: `/event/${id}`,
+          state: { newEvent: true },
+        });
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [holdModal, history, id]);
 
   useEffect(() => {
     (async function () {
@@ -59,7 +82,11 @@ const AddEvent = () => {
     <DashboardLayout pageTitle="Add your needs" navItems={navItems} showBack>
       <DashboardWrapper>
         <div className="container">
-          <GiftList gifts={data.gifts} wishlistId={id} />
+          {R.isEmpty(data.gifts) ? (
+            <NoItem />
+          ) : (
+            <GiftList gifts={data.gifts} wishlistId={id} />
+          )}
         </div>
         {data.gifts.length < 6 && <DashboardFilm />}
       </DashboardWrapper>
@@ -74,6 +101,11 @@ const AddEvent = () => {
         renderExplainer(data.gifts.length)
       )}
       <AddItem to={`/event/add-gift/${id}`}>+</AddItem>
+      <HoldModal show={holdModal} onClose={toggleHoldModal}>
+        <Hold>
+          <h2>Please hold on</h2>
+        </Hold>
+      </HoldModal>
     </DashboardLayout>
   ) : null;
 };
