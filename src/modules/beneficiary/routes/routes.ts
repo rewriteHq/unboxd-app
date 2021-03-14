@@ -6,8 +6,8 @@ const dashboard = lazy(() => import('../pages/Dashboard'));
 // const event = lazy(() => import('../pages/Event'));
 const createEvent = lazy(() => import('../pages/Event/create'));
 const addEvent = lazy(() => import('../pages/Event/add'));
-const addGift = lazy(() => import('../pages/gift/add'));
-const editGift = lazy(() => import('../pages/gift/edit'));
+const addGift = lazy(() => import('../pages/Gift/add'));
+const editGift = lazy(() => import('../pages/Gift/edit'));
 
 const routes: RouteType[] = [
   {
