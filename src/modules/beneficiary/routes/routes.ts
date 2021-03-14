@@ -6,6 +6,7 @@ const dashboard = lazy(() => import('../pages/Dashboard'));
 const event = lazy(() => import('../pages/Event'));
 const addEvent = lazy(() => import('../pages/Event/add'));
 const addGift = lazy(() => import('../pages/gift/add'));
+const editGift = lazy(() => import('../pages/gift/edit'));
 
 const routes: RouteType[] = [
   {
@@ -31,6 +32,12 @@ const routes: RouteType[] = [
     exact: true,
     auth: false,
     component: addGift,
+  },
+  {
+    path: '/event/edit-gift/:wishlistId/:id',
+    exact: true,
+    auth: false,
+    component: editGift,
   },
 ];
 

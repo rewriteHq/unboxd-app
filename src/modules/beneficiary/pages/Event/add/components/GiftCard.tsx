@@ -8,11 +8,12 @@ import {
 
 interface ComponentProps {
   gift: GiftType;
+  wishlistId: string;
 }
 
-const GiftCard: React.FC<ComponentProps> = ({ gift }) => {
+const GiftCard: React.FC<ComponentProps> = ({ gift, wishlistId }) => {
   return (
-    <GiftThumb to={`/add-gift/${gift._id}`}>
+    <GiftThumb to={`/event/edit-gift/${wishlistId}/${gift._id}`}>
       <GiftThumbImage src={gift.imageURL} alt={gift.name} />
       <GiftThumbText>
         <p>{gift.name}</p>

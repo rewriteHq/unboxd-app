@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
-import { BTN } from '../../../../../components/Button/styles';
-import Colors from '../../../../../constants/Colors';
+import { BTN } from '../../../../components/Button/styles';
+import Colors from '../../../../constants/Colors';
 
 const imageStyle = css`
   height: 40vh;

@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { NumberFormatValues } from 'react-number-format';
 import { useHistory, useParams } from 'react-router';
 import DashboardLayout from '../../../../../commons/DashboardLayout';
@@ -8,7 +8,8 @@ import PageBottom from '../../../../../commons/PageBottom';
 import Button from '../../../../../components/Button';
 import Input from '../../../../../components/Input';
 import PriceInput from '../../../../../components/Input/price';
-import { addGift } from '../service';
+import { GiftType } from '../../../../../typings';
+import { updateGift, getGift } from '../service';
 import { CoverImage, ImageHolder, UploadButton } from '../styles';
 
 interface ImageType {
@@ -18,15 +19,35 @@ interface ImageType {
 
 interface ParamTypes {
   id: string;
+  wishlistId: string;
 }
 
-const AddGift = () => {
+const EditGift = () => {
   const { id } = useParams<ParamTypes>();
   const history = useHistory();
 
   const [data, setData] = useState({ price: '', title: '' });
   const [showImageModal, setImageModal] = useState(false);
   const [image, setImage] = useState<ImageType>({ file: '', url: '' });
+
+  useEffect(() => {
+    (async function () {
+      const [err, response]: Array<null | GiftType> = await getGift(id);
+      if (err) {
+        return err;
+      }
+
+      setData({
+        price: response!.cost.toString(),
+        title: response!.name,
+      });
+
+      setImage({
+        file: response!.imageURL,
+        url: response!.imageURL,
+      });
+    })();
+  }, [id]);
 
   const changePrice = ({ value }: NumberFormatValues) =>
     setData({ ...data, price: value });
@@ -46,14 +67,15 @@ const AddGift = () => {
     []
   );
 
-  const createGift = async () => {
+  const editGift = async () => {
     const payload = new FormData();
 
     payload.append('name', data.title);
     payload.append('cost', data.price);
     payload.append('image', image.file);
 
-    const [err, result] = await addGift({ data: payload, id });
+    const [err, result] = await updateGift({ data: payload, id });
+
     if (err) {
       return err;
     }
@@ -62,7 +84,7 @@ const AddGift = () => {
   };
 
   return (
-    <DashboardLayout pageTitle="Add item" showBack>
+    <DashboardLayout pageTitle="Edit item" showBack>
       <DashboardContainer>
         {image.url ? (
           <CoverImage
@@ -86,7 +108,7 @@ const AddGift = () => {
         <PriceInput label="Price" value={data.price} onChange={changePrice} />
       </DashboardContainer>
       <PageBottom>
-        <Button onClick={createGift}>Save</Button>
+        <Button onClick={editGift}>Save</Button>
       </PageBottom>
       <ImageUploadModal
         show={showImageModal}
@@ -98,4 +120,4 @@ const AddGift = () => {
   );
 };
 
-export default AddGift;
+export default EditGift;

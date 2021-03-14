@@ -20,7 +20,7 @@ const GiftList = ({ gifts, wishlistId }: ComponentProps) => {
     <GiftThumbList>
       {giftList.map((gift) =>
         gift ? (
-          <GiftCard key={gift._id} gift={gift} />
+          <GiftCard key={gift._id} gift={gift} wishlistId={wishlistId} />
         ) : (
           <EmptyGiftCard wishlistID={wishlistId} key={shortid.generate()} />
         )
