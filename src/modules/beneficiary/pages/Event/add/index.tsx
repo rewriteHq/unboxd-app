@@ -4,7 +4,7 @@ import * as R from 'ramda';
 import { useParams } from 'react-router';
 import DashboardLayout from '../../../../../commons/DashboardLayout';
 import NoItem from '../../../../../components/NoItem';
-import { DashboardWrapper } from '../../Dashboard/styles';
+import { DashboardFilm, DashboardWrapper } from '../../Dashboard/styles';
 import { AddItem, Explainer } from './styles';
 import { getWishlist } from './service';
 import { WishList } from '../../../../../typings';
@@ -39,12 +39,20 @@ const AddEvent = () => {
     })();
   }, [id]);
 
-  const renderExplainerTitle = (giftLength: number) => {
+  const renderExplainer = (giftLength: number) => {
     if (giftLength < explainerTextTitle.length) {
-      return explainerTextTitle[giftLength];
+      return (
+        <Explainer>
+          <h3>{explainerTextTitle[giftLength]}</h3>
+          <p>
+            If you need more things, add to the list by clicking on the plus
+            button
+          </p>
+        </Explainer>
+      );
     }
 
-    return 'Over three items added';
+    return null;
   };
 
   return data ? (
@@ -53,6 +61,7 @@ const AddEvent = () => {
         <div className="container">
           <GiftList gifts={data.gifts} wishlistId={id} />
         </div>
+        {data.gifts.length < 6 && <DashboardFilm />}
       </DashboardWrapper>
       {R.isEmpty(data.gifts) ? (
         <Explainer>
@@ -62,13 +71,7 @@ const AddEvent = () => {
           </p>
         </Explainer>
       ) : (
-        <Explainer>
-          <h3>{renderExplainerTitle(data.gifts.length)}</h3>
-          <p>
-            If you need more things, add to the list by clicking on the plus
-            button
-          </p>
-        </Explainer>
+        renderExplainer(data.gifts.length)
       )}
       <AddItem to={`/event/add-gift/${id}`}>+</AddItem>
     </DashboardLayout>
