@@ -104,6 +104,7 @@ const AddEvent = () => {
       <HoldModal show={holdModal} onClose={toggleHoldModal}>
         <Hold>
           <h2>Please hold on</h2>
+          <p>We are setting up your visual list</p>
         </Hold>
       </HoldModal>
     </DashboardLayout>

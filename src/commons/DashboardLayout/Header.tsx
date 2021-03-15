@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import Styled from 'styled-components';
+import shortid from 'shortid';
+import styled from 'styled-components';
 import { HeaderProps } from './types';
 
 const Header: React.FC<HeaderProps> = ({ pageTitle, showBack, navItems }) => {
@@ -11,8 +12,13 @@ const Header: React.FC<HeaderProps> = ({ pageTitle, showBack, navItems }) => {
   };
 
   const renderNavItems = () => {
-    return navItems?.map((Items) => {
-      return <Items />;
+    console.log(navItems);
+    return navItems?.map((Item) => {
+      return (
+        <NavItem>
+          <Item key={shortid.generate()} />
+        </NavItem>
+      );
     });
   };
 
@@ -31,25 +37,33 @@ const Header: React.FC<HeaderProps> = ({ pageTitle, showBack, navItems }) => {
   );
 };
 
-const Head = Styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 70px;
-    width: 100%;
-    padding: 0 20px;
+const Head = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  width: 100%;
+  padding: 0 20px;
 `;
 
-const HeaderTitle = Styled.h2`
-    margin: 0 auto;
+const HeaderTitle = styled.h2`
+  margin: 0 auto;
 `;
 
-const Nav = Styled.nav`
-    display: flex;
-    a {
-        font-weight: 400;
-        font-size: 13px;
-    }
+const Nav = styled.nav`
+  display: flex;
+  a {
+    font-weight: 400;
+    font-size: 13px;
+  }
+`;
+
+const NavItem = styled.li`
+  padding: 0 10px;
+
+  &:last-child {
+    padding-right: 0;
+  }
 `;
 
 export default Header;

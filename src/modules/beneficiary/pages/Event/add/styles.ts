@@ -69,7 +69,13 @@ export const GiftThumbText = styled.div`
 
 export const Hold = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
+
+  p {
+    color: ${Colors.grey};
+    margin-top: 10px;
+  }
 `;
