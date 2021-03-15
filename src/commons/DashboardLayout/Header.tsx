@@ -14,8 +14,8 @@ const Header: React.FC<HeaderProps> = ({ pageTitle, showBack, navItems }) => {
   const renderNavItems = () => {
     return navItems?.map((Item) => {
       return (
-        <NavItem>
-          <Item key={shortid.generate()} />
+        <NavItem key={shortid.generate()}>
+          <Item />
         </NavItem>
       );
     });
