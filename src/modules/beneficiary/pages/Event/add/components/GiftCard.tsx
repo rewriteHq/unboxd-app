@@ -1,3 +1,4 @@
+import React from 'react';
 import { GiftType } from '../../../../../../typings';
 import {
   EmptyThumbImage,
@@ -23,7 +24,9 @@ const GiftCard: React.FC<ComponentProps> = ({ gift, wishlistId }) => {
   );
 };
 
-export const EmptyGiftCard = ({ wishlistID }: { wishlistID: string }) => {
+export const EmptyGiftCard: React.FC<{ wishlistID: string }> = ({
+  wishlistID,
+}) => {
   return (
     <GiftThumb to={`/event/add-gift/${wishlistID}`}>
       <EmptyThumbImage />

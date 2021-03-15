@@ -1,3 +1,4 @@
+import React from 'react';
 import { useMemo } from 'react';
 import shortid from 'shortid';
 import { GiftType } from '../../../../../../typings';
@@ -8,7 +9,7 @@ interface ComponentProps {
   gifts: GiftType[];
   wishlistId: string;
 }
-const GiftList = ({ gifts, wishlistId }: ComponentProps) => {
+const GiftList: React.FC<ComponentProps> = ({ gifts, wishlistId }) => {
   const giftList = useMemo((): Array<GiftType | null> => {
     const itemsArray = Array(6).fill(null);
 
