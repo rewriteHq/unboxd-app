@@ -12,7 +12,6 @@ const Header: React.FC<HeaderProps> = ({ pageTitle, showBack, navItems }) => {
   };
 
   const renderNavItems = () => {
-    console.log(navItems);
     return navItems?.map((Item) => {
       return (
         <NavItem>
