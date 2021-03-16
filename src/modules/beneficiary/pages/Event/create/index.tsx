@@ -17,12 +17,12 @@ import { createEvent } from '../service';
 
 import { CoverImage, HeadlineInput, ImageHolder } from '../styles';
 
-const ModalsIndex = {
-  NONE: 0,
-  CATEGORY: 1,
-  HEADLINES: 2,
-  IMAGE: 3,
-};
+enum ModalsIndex {
+  NONE = 0,
+  CATEGORY = 1,
+  HEADLINES = 2,
+  IMAGE = 3,
+}
 
 interface ComponentProps {
   categories: Category[] | undefined;

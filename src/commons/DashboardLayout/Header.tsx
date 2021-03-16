@@ -14,8 +14,8 @@ const Header: React.FC<HeaderProps> = ({ pageTitle, showBack, navItems }) => {
   const renderNavItems = () => {
     return navItems?.map((Item) => {
       return (
-        <NavItem>
-          <Item key={shortid.generate()} />
+        <NavItem key={shortid.generate()}>
+          <Item />
         </NavItem>
       );
     });
@@ -31,7 +31,9 @@ const Header: React.FC<HeaderProps> = ({ pageTitle, showBack, navItems }) => {
         <Link to="/">Go home</Link>
       )}
       <HeaderTitle>{pageTitle}</HeaderTitle>
-      <Nav>{renderNavItems()}</Nav>
+      <Nav>
+        <NavList>{renderNavItems()}</NavList>
+      </Nav>
     </Head>
   );
 };
@@ -50,11 +52,15 @@ const HeaderTitle = styled.h2`
 `;
 
 const Nav = styled.nav`
-  display: flex;
   a {
     font-weight: 400;
     font-size: 13px;
   }
+`;
+
+const NavList = styled.ul`
+  list-style: none;
+  display: flex;
 `;
 
 const NavItem = styled.li`

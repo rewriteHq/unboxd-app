@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import NumberInput from 'react-number-format';
 import { InputField, Label } from './styles';
 import { InputComponentProps } from './types';
