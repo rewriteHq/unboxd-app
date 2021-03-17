@@ -8,12 +8,14 @@ interface ComponentProps {
   show: boolean;
   fromGallery: (file: File) => void;
   fromUnsplash: (imageUrl: string) => void;
+  close: () => void;
 }
 
 const ImageUploadModal = ({
   show,
   fromGallery,
   fromUnsplash,
+  close,
 }: ComponentProps) => {
   const [unsplashModal, setUnsplashModal] = useState(false);
 
@@ -34,9 +36,14 @@ const ImageUploadModal = ({
     [fromUnsplash]
   );
 
+  const closeModals = useCallback(() => {
+    setUnsplashModal(false);
+    close();
+  }, [close]);
+
   return (
     <>
-      <Modal show={show}>
+      <Modal show={show} onClose={close}>
         <Modal.Bottom>
           <Container className="container">
             <FileLabel htmlFor="file">
@@ -55,7 +62,11 @@ const ImageUploadModal = ({
           </Container>
         </Modal.Bottom>
       </Modal>
-      <UnsplashModal show={unsplashModal} selectImage={selectImage} />
+      <UnsplashModal
+        show={unsplashModal}
+        selectImage={selectImage}
+        close={closeModals}
+      />
     </>
   );
 };

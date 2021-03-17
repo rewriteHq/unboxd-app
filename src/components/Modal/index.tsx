@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import useOnClickOutside from '../../hooks/useOnClickOutside';
 import {
   Head,
   HeaderTitle,
@@ -8,8 +9,14 @@ import {
 } from './styles';
 import { ModalComponentProps, ModalHeaderComponentProps } from './types';
 
-const Modal = ({ show, children }: ModalComponentProps) => {
-  return show ? <ModalWrapper>{children}</ModalWrapper> : null;
+const Modal = ({ show, children, onClose }: ModalComponentProps) => {
+  const ref = useRef<HTMLDivElement | null>(null);
+  useOnClickOutside(ref, onClose);
+  return show ? (
+    <ModalWrapper>
+      <div ref={ref}>{children}</div>
+    </ModalWrapper>
+  ) : null;
 };
 
 const Header: React.FC<ModalHeaderComponentProps> = ({ goBack, children }) => {
@@ -32,7 +39,12 @@ const Bottom: React.FC = ({ children }) => {
   return <ModalBottom>{children}</ModalBottom>;
 };
 
+const Full: React.FC = ({ children }) => {
+  return <ModalMain full>{children}</ModalMain>;
+};
+
 Modal.Header = Header;
 Modal.Main = Main;
+Modal.Full = Full;
 Modal.Bottom = Bottom;
 export default Modal;

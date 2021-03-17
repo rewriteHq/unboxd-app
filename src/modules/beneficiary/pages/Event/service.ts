@@ -16,6 +16,17 @@ export const createEvent = async (data: EventData) => {
   } catch (err) {
     const message = err.response.data.message;
     Notify.bottom(message ? message : 'Something happened. Kindly try again');
-    return [err.reponse.data];
+    return [err.response.data];
+  }
+};
+
+export const getEvent = async (id: string) => {
+  try {
+    const response = await API.get(`/list/${id}`);
+    return [null, response.data.payload];
+  } catch (err) {
+    const message = err.response.data.message;
+    Notify.bottom(message ? message : 'Something happened. Kindly try again');
+    return [err.response.data];
   }
 };

@@ -27,7 +27,7 @@ const Register = () => {
 
       Notify.bottom(response.data.message);
 
-      setTimeout(() => history.push('/login'), 500);
+      setTimeout(() => history.push('/event/create'), 500);
     } catch (err) {
       const message = err.response.data.message;
       Notify.bottom(message ? message : 'Something happened. Kindly try again');

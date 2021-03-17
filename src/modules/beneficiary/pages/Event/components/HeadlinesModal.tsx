@@ -16,7 +16,7 @@ const HeadlinesModal: React.FC<ComponentProps> = ({
   select,
 }) => {
   return (
-    <Modal show={show}>
+    <Modal show={show} onClose={goBack}>
       <Modal.Header goBack={goBack}>
         <h2>{category.name}</h2>
       </Modal.Header>

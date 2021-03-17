@@ -26,6 +26,10 @@ a {
   cursor: pointer;
 }
 
+li {
+  list-style: none;
+}
+
 .container {
   display: flex;
   width: 100%;

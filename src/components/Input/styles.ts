@@ -7,7 +7,7 @@ export const InputField = styled.div`
   flex-direction: column;
   position: relative;
   border-bottom: 1px solid ${Colors.black};
-  padding-top: 10px;
+  padding-top: 20px;
   margin: 10px 0;
 
   input {
@@ -17,9 +17,10 @@ export const InputField = styled.div`
 
 export const Label = styled.label`
   position: absolute;
-  top: 0;
+  top: 10px;
   left: 0;
   font-size: calc(${Sizes.normal}px);
+  margin-bottom: 90px;
 
   &.focus {
     font-size: calc(${Sizes.small}px);

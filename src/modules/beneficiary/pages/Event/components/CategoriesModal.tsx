@@ -21,7 +21,7 @@ const CategoriesModal = ({
   };
 
   return (
-    <Modal show={show}>
+    <Modal show={show} onClose={goBack}>
       <Modal.Header goBack={goBack}>
         <h2>Headlines</h2>
         <p>Choose category</p>

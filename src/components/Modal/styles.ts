@@ -44,12 +44,12 @@ export const HeaderTitle = styled.div`
   }
 `;
 
-export const ModalMain = styled.div`
+export const ModalMain = styled.div<{ full?: boolean }>`
   display: flex;
   flex-direction: column;
   padding: 20px;
   background: ${Colors.white};
-  min-height: 75vh;
+  min-height: ${(props) => (props.full ? '100vh' : '75vh')};
 `;
 
 export const ModalBottom = styled.div`
