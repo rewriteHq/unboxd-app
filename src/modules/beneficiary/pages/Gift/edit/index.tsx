@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { NumberFormatValues } from 'react-number-format';
+import { connect } from 'react-redux';
 import { useHistory, useParams } from 'react-router';
 import DashboardLayout from '../../../../../commons/DashboardLayout';
 import { DashboardContainer } from '../../../../../commons/DashboardLayout/styles';
@@ -8,21 +9,12 @@ import PageBottom from '../../../../../commons/PageBottom';
 import Button from '../../../../../components/Button';
 import Input from '../../../../../components/Input';
 import PriceInput from '../../../../../components/Input/price';
-import { GiftType } from '../../../../../typings';
-import { updateGift, getGift } from '../service';
+import { addGift } from '../redux/actions';
+import { updateGift } from '../service';
 import { CoverImage, ImageHolder } from '../styles';
+import { ImageType, ParamTypes, ComponentProps } from './types';
 
-interface ImageType {
-  file: File | string;
-  url: string;
-}
-
-interface ParamTypes {
-  id: string;
-  wishlistId: string;
-}
-
-const EditGift = () => {
+const EditGift = ({ gifts, getGift }: ComponentProps) => {
   const { id } = useParams<ParamTypes>();
   const history = useHistory();
 
@@ -31,23 +23,22 @@ const EditGift = () => {
   const [image, setImage] = useState<ImageType>({ file: '', url: '' });
 
   useEffect(() => {
-    (async function () {
-      const [err, response]: Array<null | GiftType> = await getGift(id);
-      if (err) {
-        return err;
-      }
+    const gift = gifts[id];
 
+    if (gift) {
       setData({
-        price: response!.cost.toString(),
-        title: response!.name,
+        price: gift.cost.toString(),
+        title: gift.name,
       });
 
       setImage({
-        file: response!.imageURL,
-        url: response!.imageURL,
+        file: gift.imageURL,
+        url: gift.imageURL,
       });
-    })();
-  }, [id]);
+    } else {
+      getGift(id);
+    }
+  }, [id, gifts, getGift]);
 
   const changePrice = ({ value }: NumberFormatValues) =>
     setData({ ...data, price: value });
@@ -116,4 +107,12 @@ const EditGift = () => {
   );
 };
 
-export default EditGift;
+const mapStateToProps = (state: any) => ({
+  gifts: state.gifts.data,
+});
+
+const mapDispatchToProps = (dispatch: any) => ({
+  getGift: (id: string) => dispatch(addGift(id)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditGift);
