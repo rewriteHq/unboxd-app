@@ -2,9 +2,12 @@
  * FOR GLOBAL APP TYPE DEFINITIONS
  */
 
-import { Category } from '../modules/beneficiary/pages/Event/redux/types';
-
 interface AppProps {}
+
+export interface Category {
+  name: string;
+  _id: string;
+}
 
 export interface GiftType {
   quantity: number;

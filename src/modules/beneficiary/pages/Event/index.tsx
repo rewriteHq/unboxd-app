@@ -10,6 +10,7 @@ type ParamTypes = {
 
 const Event = () => {
   const { id } = useParams<ParamTypes>();
+  // const [data, setData] = use
   const [activeExplainer, setActiveExplainer] = useState(1);
   const [explainer, setExplainer] = useState({ show: false, active: 1 });
 
