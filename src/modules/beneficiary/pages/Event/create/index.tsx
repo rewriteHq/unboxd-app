@@ -9,9 +9,9 @@ import { SpaceBetween } from '../../../../../commons/UtilityStyles/Flex';
 import Button from '../../../../../components/Button';
 import { PlainButton } from '../../../../../components/Button/styles';
 import Input from '../../../../../components/Input';
+import { getCategories } from '../../../../resources/redux/actions';
 import CategoriesModal from '../components/CategoriesModal';
 import HeadlinesModal from '../components/HeadlinesModal';
-import { getCategories } from '../redux/actions';
 import { Category } from '../redux/types';
 import { createEvent } from '../service';
 
@@ -25,11 +25,10 @@ enum ModalsIndex {
 }
 
 interface ComponentProps {
-  categories: Category[] | undefined;
   getCategories: () => void;
 }
 
-const Event: React.FC<ComponentProps> = ({ getCategories, categories }) => {
+const Event: React.FC<ComponentProps> = ({ getCategories }) => {
   const [image, setImage] = useState('');
   const [file, setFile] = useState<File | string>('');
   const [category, setCategory] = useState<Category | ''>('');
