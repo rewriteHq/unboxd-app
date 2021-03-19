@@ -24,6 +24,7 @@ const Event = ({ list, getWishlist }: ComponentProps) => {
   const [explainer, setExplainer] = useState({ show: false, active: 1 });
 
   const navItems = [
+    () => <Link to={`/event/edit/${id}`}>Archive</Link>,
     () => <Link to={`/event/edit/${id}`}>Edit</Link>,
     () => <Link to={`/event/share`}>Share</Link>,
     () => <Link to={`/event/wallet/${id}`}>Wallet</Link>,
