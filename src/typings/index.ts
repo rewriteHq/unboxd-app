@@ -2,7 +2,22 @@
  * FOR GLOBAL APP TYPE DEFINITIONS
  */
 
-interface AppProps {}
+import {
+  WalletState,
+  WishlistState,
+} from '../modules/beneficiary/pages/Event/redux/types';
+import { GiftState } from '../modules/beneficiary/pages/Gift/redux/types';
+import { ResourceState } from '../modules/resources/redux/types';
+
+interface AppState {
+  user: any;
+  event: {
+    list: WishlistState;
+    wallet: WalletState;
+  };
+  gifts: GiftState;
+  resources: ResourceState;
+}
 
 export interface Category {
   name: string;
@@ -28,4 +43,4 @@ export interface WishList {
   userID: string;
 }
 
-export default AppProps;
+export default AppState;

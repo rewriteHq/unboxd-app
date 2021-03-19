@@ -6,7 +6,7 @@ export type GiftDataType = {
   [key: string]: GiftType;
 };
 
-export interface InitialState {
+export interface GiftState {
   data: GiftDataType;
   error: null;
 }

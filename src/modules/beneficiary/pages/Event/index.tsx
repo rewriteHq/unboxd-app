@@ -1,14 +1,23 @@
 import { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import DashboardLayout from '../../../../commons/DashboardLayout';
 import { DashboardContainer } from '../../../../commons/DashboardLayout/styles';
+import AppState, { WishList } from '../../../../typings';
+import * as actions from './redux/actions';
+import { CoverImage, HeadlineText } from './styles';
 
 type ParamTypes = {
   id: string;
 };
 
-const Event = () => {
+type ComponentProps = {
+  list: WishList | null;
+  getWishlist: (id: string) => void;
+};
+
+const Event = ({ list, getWishlist }: ComponentProps) => {
   const { id } = useParams<ParamTypes>();
   // const [data, setData] = use
   const [activeExplainer, setActiveExplainer] = useState(1);
@@ -20,17 +29,39 @@ const Event = () => {
     () => <Link to={`/event/wallet/${id}`}>Wallet</Link>,
   ];
 
-  // useEffect(() => {
+  useEffect(() => {
+    if (!list || list._id !== id) {
+      getWishlist(id);
+    }
+  }, [list, id, getWishlist]);
 
-  // }, [])
-
-  return (
+  console.log(list);
+  return list ? (
     <>
       <DashboardLayout pageTitle="" navItems={navItems} showBack>
-        <DashboardContainer>Begin with Magic</DashboardContainer>
+        <DashboardContainer>
+          <CoverImage src={list.coverImage} alt={list.title} />
+          <HeadlineText>
+            <h2>{list.title}</h2>
+            <p>
+              If you are here, it’s because you count as one of our loved ones.
+              Below are the items we deeply wish for as we setup our new home.
+            </p>
+          </HeadlineText>
+        </DashboardContainer>
       </DashboardLayout>
     </>
-  );
+  ) : null;
 };
 
-export default Event;
+const mapStateToProps = (state: AppState) => {
+  return {
+    list: state.event.list.data,
+  };
+};
+
+const mapDispatchToProps = (dispatch: any) => ({
+  getWishlist: (id: string) => dispatch(actions.getWishlist(id)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Event);

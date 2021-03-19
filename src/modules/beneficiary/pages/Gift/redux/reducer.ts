@@ -1,6 +1,6 @@
-import { InitialState, GiftActionTypes, ADD_GIFT } from './types';
+import { GiftState, GiftActionTypes, ADD_GIFT } from './types';
 
-const initialState: InitialState = {
+const initialState: GiftState = {
   data: {},
   error: null,
 };
