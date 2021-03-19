@@ -1,19 +1,33 @@
+import { WishList } from '../../../../../typings';
+
 //event reducer types
 export const SET_CATEGORIES = 'SET_CATEGORIES';
+export const SET_WISHLIST = 'SET_WISHLIST';
+export const SET_WALLET = 'SET_WALLET';
 
 export interface Category {
   name: string;
   _id: string;
 }
 
-interface SetCategories {
-  type: typeof SET_CATEGORIES;
-  payload: Category[];
+interface SetWishlist {
+  type: typeof SET_WISHLIST;
+  payload: any;
 }
 
-export interface InititalState {
-  data: Category[];
+interface SetWallet {
+  type: typeof SET_WISHLIST;
+  payload: WishList;
+}
+
+export interface WishlistState {
+  data: WishList | null;
   error: null;
 }
 
-export type EventActionTypes = SetCategories;
+export interface WalletState {
+  data: null;
+  error: null;
+}
+
+export type EventActionTypes = SetWishlist | SetWallet;

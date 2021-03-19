@@ -20,7 +20,7 @@ export const createEvent = async (data: EventData) => {
   }
 };
 
-export const getEvent = async (id: string) => {
+export const getWishlist = async (id: string) => {
   try {
     const response = await API.get(`/list/${id}`);
     return [null, response.data.payload];
