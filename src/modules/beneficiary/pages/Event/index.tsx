@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import formatDistanceStrict from 'date-fns/formatDistanceStrict';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router';
@@ -16,6 +16,7 @@ import {
   GiftList,
   HeadlineText,
 } from './styles';
+import ExplainerModal from './components/ExplainerModal';
 
 type ParamTypes = {
   id: string;
@@ -28,7 +29,7 @@ type ComponentProps = {
 
 const Event = ({ list, getWishlist }: ComponentProps) => {
   const { id } = useParams<ParamTypes>();
-  // const [explainer, setExplainer] = useState({ show: false, active: 1 });
+  const [explainer, setExplainer] = useState({ show: true, active: 1 });
 
   const navItems = [
     () => <Link to={`/event/edit/${id}`}>Archive</Link>,
@@ -42,6 +43,11 @@ const Event = ({ list, getWishlist }: ComponentProps) => {
       getWishlist(id);
     }
   }, [list, id, getWishlist]);
+
+  const incrementExplainerIndex = () =>
+    setExplainer(({ active, show }) => ({ active: active + 1, show }));
+
+  const closeExplainer = () => setExplainer({ active: 0, show: false });
 
   console.log(list);
   return list ? (
@@ -72,6 +78,11 @@ const Event = ({ list, getWishlist }: ComponentProps) => {
           <AddItem to={`/event/add-gift/${id}`}>+</AddItem>
         </DashboardContainer>
       </DashboardLayout>
+      <ExplainerModal
+        active={explainer.active}
+        goToNext={incrementExplainerIndex}
+        finish={closeExplainer}
+      />
     </>
   ) : null;
 };

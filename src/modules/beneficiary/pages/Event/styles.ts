@@ -71,3 +71,56 @@ export const AddItem = styled(Link)`
   right: 20px;
   z-index: 3;
 `;
+
+//Explainer Modal Styles
+
+export const ExplainerWrapper = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(0deg, white, rgba(255, 255, 255, 0.85));
+  z-index: 3;
+  padding: 0 20px;
+`;
+
+export const ExplainerHeader = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 20px 0;
+  background: ${Colors.white};
+`;
+
+export const ExplainerNav = styled.div<{ active?: boolean }>`
+  background-color: transparent;
+  opacity: ${({ active }) => (active ? '1' : '0.2')};
+  font-size: 13px;
+  padding: 0 10px;
+
+  &:last-child {
+    padding-right: 0;
+  }
+`;
+
+export const ExplainerContent = styled.div`
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+
+  h3 {
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    width: 70%;
+    margin-bottom: 2.5rem;
+  }
+`;
+
+export const ExplainerButton = styled.button`
+  background: transparent;
+  text-decoration: underline;
+  font-size: 1rem;
+`;
