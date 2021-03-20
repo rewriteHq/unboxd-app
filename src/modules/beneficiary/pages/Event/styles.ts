@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import { BTN } from '../../../../components/Button/styles';
 import Colors from '../../../../constants/Colors';
@@ -6,10 +7,25 @@ export const ImageHolder = styled(BTN)`
   height: 30vh;
 `;
 
+export const CoverAndTime = styled.div`
+  position: relative;
+`;
+
 export const CoverImage = styled.img`
   height: 30vh;
   width: 100%;
   object-fit: cover;
+`;
+
+export const CountDown = styled.div`
+  background-color: ${Colors.black};
+  color: ${Colors.white};
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.7rem;
+  border-radius: 30px;
 `;
 
 const headlineFont = css`
@@ -37,4 +53,21 @@ export const HeadlineText = styled.div`
     ${headlineFont};
     margin-bottom: 0.5rem;
   }
+`;
+
+export const GiftList = styled.div`
+  padding: 1.5rem 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 1rem;
+`;
+
+export const AddItem = styled(Link)`
+  border-radius: 50%;
+  padding: 1.5rem 1.8rem;
+  background-color: ${Colors.grey};
+  position: fixed;
+  bottom: 10vh;
+  right: 20px;
+  z-index: 3;
 `;

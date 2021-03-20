@@ -1,12 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import formatDistanceStrict from 'date-fns/formatDistanceStrict';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import DashboardLayout from '../../../../commons/DashboardLayout';
 import { DashboardContainer } from '../../../../commons/DashboardLayout/styles';
+import GiftCard from '../../../../commons/GiftCard';
 import AppState, { WishList } from '../../../../typings';
 import * as actions from './redux/actions';
-import { CoverImage, HeadlineText } from './styles';
+import {
+  AddItem,
+  CountDown,
+  CoverAndTime,
+  CoverImage,
+  GiftList,
+  HeadlineText,
+} from './styles';
 
 type ParamTypes = {
   id: string;
@@ -19,9 +28,7 @@ type ComponentProps = {
 
 const Event = ({ list, getWishlist }: ComponentProps) => {
   const { id } = useParams<ParamTypes>();
-  // const [data, setData] = use
-  const [activeExplainer, setActiveExplainer] = useState(1);
-  const [explainer, setExplainer] = useState({ show: false, active: 1 });
+  // const [explainer, setExplainer] = useState({ show: false, active: 1 });
 
   const navItems = [
     () => <Link to={`/event/edit/${id}`}>Archive</Link>,
@@ -41,7 +48,15 @@ const Event = ({ list, getWishlist }: ComponentProps) => {
     <>
       <DashboardLayout pageTitle="" navItems={navItems} showBack>
         <DashboardContainer>
-          <CoverImage src={list.coverImage} alt={list.title} />
+          <CoverAndTime>
+            <CoverImage src={list.coverImage} alt={list.title} />
+            <CountDown>
+              {formatDistanceStrict(new Date(), new Date(list.date), {
+                unit: 'day',
+              })}{' '}
+              left
+            </CountDown>
+          </CoverAndTime>
           <HeadlineText>
             <h2>{list.title}</h2>
             <p>
@@ -49,6 +64,12 @@ const Event = ({ list, getWishlist }: ComponentProps) => {
               Below are the items we deeply wish for as we setup our new home.
             </p>
           </HeadlineText>
+          <GiftList>
+            {list.gifts.map((gift) => (
+              <GiftCard gift={gift} key={gift._id} />
+            ))}
+          </GiftList>
+          <AddItem to={`/event/add-gift/${id}`}>+</AddItem>
         </DashboardContainer>
       </DashboardLayout>
     </>
