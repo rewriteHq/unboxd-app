@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import shortid from 'shortid';
 import * as R from 'ramda';
 import { useHistory, useParams } from 'react-router';
@@ -6,13 +6,19 @@ import DashboardLayout from '../../../../../commons/DashboardLayout';
 import NoItem from '../../../../../components/NoItem';
 import { DashboardFilm, DashboardWrapper } from '../../Dashboard/styles';
 import { AddItem, Explainer, Hold } from './styles';
-import { getWishlist } from './service';
-import { WishList } from '../../../../../typings';
+import * as actions from '../redux/actions';
+import AppState, { WishList } from '../../../../../typings';
 import GiftList from './components/GiftList';
 import HoldModal from './components/HoldModal';
+import { connect } from 'react-redux';
 
 type ParamTypes = {
   id: string;
+};
+
+type ComponentProps = {
+  list: WishList | null;
+  getWishlist: (id: string) => void;
 };
 
 const explainerTextTitle = [
@@ -22,12 +28,11 @@ const explainerTextTitle = [
   'Three items added',
 ];
 
-const AddEvent = () => {
+const AddEvent = ({ list, getWishlist }: ComponentProps) => {
   const { id } = useParams<ParamTypes>();
   const history = useHistory();
 
   const [holdModal, setHoldModal] = useState(false);
-  const [data, setData] = useState<WishList | null>(null);
 
   const finish = () => setHoldModal(true);
 
@@ -47,7 +52,7 @@ const AddEvent = () => {
         toggleHoldModal();
         history.push({
           pathname: `/event/${id}`,
-          state: { newEvent: true },
+          state: { showIntro: true },
         });
       }, 3000);
 
@@ -56,11 +61,10 @@ const AddEvent = () => {
   }, [holdModal, history, id]);
 
   useEffect(() => {
-    (async function () {
-      const [err, result] = await getWishlist(id);
-      setData(result);
-    })();
-  }, [id]);
+    if (!list || list._id !== id) {
+      getWishlist(id);
+    }
+  }, [id, list, getWishlist]);
 
   const renderExplainer = (giftLength: number) => {
     if (giftLength < explainerTextTitle.length) {
@@ -78,19 +82,19 @@ const AddEvent = () => {
     return null;
   };
 
-  return data ? (
+  return list ? (
     <DashboardLayout pageTitle="Add your needs" navItems={navItems} showBack>
       <DashboardWrapper>
         <div className="container">
-          {R.isEmpty(data.gifts) ? (
+          {R.isEmpty(list.gifts) ? (
             <NoItem />
           ) : (
-            <GiftList gifts={data.gifts} wishlistId={id} />
+            <GiftList gifts={list.gifts} wishlistId={id} />
           )}
         </div>
-        {data.gifts.length < 6 && <DashboardFilm />}
+        {list.gifts.length < 6 && <DashboardFilm />}
       </DashboardWrapper>
-      {R.isEmpty(data.gifts) ? (
+      {R.isEmpty(list.gifts) ? (
         <Explainer>
           <p>
             Populate your list with all that you need. Click plus button to add
@@ -98,7 +102,7 @@ const AddEvent = () => {
           </p>
         </Explainer>
       ) : (
-        renderExplainer(data.gifts.length)
+        renderExplainer(list.gifts.length)
       )}
       <AddItem to={`/event/add-gift/${id}`}>+</AddItem>
       <HoldModal show={holdModal} onClose={toggleHoldModal}>
@@ -111,4 +115,14 @@ const AddEvent = () => {
   ) : null;
 };
 
-export default AddEvent;
+const mapStateToProps = (state: AppState) => {
+  return {
+    list: state.event.list.data,
+  };
+};
+
+const mapDispatchToProps = (dispatch: any) => ({
+  getWishlist: (id: string) => dispatch(actions.getWishlist(id)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddEvent);

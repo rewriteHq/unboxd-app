@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import formatDistanceStrict from 'date-fns/formatDistanceStrict';
 import { connect } from 'react-redux';
-import { useParams } from 'react-router';
+import { useLocation, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import DashboardLayout from '../../../../commons/DashboardLayout';
 import { DashboardContainer } from '../../../../commons/DashboardLayout/styles';
@@ -27,9 +27,17 @@ type ComponentProps = {
   getWishlist: (id: string) => void;
 };
 
+type LocationState = {
+  showIntro?: boolean;
+};
+
 const Event = ({ list, getWishlist }: ComponentProps) => {
   const { id } = useParams<ParamTypes>();
-  const [explainer, setExplainer] = useState({ show: true, active: 1 });
+  const { state } = useLocation<LocationState>();
+  const [explainer, setExplainer] = useState({
+    show: state && state.showIntro,
+    active: 1,
+  });
 
   const navItems = [
     () => <Link to={`/event/edit/${id}`}>Archive</Link>,
@@ -49,7 +57,6 @@ const Event = ({ list, getWishlist }: ComponentProps) => {
 
   const closeExplainer = () => setExplainer({ active: 0, show: false });
 
-  console.log(list);
   return list ? (
     <>
       <DashboardLayout pageTitle="" navItems={navItems} showBack>
@@ -78,11 +85,13 @@ const Event = ({ list, getWishlist }: ComponentProps) => {
           <AddItem to={`/event/add-gift/${id}`}>+</AddItem>
         </DashboardContainer>
       </DashboardLayout>
-      <ExplainerModal
-        active={explainer.active}
-        goToNext={incrementExplainerIndex}
-        finish={closeExplainer}
-      />
+      {explainer.show && (
+        <ExplainerModal
+          active={explainer.active}
+          goToNext={incrementExplainerIndex}
+          finish={closeExplainer}
+        />
+      )}
     </>
   ) : null;
 };

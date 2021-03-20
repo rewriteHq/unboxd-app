@@ -108,6 +108,7 @@ export const ExplainerContent = styled.div`
   position: absolute;
   bottom: 40px;
   left: 40px;
+  padding-right: 20px;
 
   h3 {
     margin-bottom: 0.5rem;
