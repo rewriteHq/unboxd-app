@@ -16,7 +16,6 @@ const routes: RouteType[] = [
     auth: true,
     component: dashboard,
   },
-
   {
     path: '/event/create',
     exact: true,

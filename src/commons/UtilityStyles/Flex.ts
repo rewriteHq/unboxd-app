@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-export const SpaceBetween = styled.div`
+export const SpaceBetween = styled.div<{ align?: string }>`
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: ${({ align }) => align || 'flex-start'};
 `;

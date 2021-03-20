@@ -125,3 +125,55 @@ export const ExplainerButton = styled.button`
   text-decoration: underline;
   font-size: 1rem;
 `;
+
+//Share Modal styles
+
+export const ShareText = styled.p`
+  width: 70%;
+  margin: 1rem 0 1.5rem;
+  color: ${Colors.darkGrey};
+`;
+
+export const ShareUrl = styled.p`
+  position: relative;
+  white-space: nowrap;
+  overflow-x: hidden;
+  padding: 1rem 0.5rem;
+  background: #f7f7f7;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: linear-gradient(
+      270deg,
+      #f7f7f7 0%,
+      rgba(247, 247, 247, 0) 100%
+    );
+    width: 100%;
+    height: 100%;
+  }
+`;
+
+export const SocialOptions = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+`;
+
+export const SocialIcon = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem 0;
+  font-size: 0.8rem;
+
+  .image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: ${Colors.grey};
+    margin-bottom: 0.5rem;
+  }
+`;

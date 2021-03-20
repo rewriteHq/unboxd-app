@@ -17,6 +17,7 @@ import {
   HeadlineText,
 } from './styles';
 import ExplainerModal from './components/ExplainerModal';
+import ShareEventModal from './components/ShareModal';
 
 type ParamTypes = {
   id: string;
@@ -38,11 +39,17 @@ const Event = ({ list, getWishlist }: ComponentProps) => {
     show: state && state.showIntro,
     active: 1,
   });
+  const [shareModal, setShareModal] = useState(false);
+  const toggleShareModal = () => setShareModal((prev) => !prev);
 
   const navItems = [
     () => <Link to={`/event/edit/${id}`}>Archive</Link>,
     () => <Link to={`/event/edit/${id}`}>Edit</Link>,
-    () => <Link to={`/event/share`}>Share</Link>,
+    () => (
+      <Link to="#0" onClick={toggleShareModal}>
+        Share
+      </Link>
+    ),
     () => <Link to={`/event/wallet/${id}`}>Wallet</Link>,
   ];
 
@@ -92,6 +99,8 @@ const Event = ({ list, getWishlist }: ComponentProps) => {
           finish={closeExplainer}
         />
       )}
+
+      <ShareEventModal show={shareModal} close={toggleShareModal} />
     </>
   ) : null;
 };
