@@ -10,7 +10,7 @@ export type EventData = {
 export interface EventFormProps {
   getCategories: () => void;
   getWishlist?: (id: string) => void;
-  list?: WishList;
+  list?: WishList | null;
   type: 'create' | 'edit';
 }
 

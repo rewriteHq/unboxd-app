@@ -79,10 +79,7 @@ const Event = ({ list, getWishlist }: ComponentProps) => {
           </CoverAndTime>
           <HeadlineText>
             <h2>{list.title}</h2>
-            <p>
-              If you are here, it’s because you count as one of our loved ones.
-              Below are the items we deeply wish for as we setup our new home.
-            </p>
+            <p>{list.description}</p>
           </HeadlineText>
           <GiftList>
             {list.gifts.map((gift) => (

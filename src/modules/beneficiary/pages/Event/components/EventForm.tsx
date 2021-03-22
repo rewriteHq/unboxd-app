@@ -22,6 +22,11 @@ enum ModalsIndex {
   IMAGE = 3,
 }
 
+const eventParams = {
+  create: { showBack: false, title: 'Setup Event' },
+  edit: { showBack: true, title: 'Edit Event' },
+};
+
 const EventForm = ({
   list,
   getCategories,
@@ -118,7 +123,10 @@ const EventForm = ({
 
   return (
     <>
-      <DashboardLayout pageTitle="Setup Event">
+      <DashboardLayout
+        pageTitle={eventParams[type]['title']}
+        showBack={eventParams[type]['showBack']}
+      >
         <DashboardContainer>
           {image ? (
             <CoverImage
