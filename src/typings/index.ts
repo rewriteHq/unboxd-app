@@ -41,6 +41,7 @@ export interface WishList {
   categoryID: Category;
   date: string;
   userID: string;
+  description?: string;
 }
 
 export default AppState;

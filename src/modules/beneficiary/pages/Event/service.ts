@@ -1,16 +1,17 @@
 import API from '../../../../utils/api';
 import Notify from '../../../../utils/notify/notify';
+import { EventData } from './types';
 
-type EventData = {
-  title: string;
-  categoryID: string;
-  date: string;
-  coverImage: string | File;
-};
+export const createOrEditEvent = async (
+  data: EventData,
+  type: 'create' | 'edit',
+  id: string
+) => {
+  const method = type === 'create' ? 'post' : 'put';
+  const url = type === 'edit' && id ? `/list/${id}` : '/list';
 
-export const createEvent = async (data: EventData) => {
   try {
-    const response = await API.post('/list', data);
+    const response = await API[method](url, data);
     Notify.bottom(response.data.message);
     return [null, response.data.payload];
   } catch (err) {

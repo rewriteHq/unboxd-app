@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router';
 import DashboardLayout from '../../../../../commons/DashboardLayout';
 import { DashboardContainer } from '../../../../../commons/DashboardLayout/styles';
 import ImageUploadModal from '../../../../../commons/ImageUploadModal';
@@ -9,13 +8,12 @@ import { SpaceBetween } from '../../../../../commons/UtilityStyles/Flex';
 import Button from '../../../../../components/Button';
 import { PlainButton } from '../../../../../components/Button/styles';
 import Input from '../../../../../components/Input';
-import { getCategories } from '../../../../resources/redux/actions';
-import CategoriesModal from '../components/CategoriesModal';
-import HeadlinesModal from '../components/HeadlinesModal';
-import { Category } from '../redux/types';
+import { Category } from '../../../../../typings';
 import { createOrEditEvent } from '../service';
-
 import { CoverImage, HeadlineInput, ImageHolder } from '../styles';
+import { EventFormProps, EventParamsType } from '../types';
+import CategoriesModal from './CategoriesModal';
+import HeadlinesModal from './HeadlinesModal';
 
 enum ModalsIndex {
   NONE = 0,
@@ -24,11 +22,12 @@ enum ModalsIndex {
   IMAGE = 3,
 }
 
-interface ComponentProps {
-  getCategories: () => void;
-}
-
-const Event: React.FC<ComponentProps> = ({ getCategories }) => {
+const EventForm = ({
+  list,
+  getCategories,
+  getWishlist,
+  type,
+}: EventFormProps) => {
   const [image, setImage] = useState('');
   const [file, setFile] = useState<File | string>('');
   const [category, setCategory] = useState<Category | ''>('');
@@ -39,11 +38,29 @@ const Event: React.FC<ComponentProps> = ({ getCategories }) => {
     note: '',
   });
 
+  const { id } = useParams<EventParamsType>();
   const history = useHistory();
 
   useEffect(() => {
     getCategories();
   }, [getCategories]);
+
+  useEffect(() => {
+    if (id && type === 'edit') {
+      if (!list || list._id !== id) {
+        getWishlist && getWishlist(id);
+      } else {
+        setImage(list.coverImage);
+        setFile(list.coverImage);
+        setCategory(list.categoryID);
+        setData({
+          headline: list.title,
+          date: list.date,
+          note: list.description || '',
+        });
+      }
+    }
+  }, [type, id, list, getWishlist]);
 
   const selectCategory = useCallback((cat: Category) => {
     setCategory(cat);
@@ -76,6 +93,8 @@ const Event: React.FC<ComponentProps> = ({ getCategories }) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
+  const closeModals = () => setModal(ModalsIndex.NONE);
+
   const handleSubmit = async () => {
     const payload = {
       title: data.headline,
@@ -85,16 +104,17 @@ const Event: React.FC<ComponentProps> = ({ getCategories }) => {
       date: data.date,
     };
 
-    // const [err, result] = await createEvent(payload);
+    const [err, result] = await createOrEditEvent(payload, type, id);
 
-    // if (err) {
-    //   return err;
-    // }
+    if (err) {
+      return err;
+    }
 
-    // history.push(`/event/add/${result._id}`);
+    const nextUrl =
+      type === 'create' ? `/event/add/${result._id}` : `/event/${id}`;
+
+    history.push(nextUrl);
   };
-
-  const closeModals = () => setModal(ModalsIndex.NONE);
 
   return (
     <>
@@ -169,12 +189,4 @@ const Event: React.FC<ComponentProps> = ({ getCategories }) => {
   );
 };
 
-const mapStateToProps = (state: any) => ({
-  categories: state.event?.data,
-});
-
-const mapDispatchToProps = (dispatch: any) => ({
-  getCategories: async () => dispatch(getCategories()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Event);
+export default EventForm;
