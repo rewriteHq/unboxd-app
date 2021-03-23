@@ -12,14 +12,18 @@ export const ImageHolder = styled.div`
   background-color: ${Colors.grey};
 `;
 
-export const UploadButton = styled(BTN)`
-  background-color: transparent;
+export const UploadButton = styled(BTN)<{ color?: string }>`
+  background-color: ${({ color }) => (color ? color : 'transparent')};
   border: 1px solid ${Colors.black};
   position: absolute;
   bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
   width: unset;
+`;
+
+export const ImageWrapper = styled.div`
+  position: relative;
 `;
 
 export const CoverImage = styled.img`

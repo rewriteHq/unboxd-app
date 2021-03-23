@@ -21,6 +21,7 @@ interface MenuButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 interface MenuProps {
   close: () => void;
+  id: string;
 }
 
 const GiftMenuButton = ({ onClick, active }: MenuButtonProps) => {
@@ -33,11 +34,11 @@ const GiftMenuButton = ({ onClick, active }: MenuButtonProps) => {
   );
 };
 
-const GiftMenu = ({ close }: MenuProps) => {
+const GiftMenu = ({ close, id }: MenuProps) => {
   return (
     <>
       <MenuItems>
-        <Link to="event">Edit</Link>
+        <Link to={`/event/gift/${id}`}>Edit</Link>
         <Link to="event">Hide Item</Link>
         <Link to="event" className="danger">
           Delete
@@ -55,7 +56,7 @@ const GiftCard = ({ gift }: ComponentProps) => {
     <GiftThumb>
       <GiftThumbImage src={gift.imageURL} alt={gift.name} />
       <GiftMenuButton onClick={toggleMenu} active={showMenu} />
-      {showMenu && <GiftMenu close={toggleMenu} />}
+      {showMenu && <GiftMenu close={toggleMenu} id={gift._id} />}
       <GiftThumbText>
         <p>{gift.name}</p>
         <p className="price">{`₦${gift.cost.toLocaleString()}`}</p>

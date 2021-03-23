@@ -9,6 +9,7 @@ const editEvent = lazy(() => import('../pages/Event/edit'));
 const addEvent = lazy(() => import('../pages/Event/add'));
 const addGift = lazy(() => import('../pages/Gift/add'));
 const editGift = lazy(() => import('../pages/Gift/edit'));
+const gift = lazy(() => import('../pages/Gift'));
 
 const routes: RouteType[] = [
   {
@@ -28,6 +29,12 @@ const routes: RouteType[] = [
     exact: true,
     auth: false,
     component: editEvent,
+  },
+  {
+    path: '/event/gift/:id',
+    exact: true,
+    auth: false,
+    component: gift,
   },
   {
     path: '/event/:id',
