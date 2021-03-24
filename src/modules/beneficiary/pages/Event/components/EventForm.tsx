@@ -118,6 +118,10 @@ const EventForm = ({
     const nextUrl =
       type === 'create' ? `/event/add/${result._id}` : `/event/${id}`;
 
+    if (type === 'edit' && id && getWishlist) {
+      getWishlist(id);
+    }
+
     history.push(nextUrl);
   };
 

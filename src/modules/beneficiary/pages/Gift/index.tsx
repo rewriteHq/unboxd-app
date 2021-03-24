@@ -6,10 +6,12 @@ import DashboardLayout from '../../../../commons/DashboardLayout';
 import { DashboardContainer } from '../../../../commons/DashboardLayout/styles';
 import ImageUploadModal from '../../../../commons/ImageUploadModal';
 import PageBottom from '../../../../commons/PageBottom';
+import Transaction from '../../../../commons/Transaction';
 import Button from '../../../../components/Button';
 import Input from '../../../../components/Input';
 import PriceInput from '../../../../components/Input/price';
 import Tab from '../../../../components/Tab';
+import TotalContribution from './components/TotalContribution';
 import { addGift } from './redux/actions';
 import { CoverImage, ImageHolder, ImageWrapper, UploadButton } from './styles';
 import { ParamType, ComponentProps, ImageState } from './types';
@@ -96,6 +98,14 @@ const Gift = ({ gifts, getGift }: ComponentProps) => {
             />
           </>
         )}
+
+        {activeTab === tabIndex.contibutors && (
+          <>
+            <Transaction />
+            <Transaction />
+            <Transaction />
+          </>
+        )}
       </DashboardContainer>
       <ImageUploadModal
         show={image.modal}
@@ -106,6 +116,7 @@ const Gift = ({ gifts, getGift }: ComponentProps) => {
 
       <PageBottom>
         {activeTab === tabIndex.edit && <Button>Save</Button>}
+        {activeTab === tabIndex.contibutors && <TotalContribution />}
       </PageBottom>
     </DashboardLayout>
   );

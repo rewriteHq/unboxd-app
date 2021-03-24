@@ -10,6 +10,7 @@ const addEvent = lazy(() => import('../pages/Event/add'));
 const addGift = lazy(() => import('../pages/Gift/add'));
 const editGift = lazy(() => import('../pages/Gift/edit'));
 const gift = lazy(() => import('../pages/Gift'));
+const archive = lazy(() => import('../pages/Event/archive'));
 
 const routes: RouteType[] = [
   {
@@ -59,6 +60,12 @@ const routes: RouteType[] = [
     exact: true,
     auth: false,
     component: editGift,
+  },
+  {
+    path: '/archive/:id',
+    exact: true,
+    auth: false,
+    component: archive,
   },
 ];
 

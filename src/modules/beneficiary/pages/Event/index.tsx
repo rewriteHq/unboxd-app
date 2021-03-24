@@ -37,13 +37,13 @@ const Event = ({ list, getWishlist }: ComponentProps) => {
   const { state } = useLocation<LocationState>();
   const [explainer, setExplainer] = useState({
     show: state && state.showIntro,
-    active: 1,
+    active: 0,
   });
   const [shareModal, setShareModal] = useState(false);
   const toggleShareModal = () => setShareModal((prev) => !prev);
 
   const navItems = [
-    () => <Link to={`/event/edit/${id}`}>Archive</Link>,
+    () => <Link to={`/archive/${id}`}>Archive</Link>,
     () => <Link to={`/event/edit/${id}`}>Edit</Link>,
     () => (
       <Link to="#0" onClick={toggleShareModal}>
