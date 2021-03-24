@@ -1,5 +1,6 @@
 import { AxiosError } from 'axios';
 import API from '.';
+import Notify from '../notify/notify';
 
 type ResponseActionType = (res: any) => unknown;
 
@@ -51,3 +52,9 @@ export const postReq = (
  *  Put Request
  *  Delete Request
  */
+
+export const handleRequestError = (err: AxiosError) => {
+  const message = err.response && err.response.data.message;
+  Notify.bottom(message ? message : 'Something happened. Kindly try again');
+  return [err.response];
+};
