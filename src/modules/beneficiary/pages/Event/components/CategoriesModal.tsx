@@ -40,7 +40,7 @@ const CategoriesModal = ({
 };
 
 const mapStateToProps = (state: any) => ({
-  categories: state.event.data,
+  categories: state.resources.data.categories,
 });
 
 export default connect(mapStateToProps)(CategoriesModal);
