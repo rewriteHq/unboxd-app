@@ -25,9 +25,15 @@ export const Spinner = styled.span`
   max-width: 20px;
 `;
 
-export const PlainButton = styled.button`
+export const PlainButton = styled.button<{ underlined?: boolean }>`
   background: transparent;
   border: none;
   padding: 1rem 0;
   white-space: nowrap;
+
+  ${({ underlined }) =>
+    underlined &&
+    css`
+      text-decoration: underline;
+    `}
 `;

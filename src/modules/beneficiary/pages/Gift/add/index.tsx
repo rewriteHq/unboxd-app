@@ -1,5 +1,6 @@
 import { useCallback, useState } from 'react';
 import { NumberFormatValues } from 'react-number-format';
+import { connect } from 'react-redux';
 import { useHistory, useParams } from 'react-router';
 import DashboardLayout from '../../../../../commons/DashboardLayout';
 import { DashboardContainer } from '../../../../../commons/DashboardLayout/styles';
@@ -8,6 +9,7 @@ import PageBottom from '../../../../../commons/PageBottom';
 import Button from '../../../../../components/Button';
 import Input from '../../../../../components/Input';
 import PriceInput from '../../../../../components/Input/price';
+import { getWishlist } from '../../Event/redux/actions';
 import { addGift } from '../service';
 import { CoverImage, ImageHolder, UploadButton } from '../styles';
 
@@ -16,11 +18,15 @@ interface ImageType {
   url: string;
 }
 
+interface ComponentProps {
+  getWishlist: (id: string) => void;
+}
+
 interface ParamTypes {
   id: string;
 }
 
-const AddGift = () => {
+const AddGift = ({ getWishlist }: ComponentProps) => {
   const { id } = useParams<ParamTypes>();
   const history = useHistory();
 
@@ -55,10 +61,11 @@ const AddGift = () => {
 
     const [err, result] = await addGift({ data: payload, id });
     if (err) {
-      return err;
+      return [err];
     }
 
-    history.push(`/event/add/${result.wishlistId}`);
+    getWishlist(id);
+    history.goBack();
   };
 
   return (
@@ -98,4 +105,8 @@ const AddGift = () => {
   );
 };
 
-export default AddGift;
+const mapDispatchToProps = (dispatch: any) => ({
+  getWishlist: (id: string) => dispatch(getWishlist(id)),
+});
+
+export default connect(null, mapDispatchToProps)(AddGift);

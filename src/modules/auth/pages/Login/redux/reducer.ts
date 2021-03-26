@@ -50,7 +50,7 @@ function reducer(state = initialState, action: any) {
     case LOADING_UI:
       return {
         ...state,
-        loading: true,
+        loading: action.payload,
       };
     default:
       return state;

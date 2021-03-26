@@ -1,12 +1,6 @@
 import API from '../../../../utils/api';
 import Notify from '../../../../utils/notify/notify';
 
-type GiftData = {
-  name: string;
-  cost: string;
-  image: File | string;
-};
-
 type GiftParams = {
   data: any;
   id: string;

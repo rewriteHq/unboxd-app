@@ -24,7 +24,7 @@ const Header: React.FC<HeaderProps> = ({ pageTitle, showBack, navItems }) => {
   return (
     <Head>
       {showBack ? (
-        <a href="/" onClick={goBack}>
+        <a href="/" onClick={goBack} className="back-arrow">
           ←
         </a>
       ) : (
