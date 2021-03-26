@@ -1,12 +1,14 @@
 import { Form, Main } from './styles';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import Button from '../../../../components/Button';
 import Input from '../../../../components/Input';
 import Layout from '../../../../Layout';
-import { PageHeadingSmall } from '../../../../commons/Heading';
 import { loginUser } from './redux/actions';
+import { SpaceBetween } from '../../../../commons/UtilityStyles/Flex';
+import { Auth } from '../../../../components/Header/styles';
 
 const Login = (props: any) => {
   const [values, setValues] = useState({
@@ -41,9 +43,12 @@ const Login = (props: any) => {
     <Layout>
       <Main>
         <div className="container">
-          <PageHeadingSmall className="text-center">
-            Sign in to continue
-          </PageHeadingSmall>
+          <SpaceBetween align="center">
+            <h2>Sign in</h2>
+            <Auth>
+              New here? <Link to="/register">Sign up</Link>
+            </Auth>
+          </SpaceBetween>
           <Form onSubmit={handleSubmit}>
             <Input
               label="Email address"
@@ -57,9 +62,7 @@ const Login = (props: any) => {
               name="password"
               onChange={handleChange}
             />
-            <Button loading={props.loading} disabled={props.loading}>
-              Login
-            </Button>
+            <Button type="submit">Login</Button>
           </Form>
         </div>
       </Main>

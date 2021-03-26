@@ -8,11 +8,9 @@ const Header: React.FC = () => {
   return (
     <HomeHeader>
       <div className="container">
-        <h2>
-          <Link to="/">
-            <Logo />
-          </Link>
-        </h2>
+        <Link to="/">
+          <Logo />
+        </Link>
       </div>
     </HomeHeader>
   );
