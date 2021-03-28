@@ -1,10 +1,18 @@
 import React from 'react';
-import styled from 'styled-components';
-import { SpaceBetween } from '../../../../../commons/UtilityStyles/Flex';
-import { PlainButton } from '../../../../../components/Button/styles';
-import Modal from '../../../../../components/Modal';
-import Colors from '../../../../../constants/Colors';
-import { ShareText, ShareUrl, SocialIcon, SocialOptions } from '../styles';
+import { SpaceBetween } from '../UtilityStyles/Flex';
+import { PlainButton } from '../../components/Button/styles';
+import Modal from '../../components/Modal';
+import {
+  ShareWrapper,
+  ShareText,
+  ShareUrl,
+  SocialIcon,
+  SocialOptions,
+  FShare,
+  WShare,
+  TShare,
+  CopyShare,
+} from './styles';
 
 interface ComponentProps {
   show: boolean;
@@ -28,19 +36,19 @@ const ShareEventModal = ({ show, close }: ComponentProps) => {
           </ShareUrl>
           <SocialOptions>
             <SocialIcon>
-              <span className="image" />
+              <CopyShare />
               Copy Link
             </SocialIcon>
             <SocialIcon>
-              <span className="image" />
+              <FShare />
               Facebook
             </SocialIcon>
             <SocialIcon>
-              <span className="image" />
+              <WShare />
               WhatsApp
             </SocialIcon>
             <SocialIcon>
-              <span className="image" />
+              <TShare />
               Twitter
             </SocialIcon>
           </SocialOptions>
@@ -51,8 +59,3 @@ const ShareEventModal = ({ show, close }: ComponentProps) => {
 };
 
 export default ShareEventModal;
-
-const ShareWrapper = styled.div`
-  background: ${Colors.white};
-  padding: 20px 40px;
-`;
