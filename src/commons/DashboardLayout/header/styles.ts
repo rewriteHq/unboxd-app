@@ -9,7 +9,6 @@ export const Hamburger = styled(PlainButton)`
   height: 80%;
   width: 25px;
   padding: 0;
-
   span {
     width: 100%;
     height: 2px;
