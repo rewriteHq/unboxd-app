@@ -7,7 +7,6 @@ export const DashboardContainer = styled.div`
 
 export const NavItem = styled.li`
   padding: 0 10px;
-
   &:last-child {
     padding-right: 0;
   }

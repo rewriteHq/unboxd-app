@@ -3,7 +3,7 @@ import { Head } from '../styles';
 import Main from './main';
 
 type ComponentProps = {
-  children: React.ReactElement;
+  children: React.ReactNode;
 };
 
 const Header = ({ children }: ComponentProps) => {

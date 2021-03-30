@@ -55,8 +55,8 @@ const GiftCard = ({ gift }: ComponentProps) => {
   return (
     <GiftThumb>
       <GiftThumbImage src={gift.imageURL} alt={gift.name} />
-      {/* <GiftMenuButton onClick={toggleMenu} active={showMenu} />
-      {showMenu && <GiftMenu close={toggleMenu} id={gift._id} />} */}
+      <GiftMenuButton onClick={toggleMenu} active={showMenu} />
+      {showMenu && <GiftMenu close={toggleMenu} id={gift._id} />}
       <GiftThumbText>
         <p>{gift.name}</p>
         <p className="price">{`₦${gift.cost.toLocaleString()}`}</p>
