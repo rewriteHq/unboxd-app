@@ -1,4 +1,10 @@
-import React, { ButtonHTMLAttributes, useState } from 'react';
+import React, {
+  ButtonHTMLAttributes,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+} from 'react';
 import { Link } from 'react-router-dom';
 import { GiftType } from '../../typings';
 import {
@@ -12,6 +18,7 @@ import {
 
 interface ComponentProps {
   gift: GiftType;
+  children?: React.ReactNode;
 }
 
 interface MenuButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -23,6 +30,18 @@ interface MenuProps {
   close: () => void;
   id: string;
 }
+
+interface ContextProps {
+  show: boolean;
+  toggle: () => void;
+  gift: GiftType | null;
+}
+
+const GiftCardContext = React.createContext<ContextProps>({
+  show: false,
+  toggle: () => null,
+  gift: null,
+});
 
 const GiftMenuButton = ({ onClick, active }: MenuButtonProps) => {
   return (
@@ -49,20 +68,41 @@ const GiftMenu = ({ close, id }: MenuProps) => {
   );
 };
 
-const GiftCard = ({ gift }: ComponentProps) => {
+const GiftCard = ({ gift, children }: ComponentProps) => {
   const [showMenu, setShowMenu] = useState(false);
-  const toggleMenu = () => setShowMenu((prev) => !prev);
+  const toggleMenu = useCallback(() => setShowMenu((prev) => !prev), []);
+
+  const value = useMemo(() => ({ show: showMenu, toggle: toggleMenu, gift }), [
+    showMenu,
+    toggleMenu,
+    gift,
+  ]);
+
   return (
-    <GiftThumb>
-      <GiftThumbImage src={gift.imageURL} alt={gift.name} />
-      <GiftMenuButton onClick={toggleMenu} active={showMenu} />
-      {showMenu && <GiftMenu close={toggleMenu} id={gift._id} />}
-      <GiftThumbText>
-        <p>{gift.name}</p>
-        <p className="price">{`₦${gift.cost.toLocaleString()}`}</p>
-      </GiftThumbText>
-    </GiftThumb>
+    <GiftCardContext.Provider value={value}>
+      <GiftThumb>
+        {children}
+        <GiftThumbImage src={gift.imageURL} alt={gift.name} />
+        <GiftThumbText>
+          <p>{gift.name}</p>
+          <p className="price">{`₦${gift.cost.toLocaleString()}`}</p>
+        </GiftThumbText>
+      </GiftThumb>
+    </GiftCardContext.Provider>
   );
 };
+
+const Menu = () => {
+  const { show, toggle, gift } = useContext(GiftCardContext);
+
+  return (
+    <>
+      <GiftMenuButton onClick={toggle} active={show} />
+      {show && <GiftMenu close={toggle} id={gift!._id} />}
+    </>
+  );
+};
+
+GiftCard.Menu = Menu;
 
 export default GiftCard;

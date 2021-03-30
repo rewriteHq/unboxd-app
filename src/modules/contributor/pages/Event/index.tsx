@@ -2,6 +2,7 @@ import { differenceInDays } from 'date-fns';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router';
+import GiftCard from '../../../../commons/GiftCard';
 import Layout from '../../../../Layout';
 import AppState, { WishList } from '../../../../typings';
 import { getWishlist } from '../../../beneficiary/pages/Event/redux/actions';
@@ -9,6 +10,9 @@ import {
   CountDown,
   CoverAndTime,
   CoverImage,
+  GiftList,
+  HeadlineText,
+  NeedText,
 } from '../../../beneficiary/pages/Event/styles';
 import WelcomeModal from './components/WelcomeModal';
 
@@ -48,6 +52,15 @@ const Event = ({ list, getWishlist }: ComponentProps) => {
             <span>{daysLeft > 1 ? 'days ' : 'day'} left</span>
           </CountDown>
         </CoverAndTime>
+        <HeadlineText>
+          <h2>{list.title}</h2>
+        </HeadlineText>
+        <NeedText>Choose what to gift [Taofeeqat]</NeedText>
+        <GiftList>
+          {list.gifts.map((gift) => (
+            <GiftCard gift={gift} key={gift._id} />
+          ))}
+        </GiftList>
       </div>
       <WelcomeModal
         show={welcomeModal}

@@ -95,7 +95,9 @@ const Event = ({ list, getWishlist }: ComponentProps) => {
           <NeedText>Your wishes</NeedText>
           <GiftList>
             {list.gifts.map((gift) => (
-              <GiftCard gift={gift} key={gift._id} />
+              <GiftCard gift={gift} key={gift._id}>
+                <GiftCard.Menu />
+              </GiftCard>
             ))}
           </GiftList>
           <AddItem to={`/event/add-gift/${id}`}>Add wish</AddItem>
