@@ -19,6 +19,7 @@ import {
 interface ComponentProps {
   gift: GiftType;
   children?: React.ReactNode;
+  onClick?: () => void;
 }
 
 interface MenuButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -68,7 +69,7 @@ const GiftMenu = ({ close, id }: MenuProps) => {
   );
 };
 
-const GiftCard = ({ gift, children }: ComponentProps) => {
+const GiftCard = ({ gift, children, onClick }: ComponentProps) => {
   const [showMenu, setShowMenu] = useState(false);
   const toggleMenu = useCallback(() => setShowMenu((prev) => !prev), []);
 
@@ -80,7 +81,7 @@ const GiftCard = ({ gift, children }: ComponentProps) => {
 
   return (
     <GiftCardContext.Provider value={value}>
-      <GiftThumb>
+      <GiftThumb onClick={onClick ? onClick : toggleMenu}>
         {children}
         <GiftThumbImage src={gift.imageURL} alt={gift.name} />
         <GiftThumbText>

@@ -85,9 +85,7 @@ const Event = ({ list, getWishlist }: ComponentProps) => {
             <h2>{list.title}</h2>
           </HeadlineText>
           <ShareBox>
-            <p className="url">
-              unboxd.gifts/a-new-beginning-with-the-love-of-my-life
-            </p>
+            <p className="url">{`${process.env.REACT_APP_DOMAIN_NAME}${list.slug}`}</p>
             <PlainButton className="share-button" onClick={toggleShareModal}>
               Share
             </PlainButton>

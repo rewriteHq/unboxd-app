@@ -21,6 +21,7 @@ export const UploadButton = styled(BTN)<{ color?: string }>`
   left: 50%;
   transform: translateX(-50%);
   width: unset;
+  border-radius: 5px;
 `;
 
 export const ImageWrapper = styled.div`

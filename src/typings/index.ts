@@ -26,7 +26,7 @@ export interface Category {
 
 export interface GiftType {
   quantity: number;
-  paid: 0 | 1 | boolean;
+  paid: number;
   _id: string;
   name: string;
   cost: number;
@@ -42,6 +42,7 @@ export interface WishList {
   date: string;
   userID: string;
   description?: string;
+  slug: string;
 }
 
 export default AppState;

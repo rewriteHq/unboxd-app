@@ -5,8 +5,8 @@ import beneficiaryRoutes from '../modules/beneficiary/routes/routes';
 
 const combinedRoutes: RouteType[] = [
   ...authRoutes,
-  ...contributorRoutes,
   ...beneficiaryRoutes,
+  ...contributorRoutes,
 ];
 
 export default combinedRoutes;

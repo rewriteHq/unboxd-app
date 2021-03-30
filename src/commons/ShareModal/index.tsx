@@ -53,9 +53,8 @@ const shareToTwitter = (url: string, title: string) => {
   window.open(twitterSharer, '_blank');
 };
 
-const FakeURL = 'unboxd.gifts/a-new-beginning-with-the-love-of-my-life';
-
 const ShareEventModal = ({ show, close, wishlist }: ComponentProps) => {
+  const eventUrl = `${process.env.REACT_APP_DOMAIN_NAME}${wishlist.slug}`;
   return (
     <Modal show={show} onClose={close}>
       <Modal.Bottom>
@@ -67,29 +66,27 @@ const ShareEventModal = ({ show, close, wishlist }: ComponentProps) => {
             </PlainButton>
           </SpaceBetween>
           <ShareText>Let your loved ones know what exactly you need</ShareText>
-          <ShareUrl>{FakeURL}</ShareUrl>
+          <ShareUrl>{eventUrl}</ShareUrl>
           <SocialOptions>
-            <SocialIcon
-              onClick={() =>
-                copyUrl('unboxd.gifts/a-new-beginning-with-the-love-of-my-life')
-              }
-            >
+            <SocialIcon onClick={() => copyUrl(eventUrl)}>
               <CopyShare />
               Copy Link
             </SocialIcon>
             <SocialIcon
-              onClick={() => shareToFacebook(FakeURL, wishlist.title)}
+              onClick={() => shareToFacebook(eventUrl, wishlist.title)}
             >
               <FShare />
               Facebook
             </SocialIcon>
             <SocialIcon
-              onClick={() => shareToWhatsapp(FakeURL, wishlist.title)}
+              onClick={() => shareToWhatsapp(eventUrl, wishlist.title)}
             >
               <WShare />
               WhatsApp
             </SocialIcon>
-            <SocialIcon onClick={() => shareToTwitter(FakeURL, wishlist.title)}>
+            <SocialIcon
+              onClick={() => shareToTwitter(eventUrl, wishlist.title)}
+            >
               <TShare />
               Twitter
             </SocialIcon>

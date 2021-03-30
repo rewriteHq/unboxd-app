@@ -1,5 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router';
+import slugify from 'slugify';
+
 import DashboardLayout from '../../../../../commons/DashboardLayout';
 import { DashboardContainer } from '../../../../../commons/DashboardLayout/styles';
 import ImageUploadModal from '../../../../../commons/ImageUploadModal';
@@ -107,6 +109,12 @@ const EventForm = ({
       coverImage: file,
       description: data.note,
       date: data.date,
+      slug: slugify(data.headline, {
+        replacement: '-',
+        lower: true,
+        strict: true,
+        locale: 'en',
+      }),
     };
 
     const [err, result] = await createOrEditEvent(payload, type, id);
