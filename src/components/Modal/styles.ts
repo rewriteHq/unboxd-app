@@ -62,3 +62,14 @@ export const ModalBottom = styled.div`
   max-height: 90vh;
   overflow-y: auto;
 `;
+
+export const ModalCenter = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 20px;
+`;

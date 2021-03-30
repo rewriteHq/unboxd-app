@@ -2,6 +2,7 @@ import { lazy } from 'react';
 import RouteType from '../../../routes/types';
 
 const event = lazy(() => import('../pages/Event'));
+const homeHeader = lazy(() => import('../../auth/pages/Home/header'));
 
 const routes: RouteType[] = [
   {
@@ -9,6 +10,7 @@ const routes: RouteType[] = [
     exact: true,
     auth: false,
     component: event,
+    header: homeHeader,
   },
 ];
 
