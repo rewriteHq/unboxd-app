@@ -13,11 +13,21 @@ import {
   TShare,
   CopyShare,
 } from './styles';
+import Notify from '../../utils/notify/notify';
 
 interface ComponentProps {
   show: boolean;
   close: () => void;
 }
+
+const copyUrl = async (url: string) => {
+  try {
+    await navigator.clipboard.writeText(url);
+    Notify.bottom('Copied to clipboard');
+  } catch (err) {
+    return err;
+  }
+};
 
 const ShareEventModal = ({ show, close }: ComponentProps) => {
   return (
@@ -35,7 +45,11 @@ const ShareEventModal = ({ show, close }: ComponentProps) => {
             unboxd.gifts/a-new-beginning-with-the-love-of-my-life
           </ShareUrl>
           <SocialOptions>
-            <SocialIcon>
+            <SocialIcon
+              onClick={() =>
+                copyUrl('unboxd.gifts/a-new-beginning-with-the-love-of-my-life')
+              }
+            >
               <CopyShare />
               Copy Link
             </SocialIcon>

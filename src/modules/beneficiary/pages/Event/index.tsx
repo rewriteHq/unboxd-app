@@ -22,6 +22,7 @@ import {
 import ExplainerModal from './components/ExplainerModal';
 import { PlainButton } from '../../../../components/Button/styles';
 import ShareEventModal from '../../../../commons/ShareModal';
+import { SideBarWrapper } from '../../../../commons/Sidebar/styles';
 
 type ParamTypes = {
   id: string;
