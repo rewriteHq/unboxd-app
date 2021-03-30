@@ -1,5 +1,6 @@
 import React from 'react';
-import Header from './Header';
+import Header from './header';
+// import Header from './Header';
 import { LayoutProps } from './types';
 
 const DashboardLayout: React.FC<LayoutProps> = ({
@@ -10,7 +11,10 @@ const DashboardLayout: React.FC<LayoutProps> = ({
 }) => {
   return (
     <>
-      <Header pageTitle={pageTitle} showBack={showBack} navItems={navItems} />
+      {/* <Header pageTitle={pageTitle} showBack={showBack} navItems={navItems} /> */}
+      <Header>
+        <Header.Main />
+      </Header>
       {children}
     </>
   );

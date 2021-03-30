@@ -71,8 +71,6 @@ const Event = ({ list, getWishlist }: ComponentProps) => {
 
   const daysLeft = list ? differenceInDays(new Date(), new Date(list.date)) : 1;
 
-  console.log(daysLeft);
-
   return list ? (
     <>
       <DashboardLayout pageTitle="" navItems={navItems} showBack>
@@ -112,7 +110,11 @@ const Event = ({ list, getWishlist }: ComponentProps) => {
         />
       )}
 
-      <ShareEventModal show={shareModal} close={toggleShareModal} />
+      <ShareEventModal
+        show={shareModal}
+        close={toggleShareModal}
+        wishlist={list}
+      />
     </>
   ) : null;
 };

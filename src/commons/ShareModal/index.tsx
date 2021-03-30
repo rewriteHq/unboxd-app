@@ -14,10 +14,12 @@ import {
   CopyShare,
 } from './styles';
 import Notify from '../../utils/notify/notify';
+import { WishList } from '../../typings';
 
 interface ComponentProps {
   show: boolean;
   close: () => void;
+  wishlist: WishList;
 }
 
 const copyUrl = async (url: string) => {
@@ -29,7 +31,31 @@ const copyUrl = async (url: string) => {
   }
 };
 
-const ShareEventModal = ({ show, close }: ComponentProps) => {
+const shareToFacebook = (url: string, title: string) => {
+  const encodedUrl = encodeURIComponent(url);
+  const facebookSharer = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}&quote=${title}`;
+
+  window.open(facebookSharer, '_blank');
+};
+
+const shareToWhatsapp = (url: string, title: string) => {
+  const encodedUrl = encodeURIComponent(url + ' \n\n' + title);
+  const whatsappSharer = `whatsapp://send?text=${encodedUrl}`;
+
+  window.open(whatsappSharer, '_blank');
+};
+
+const shareToTwitter = (url: string, title: string) => {
+  const encodedUrl = encodeURIComponent(url);
+  const encodedTitle = encodeURIComponent(title);
+  const twitterSharer = `https://www.twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`;
+
+  window.open(twitterSharer, '_blank');
+};
+
+const FakeURL = 'unboxd.gifts/a-new-beginning-with-the-love-of-my-life';
+
+const ShareEventModal = ({ show, close, wishlist }: ComponentProps) => {
   return (
     <Modal show={show} onClose={close}>
       <Modal.Bottom>
@@ -41,9 +67,7 @@ const ShareEventModal = ({ show, close }: ComponentProps) => {
             </PlainButton>
           </SpaceBetween>
           <ShareText>Let your loved ones know what exactly you need</ShareText>
-          <ShareUrl>
-            unboxd.gifts/a-new-beginning-with-the-love-of-my-life
-          </ShareUrl>
+          <ShareUrl>{FakeURL}</ShareUrl>
           <SocialOptions>
             <SocialIcon
               onClick={() =>
@@ -53,15 +77,19 @@ const ShareEventModal = ({ show, close }: ComponentProps) => {
               <CopyShare />
               Copy Link
             </SocialIcon>
-            <SocialIcon>
+            <SocialIcon
+              onClick={() => shareToFacebook(FakeURL, wishlist.title)}
+            >
               <FShare />
               Facebook
             </SocialIcon>
-            <SocialIcon>
+            <SocialIcon
+              onClick={() => shareToWhatsapp(FakeURL, wishlist.title)}
+            >
               <WShare />
               WhatsApp
             </SocialIcon>
-            <SocialIcon>
+            <SocialIcon onClick={() => shareToTwitter(FakeURL, wishlist.title)}>
               <TShare />
               Twitter
             </SocialIcon>
