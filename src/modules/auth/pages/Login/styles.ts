@@ -12,4 +12,5 @@ export const Main = styled.div`
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
+  margin-top: 2rem;
 `;

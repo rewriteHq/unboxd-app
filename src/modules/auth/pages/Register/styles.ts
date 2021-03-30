@@ -5,6 +5,7 @@ import Sizes from '../../../../constants/Sizes';
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
+  margin-top: 2rem;
 `;
 
 export const Auth = styled.p`

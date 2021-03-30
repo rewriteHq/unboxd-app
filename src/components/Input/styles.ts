@@ -11,7 +11,9 @@ export const InputField = styled.div`
   margin: 10px 0;
 
   input {
+    width: 100%;
     height: 28px;
+    margin-top: 0.5rem;
   }
 `;
 
@@ -20,7 +22,6 @@ export const Label = styled.label`
   top: 10px;
   left: 0;
   font-size: calc(${Sizes.normal}px);
-  margin-bottom: 90px;
 
   &.focus {
     font-size: calc(${Sizes.small}px);

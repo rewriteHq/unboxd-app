@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import formatDistanceStrict from 'date-fns/formatDistanceStrict';
 import { connect } from 'react-redux';
 import { useLocation, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
+import { differenceInDays } from 'date-fns';
+
 import DashboardLayout from '../../../../commons/DashboardLayout';
 import { DashboardContainer } from '../../../../commons/DashboardLayout/styles';
 import GiftCard from '../../../../commons/GiftCard';
@@ -15,9 +16,13 @@ import {
   CoverImage,
   GiftList,
   HeadlineText,
+  NeedText,
+  ShareBox,
 } from './styles';
 import ExplainerModal from './components/ExplainerModal';
-import ShareEventModal from './components/ShareModal';
+import { PlainButton } from '../../../../components/Button/styles';
+import ShareEventModal from '../../../../commons/ShareModal';
+import { SideBarWrapper } from '../../../../commons/Sidebar/styles';
 
 type ParamTypes = {
   id: string;
@@ -64,6 +69,8 @@ const Event = ({ list, getWishlist }: ComponentProps) => {
 
   const closeExplainer = () => setExplainer({ active: 0, show: false });
 
+  const daysLeft = list ? differenceInDays(new Date(), new Date(list.date)) : 1;
+
   return list ? (
     <>
       <DashboardLayout pageTitle="" navItems={navItems} showBack>
@@ -71,22 +78,28 @@ const Event = ({ list, getWishlist }: ComponentProps) => {
           <CoverAndTime>
             <CoverImage src={list.coverImage} alt={list.title} />
             <CountDown>
-              {formatDistanceStrict(new Date(), new Date(list.date), {
-                unit: 'day',
-              })}{' '}
-              left
+              <p>{daysLeft} </p>
+              <span>{daysLeft > 1 ? 'days ' : 'day'} left</span>
             </CountDown>
           </CoverAndTime>
           <HeadlineText>
             <h2>{list.title}</h2>
-            <p>{list.description}</p>
           </HeadlineText>
+          <ShareBox>
+            <p className="url">
+              unboxd.gifts/a-new-beginning-with-the-love-of-my-life
+            </p>
+            <PlainButton className="share-button" onClick={toggleShareModal}>
+              Share
+            </PlainButton>
+          </ShareBox>
+          <NeedText>Your wishes</NeedText>
           <GiftList>
             {list.gifts.map((gift) => (
               <GiftCard gift={gift} key={gift._id} />
             ))}
           </GiftList>
-          <AddItem to={`/event/add-gift/${id}`}>+</AddItem>
+          <AddItem to={`/event/add-gift/${id}`}>Add wish</AddItem>
         </DashboardContainer>
       </DashboardLayout>
       {explainer.show && (
@@ -97,7 +110,11 @@ const Event = ({ list, getWishlist }: ComponentProps) => {
         />
       )}
 
-      <ShareEventModal show={shareModal} close={toggleShareModal} />
+      <ShareEventModal
+        show={shareModal}
+        close={toggleShareModal}
+        wishlist={list}
+      />
     </>
   ) : null;
 };

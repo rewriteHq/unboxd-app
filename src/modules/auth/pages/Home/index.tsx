@@ -7,6 +7,8 @@ import { Paragraph, Image } from './styles';
 import { BTNLink } from '../../../../components/Button/styles';
 import PageBottom from '../../../../commons/PageBottom';
 
+import illustration from '../../../../assets/img/illustrations/home.png';
+
 const Home: React.FC<HomeComponentProps> = () => {
   return (
     <Layout>
@@ -20,7 +22,7 @@ const Home: React.FC<HomeComponentProps> = () => {
           support from them.
         </Paragraph>
 
-        <Image />
+        <Image src={illustration} alt="illustration" />
       </div>
       <PageBottom>
         <BTNLink to="/register">Get Started</BTNLink>

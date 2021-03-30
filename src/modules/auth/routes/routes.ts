@@ -29,7 +29,7 @@ const routes: RouteType[] = [
     exact: true,
     auth: false,
     component: register,
-    header: registerHeader,
+    header: homeHeader,
   },
 ];
 

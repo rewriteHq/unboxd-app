@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Colors from '../../constants/Colors';
+import Effects from '../../constants/Effects';
 import Sizes from '../../constants/Sizes';
 
 export const ModalWrapper = styled.div`
@@ -19,6 +20,7 @@ export const ModalWrapper = styled.div`
     left: 0;
     background: rgba(0, 0, 0, 0.8);
     z-index: -1;
+    backdrop-filter: blur(${Effects.blur}px);
   }
 `;
 
