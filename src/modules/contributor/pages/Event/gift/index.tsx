@@ -109,25 +109,34 @@ const Gift = ({ gifts, getGift, list, getWishlist }: ComponentProps) => {
                 </GiftProgressPrice>
               </GiftDescription>
             </GiftCoverTime>
-            {payment.showForm ? (
-              <PaymentForm price={payment.amount} />
-            ) : (
-              <PriceSuggest price={gift.cost} selectSuggestion={selectPrice} />
-            )}
-            <NeedText>Choose another item to gift Lateef</NeedText>
 
             {list && (
-              <GiftList>
-                {list.gifts.map((gift) =>
-                  gift._id !== id ? (
-                    <GiftCard
-                      gift={gift}
-                      key={gift._id}
-                      onClick={() => openGift(gift._id)}
-                    />
-                  ) : null
+              <>
+                {payment.showForm ? (
+                  <PaymentForm
+                    price={payment.amount}
+                    eventData={{ ...list, giftId: id }}
+                  />
+                ) : (
+                  <PriceSuggest
+                    price={gift.cost}
+                    selectSuggestion={selectPrice}
+                  />
                 )}
-              </GiftList>
+
+                <NeedText>Choose another item to gift Lateef</NeedText>
+                <GiftList>
+                  {list.gifts.map((gift) =>
+                    gift._id !== id ? (
+                      <GiftCard
+                        gift={gift}
+                        key={gift._id}
+                        onClick={() => openGift(gift._id)}
+                      />
+                    ) : null
+                  )}
+                </GiftList>
+              </>
             )}
           </div>
         </Layout>
