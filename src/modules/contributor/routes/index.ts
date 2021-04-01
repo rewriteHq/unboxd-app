@@ -14,11 +14,10 @@ const routes: RouteType[] = [
     header: homeHeader,
   },
   {
-    path: '/:slug/gift',
+    path: '/:slug/:id',
     exact: true,
     auth: false,
     component: gift,
-    header: homeHeader,
   },
 ];
 

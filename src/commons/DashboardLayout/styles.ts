@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Sizes from '../../constants/Sizes';
 
 export const DashboardContainer = styled.div`
   padding: 0 20px;
@@ -23,7 +24,7 @@ export const Head = styled.div`
 `;
 
 export const HeaderTitle = styled.h2`
-  margin: 0 auto;
+  font-size: ${Sizes.twenty}px;
 `;
 
 export const Nav = styled.nav`

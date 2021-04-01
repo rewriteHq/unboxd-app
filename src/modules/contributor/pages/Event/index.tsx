@@ -5,7 +5,7 @@ import { useParams, useHistory } from 'react-router';
 import GiftCard from '../../../../commons/GiftCard';
 import Layout from '../../../../Layout';
 import AppState, { WishList } from '../../../../typings';
-import { getWishlist } from '../../../beneficiary/pages/Event/redux/actions';
+import { getWishlistBySlug } from './redux/actions';
 import {
   CountDown,
   CoverAndTime,
@@ -17,37 +17,38 @@ import {
 import WelcomeModal from './components/WelcomeModal';
 
 type ParamTypes = {
-  id: string;
+  slug: string;
 };
 
 type ComponentProps = {
   list: WishList | null;
-  getWishlist: (id: string) => void;
+  getWishlist: (slug: string) => void;
+  getWish: () => void;
 };
 
 const Event = ({ list, getWishlist }: ComponentProps) => {
-  const { id } = useParams<ParamTypes>();
+  const { slug } = useParams<ParamTypes>();
   const [welcomeModal, setWelcomeModal] = useState(false);
   const history = useHistory();
 
   const toggleWelcomeModal = () => setWelcomeModal((prev) => !prev);
 
   useEffect(() => {
-    if (!list || list._id !== id) {
-      getWishlist(id);
+    if (!list || list.slug !== slug) {
+      getWishlist(slug);
     } else {
       const delay = setTimeout(toggleWelcomeModal, 1000);
       return () => clearTimeout(delay);
     }
-  }, [list, id, getWishlist]);
+  }, [list, slug, getWishlist]);
 
   const daysLeft = list ? differenceInDays(new Date(), new Date(list.date)) : 1;
 
   const openGift = useCallback(
     (giftId: string) => {
-      history.push(`/give/gift/${giftId}`);
+      history.push(`/${slug}/${giftId}`);
     },
-    [history]
+    [history, slug]
   );
 
   return list ? (
@@ -85,12 +86,12 @@ const Event = ({ list, getWishlist }: ComponentProps) => {
 
 const mapStateToProps = (state: AppState) => {
   return {
-    list: state.event.list.data,
+    list: state.contributor.event.data,
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => ({
-  getWishlist: (id: string) => dispatch(getWishlist(id)),
+  getWishlist: (slug: string) => dispatch(getWishlistBySlug(slug)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Event);

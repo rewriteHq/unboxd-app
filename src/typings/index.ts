@@ -7,6 +7,7 @@ import {
   WishlistState,
 } from '../modules/beneficiary/pages/Event/redux/types';
 import { GiftState } from '../modules/beneficiary/pages/Gift/redux/types';
+import { EventState } from '../modules/contributor/pages/Event/redux/types';
 import { ResourceState } from '../modules/resources/redux/types';
 
 interface AppState {
@@ -17,6 +18,9 @@ interface AppState {
   };
   gifts: GiftState;
   resources: ResourceState;
+  contributor: {
+    event: EventState;
+  };
 }
 
 export interface Category {
