@@ -10,6 +10,14 @@ const Notify = {
       ...options,
     });
   },
+
+  top: (message: MessageProp, options?: MessageOptionalOptions) => {
+    toaster.notify(message, {
+      position: 'top',
+      duration: +process.env.REACT_APP_DEFAULT_TOAST_DURATION! || 5000,
+      ...options,
+    });
+  },
 };
 
 export default Notify;

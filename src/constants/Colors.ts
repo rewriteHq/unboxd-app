@@ -8,6 +8,7 @@ const Colors = {
   green: '#67FA28',
   lightgreen: '#EDFFE5',
   paleblue: '#F8FFF4',
+  blue: '#12B8FF',
 };
 
 export default Colors;

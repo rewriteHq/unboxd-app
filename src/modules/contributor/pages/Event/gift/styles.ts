@@ -29,10 +29,40 @@ export const GiftCountdown = styled(CountDown)`
 
 export const GiftDescription = styled.div`
   position: absolute;
-  bottom: 20px;
+  bottom: 0;
   left: 0;
   padding: 20px;
   color: ${Colors.white};
   z-index: 2;
   width: 100%;
+`;
+
+export const GiftProgressPrice = styled.div`
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  margin-top: 0.5rem;
+  align-items: center;
+  gap: 1rem;
+
+  .price {
+    display: flex;
+    flex-direction: column;
+
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 2px;
+    }
+
+    small {
+      opacity: 0.5;
+    }
+  }
+`;
+
+export const SuggestWrapper = styled.div`
+  padding: 2rem 0 3rem;
+  p {
+    color: ${Colors.darkGrey};
+    margin-bottom: 1rem;
+  }
 `;

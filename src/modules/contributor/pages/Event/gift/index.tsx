@@ -1,16 +1,28 @@
-import React, { useEffect } from 'react';
-import { useParams } from 'react-router';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useHistory, useParams } from 'react-router';
 import Layout from '../../../../../Layout';
 import { GiftDataType } from '../../../../beneficiary/pages/Gift/redux/types';
 import * as giftActions from '../../../../beneficiary/pages/Gift/redux/actions';
 import { connect } from 'react-redux';
 import GiftHeader from './header';
-import { GiftCountdown, GiftCoverTime, GiftDescription } from './styles';
+import {
+  GiftCountdown,
+  GiftCoverTime,
+  GiftDescription,
+  GiftProgressPrice,
+} from './styles';
 import { getWishlistBySlug } from '../redux/actions';
 import AppState, { WishList } from '../../../../../typings';
 import { differenceInDays } from 'date-fns';
-import { CoverImage } from '../../../../beneficiary/pages/Event/styles';
+import {
+  CoverImage,
+  GiftList,
+  NeedText,
+} from '../../../../beneficiary/pages/Event/styles';
 import ProgressBar from '../../../../../commons/Progress';
+import GiftCard from '../../../../../commons/GiftCard';
+import PriceSuggest from './components/PriceSuggest';
+import PaymentForm from './components/PaymentForm';
 
 interface ComponentProps {
   gifts: GiftDataType;
@@ -24,9 +36,26 @@ interface ParamType {
   slug: string;
 }
 
+interface PaymentState {
+  amount: number | '';
+  showForm: boolean;
+}
+
 const Gift = ({ gifts, getGift, list, getWishlist }: ComponentProps) => {
   const { id, slug } = useParams<ParamType>();
   const gift = gifts[id];
+  const history = useHistory();
+  const [payment, setPayment] = useState<PaymentState>({
+    amount: '',
+    showForm: false,
+  });
+
+  const selectPrice = (amount: number | '') => {
+    setPayment({
+      amount,
+      showForm: true,
+    });
+  };
 
   useEffect(() => {
     if (!gift) {
@@ -42,11 +71,16 @@ const Gift = ({ gifts, getGift, list, getWishlist }: ComponentProps) => {
 
   const daysLeft = list ? differenceInDays(new Date(), new Date(list.date)) : 1;
 
-  console.log(gift);
+  const openGift = useCallback(
+    (giftId: string) => {
+      history.push(`/${slug}/${giftId}`);
+    },
+    [history, slug]
+  );
 
   return (
     <>
-      <GiftHeader title={gift?.name || ''} />
+      <GiftHeader title={list?.title || ''} />
       {gift && (
         <Layout>
           <div className="container">
@@ -58,10 +92,43 @@ const Gift = ({ gifts, getGift, list, getWishlist }: ComponentProps) => {
                 <span>{daysLeft > 1 ? 'days ' : 'day'} left</span>
               </GiftCountdown>
               <GiftDescription>
-                <p>{gift.name}</p>
-                <ProgressBar percentage={50} />
+                <h3>{gift.name}</h3>
+                <GiftProgressPrice>
+                  <ProgressBar percentage={5} />
+                  <div className="price">
+                    <p>₦{gift.cost.toLocaleString()}</p>
+                    <small>
+                      ₦
+                      {gift.paid.toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}{' '}
+                      raised
+                    </small>
+                  </div>
+                </GiftProgressPrice>
               </GiftDescription>
             </GiftCoverTime>
+            {payment.showForm ? (
+              <PaymentForm price={payment.amount} />
+            ) : (
+              <PriceSuggest price={gift.cost} selectSuggestion={selectPrice} />
+            )}
+            <NeedText>Choose another item to gift Lateef</NeedText>
+
+            {list && (
+              <GiftList>
+                {list.gifts.map((gift) =>
+                  gift._id !== id ? (
+                    <GiftCard
+                      gift={gift}
+                      key={gift._id}
+                      onClick={() => openGift(gift._id)}
+                    />
+                  ) : null
+                )}
+              </GiftList>
+            )}
           </div>
         </Layout>
       )}

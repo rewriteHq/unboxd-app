@@ -5,3 +5,7 @@ export const SpaceBetween = styled.div<{ align?: string }>`
   justify-content: space-between;
   align-items: ${({ align }) => align || 'flex-start'};
 `;
+
+export const Flex = styled.div`
+  display: flex;
+`;
