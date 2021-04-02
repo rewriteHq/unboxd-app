@@ -7,7 +7,6 @@ const homeHeader = lazy(() => import('../pages/Home/header'));
 const login = lazy(() => import('../pages/Login'));
 
 const register = lazy(() => import('../pages/Register'));
-const registerHeader = lazy(() => import('../pages/Register/header'));
 
 const routes: RouteType[] = [
   {
