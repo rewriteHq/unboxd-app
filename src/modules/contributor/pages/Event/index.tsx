@@ -64,7 +64,7 @@ const Event = ({ list, getWishlist }: ComponentProps) => {
         <HeadlineText>
           <h2>{list.title}</h2>
         </HeadlineText>
-        <NeedText>Choose what to gift [Taofeeqat]</NeedText>
+        <NeedText>Choose what to gift Lateef</NeedText>
         <GiftList>
           {list.gifts.map((gift) => (
             <GiftCard

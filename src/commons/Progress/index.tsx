@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 import Colors from '../../constants/Colors';
 
-const ProgressWrapper = styled.div<{ percentage: number }>`
+const ProgressWrapper = styled.div<{
+  percentage: number;
+  indicatorColor?: string;
+}>`
   position: relative;
   width: 100%;
   margin: 0.5rem 0;
@@ -15,7 +18,8 @@ const ProgressWrapper = styled.div<{ percentage: number }>`
     width: ${({ percentage }) => percentage}%;
     height: 3px;
     border-radius: 5px;
-    background: ${Colors.green};
+    background: ${({ indicatorColor }) =>
+      indicatorColor ? indicatorColor : Colors.green};
     position: relative;
     bottom: 2px;
   }
@@ -23,11 +27,12 @@ const ProgressWrapper = styled.div<{ percentage: number }>`
 
 type ComponentProps = {
   percentage: number;
+  indicatorColor?: string;
 };
 
-const ProgressBar = ({ percentage }: ComponentProps) => {
+const ProgressBar = (props: ComponentProps) => {
   return (
-    <ProgressWrapper percentage={percentage}>
+    <ProgressWrapper {...props}>
       <div className="full-bar" />
       <div className="indicator" />
     </ProgressWrapper>

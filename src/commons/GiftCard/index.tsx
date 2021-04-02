@@ -6,7 +6,9 @@ import React, {
   useState,
 } from 'react';
 import { Link } from 'react-router-dom';
+import Colors from '../../constants/Colors';
 import { GiftType } from '../../typings';
+import ProgressBar from '../Progress';
 import {
   GiftThumb,
   GiftThumbImage,
@@ -79,6 +81,8 @@ const GiftCard = ({ gift, children, onClick }: ComponentProps) => {
     gift,
   ]);
 
+  const percentageRaised = (gift.paid / gift.cost) * 100;
+
   return (
     <GiftCardContext.Provider value={value}>
       <GiftThumb onClick={onClick ? onClick : toggleMenu}>
@@ -87,6 +91,11 @@ const GiftCard = ({ gift, children, onClick }: ComponentProps) => {
         <GiftThumbText>
           <p>{gift.name}</p>
           <p className="price">{`₦${gift.cost.toLocaleString()}`}</p>
+          <ProgressBar
+            percentage={percentageRaised}
+            indicatorColor={Colors.pink}
+          />
+          <p className="raised">{`₦${gift.paid.toLocaleString()} raised`}</p>
         </GiftThumbText>
       </GiftThumb>
     </GiftCardContext.Provider>

@@ -22,7 +22,7 @@ const WelcomeModal = ({ show, close, list }: ComponentProps) => {
         <WelcomeWrapper>
           <WelcomeHead>
             <Avatar src={list.coverImage} alt="User" />
-            <span className="name">Taofeeqat</span>
+            <span className="name">Lateef</span>
           </WelcomeHead>
           <WelcomeBody>
             <p className="hello">Hello,</p>

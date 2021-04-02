@@ -39,7 +39,7 @@ export const GiftDescription = styled.div`
 
 export const GiftProgressPrice = styled.div`
   display: grid;
-  grid-template-columns: 3fr 1fr;
+  grid-template-columns: 5fr 2fr;
   margin-top: 0.5rem;
   align-items: center;
   gap: 1rem;

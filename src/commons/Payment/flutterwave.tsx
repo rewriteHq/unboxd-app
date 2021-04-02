@@ -1,5 +1,5 @@
-import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3';
 import { useEffect, useRef } from 'react';
+import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3';
 import { verifyPayment } from '../../modules/contributor/pages/Event/gift/services';
 import Notify from '../../utils/notify/notify';
 
@@ -8,6 +8,7 @@ type PropsTypes = {
   amount: number;
   email: string;
   event: string;
+  success: () => void;
 };
 
 const PayWithFlutterwave = ({
@@ -15,7 +16,9 @@ const PayWithFlutterwave = ({
   amount,
   email,
   event,
+  success,
 }: PropsTypes) => {
+  const successReference = useRef('');
   const config = {
     public_key: process.env.REACT_APP_FLUTTERWAVE_CLIENT || '',
     tx_ref: reference,
@@ -34,30 +37,38 @@ const PayWithFlutterwave = ({
     },
   };
 
-  console.log(config.public_key);
-
   const handlePayment = useFlutterwave(config);
 
   useEffect(() => {
-    handlePayment({
-      callback: async (response) => {
-        const { status, transaction_id, tx_ref } = response;
-        if (status === 'successful') {
-          const [err, result] = await verifyPayment({
-            trxId: transaction_id,
-            initialRef: tx_ref,
-          });
+    if (
+      reference &&
+      (!successReference.current || successReference.current !== reference)
+    ) {
+      handlePayment({
+        callback: async (response) => {
+          const { status, transaction_id, tx_ref } = response;
+          if (status === 'successful') {
+            const [err, result] = await verifyPayment({
+              trxId: String(transaction_id),
+              initialRef: tx_ref,
+            });
 
-          closePaymentModal();
-          if (err) {
-            Notify.top('Error!');
+            closePaymentModal();
+
+            if (err) {
+              return Notify.top('Error!');
+            }
+
+            if (result.status === 'complete') {
+              successReference.current = tx_ref;
+              success();
+            }
           }
-          console.log(result);
-        }
-      },
-      onClose: () => {},
-    });
-  }, [handlePayment]);
+        },
+        onClose: () => {},
+      });
+    }
+  }, [handlePayment, reference, success]);
 
   return null;
 };

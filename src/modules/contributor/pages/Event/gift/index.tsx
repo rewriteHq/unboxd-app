@@ -70,6 +70,7 @@ const Gift = ({ gifts, getGift, list, getWishlist }: ComponentProps) => {
   }, [list, slug, getWishlist]);
 
   const daysLeft = list ? differenceInDays(new Date(), new Date(list.date)) : 1;
+  const percentageRaised = gift ? (gift.paid / gift.cost) * 100 : 0;
 
   const openGift = useCallback(
     (giftId: string) => {
@@ -94,7 +95,7 @@ const Gift = ({ gifts, getGift, list, getWishlist }: ComponentProps) => {
               <GiftDescription>
                 <h3>{gift.name}</h3>
                 <GiftProgressPrice>
-                  <ProgressBar percentage={5} />
+                  <ProgressBar percentage={percentageRaised} />
                   <div className="price">
                     <p>₦{gift.cost.toLocaleString()}</p>
                     <small>

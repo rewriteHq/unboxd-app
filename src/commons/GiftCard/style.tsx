@@ -7,13 +7,13 @@ export const GiftThumb = styled.div`
   border: 1px solid ${Colors.lightGrey};
   border-radius: 10px;
   overflow: hidden;
-  height: 250px;
+  height: 270px;
   position: relative;
 `;
 
 export const GiftThumbImage = styled.img`
   width: 100%;
-  height: 65%;
+  height: 55%;
   object-fit: cover;
 `;
 
@@ -22,11 +22,16 @@ export const GiftThumbText = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 15px 0 0;
+  padding: 15px;
 
   .price {
     font-size: 1.1rem;
     margin-top: 5px;
+  }
+
+  .raised {
+    color: ${Colors.darkGrey};
+    font-weight: 700;
   }
 `;
 

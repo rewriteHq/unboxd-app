@@ -12,7 +12,7 @@ interface RequestData {
 
 interface VerifyTypes {
   initialRef: string;
-  trxId: number;
+  trxId: string;
 }
 
 export const getPaymentReference = async (payload: RequestData) => {

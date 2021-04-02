@@ -12,14 +12,15 @@ import { isEmail } from '../../../../../../utils/validate';
 import { LOADING_UI } from '../../../../../auth/pages/Login/redux/types';
 import { getPaymentReference } from '../services';
 import { SuggestWrapper } from '../styles';
+import ThankYouModal from './ThankYouModal';
 
-interface DataType extends WishList {
+export interface EventData extends WishList {
   giftId: string;
 }
 
 type ComponentProps = {
   price: number | string;
-  eventData: DataType;
+  eventData: EventData;
   setLoading: (payload: boolean) => void;
 };
 
@@ -29,10 +30,10 @@ const PaymentForm = ({ price, eventData, setLoading }: ComponentProps) => {
     email: '',
   });
   const [reference, setReference] = useState('');
+  const [successModal, setSuccessModal] = useState(false);
 
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
-
     setData((prev) => ({
       ...prev,
       [name]: value,
@@ -71,10 +72,19 @@ const PaymentForm = ({ price, eventData, setLoading }: ComponentProps) => {
     if (err) {
       return;
     }
-    console.log(result);
 
     setReference(result.reference);
   };
+
+  const toggleSuccessModal = useCallback(
+    () => setSuccessModal((prev) => !prev),
+    []
+  );
+
+  const paymentSuccess = useCallback(() => {
+    setReference('');
+    setSuccessModal(true);
+  }, []);
 
   return (
     <>
@@ -107,8 +117,15 @@ const PaymentForm = ({ price, eventData, setLoading }: ComponentProps) => {
           email={data.email}
           event={eventData.title}
           reference={reference}
+          success={paymentSuccess}
         />
       )}
+
+      <ThankYouModal
+        show={successModal}
+        close={toggleSuccessModal}
+        eventData={eventData}
+      />
     </>
   );
 };
