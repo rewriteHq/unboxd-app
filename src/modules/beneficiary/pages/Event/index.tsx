@@ -22,7 +22,6 @@ import {
 import ExplainerModal from './components/ExplainerModal';
 import { PlainButton } from '../../../../components/Button/styles';
 import ShareEventModal from '../../../../commons/ShareModal';
-import { SideBarWrapper } from '../../../../commons/Sidebar/styles';
 
 type ParamTypes = {
   id: string;
@@ -86,9 +85,7 @@ const Event = ({ list, getWishlist }: ComponentProps) => {
             <h2>{list.title}</h2>
           </HeadlineText>
           <ShareBox>
-            <p className="url">
-              unboxd.gifts/a-new-beginning-with-the-love-of-my-life
-            </p>
+            <p className="url">{`${process.env.REACT_APP_DOMAIN_NAME}${list.slug}`}</p>
             <PlainButton className="share-button" onClick={toggleShareModal}>
               Share
             </PlainButton>
@@ -96,7 +93,9 @@ const Event = ({ list, getWishlist }: ComponentProps) => {
           <NeedText>Your wishes</NeedText>
           <GiftList>
             {list.gifts.map((gift) => (
-              <GiftCard gift={gift} key={gift._id} />
+              <GiftCard gift={gift} key={gift._id}>
+                <GiftCard.Menu />
+              </GiftCard>
             ))}
           </GiftList>
           <AddItem to={`/event/add-gift/${id}`}>Add wish</AddItem>

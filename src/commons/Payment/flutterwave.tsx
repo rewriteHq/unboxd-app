@@ -1,0 +1,76 @@
+import { useEffect, useRef } from 'react';
+import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3';
+import { verifyPayment } from '../../modules/contributor/pages/Event/gift/services';
+import Notify from '../../utils/notify/notify';
+
+type PropsTypes = {
+  reference: string;
+  amount: number;
+  email: string;
+  event: string;
+  success: () => void;
+};
+
+const PayWithFlutterwave = ({
+  reference,
+  amount,
+  email,
+  event,
+  success,
+}: PropsTypes) => {
+  const successReference = useRef('');
+  const config = {
+    public_key: process.env.REACT_APP_FLUTTERWAVE_CLIENT || '',
+    tx_ref: reference,
+    amount,
+    currency: 'NGN',
+    payment_options: 'card,mobilemoney,ussd',
+    customer: {
+      email,
+      name: '',
+      phonenumber: '',
+    },
+    customizations: {
+      title: 'Unboxd',
+      description: `Payment for ${event}`,
+      logo: '',
+    },
+  };
+
+  const handlePayment = useFlutterwave(config);
+
+  useEffect(() => {
+    if (
+      reference &&
+      (!successReference.current || successReference.current !== reference)
+    ) {
+      handlePayment({
+        callback: async (response) => {
+          const { status, transaction_id, tx_ref } = response;
+          if (status === 'successful') {
+            const [err, result] = await verifyPayment({
+              trxId: String(transaction_id),
+              initialRef: tx_ref,
+            });
+
+            closePaymentModal();
+
+            if (err) {
+              return Notify.top('Error!');
+            }
+
+            if (result.status === 'complete') {
+              successReference.current = tx_ref;
+              success();
+            }
+          }
+        },
+        onClose: () => {},
+      });
+    }
+  }, [handlePayment, reference, success]);
+
+  return null;
+};
+
+export default PayWithFlutterwave;

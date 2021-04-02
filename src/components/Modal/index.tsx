@@ -4,6 +4,7 @@ import {
   Head,
   HeaderTitle,
   ModalBottom,
+  ModalCenter,
   ModalMain,
   ModalWrapper,
 } from './styles';
@@ -39,12 +40,17 @@ const Bottom: React.FC = ({ children }) => {
   return <ModalBottom>{children}</ModalBottom>;
 };
 
+const Centered: React.FC = ({ children }) => {
+  return <ModalCenter>{children}</ModalCenter>;
+};
+
 const Full: React.FC = ({ children }) => {
   return <ModalMain full>{children}</ModalMain>;
 };
 
 Modal.Header = Header;
 Modal.Main = Main;
+Modal.Centered = Centered;
 Modal.Full = Full;
 Modal.Bottom = Bottom;
 export default Modal;

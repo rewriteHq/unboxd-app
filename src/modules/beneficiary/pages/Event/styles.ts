@@ -6,6 +6,8 @@ import Sizes from '../../../../constants/Sizes';
 
 export const ImageHolder = styled(BTN)`
   height: 30vh;
+  background: ${Colors.grey};
+  border-radius: 5px;
 `;
 
 export const CoverAndTime = styled.div`

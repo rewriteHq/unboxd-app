@@ -3,7 +3,6 @@ import { IRegisterState } from './types';
 import { Form, FooterText } from './styles';
 import Input from '../../../../components/Input';
 import Layout from '../../../../Layout';
-import { PageHeadingSmall } from '../../../../commons/Heading';
 import Button from '../../../../components/Button';
 import { Link, useHistory } from 'react-router-dom';
 

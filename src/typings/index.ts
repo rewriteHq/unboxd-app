@@ -7,6 +7,7 @@ import {
   WishlistState,
 } from '../modules/beneficiary/pages/Event/redux/types';
 import { GiftState } from '../modules/beneficiary/pages/Gift/redux/types';
+import { EventState } from '../modules/contributor/pages/Event/redux/types';
 import { ResourceState } from '../modules/resources/redux/types';
 
 interface AppState {
@@ -17,6 +18,9 @@ interface AppState {
   };
   gifts: GiftState;
   resources: ResourceState;
+  contributor: {
+    event: EventState;
+  };
 }
 
 export interface Category {
@@ -26,7 +30,7 @@ export interface Category {
 
 export interface GiftType {
   quantity: number;
-  paid: 0 | 1 | boolean;
+  paid: number;
   _id: string;
   name: string;
   cost: number;
@@ -42,6 +46,7 @@ export interface WishList {
   date: string;
   userID: string;
   description?: string;
+  slug: string;
 }
 
 export default AppState;
