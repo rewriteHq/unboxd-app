@@ -21,9 +21,5 @@ export const Label = styled.label`
   position: absolute;
   top: 10px;
   left: 0;
-  font-size: calc(${Sizes.normal}px);
-
-  &.focus {
-    font-size: calc(${Sizes.small}px);
-  }
+  font-size: calc(${Sizes.normal - 1}px);
 `;
