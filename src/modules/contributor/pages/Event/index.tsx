@@ -1,4 +1,5 @@
 import { differenceInDays } from 'date-fns';
+import localforage from 'localforage';
 import React, { useCallback, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useParams, useHistory } from 'react-router';
@@ -26,6 +27,10 @@ type ComponentProps = {
   getWish: () => void;
 };
 
+const eventVisited = localforage.createInstance({
+  name: 'Event Visited',
+});
+
 const Event = ({ list, getWishlist }: ComponentProps) => {
   const { slug } = useParams<ParamTypes>();
   const [welcomeModal, setWelcomeModal] = useState(false);
@@ -34,12 +39,24 @@ const Event = ({ list, getWishlist }: ComponentProps) => {
   const toggleWelcomeModal = () => setWelcomeModal((prev) => !prev);
 
   useEffect(() => {
-    if (!list || list.slug !== slug) {
-      getWishlist(slug);
-    } else {
-      const delay = setTimeout(toggleWelcomeModal, 1000);
-      return () => clearTimeout(delay);
-    }
+    (async function () {
+      if (!list || list.slug !== slug) {
+        getWishlist(slug);
+      } else {
+        /**
+         * check if this event has been visited before (saved with localforage),
+         * then prevent showing welcome message if it has been visited
+         */
+
+        const isEventVisited = await eventVisited.getItem(slug);
+
+        if (!isEventVisited) {
+          const delay = setTimeout(toggleWelcomeModal, 1000);
+          eventVisited.setItem(slug, true);
+          return () => clearTimeout(delay);
+        }
+      }
+    })();
   }, [list, slug, getWishlist]);
 
   const daysLeft = list ? differenceInDays(new Date(), new Date(list.date)) : 1;
