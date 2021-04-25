@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import image from '../../assets/img/logo/logo.svg';
+import image from '../../assets/img/logo/logo_white.svg';
 
 const LogoSizes = {
   sm: 110,

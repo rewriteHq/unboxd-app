@@ -49,14 +49,17 @@ const Register = () => {
 
         <Form onSubmit={handleSubmit(onHandleSubmit)}>
           <SpaceBetween>
-            <Input
-              label="First name"
-              type="text"
-              name="firstname"
-              error={errors}
-              register={register}
-              required
-            />
+            <div className="marg-r">
+              <Input
+                label="First name"
+                type="text"
+                name="firstname"
+                error={errors}
+                register={register}
+                required
+              />
+            </div>
+
             <Input
               label="Last name"
               type="text"

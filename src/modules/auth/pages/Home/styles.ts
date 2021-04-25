@@ -20,7 +20,7 @@ export const Image = Styled.img`
   position: relative;
 
   &::before {
-    content: 'What is going on?';
+    content: ' ';
     position: absolute;
     top: 0;
     left: 0;
