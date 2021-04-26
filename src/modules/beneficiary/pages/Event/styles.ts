@@ -9,7 +9,7 @@ import Sizes from '../../../../constants/Sizes';
 
 const headlineFont = css`
   font-weight: bold;
-  font-size: calc(${Sizes.twenty}) px;
+  font-size: calc(${Sizes.twenty}px);
 `;
 
 export const ImageHolder = styled(BTN)`
@@ -66,8 +66,10 @@ export const CountDown = styled.div`
 
 export const HeadlineInput = styled.textarea`
   border: none;
+  background: transparent;
   padding: 1rem 0;
   width: 100%;
+  color: ${Colors.white};
   ${headlineFont}
 
   &::placeholder {

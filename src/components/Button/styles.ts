@@ -31,6 +31,7 @@ export const PlainButton = styled.button<{ underlined?: boolean }>`
   border: none;
   padding: 1rem 0;
   white-space: nowrap;
+  color: ${Colors.white};
 
   ${({ underlined }) =>
     underlined &&
