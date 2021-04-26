@@ -1,41 +1,72 @@
+import { useRef } from 'react';
 import styled from 'styled-components';
 import Colors from '../../constants/Colors';
+import Sizes from '../../constants/Sizes';
 
-const ProgressWrapper = styled.div<{
-  percentage: number;
-  indicatorColor?: string;
-}>`
+const Circle = styled.circle`
+  transition: 0.35s stroke-dashoffset;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+`;
+const Vector = styled.svg`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Progress = styled.div`
   position: relative;
-  width: 100%;
-  margin: 0.5rem 0;
+  display: inline;
 
-  .full-bar {
-    background: ${Colors.grey};
-    height: 1px;
-  }
-
-  .indicator {
-    width: ${({ percentage }) => percentage}%;
-    height: 3px;
-    border-radius: 5px;
-    background: ${({ indicatorColor }) =>
-      indicatorColor ? indicatorColor : Colors.green};
-    position: relative;
-    bottom: 2px;
+  .percent {
+    position: absolute;
+    font-size: calc(${Sizes.small - 2}px);
+    bottom: 50%;
+    left: 0;
+    transform: translate(0, 70%);
+    width: 100%;
+    text-align: center;
   }
 `;
 
 type ComponentProps = {
   percentage: number;
-  indicatorColor?: string;
+  radius: number;
+  stroke: number;
 };
 
-const ProgressBar = (props: ComponentProps) => {
+const ProgressBar = ({ percentage, radius, stroke }: ComponentProps) => {
+  const normalizedRadius = useRef(radius - stroke * 2);
+  const circumference = useRef(normalizedRadius.current * 2 * Math.PI);
+
+  const strokeDashoffset =
+    circumference.current - (percentage / 100) * circumference.current;
+
   return (
-    <ProgressWrapper {...props}>
-      <div className="full-bar" />
-      <div className="indicator" />
-    </ProgressWrapper>
+    <Progress>
+      <Vector height={radius * 2.2} width={radius * 2.2}>
+        {/* <circle /> */}
+        <Circle
+          r={normalizedRadius.current}
+          cx={radius}
+          cy={radius}
+          strokeWidth={stroke}
+          stroke={Colors.dark}
+          fill="transparent"
+        />
+        <Circle
+          stroke={Colors.green}
+          fill="transparent"
+          strokeWidth={stroke}
+          style={{ strokeDashoffset }}
+          strokeDasharray={circumference.current + ' ' + circumference.current}
+          r={normalizedRadius.current}
+          cx={radius}
+          cy={radius}
+        />
+      </Vector>
+      <span className="percent">{percentage}&#37;</span>
+    </Progress>
   );
 };
 

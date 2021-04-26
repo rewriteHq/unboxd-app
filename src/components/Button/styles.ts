@@ -7,7 +7,8 @@ export const button = css`
   justify-content: center;
   align-items: center;
   background-color: ${Colors.green};
-  padding: 1rem;
+  color: ${Colors.white};
+  padding: 1.2rem 1rem;
   margin: 1.5rem 0;
   width: 100%;
   border-radius: 20px;
@@ -30,6 +31,7 @@ export const PlainButton = styled.button<{ underlined?: boolean }>`
   border: none;
   padding: 1rem 0;
   white-space: nowrap;
+  color: ${Colors.white};
 
   ${({ underlined }) =>
     underlined &&

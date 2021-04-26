@@ -1,10 +1,12 @@
 import styled, { css } from 'styled-components';
 import Colors from '../../constants/Colors';
+import Sizes from '../../constants/Sizes';
+import { SpaceBetween } from '../UtilityStyles/Flex';
 
 export const GiftThumb = styled.div`
   display: flex;
   flex-direction: column;
-  border: 1px solid ${Colors.lightGrey};
+  background: ${Colors.darkNavy};
   border-radius: 10px;
   overflow: hidden;
   height: 270px;
@@ -15,6 +17,12 @@ export const GiftThumbImage = styled.img`
   width: 100%;
   height: 55%;
   object-fit: cover;
+`;
+
+export const Raised = styled(SpaceBetween)`
+  align-items: center;
+  width: 100%;
+  margin-top: 0.5rem;
 `;
 
 export const GiftThumbText = styled.div`
@@ -31,7 +39,7 @@ export const GiftThumbText = styled.div`
 
   .raised {
     color: ${Colors.darkGrey};
-    font-weight: 700;
+    font-size: ${Sizes.small}px;
   }
 `;
 

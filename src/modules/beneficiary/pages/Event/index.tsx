@@ -10,10 +10,12 @@ import GiftCard from '../../../../commons/GiftCard';
 import AppState, { WishList } from '../../../../typings';
 import * as actions from './redux/actions';
 import {
+  AddIcon,
   AddItem,
   CountDown,
-  CoverAndTime,
   CoverImage,
+  EventCard,
+  EventCardContent,
   GiftList,
   HeadlineText,
   NeedText,
@@ -74,31 +76,34 @@ const Event = ({ list, getWishlist }: ComponentProps) => {
     <>
       <DashboardLayout pageTitle="" navItems={navItems} showBack>
         <DashboardContainer>
-          <CoverAndTime>
+          <EventCard>
             <CoverImage src={list.coverImage} alt={list.title} />
-            <CountDown>
-              <p>{daysLeft} </p>
-              <span>{daysLeft > 1 ? 'days ' : 'day'} left</span>
-            </CountDown>
-          </CoverAndTime>
-          <HeadlineText>
-            <h2>{list.title}</h2>
-          </HeadlineText>
+            <EventCardContent>
+              <HeadlineText>
+                <h2>{list.title}</h2>
+              </HeadlineText>
+              <CountDown>
+                <span>
+                  {daysLeft} {daysLeft > 1 ? 'days ' : 'day'} left
+                </span>
+              </CountDown>
+            </EventCardContent>
+          </EventCard>
           <ShareBox>
             <p className="url">{`${process.env.REACT_APP_DOMAIN_NAME}${list.slug}`}</p>
             <PlainButton className="share-button" onClick={toggleShareModal}>
-              Share
+              share
             </PlainButton>
           </ShareBox>
-          <NeedText>Your wishes</NeedText>
+          <NeedText>Your wishes &#40;{list.gifts.length}&#41;</NeedText>
           <GiftList>
             {list.gifts.map((gift) => (
-              <GiftCard gift={gift} key={gift._id}>
-                <GiftCard.Menu />
-              </GiftCard>
+              <GiftCard gift={gift} key={gift._id} />
             ))}
           </GiftList>
-          <AddItem to={`/event/add-gift/${id}`}>Add wish</AddItem>
+          <AddItem to={`/event/add-gift/${id}`}>
+            <AddIcon />
+          </AddItem>
         </DashboardContainer>
       </DashboardLayout>
       {explainer.show && (

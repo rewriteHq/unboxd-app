@@ -3,7 +3,7 @@ import Colors from '../constants/Colors';
 import Sizes from '../constants/Sizes';
 
 export const PageHeading = styled.h1<{ large?: boolean; centered?: boolean }>`
-  color: ${Colors.black};
+  /* color: ${Colors.black}; */
   ${(props) =>
     props.large &&
     css`

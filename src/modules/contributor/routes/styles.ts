@@ -2,12 +2,13 @@ import styled from 'styled-components';
 import Colors from '../../../constants/Colors';
 
 export const WelcomeWrapper = styled.div`
-  background: ${Colors.white};
+  background: ${Colors.navy};
   font-size: 1.2rem;
+  border-radius: 18px;
 `;
 
 export const WelcomeHead = styled.div`
-  background: ${Colors.paleblue};
+  /* background: ${Colors.navy}; */
   padding: 2rem;
   display: flex;
   align-items: center;

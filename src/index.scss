@@ -17,6 +17,8 @@ body {
   font-family: 'Lato', sans-serif;
   font-size: $font-size-normal;
   font-weight: $font-weight-Regular;
+  background: $dark-background;
+  color: $white;
 }
 
 a {
@@ -47,4 +49,10 @@ button {
 
 .danger {
   color: #ff4646;
+}
+
+.marg {
+  &-r {
+    margin-right: 1rem;
+  }
 }

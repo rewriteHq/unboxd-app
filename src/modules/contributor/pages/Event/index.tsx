@@ -1,4 +1,5 @@
 import { differenceInDays } from 'date-fns';
+import localforage from 'localforage';
 import React, { useCallback, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useParams, useHistory } from 'react-router';
@@ -8,11 +9,12 @@ import AppState, { WishList } from '../../../../typings';
 import { getWishlistBySlug } from './redux/actions';
 import {
   CountDown,
-  CoverAndTime,
+  EventCard,
   CoverImage,
   GiftList,
   HeadlineText,
   NeedText,
+  EventCardContent,
 } from '../../../beneficiary/pages/Event/styles';
 import WelcomeModal from './components/WelcomeModal';
 
@@ -26,6 +28,10 @@ type ComponentProps = {
   getWish: () => void;
 };
 
+const eventVisited = localforage.createInstance({
+  name: 'Event Visited',
+});
+
 const Event = ({ list, getWishlist }: ComponentProps) => {
   const { slug } = useParams<ParamTypes>();
   const [welcomeModal, setWelcomeModal] = useState(false);
@@ -34,12 +40,24 @@ const Event = ({ list, getWishlist }: ComponentProps) => {
   const toggleWelcomeModal = () => setWelcomeModal((prev) => !prev);
 
   useEffect(() => {
-    if (!list || list.slug !== slug) {
-      getWishlist(slug);
-    } else {
-      const delay = setTimeout(toggleWelcomeModal, 1000);
-      return () => clearTimeout(delay);
-    }
+    (async function () {
+      if (!list || list.slug !== slug) {
+        getWishlist(slug);
+      } else {
+        /**
+         * check if this event has been visited before (saved with localforage),
+         * then prevent showing welcome message if it has been visited
+         */
+
+        const isEventVisited = await eventVisited.getItem(slug);
+
+        if (!isEventVisited) {
+          const delay = setTimeout(toggleWelcomeModal, 1000);
+          eventVisited.setItem(slug, true);
+          return () => clearTimeout(delay);
+        }
+      }
+    })();
   }, [list, slug, getWishlist]);
 
   const daysLeft = list ? differenceInDays(new Date(), new Date(list.date)) : 1;
@@ -54,16 +72,20 @@ const Event = ({ list, getWishlist }: ComponentProps) => {
   return list ? (
     <Layout>
       <div className="container">
-        <CoverAndTime>
+        <EventCard>
           <CoverImage src={list.coverImage} alt={list.title} />
-          <CountDown>
-            <p>{daysLeft} </p>
-            <span>{daysLeft > 1 ? 'days ' : 'day'} left</span>
-          </CountDown>
-        </CoverAndTime>
-        <HeadlineText>
-          <h2>{list.title}</h2>
-        </HeadlineText>
+          <EventCardContent>
+            <HeadlineText>
+              <h2>{list.title}</h2>
+            </HeadlineText>
+            <CountDown>
+              <span>
+                {daysLeft} {daysLeft > 1 ? 'days ' : 'day'} left
+              </span>
+            </CountDown>
+          </EventCardContent>
+        </EventCard>
+
         <NeedText>Choose what to gift Lateef</NeedText>
         <GiftList>
           {list.gifts.map((gift) => (
