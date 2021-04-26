@@ -13,6 +13,7 @@ const Colors = {
   darkNavy: '#16181D',
   navy: '#22242C',
   yellow: '#FDD384',
+  dark: '#303030',
 };
 
 export default Colors;

@@ -12,7 +12,7 @@ export const Hamburger = styled(PlainButton)`
   span {
     width: 100%;
     height: 2px;
-    background-color: ${Colors.black};
+    background-color: ${Colors.white};
   }
 `;
 

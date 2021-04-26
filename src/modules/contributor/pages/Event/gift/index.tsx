@@ -23,6 +23,7 @@ import ProgressBar from '../../../../../commons/Progress';
 import GiftCard from '../../../../../commons/GiftCard';
 import PriceSuggest from './components/PriceSuggest';
 import PaymentForm from './components/PaymentForm';
+import { SpaceBetween } from '../../../../../commons/UtilityStyles/Flex';
 
 interface ComponentProps {
   gifts: GiftDataType;
@@ -89,25 +90,26 @@ const Gift = ({ gifts, getGift, list, getWishlist }: ComponentProps) => {
               <CoverImage src={gift.imageURL} alt={gift.name} />
 
               <GiftCountdown>
-                <p>{daysLeft} </p>
-                <span>{daysLeft > 1 ? 'days ' : 'day'} left</span>
+                {daysLeft} {daysLeft > 1 ? 'days ' : 'day'} left
               </GiftCountdown>
               <GiftDescription>
-                <h3>{gift.name}</h3>
-                <GiftProgressPrice>
-                  <ProgressBar percentage={percentageRaised} />
-                  <div className="price">
-                    <p>₦{gift.cost.toLocaleString()}</p>
-                    <small>
-                      ₦
-                      {gift.paid.toLocaleString(undefined, {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2,
-                      })}{' '}
-                      raised
-                    </small>
-                  </div>
-                </GiftProgressPrice>
+                <SpaceBetween align="flex-end">
+                  <h3>{gift.name}</h3>
+                  <GiftProgressPrice>
+                    <ProgressBar percentage={10} radius={21} stroke={1.5} />
+                    <div className="price">
+                      <p>₦{gift.cost.toLocaleString()}</p>
+                      <small>
+                        ₦
+                        {gift.paid.toLocaleString(undefined, {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2,
+                        })}{' '}
+                        raised
+                      </small>
+                    </div>
+                  </GiftProgressPrice>
+                </SpaceBetween>
               </GiftDescription>
             </GiftCoverTime>
 

@@ -2,7 +2,7 @@ import API from '../../../../utils/api';
 import { handleRequestError } from '../../../../utils/api/service';
 
 export const getWishlistBySlug = async (slug: string) => {
-  const url = '/list/user';
+  const url = `/list/slug/${slug}`;
   try {
     const response = await API.get(`${url}`);
 

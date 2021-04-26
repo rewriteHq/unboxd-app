@@ -1,8 +1,16 @@
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
+import { Plus } from '@styled-icons/icomoon';
+
+import { SpaceBetween } from '../../../../commons/UtilityStyles/Flex';
 import { BTN } from '../../../../components/Button/styles';
 import Colors from '../../../../constants/Colors';
 import Sizes from '../../../../constants/Sizes';
+
+const headlineFont = css`
+  font-weight: bold;
+  font-size: calc(${Sizes.twenty}) px;
+`;
 
 export const ImageHolder = styled(BTN)`
   height: 30vh;
@@ -10,9 +18,35 @@ export const ImageHolder = styled(BTN)`
   border-radius: 5px;
 `;
 
-export const CoverAndTime = styled.div`
+export const EventCard = styled.div`
   position: relative;
-  margin: 0 -20px;
+  margin-bottom: 1rem;
+  border-radius: 18px;
+  overflow: hidden;
+  &::before {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      360deg,
+      #000000 2.57%,
+      rgba(0, 0, 0, 0) 140.57%
+    );
+    z-index: 2;
+  }
+`;
+
+export const EventCardContent = styled(SpaceBetween)`
+  width: 100%;
+  position: absolute;
+  bottom: 20px;
+  left: 0px;
+  padding: 0 10px;
+  align-items: flex-end;
+  z-index: 3;
 `;
 
 export const CoverImage = styled.img`
@@ -22,27 +56,12 @@ export const CoverImage = styled.img`
 `;
 
 export const CountDown = styled.div`
-  background-color: ${Colors.lightgreen};
-  position: absolute;
-  bottom: -5px;
-  right: 20px;
-  padding: 0.7rem 1rem;
-  font-size: 0.85rem;
+  background-color: ${Colors.green};
+  padding: 0.4rem 0.7rem;
+  font-size: 0.95rem;
   border-radius: 7.5px;
   text-align: center;
-
-  p {
-    font-size: 1.1rem;
-  }
-
-  span {
-    color: ${Colors.darkGrey};
-  }
-`;
-
-const headlineFont = css`
-  font-weight: bold;
-  font-size: 25px;
+  white-space: nowrap;
 `;
 
 export const HeadlineInput = styled.textarea`
@@ -58,8 +77,7 @@ export const HeadlineInput = styled.textarea`
 `;
 
 export const HeadlineText = styled.div`
-  padding: 1.5rem 0 2rem;
-
+  max-width: 60%;
   h2 {
     ${headlineFont};
   }
@@ -68,16 +86,17 @@ export const HeadlineText = styled.div`
 export const ShareBox = styled.div`
   position: relative;
   padding: 1rem;
-  border: 1px solid ${Colors.lightGrey};
+  background: ${Colors.darkNavy};
   border-radius: 10px;
   width: 100%;
+  overflow: hidden;
 
   &::before {
     content: '';
     background: linear-gradient(
       to right,
-      rgba(255, 255, 255, 0.2) 20%,
-      rgba(255, 255, 255, 1) 60%
+      rgba(255, 255, 255, 0) 20%,
+      ${Colors.darkNavy} 60%
     );
     width: 100%;
     height: 100%;
@@ -94,7 +113,6 @@ export const ShareBox = styled.div`
   }
 
   .share-button {
-    font-weight: ${Sizes.mediumWeight};
     color: ${Colors.textGreen};
     position: absolute;
     top: 50%;
@@ -119,25 +137,36 @@ export const GiftList = styled.div`
   gap: 1rem 1rem;
 `;
 
+export const AddIcon = styled(Plus)`
+  color: ${Colors.green};
+  width: 15px;
+  height: 15px;
+`;
+
 export const AddItem = styled(Link)`
-  border-radius: 50px;
-  padding: 0.5rem 1.2rem;
-  box-shadow: 0px 11px 16px rgba(0, 0, 0, 0.15);
+  border-radius: 50%;
+  padding: 2rem;
   background-color: ${Colors.lightgreen};
-  border: 1px solid #cefabb;
   position: fixed;
   bottom: 10vh;
-  right: 50%;
-  transform: translateX(50%);
+  right: 20px;
   z-index: 3;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: rgba(255, 255, 255, 0.7);
 
   &::after {
-    content: '+';
-    margin-left: 10px;
-    font-size: 1.4rem;
+    content: ' ';
+    width: 70%;
+    height: 70%;
+    background: ${Colors.white};
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
   }
 `;
 

@@ -9,23 +9,17 @@ type ComponentProps = {
   selectSuggestion: (price: number | '') => void;
 };
 
-const pillTheme = css<{ theme: string }>`
-  color: ${(props) => props.theme};
-  border: 1px solid ${(props) => props.theme};
-`;
-
 const PillWrapper = styled(Flex)`
   flex-wrap: wrap;
 `;
 
 const PricePill = styled.button<{ theme?: string }>`
-  background: transparent;
-  border-radius: 30px;
-  border: 1px solid ${Colors.black};
+  background: ${Colors.darkNavy};
+  border-radius: 18px;
   padding: 1rem 1.5rem;
   margin-bottom: 0.8rem;
   white-space: nowrap;
-  ${(props) => props.theme && pillTheme}
+  color: ${Colors.white};
 
   &:not(:last-child) {
     margin-right: 0.5rem;
@@ -34,16 +28,12 @@ const PricePill = styled.button<{ theme?: string }>`
 
 const PriceSuggest = ({ price, selectSuggestion }: ComponentProps) => {
   const roundedHalfPrice = roundToThousands(price / 2);
-  const roundedOneThird = roundToThousands(price / 3);
 
   return (
     <SuggestWrapper>
       <p>Choose an amount to contribute</p>
 
       <PillWrapper>
-        <PricePill onClick={() => selectSuggestion(roundedOneThird)}>
-          ₦ {roundedOneThird.toLocaleString()}
-        </PricePill>
         <PricePill onClick={() => selectSuggestion(roundedHalfPrice)}>
           ₦ {roundedHalfPrice.toLocaleString()}
         </PricePill>
@@ -51,7 +41,7 @@ const PriceSuggest = ({ price, selectSuggestion }: ComponentProps) => {
           ₦ {price.toLocaleString()}
         </PricePill>
         <PricePill theme={Colors.blue} onClick={() => selectSuggestion('')}>
-          I have an amount in mind
+          Others
         </PricePill>
       </PillWrapper>
     </SuggestWrapper>

@@ -9,11 +9,12 @@ import AppState, { WishList } from '../../../../typings';
 import { getWishlistBySlug } from './redux/actions';
 import {
   CountDown,
-  CoverAndTime,
+  EventCard,
   CoverImage,
   GiftList,
   HeadlineText,
   NeedText,
+  EventCardContent,
 } from '../../../beneficiary/pages/Event/styles';
 import WelcomeModal from './components/WelcomeModal';
 
@@ -71,16 +72,20 @@ const Event = ({ list, getWishlist }: ComponentProps) => {
   return list ? (
     <Layout>
       <div className="container">
-        <CoverAndTime>
+        <EventCard>
           <CoverImage src={list.coverImage} alt={list.title} />
-          <CountDown>
-            <p>{daysLeft} </p>
-            <span>{daysLeft > 1 ? 'days ' : 'day'} left</span>
-          </CountDown>
-        </CoverAndTime>
-        <HeadlineText>
-          <h2>{list.title}</h2>
-        </HeadlineText>
+          <EventCardContent>
+            <HeadlineText>
+              <h2>{list.title}</h2>
+            </HeadlineText>
+            <CountDown>
+              <span>
+                {daysLeft} {daysLeft > 1 ? 'days ' : 'day'} left
+              </span>
+            </CountDown>
+          </EventCardContent>
+        </EventCard>
+
         <NeedText>Choose what to gift Lateef</NeedText>
         <GiftList>
           {list.gifts.map((gift) => (
