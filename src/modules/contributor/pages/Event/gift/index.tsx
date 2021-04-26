@@ -96,7 +96,11 @@ const Gift = ({ gifts, getGift, list, getWishlist }: ComponentProps) => {
                 <SpaceBetween align="flex-end">
                   <h3>{gift.name}</h3>
                   <GiftProgressPrice>
-                    <ProgressBar percentage={10} radius={21} stroke={1.5} />
+                    <ProgressBar
+                      percentage={percentageRaised}
+                      radius={21}
+                      stroke={1.5}
+                    />
                     <div className="price">
                       <p>₦{gift.cost.toLocaleString()}</p>
                       <small>

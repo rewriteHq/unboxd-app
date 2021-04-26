@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { Flex } from '../../../../../../commons/UtilityStyles/Flex';
 import Colors from '../../../../../../constants/Colors';
 import { roundToThousands } from '../../../../../../utils/price';

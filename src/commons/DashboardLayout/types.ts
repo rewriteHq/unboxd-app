@@ -3,5 +3,8 @@ export interface LayoutProps
     HeaderProps {}
 
 export interface HeaderProps {
+  pageTitle?: string | React.ReactNode;
+  showBack?: boolean;
+  navItems?: Array<React.FC<any>>;
   isHome?: boolean;
 }
