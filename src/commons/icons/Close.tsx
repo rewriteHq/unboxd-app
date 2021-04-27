@@ -15,14 +15,14 @@ const Close = ({ fill = Colors.white, className }: IconProps) => {
       <path
         d="M8.22363 7.44769L23.0022 22.2263"
         stroke={fill}
-        stroke-width="1.39735"
-        stroke-miterlimit="10"
+        strokeWidth="1.39735"
+        strokeMiterlimit="10"
       />
       <path
         d="M22.8389 7.61011L8.06028 22.3887"
         stroke={fill}
-        stroke-width="1.39735"
-        stroke-miterlimit="10"
+        strokeWidth="1.39735"
+        strokeMiterlimit="10"
       />
     </svg>
   );

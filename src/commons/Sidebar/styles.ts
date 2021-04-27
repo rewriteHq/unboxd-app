@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import Colors from '../../constants/Colors';
-import { Cross } from '@styled-icons/icomoon';
 import Sizes from '../../constants/Sizes';
 
 export const SideBarWrapper = styled.div<{ show: boolean }>`
@@ -18,20 +17,22 @@ export const SideBarWrapper = styled.div<{ show: boolean }>`
   padding: 3rem 2rem 2rem;
 `;
 
-export const CloseButton = styled(Cross)`
-  position: absolute;
-  top: 40px;
-  right: 20px;
-  width: 20px;
-`;
-
 export const NavLinks = styled.ul`
-  margin: 4rem 0;
+  margin: 2rem 0 8rem;
 `;
 
 export const NavItem = styled.li`
   margin-bottom: 2rem;
-  font-size: ${Sizes.twenty}px;
+  font-size: calc(${Sizes.normal + 1}px);
+
+  a {
+    display: flex;
+    align-items: center;
+
+    span {
+      margin-left: 1rem;
+    }
+  }
 `;
 
 export const FindOnline = styled.div`

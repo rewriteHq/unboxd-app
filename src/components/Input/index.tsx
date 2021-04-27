@@ -4,8 +4,8 @@ import { InputComponentProps } from './types';
 const Input: React.FC<InputComponentProps> = ({ register, ...props }) => {
   return (
     <InputField>
-      <Label>{props.label}</Label>
-      <input {...props} ref={register} />
+      <Label htmlFor={props.name}>{props.label}</Label>
+      <input id={props.name} {...props} ref={register} />
     </InputField>
   );
 };

@@ -29,5 +29,5 @@ export const InputField = styled.div`
 
 export const Label = styled.label`
   color: ${Colors.yellow};
-  font-size: calc(${Sizes.normal - 3}px);
+  font-size: calc(${Sizes.small - 2}px);
 `;

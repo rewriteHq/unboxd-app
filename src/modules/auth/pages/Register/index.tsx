@@ -94,9 +94,7 @@ const Register = () => {
             register={register}
             required
           />
-          <Button loading={loading} disabled={loading}>
-            Create account
-          </Button>
+          <Button disabled={loading}>Create account</Button>
         </Form>
       </div>
       <FooterText>

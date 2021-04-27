@@ -33,7 +33,6 @@ function reducer(state = initialState, action: any) {
     case LOADING_USER:
       return {
         ...state,
-        loading: true,
       };
     case SET_ERRORS:
       return {

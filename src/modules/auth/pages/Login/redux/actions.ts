@@ -12,7 +12,7 @@ import Notify from '../../../../../utils/notify/notify';
 import { AppDispatch } from '../../../../../store/types';
 
 export const loginUser = (userData: any, history: any) => (dispatch: any) => {
-  dispatch({ type: LOADING_UI });
+  dispatch({ type: LOADING_UI, payload: true });
   API.post('/auth/signin', userData)
     .then((res) => {
       const token = `Bearer ${res.data.token}`;
@@ -21,6 +21,8 @@ export const loginUser = (userData: any, history: any) => (dispatch: any) => {
       dispatch(getUserData());
       dispatch({ type: CLEAR_ERRORS });
       dispatch({ type: SET_AUTHENTICATED });
+      dispatch({ type: LOADING_UI, payload: false });
+
       history.push('/dashboard'); //redirecting to index page after login success
     })
     .catch((err) => {
@@ -28,6 +30,8 @@ export const loginUser = (userData: any, history: any) => (dispatch: any) => {
         type: SET_ERRORS,
         payload: err.response.data,
       });
+      dispatch({ type: LOADING_UI, payload: false });
+
       Notify.bottom(err.response.data.message);
     });
 };
@@ -41,9 +45,10 @@ export const getUserData = () => (dispatch: any) => {
         type: SET_USER,
         payload: res.data,
       });
+      dispatch({ type: LOADING_UI, payload: false });
     })
     .catch((err) => {
-      console.log(err);
+      dispatch({ type: LOADING_UI, payload: false });
     });
 };
 
