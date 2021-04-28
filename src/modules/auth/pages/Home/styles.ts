@@ -118,6 +118,7 @@ export const UnboxdCarousel = Styled.div`
     .card {
       display: flex;
       flex-direction: column;
+      background: ${Colors.black};
       border: 0.5px solid ${Colors.tintGrey};
       border-radius: 5px;
       overflow: hidden;
