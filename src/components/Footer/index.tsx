@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { FooterWrapper } from './styles';
 import { FooterComponentProps } from './types';
 
@@ -6,7 +7,9 @@ const Footer: React.FC<FooterComponentProps> = () => {
     <FooterWrapper>
       <div className="container">
         <p className="info">
-          By continuing, you agree to our Terms of Service and Privacy Policy
+          By continuing, you agree to our
+          <br /> <Link to="/">Terms of Service</Link> and{' '}
+          <Link to="/">Privacy Policy</Link>
         </p>
       </div>
     </FooterWrapper>

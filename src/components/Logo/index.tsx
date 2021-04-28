@@ -3,7 +3,7 @@ import image from '../../assets/img/logo/logo_white.svg';
 
 const LogoSizes = {
   sm: 110,
-  md: 150,
+  md: 130,
   lg: 200,
 };
 

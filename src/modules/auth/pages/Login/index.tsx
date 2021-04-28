@@ -9,6 +9,10 @@ import Layout from '../../../../Layout';
 import { loginUser } from './redux/actions';
 import { SpaceBetween } from '../../../../commons/UtilityStyles/Flex';
 import { Auth } from '../../../../components/Header/styles';
+import SocialAuth from '../../../../components/SocialAuth';
+import { ReactComponent as GoogleIcon } from '../../../../assets/img/illustrations/google.svg';
+import { ReactComponent as FacebookIcon } from '../../../../assets/img/illustrations/facebook.svg';
+import Footer from '../../../../components/Footer';
 
 const Login = (props: any) => {
   const [values, setValues] = useState({
@@ -54,18 +58,39 @@ const Login = (props: any) => {
               label="Email address"
               type="text"
               name="email"
+              id="email"
               onChange={handleChange}
             />
             <Input
               label="Password"
               type="password"
               name="password"
+              id="password"
               onChange={handleChange}
             />
-            <Button type="submit">Login</Button>
+            <Button type="submit">Sign in</Button>
           </Form>
+          <SocialAuth
+            options={[
+              {
+                text: 'Sign in with Google',
+                onClick: (e) => {
+                  console.log(e);
+                },
+                icon: GoogleIcon,
+              },
+              {
+                text: 'Signin with Facebook',
+                onClick: (e) => {
+                  console.log(e);
+                },
+                icon: FacebookIcon,
+              },
+            ]}
+          />
         </div>
       </Main>
+      <Footer />
     </Layout>
   );
 };

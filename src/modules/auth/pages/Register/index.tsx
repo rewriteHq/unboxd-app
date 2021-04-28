@@ -11,6 +11,10 @@ import API from '../../../../utils/api';
 import Notify from '../../../../utils/notify/notify';
 import { SpaceBetween } from '../../../../commons/UtilityStyles/Flex';
 import { Auth } from '../../../../components/Header/styles';
+import SocialAuth from '../../../../components/SocialAuth';
+import { ReactComponent as GoogleIcon } from '../../../../assets/img/illustrations/google.svg';
+import { ReactComponent as FacebookIcon } from '../../../../assets/img/illustrations/facebook.svg';
+import Footer from '../../../../components/Footer';
 
 const Register = () => {
   const [loading, setLoading] = useState(false);
@@ -98,12 +102,26 @@ const Register = () => {
             Create account
           </Button>
         </Form>
+        <SocialAuth
+          options={[
+            {
+              text: 'Sign in with Google',
+              onClick: (e) => {
+                console.log(e);
+              },
+              icon: GoogleIcon,
+            },
+            {
+              text: 'Signin with Facebook',
+              onClick: (e) => {
+                console.log(e);
+              },
+              icon: FacebookIcon,
+            },
+          ]}
+        />
       </div>
-      <FooterText>
-        <div className="info">
-          By continuing, you agree to our Terms of Service and Privacy Policy
-        </div>
-      </FooterText>
+      <Footer />
     </Layout>
   );
 };

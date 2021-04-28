@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Colors from '../../constants/Colors';
 import Sizes from '../../constants/Sizes';
 
 export const HeadWrapper = styled.header`
@@ -11,9 +12,12 @@ export const HeadWrapper = styled.header`
 `;
 
 export const Auth = styled.p`
-  font-size: calc(${Sizes.small}px + 1px);
-
+  font-size: calc(${Sizes.fourteen}px + 1px);
+  color: ${Colors.semiDarkGrey};
+  font-weight: ${Sizes.lightWeight};
   a {
-    font-weight: ${Sizes.mediumWeight};
+    font-weight: ${Sizes.normalWeight};
+    opacity: 1;
+    text-decoration: underline;
   }
 `;

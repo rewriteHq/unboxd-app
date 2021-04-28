@@ -9,7 +9,7 @@ const Header: React.FC = () => {
     <HomeHeader>
       <div className="container">
         <Link to="/">
-          <Logo size="sm" />
+          <Logo />
         </Link>
       </div>
     </HomeHeader>

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Colors from '../../constants/Colors';
+import Fonts from '../../constants/Fonts';
 import Sizes from '../../constants/Sizes';
 
 export const InputField = styled.div`
@@ -10,6 +11,7 @@ export const InputField = styled.div`
   margin: 10px 0;
   background: ${Colors.darkNavy};
   border-radius: 18px;
+  height: 64px;
 
   input {
     width: 100%;
@@ -17,6 +19,8 @@ export const InputField = styled.div`
     background: ${Colors.darkNavy};
     color: ${Colors.white} !important;
     -webkit-text-fill-color: ${Colors.white} !important;
+    font-size: 16px;
+    font-family: ${Fonts.secondary};
 
     &:-webkit-autofill,
     &:-webkit-autofill:hover,
@@ -29,5 +33,5 @@ export const InputField = styled.div`
 
 export const Label = styled.label`
   color: ${Colors.yellow};
-  font-size: calc(${Sizes.normal - 3}px);
+  font-size: calc(${Sizes.normal - 4}px);
 `;

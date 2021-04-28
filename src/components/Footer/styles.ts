@@ -1,18 +1,24 @@
 import Styled from 'styled-components';
+import Fonts from '../../constants/Fonts';
 import Sizes from '../../constants/Sizes';
 
 export const FooterWrapper = Styled.div`
     display: flex;
-
+    font-family: ${Fonts.primary};
+    font-size: 14px;
+    opacity: 0.5;
+    padding: 20px 0;
     .container {
         justify-content: center;
-        padding: 10px 92px;
-
+        min-height: max-content !important;
         .info {
             font-size: ${Sizes.small}px;
-            line-height: ${Sizes.fourteen}px;
-            font-weight: ${Sizes.normalWeight};
+            font-weight: 100;
+            line-height: ${Sizes.normal}px;
             text-align: center;
+            a {
+                text-decoration: underline;
+            }
         }
     }
 `;
