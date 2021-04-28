@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { PlainButton } from '../../../components/Button/styles';
 import Colors from '../../../constants/Colors';
+import { SpaceBetween } from '../../UtilityStyles/Flex';
 
 export const Hamburger = styled(PlainButton)`
   display: flex;
@@ -12,14 +13,14 @@ export const Hamburger = styled(PlainButton)`
   span {
     width: 100%;
     height: 2px;
-    background-color: ${Colors.black};
+    background-color: ${Colors.white};
   }
 `;
 
-export const WalletBubble = styled.button`
-  margin-left: 5px;
-  background: ${Colors.black};
-  color: ${Colors.white};
-  padding: 0.1rem 0.3rem;
-  border-radius: 50%;
+export const HeaderLeft = styled(SpaceBetween)`
+  height: 100%;
+`;
+
+export const HeaderRight = styled(SpaceBetween)`
+  height: 100%;
 `;

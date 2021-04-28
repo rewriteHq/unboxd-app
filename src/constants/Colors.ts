@@ -5,11 +5,18 @@ const Colors = {
   white: '#fff',
   lightGrey: '#E1E1E1',
   textGreen: '#3ECD00',
-  green: '#67FA28',
+  green: '#80BA7C',
   lightgreen: '#EDFFE5',
   paleblue: '#F8FFF4',
   blue: '#12B8FF',
   pink: '#C35BF7',
+  darkNavy: '#16181D',
+  navy: '#22242C',
+  yellow: '#FDD384',
+  dark: '#303030',
+  tintOrange: '#EBD6B7',
+  burntOrange: '#734B0F',
+  tintGrey: '#A2A2A2',
 };
 
 export default Colors;

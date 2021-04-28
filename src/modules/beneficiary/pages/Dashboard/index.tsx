@@ -5,7 +5,7 @@ import NoItem from '../../../../components/NoItem';
 
 const Dashboard: React.FC<ComponentProps> = () => {
   return (
-    <DashboardLayout pageTitle="Add your needs" showBack>
+    <DashboardLayout isHome>
       <DashboardWrapper>
         <div className="container">
           <NoItem />

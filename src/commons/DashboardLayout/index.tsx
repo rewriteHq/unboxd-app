@@ -2,17 +2,10 @@ import React from 'react';
 import Header from './header';
 import { LayoutProps } from './types';
 
-const DashboardLayout: React.FC<LayoutProps> = ({
-  children,
-  pageTitle,
-  showBack,
-  navItems,
-}) => {
+const DashboardLayout: React.FC<LayoutProps> = ({ children, isHome }) => {
   return (
     <>
-      <Header>
-        <Header.Main />
-      </Header>
+      <Header>{isHome ? <Header.Home /> : <Header.Main />}</Header>
       {children}
     </>
   );

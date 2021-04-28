@@ -1,11 +1,12 @@
 import styled from 'styled-components';
+import { SpaceBetween } from '../../../../../commons/UtilityStyles/Flex';
 import Colors from '../../../../../constants/Colors';
 import {
   CountDown,
-  CoverAndTime,
+  EventCard,
 } from '../../../../beneficiary/pages/Event/styles';
 
-export const GiftCoverTime = styled(CoverAndTime)`
+export const GiftCoverTime = styled(EventCard)`
   &::after {
     content: '';
     position: absolute;
@@ -23,8 +24,10 @@ export const GiftCoverTime = styled(CoverAndTime)`
 `;
 
 export const GiftCountdown = styled(CountDown)`
+  position: absolute;
   top: 20px;
-  bottom: unset;
+  right: 10px;
+  z-index: 2;
 `;
 
 export const GiftDescription = styled.div`
@@ -37,19 +40,15 @@ export const GiftDescription = styled.div`
   width: 100%;
 `;
 
-export const GiftProgressPrice = styled.div`
-  display: grid;
-  grid-template-columns: 5fr 2fr;
+export const GiftProgressPrice = styled(SpaceBetween)`
   margin-top: 0.5rem;
-  align-items: center;
-  gap: 1rem;
 
   .price {
     display: flex;
     flex-direction: column;
 
     p {
-      font-size: 1.1rem;
+      font-size: 1.3rem;
       margin-bottom: 2px;
     }
 

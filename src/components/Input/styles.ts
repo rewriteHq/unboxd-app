@@ -6,24 +6,28 @@ export const InputField = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  border-bottom: 1px solid ${Colors.black};
-  padding-top: 20px;
+  padding: 10px 20px;
   margin: 10px 0;
+  background: ${Colors.darkNavy};
+  border-radius: 18px;
 
   input {
     width: 100%;
-    height: 28px;
     margin-top: 0.5rem;
+    background: ${Colors.darkNavy};
+    color: ${Colors.white} !important;
+    -webkit-text-fill-color: ${Colors.white} !important;
+
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill:active {
+      transition: background-color 5000s ease-in-out 0s;
+    }
   }
 `;
 
 export const Label = styled.label`
-  position: absolute;
-  top: 10px;
-  left: 0;
-  font-size: calc(${Sizes.normal}px);
-
-  &.focus {
-    font-size: calc(${Sizes.small}px);
-  }
+  color: ${Colors.yellow};
+  font-size: calc(${Sizes.normal - 3}px);
 `;
