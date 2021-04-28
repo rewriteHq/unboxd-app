@@ -14,6 +14,9 @@ const Colors = {
   navy: '#22242C',
   yellow: '#FDD384',
   dark: '#303030',
+  tintOrange: '#EBD6B7',
+  burntOrange: '#734B0F',
+  tintGrey: '#A2A2A2',
 };
 
 export default Colors;
