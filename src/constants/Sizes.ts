@@ -4,6 +4,7 @@ const Sizes = {
   normal: 16,
   twenty: 20,
 
+  lightWeight: 300,
   normalWeight: 400,
   mediumWeight: 700,
   BoldWeight: 900,

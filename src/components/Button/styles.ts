@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import Colors from '../../constants/Colors';
+import Sizes from '../../constants/Sizes';
 
 export const button = css`
   display: flex;
@@ -12,6 +13,9 @@ export const button = css`
   margin: 1.5rem 0;
   width: 100%;
   border-radius: 20px;
+  font-weight: ${Sizes.normalWeight};
+  font-size: calc(${Sizes.fourteen}px + 1px);
+  height: 64px;
 `;
 
 export const BTN = styled.button`

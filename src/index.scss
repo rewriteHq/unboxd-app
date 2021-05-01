@@ -1,5 +1,10 @@
 @import './variables';
 
+@font-face {
+  font-family: 'Averta-CY';
+  src: url('./assets/fonts/Averta-Regular.otf') format('opentype');
+}
+
 * {
   margin: 0;
   padding: 0;
