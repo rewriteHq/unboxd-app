@@ -9,12 +9,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './registerServiceWorker';
 import store from './store';
+import AppThemeProvider from './store/ThemeContex';
 
 ReactDOM.render(
   <Provider store={store}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
+    <AppThemeProvider>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </AppThemeProvider>
   </Provider>,
   document.getElementById('root')
 );
