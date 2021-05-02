@@ -81,10 +81,12 @@ export const AuthDescriptionFooter = styled.div`
   z-index: 9;
   h1 {
     font-size: 55px;
+    font-weight: 500;
   }
   p {
     font-size: 20px;
-    font-family: Averta-CY-Light;
+    font-family: Averta-CY;
     margin-top: 17px;
+    font-weight: 300;
   }
 `;
