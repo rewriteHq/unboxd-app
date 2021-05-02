@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import Colors from '../../../../constants/Colors';
-import Sizes from '../../../../constants/Sizes';
 
 export const Main = styled.div`
   display: flex;
