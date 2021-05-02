@@ -9,16 +9,16 @@ export const InputField = styled.div`
   position: relative;
   padding: 10px 20px;
   margin: 10px 0;
-  background: ${Colors.darkNavy};
+  background: ${(props) => props.theme.appSecondaryColor};
   border-radius: 18px;
   height: 64px;
 
   input {
     width: 100%;
     margin-top: 0.5rem;
-    background: ${Colors.darkNavy};
-    color: ${Colors.white} !important;
-    -webkit-text-fill-color: ${Colors.white} !important;
+    background: ${(props) => props.theme.appSecondaryColor};
+    color: ${(props) => props.theme.contentColor} !important;
+    -webkit-text-fill-color: ${(props) => props.theme.contentColor} !important;
     font-size: 16px;
     font-family: ${Fonts.secondary};
 

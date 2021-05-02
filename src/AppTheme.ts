@@ -7,7 +7,7 @@ interface AppTheme {
 
 const LightTheme: AppTheme = {
   appPrimaryColor: '#ffffff',
-  appSecondaryColor: '#F5F5F5',
+  appSecondaryColor: '#F4F4F4',
   logoSrc: '/logo-dark.svg',
   contentColor: '#000000',
 };
