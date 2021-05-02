@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import image from '../../assets/img/logo/logo_white.svg';
+import { useAppThemeContext } from '../../store/ThemeContex';
 
 const LogoSizes = {
   sm: 110,
@@ -18,7 +18,16 @@ const LogoStyle = styled.img<{ size: Size }>`
 `;
 
 const Logo = ({ size = 'md' }: LogoProps) => {
-  return <LogoStyle size={size} src={image} alt="unboxd logo" />;
+  const appThemeContext = useAppThemeContext();
+  return (
+    <LogoStyle
+      size={size}
+      src={
+        appThemeContext?.theme === 'dark' ? '/logo-white.svg' : '/logo-dark.svg'
+      }
+      alt="unboxd logo"
+    />
+  );
 };
 
 export default Logo;

@@ -13,7 +13,7 @@ const PillWrapper = styled(Flex)`
   flex-wrap: wrap;
 `;
 
-const PricePill = styled.button<{ theme?: string }>`
+const PricePill = styled.button`
   background: ${Colors.darkNavy};
   border-radius: 18px;
   padding: 1rem 1.5rem;
@@ -40,9 +40,7 @@ const PriceSuggest = ({ price, selectSuggestion }: ComponentProps) => {
         <PricePill onClick={() => selectSuggestion(price)}>
           ₦ {price.toLocaleString()}
         </PricePill>
-        <PricePill theme={Colors.blue} onClick={() => selectSuggestion('')}>
-          Others
-        </PricePill>
+        <PricePill onClick={() => selectSuggestion('')}>Others</PricePill>
       </PillWrapper>
     </SuggestWrapper>
   );

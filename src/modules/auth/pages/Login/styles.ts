@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import Colors from '../../../../constants/Colors';
 
 export const Main = styled.div`
   display: flex;
@@ -33,8 +32,9 @@ export const MainContainer = styled.div`
   .description {
     display: flex;
     flex-direction: column;
-    background: ${Colors.darkNavy};
+    background: ${(props) => props.theme.appSecondaryColor};
     position: relative;
+    color: ${(props) => props.theme.contentColor};
     .large-heart,
     .small-heart {
       position: absolute;

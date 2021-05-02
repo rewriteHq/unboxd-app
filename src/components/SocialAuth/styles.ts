@@ -33,7 +33,7 @@ export const SocialAuthWrapper = styled.div`
     svg {
       margin-right: 10px;
     }
-    @media (max-width: 768px) {
+    @media (max-width: 1120px) {
       span {
         display: none;
       }
