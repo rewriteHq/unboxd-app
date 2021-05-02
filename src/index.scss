@@ -5,6 +5,11 @@
   src: url('./assets/fonts/Averta-Regular.otf') format('opentype');
 }
 
+@font-face {
+  font-family: 'Averta-CY-Light';
+  src: url('./assets/fonts/Averta-Light.ttf') format('truetype');
+}
+
 * {
   margin: 0;
   padding: 0;

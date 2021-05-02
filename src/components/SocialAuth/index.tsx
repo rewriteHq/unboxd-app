@@ -17,7 +17,7 @@ const SocialAuth = ({ options }: SocialAuthProps) => {
       {options.map(({ text, onClick, icon: Icon }) => (
         <button onClick={onClick} key={text}>
           <Icon />
-          {text}
+          <span>{text}</span>
         </button>
       ))}
     </SocialAuthWrapper>
