@@ -20,6 +20,7 @@ export const SocialAuthWrapper = styled.div`
     align-items: center;
     justify-content: center;
     padding: 0 10px;
+    border-right: 1px solid #22242c;
     &:first-of-type {
       border-top-left-radius: 7px;
       border-bottom-left-radius: 7px;
@@ -27,9 +28,19 @@ export const SocialAuthWrapper = styled.div`
     &:last-of-type {
       border-top-right-radius: 7px;
       border-bottom-right-radius: 7px;
+      border-right: 0px;
     }
     svg {
       margin-right: 10px;
+    }
+    @media (max-width: 768px) {
+      span {
+        display: none;
+      }
+      svg {
+        width: 20px;
+        height: 20px;
+      }
     }
   }
 `;
