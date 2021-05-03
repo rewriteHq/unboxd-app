@@ -21,6 +21,7 @@ export const InputField = styled.div`
     -webkit-text-fill-color: ${(props) => props.theme.contentColor} !important;
     font-size: 16px;
     font-family: ${Fonts.secondary};
+    font-weight: 300;
 
     &:-webkit-autofill,
     &:-webkit-autofill:hover,

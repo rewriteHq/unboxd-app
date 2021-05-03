@@ -1,16 +1,30 @@
-import { DashboardWrapper } from './styles';
 import { ComponentProps } from './types';
 import DashboardLayout from '../../../../commons/DashboardLayout';
-import NoItem from '../../../../components/NoItem';
+import { MyUnboxdListHeader, WishList } from './styles';
+import Logo from '../../../../components/Logo';
+import WishCard from '../../../../components/WishCard';
+import wishes from '../../../../mocks/wishes.json';
 
 const Dashboard: React.FC<ComponentProps> = () => {
   return (
     <DashboardLayout isHome>
-      <DashboardWrapper>
-        <div className="container">
-          <NoItem />
-        </div>
-      </DashboardWrapper>
+      <MyUnboxdListHeader>
+        <p>
+          my&nbsp;
+          <Logo />
+          &nbsp; list
+        </p>
+      </MyUnboxdListHeader>
+      <WishList>
+        {wishes.map((wish) => (
+          <WishCard
+            key={wish.title}
+            title={wish.title}
+            wishCount={wish.count}
+            imgSrc={wish.imgSrc}
+          />
+        ))}
+      </WishList>
     </DashboardLayout>
   );
 };

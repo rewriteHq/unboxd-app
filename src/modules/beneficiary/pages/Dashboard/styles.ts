@@ -25,3 +25,24 @@ export const DashboardFilm = styled.div`
   );
   z-index: 2;
 `;
+
+export const MyUnboxdListHeader = styled.div`
+  width: 100%;
+  margin-top: 50px;
+  p {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    @media (max-width: 768px) {
+      justify-content: center;
+    }
+  }
+`;
+
+export const WishList = styled.section`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 42px;
+`;
