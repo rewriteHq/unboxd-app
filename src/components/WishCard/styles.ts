@@ -22,7 +22,7 @@ export const WishCardWrapper = styled.div`
   }
   .wish-details {
     position: absolute;
-    z-index: 99;
+    z-index: 9;
     padding: 20px;
     display: flex;
     justify-content: space-between;
@@ -37,6 +37,7 @@ export const WishCardWrapper = styled.div`
       justify-content: space-between;
       align-self: flex-end;
       .wish-amount {
+        margin-right: 5px;
         width: 78px;
         height: 27px;
         background: ${Colors.green};
