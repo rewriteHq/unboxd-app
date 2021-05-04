@@ -92,7 +92,7 @@ const Home: React.FC<HomeComponentProps> = () => {
             )}
           </div>
           <GetStarted>
-            <BTNLink to="/register">Get Started</BTNLink>
+            <BTNLink to="/register">Sign up for early access</BTNLink>
           </GetStarted>
         </UnboxdCarousel>
       </div>

@@ -43,7 +43,7 @@ export const Image = Styled.img`
 export const UnboxdCarousel = Styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 2rem;
+  margin-top: 1rem;
   margin-left: -20px;
   margin-right: -20px;
   margin-bottom: -10px;
@@ -175,6 +175,7 @@ export const UnboxdCarousel = Styled.div`
   }
 
   @media (min-width: 780px) {
+    margin-top: 2rem;
     max-height: 65vh;
     
     .carousel-tab {
