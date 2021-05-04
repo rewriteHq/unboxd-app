@@ -26,6 +26,7 @@ const Logo = ({ size = 'md' }: LogoProps) => {
         appThemeContext?.theme === 'dark' ? '/logo-white.svg' : '/logo-dark.svg'
       }
       alt="unboxd logo"
+      className="ub-logo"
     />
   );
 };

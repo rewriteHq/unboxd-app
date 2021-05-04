@@ -7,4 +7,5 @@ export interface HeaderProps {
   showBack?: boolean;
   navItems?: Array<React.FC<any>>;
   isHome?: boolean;
+  hideWalletSection?: boolean;
 }
