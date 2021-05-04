@@ -57,4 +57,7 @@ export const WishCardWrapper = styled.div`
     width: 100%;
     min-width: 100%;
   }
+  @media (min-width: 768px) and (max-width: 770px) {
+    min-width: 355px;
+  }
 `;

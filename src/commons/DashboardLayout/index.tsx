@@ -14,7 +14,11 @@ import {
 import { LayoutProps } from './types';
 import { ReactComponent as PlusIcon } from '../../assets/img/icons/plus.svg';
 
-const DashboardLayout: React.FC<LayoutProps> = ({ children, isHome }) => {
+const DashboardLayout: React.FC<LayoutProps> = ({
+  children,
+  isHome,
+  hideWalletSection,
+}) => {
   return (
     <>
       <DashboardHeader></DashboardHeader>
@@ -22,18 +26,20 @@ const DashboardLayout: React.FC<LayoutProps> = ({ children, isHome }) => {
       <AppWrapper>
         <DashboardSidebar />
         <DashboardContent>
-          <DashboardWalletSection>
-            <UserProfile>
-              <div className="profile-img">
-                <img src="/assets/dp.jpg" alt="profile" />
-              </div>
-              <p>Hi, Taofeeqat</p>
-            </UserProfile>
-            <WalletBalance>
-              <span>Wallet Balance</span>
-              <p>NGN 150,000.00</p>
-            </WalletBalance>
-          </DashboardWalletSection>
+          {!hideWalletSection ? (
+            <DashboardWalletSection>
+              <UserProfile>
+                <div className="profile-img">
+                  <img src="/assets/dp.jpg" alt="profile" />
+                </div>
+                <p>Hi, Taofeeqat</p>
+              </UserProfile>
+              <WalletBalance>
+                <span>Wallet Balance</span>
+                <p>NGN 150,000.00</p>
+              </WalletBalance>
+            </DashboardWalletSection>
+          ) : null}
           {children}
         </DashboardContent>
         <UnboxdAddButton>
