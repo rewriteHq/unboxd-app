@@ -8,7 +8,9 @@ export const PageHeading = styled.h1<{ large?: boolean; centered?: boolean }>`
     props.large &&
     css`
       font-weight: 900;
-      font-size: 53px;
+      font-size: 40px;
+      padding: 0 4% 0.5rem;
+
       @media (min-width: 780px) {
         font-size: 62px;
       }
