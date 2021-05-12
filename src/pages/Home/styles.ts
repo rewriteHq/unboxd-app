@@ -22,6 +22,35 @@ export const Paragraph = Styled.p`
   }
 `;
 
+export const UnorderedList = Styled.ul`
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0;
+
+  li {
+    margin: 0.5rem;
+    display: flex;
+    align-items: center;
+
+    span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      margin-right: 1rem;
+      background: ${Colors.tintOrange};
+      color: ${Colors.burntOrange};
+    }
+  }
+
+  @media (min-width: 768px) {
+    width: 55%;
+    margin: 2rem auto 1rem;
+  }
+`;
+
 export const Image = Styled.img`
   width: 200px;
   height: 200px;
@@ -47,7 +76,7 @@ export const UnboxdCarousel = Styled.div`
   margin-left: -20px;
   margin-right: -20px;
   margin-bottom: -10px;
-  max-height: 58vh;
+  max-height: 45vh;
   position: relative;
   overflow: hidden;
 
@@ -111,16 +140,19 @@ export const UnboxdCarousel = Styled.div`
   .carousel {
     display: grid;
     grid-template-columns: repeat(3, 180px);
-    gap: 1rem;
+    gap: 1.15rem;
     justify-content: center;
     margin: 1rem 0 0;
+
+    &.start {
+      justify-content: flex-start;
+    }
 
     .card {
       display: flex;
       flex-direction: column;
       background: ${Colors.black};
-      border: 0.5px solid ${Colors.tintGrey};
-      border-radius: 5px;
+      border-radius: 15px;
       overflow: hidden;
 
       .img-holder {
@@ -175,8 +207,8 @@ export const UnboxdCarousel = Styled.div`
   }
 
   @media (min-width: 780px) {
-    margin-top: 2rem;
-    max-height: 65vh;
+    max-height: 45vh;
+    margin-top: 0;
     
     .carousel-tab {
       margin: 1rem 0;
@@ -201,6 +233,10 @@ export const UnboxdCarousel = Styled.div`
       grid-template-columns: repeat(3, 235px);
       gap: 1.15rem;
       margin-top: 2rem;
+
+      &.start {
+        justify-content: center;
+      }
 
       .card {
         .img-holder {
