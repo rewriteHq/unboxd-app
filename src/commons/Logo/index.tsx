@@ -15,6 +15,7 @@ type LogoProps = {
 
 const LogoStyle = styled.img<{ size: Size }>`
   width: ${({ size }) => LogoSizes[size]}px;
+  margin-top: 1rem;
 `;
 
 const Logo = ({ size = 'md' }: LogoProps) => {
