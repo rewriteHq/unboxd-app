@@ -57,6 +57,11 @@ body {
   color: $white;
 }
 
+body {
+  height: 100vh;
+  overflow: hidden;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -71,7 +76,7 @@ li {
 .container {
   display: flex;
   width: 100%;
-  padding: 10px 20px;
+  padding: 20px;
 }
 
 button {
