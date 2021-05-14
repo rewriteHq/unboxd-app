@@ -1,19 +1,30 @@
 import Styled from 'styled-components';
 import { button } from '../Button/styles';
 import Colors from '../../constants/Colors';
+import Effects from '../../constants/Effects';
 
 export const ModalWrapper = Styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
   display: flex;
   justify-content: center;
-  background: rgba(0,0,0,0.975);
   z-index: 5;
   padding: 2rem 1rem;
-  overflow: hidden;
+
+  &::before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: -1;
+    backdrop-filter: blur(${Effects.blur}px);
+  }
 
   .modal-container {
     display: flex;
