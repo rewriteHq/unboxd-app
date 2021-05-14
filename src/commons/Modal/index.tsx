@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { ModalWrapper } from './style';
 import MailchimpSubscribe from 'react-mailchimp-subscribe';
 
@@ -26,6 +27,13 @@ const CustomForm = ({ status, message, onValidated }: FormProps) => {
       EMAIL: email.value,
       NAME: name.value
     });
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      status === "success" && window.location.reload();
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, [status])
 
   return (
     <div className="form">
