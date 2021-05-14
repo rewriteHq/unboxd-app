@@ -164,6 +164,7 @@ export const UnboxdCarousel = Styled.div`
 
         img {
           width: 100%;
+          height: auto
         }
       }
 
@@ -267,7 +268,7 @@ export const UnboxdCarousel = Styled.div`
 
 export const GetStarted = Styled.div`
   position: absolute;
-  bottom: 3.5rem;
+  bottom: 7.5rem;
   display: flex;
   width: 100%;
   padding: 0 2rem;
