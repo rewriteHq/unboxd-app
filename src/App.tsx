@@ -6,7 +6,7 @@ const NotFound = lazy(() => import('./pages/NotFound'));
 
 function App() {
   return (
-    <Suspense fallback={() => <h1>Loading...</h1>}>
+    <Suspense fallback={<h1>Loading...</h1>}>
       <Router>
         <Switch>
           <Route exact path="/" component={HomePage} />
