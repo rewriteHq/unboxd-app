@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import AppWrapper from '../AppWrapper';
 import DashboardSidebar from '../DashboardSidebar';
 import DashboardHeader from './DashboardHeader';
@@ -13,12 +13,17 @@ import {
 } from './styles';
 import { LayoutProps } from './types';
 import { ReactComponent as PlusIcon } from '../../assets/img/icons/plus.svg';
+import { useSelector } from 'react-redux';
+import AppState from '../../typings';
 
 const DashboardLayout: React.FC<LayoutProps> = ({
   children,
   isHome,
   hideWalletSection,
 }) => {
+  const history = useHistory();
+  const { link } = useSelector((state: AppState) => state.beneficiary);
+
   return (
     <>
       <DashboardHeader></DashboardHeader>
@@ -44,7 +49,7 @@ const DashboardLayout: React.FC<LayoutProps> = ({
         </DashboardContent>
         <UnboxdAddButton>
           <div className="under-layer pulsate-fwd"></div>
-          <Link to="/" className="d-flex-center">
+          <Link to={link} className="d-flex-center">
             <PlusIcon />
           </Link>
         </UnboxdAddButton>

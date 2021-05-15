@@ -21,6 +21,9 @@ interface AppState {
   contributor: {
     event: EventState;
   };
+  beneficiary: {
+    link: string;
+  };
 }
 
 export interface Category {

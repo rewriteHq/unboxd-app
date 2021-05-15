@@ -4,7 +4,7 @@ import Fonts from '../../constants/Fonts';
 import Sizes from '../../constants/Sizes';
 
 export const DashboardContainer = styled.div`
-  padding: 0 20px;
+  margin-top: 30px;
   min-height: 75vh;
 `;
 
