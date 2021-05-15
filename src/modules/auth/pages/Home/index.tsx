@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { PageHeading } from '../../../../commons/Heading';
 import { HomeComponentProps } from './types';
 
 import Layout from '../../../../Layout';
 import { Paragraph, UnboxdCarousel, GetStarted } from './styles';
 import { BTNLink } from '../../../../components/Button/styles';
+
+const WishItem = lazy(() => import('../../../../components/WishItem'));
 
 const Home: React.FC<HomeComponentProps> = () => {
 
@@ -76,19 +78,7 @@ const Home: React.FC<HomeComponentProps> = () => {
           </div>
           <div className="carousel">
             {sample.map((item, index) =>
-              <div key={index} className="card">
-                <div className="img-holder">
-                  <img src={`/assets/card-img/${item.image}.png`} alt={item.name} />
-                </div>
-                <div className="card-content">
-                  <h3 className="name">{item.name}</h3>
-                  <p className="price">₦{item.price}</p>
-                  <div className="progress">
-                    <p className="amount-raised">₦{item.raised} raised</p>
-                    <div className="progress-circle"></div>
-                  </div>
-                </div>
-              </div>
+              <WishItem key={index} image={item.image} name={item.name} price={item.price} raised={item.raised} />
             )}
           </div>
           <GetStarted>
