@@ -156,14 +156,14 @@ export const UnboxdCarousel = Styled.div`
       overflow: hidden;
 
       .img-holder {
-        width: 100%;
+        width: 180px;
         height: 166px;
         overflow: hidden;
         position: relative;
         top: -1px;
 
         img {
-          width: 100%;
+          width: 180px;
           height: auto
         }
       }
@@ -241,7 +241,12 @@ export const UnboxdCarousel = Styled.div`
 
       .card {
         .img-holder {
+          width: 235px;
           height: 200px;
+
+          img {
+            width: 235px;
+          }
         }
 
         .card-content {
