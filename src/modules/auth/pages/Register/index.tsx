@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { IRegisterState } from './types';
-import { Form, FooterText } from './styles';
+import { Form } from './styles';
 import Input from '../../../../components/Input';
 import Layout from '../../../../Layout';
 import Button from '../../../../components/Button';
