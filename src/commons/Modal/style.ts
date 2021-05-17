@@ -56,6 +56,7 @@ export const ModalWrapper = Styled.div`
         input {
           color: ${Colors.white};
           padding-bottom: 0.5rem;
+          font-size: 16px;
         }
       }
 
