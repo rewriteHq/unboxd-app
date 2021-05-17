@@ -17,8 +17,6 @@ const Home: React.FC<HomeComponentProps> = () => {
     "Receive part or full contributions"
   ]
 
-  const sample = ["ps4", "ipad", "camera", "sneakers", "throwpillows", "workspacechairs"]
-
   const toggleModal = () => setOpenModal(!openModal);
 
   return (
@@ -33,24 +31,8 @@ const Home: React.FC<HomeComponentProps> = () => {
         </UnorderedList>
 
         <UnboxdCarousel>
-          <div className="carousel">
-            {sample.slice(0, 3).map((item, index) =>
-              <div key={index} className="card">
-                <div className="img-holder">
-                  <img src={`/assets/card-img/${item}.png`} alt={item} />
-                </div>
-              </div>
-            )}
-          </div>
-          <div className="carousel start">
-            {sample.slice(3).map((item, index) =>
-              <div key={index} className="card">
-                <div className="img-holder">
-                  <img src={`/assets/card-img/${item}.png`} alt={item} />
-                </div>
-              </div>
-            )}
-          </div>
+          <div className="carousel"></div>
+          <div className="bottom-overlay"></div>
           <GetStarted>
             <BTN onClick={toggleModal}>Sign up for early access</BTN>
           </GetStarted>
