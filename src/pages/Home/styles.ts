@@ -1,6 +1,8 @@
 import Styled from 'styled-components';
 import { HeadWrapper } from '../../commons/Header/styles';
 import Colors from '../../constants/Colors';
+import Image from '../../assets/img/unboxd-banner-lg.png';
+import SmImage from '../../assets/img/unboxd-banner-sm.png';
 
 export const HomeHeader = Styled(HeadWrapper)`
 padding: 3rem 0;
@@ -51,24 +53,6 @@ export const UnorderedList = Styled.ul`
   }
 `;
 
-export const Image = Styled.img`
-  width: 200px;
-  height: 200px;
-  margin: 2rem auto;
-  position: relative;
-
-  &::before {
-    content: ' ';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 80%;
-    height: 80%;
-    background: linear-gradient(240.57deg, #B2FA28 -0.36%, #ddd 98.42%);
-    z-index: 10;
-  }
-`;
-
 export const UnboxdCarousel = Styled.div`
   display: flex;
   flex-direction: column;
@@ -80,8 +64,38 @@ export const UnboxdCarousel = Styled.div`
   position: relative;
   overflow: hidden;
 
-  &::before {
+  &::before, &::after {
     content: '';
+    position: absolute;
+    width: 20%;
+    height: 100%;
+    top: 0;
+    z-index: 1;
+  }
+
+  &::before {
+    left: -1px;
+    background: linear-gradient(to right, rgba(34, 36, 44, 1), rgba(34, 36, 44, 0));
+  }
+
+  &::after {
+    right: -1px;
+    background: linear-gradient(to left, rgba(34, 36, 44, 1), rgba(34, 36, 44, 0));
+  }
+
+  .carousel {
+    display: flex;
+    height: 330px;
+    background-size: 650px;
+    background-repeat: repeat-x;
+    background-position: top center;
+    background-image: url(${SmImage});
+    width: 4800px;
+    -webkit-animation: scroll-grid 180s linear infinite;
+    animation: scroll-grid 180s linear infinite;
+  }
+
+  .bottom-overlay {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -91,182 +105,40 @@ export const UnboxdCarousel = Styled.div`
     z-index: 2;
   }
 
-  .carousel-tab {
-    margin: 0.5rem 0;
-
-    ul {
-      display: flex;
-      width: 100%;
-      overflow: hidden;
-      justify-content: center;
-      position: relative;
-
-      &::before, &::after {
-        content: '';
-        position: absolute;
-        width: 15%;
-        height: 100%;
-        top: 0;
-      }
-
-      &::before {
-        left: 0;
-        background: linear-gradient(to right, rgba(34, 36, 44, 0.8), rgba(34, 36, 44, 0.1));
-      }
-
-      &::after {
-        right: 0;
-        background: linear-gradient(to left, rgba(34, 36, 44, 0.8), rgba(34, 36, 44, 0.1));
-      }
-
-      .list-item {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 0 0.5rem;
-        white-space: nowrap;
-        color: ${Colors.tintOrange};
-
-        &.active {
-          background: ${Colors.tintOrange};
-          color: ${Colors.burntOrange};
-          padding: 5px 10px;
-          border-radius: 7.5px;
-        }
-      }
-    }
-  }
-
-  .carousel {
-    display: grid;
-    grid-template-columns: repeat(3, 180px);
-    gap: 1.15rem;
-    justify-content: center;
-    margin: 1rem 0 0;
-
-    &.start {
-      justify-content: flex-start;
-    }
-
-    .card {
-      display: flex;
-      flex-direction: column;
-      background: ${Colors.black};
-      border-radius: 15px;
-      overflow: hidden;
-
-      .img-holder {
-        width: 180px;
-        height: 166px;
-        overflow: hidden;
-        position: relative;
-        top: -1px;
-
-        img {
-          width: 180px;
-          height: auto
-        }
-      }
-
-      .card-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 1rem;
-
-        .name {
-          font-size: 14px;
-          font-weight: 100;
-          padding-bottom: 0.25rem;
-        }
-
-        .price {
-          font-size: 16px;
-        }
-
-        .progress {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          width: 100%;
-          margin-top: 1rem;
-
-          .amount-raised {
-            font-size: 12px;
-            font-weight: 300;
-          }
-
-          .progress-circle {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background: ${Colors.tintOrange};
-          }
-        }
-      }
-    }
-  }
-
   @media (min-width: 780px) {
     max-height: 45vh;
     margin-top: 0;
-    
-    .carousel-tab {
-      margin: 1rem 0;
-
-      ul {
-        &::before, &::after {
-          content: '';
-          position: absolute;
-          width: 31%;
-          height: 100%;
-          top: 0;
-        }
-
-        .list-item {
-          font-size: 18px;
-          margin: 0 0.95rem;
-        }
-      }
-    }
 
     .carousel {
-      grid-template-columns: repeat(3, 235px);
-      gap: 1.15rem;
+      height: 500px;
+      background-size: 2420px;
+      width: 5260px;
       margin-top: 2rem;
+      background-image: url(${Image});
+    }
+  }
 
-      &.start {
-        justify-content: center;
-      }
+  @-webkit-keyframes scroll-grid {
+    0% {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform:translate3d(0, 0, 0)
+    }
 
-      .card {
-        .img-holder {
-          width: 235px;
-          height: 200px;
+    100% {
+        -webkit-transform: translate3d(-2420px, 0, 0);
+        transform:translate3d(-2420px, 0, 0)
+    }
+  }
 
-          img {
-            width: 235px;
-          }
-        }
+  @keyframes scroll-grid {
+    0% {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform:translate3d(0, 0, 0)
+    }
 
-        .card-content {
-          padding: 1.5rem; 
-
-          .name {
-            font-size: 20px
-          }
-
-          .price {
-            font-size: 24px
-          }
-
-          .progress {
-            .amount-raised {
-              font-size: 15px;
-            }
-          }
-        }
-      }
+    100% {
+        -webkit-transform: translate3d(-2420px, 0, 0);
+        transform:translate3d(-2420px, 0, 0)
     }
   }
 `;
