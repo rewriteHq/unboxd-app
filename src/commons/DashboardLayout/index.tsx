@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import AppWrapper from '../AppWrapper';
 import DashboardSidebar from '../DashboardSidebar';
 import DashboardHeader from './DashboardHeader';
@@ -21,7 +21,6 @@ const DashboardLayout: React.FC<LayoutProps> = ({
   isHome,
   hideWalletSection,
 }) => {
-  const history = useHistory();
   const { link } = useSelector((state: AppState) => state.beneficiary);
 
   return (
