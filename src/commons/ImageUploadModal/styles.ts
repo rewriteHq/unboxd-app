@@ -8,7 +8,7 @@ export const FileInput = styled.input`
 
 const buttonstyle = css`
   ${button};
-  background-color: ${Colors.white};
+  background-color: ${Colors.green};
   margin: 1rem 0 0.5rem;
 `;
 
@@ -23,7 +23,7 @@ export const Button = styled.button`
 export const PhotoGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  gap: 10px;
   margin: 10px 0;
 `;
 

@@ -1,29 +1,26 @@
 import { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { useLocation, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
-import { differenceInDays } from 'date-fns';
+// import { differenceInDays } from 'date-fns';
 
 import DashboardLayout from '../../../../commons/DashboardLayout';
 import { DashboardContainer } from '../../../../commons/DashboardLayout/styles';
-import GiftCard from '../../../../commons/GiftCard';
 import AppState, { WishList } from '../../../../typings';
 import * as actions from './redux/actions';
 import {
-  AddIcon,
-  AddItem,
-  CountDown,
-  CoverImage,
-  EventCard,
-  EventCardContent,
-  GiftList,
-  HeadlineText,
+  CopyLink,
   NeedText,
-  ShareBox,
+  WishItemsWrapper,
+  // ShareBox,
+  WishlistHeader,
+  WishlistHeaderEventDetails,
 } from './styles';
 import ExplainerModal from './components/ExplainerModal';
-import { PlainButton } from '../../../../components/Button/styles';
-import ShareEventModal from '../../../../commons/ShareModal';
+// import { PlainButton } from '../../../../components/Button/styles';
+// import ShareEventModal from '../../../../commons/ShareModal';
+import { setGlobalButtoLink } from '../../redux/actions';
+import GiftCard from './components/GiftCard';
 
 type ParamTypes = {
   id: string;
@@ -45,7 +42,9 @@ const Event = ({ list, getWishlist }: ComponentProps) => {
     show: state && state.showIntro,
     active: 0,
   });
-  const [shareModal, setShareModal] = useState(false);
+
+  const dispatch = useDispatch();
+  const [, setShareModal] = useState(false);
   const toggleShareModal = () => setShareModal((prev) => !prev);
 
   const navItems = [
@@ -70,40 +69,62 @@ const Event = ({ list, getWishlist }: ComponentProps) => {
 
   const closeExplainer = () => setExplainer({ active: 0, show: false });
 
-  const daysLeft = list ? differenceInDays(new Date(), new Date(list.date)) : 1;
+  // const daysLeft = list ? differenceInDays(new Date(), new Date(list.date)) : 1;
 
-  return list ? (
+  useEffect(() => {
+    dispatch(setGlobalButtoLink(`/event/add-gift/${id}`));
+  }, [id, dispatch]);
+
+  return (
     <>
       <DashboardLayout pageTitle="" navItems={navItems} showBack>
         <DashboardContainer>
-          <EventCard>
-            <CoverImage src={list.coverImage} alt={list.title} />
-            <EventCardContent>
-              <HeadlineText>
-                <h2>{list.title}</h2>
-              </HeadlineText>
-              <CountDown>
-                <span>
-                  {daysLeft} {daysLeft > 1 ? 'days ' : 'day'} left
-                </span>
-              </CountDown>
-            </EventCardContent>
-          </EventCard>
-          <ShareBox>
-            <p className="url">{`${process.env.REACT_APP_DOMAIN_NAME}${list.slug}`}</p>
-            <PlainButton className="share-button" onClick={toggleShareModal}>
-              share
-            </PlainButton>
-          </ShareBox>
-          <NeedText>Your wishes &#40;{list.gifts.length}&#41;</NeedText>
-          <GiftList>
-            {list.gifts.map((gift) => (
-              <GiftCard gift={gift} key={gift._id} />
-            ))}
-          </GiftList>
-          <AddItem to={`/event/add-gift/${id}`}>
-            <AddIcon />
-          </AddItem>
+          <WishlistHeader>
+            <div className="list-header-content">
+              <CopyLink>
+                <p>unboxd.com/taofeeqat30th</p>
+                <span className="copy">copy</span>
+              </CopyLink>
+              <WishlistHeaderEventDetails>
+                <h2>Make my birthday fabulous</h2>
+                <span className="days">28 days left</span>
+              </WishlistHeaderEventDetails>
+            </div>
+            <img src="/assets/rectangle-175.png" alt="event" />
+          </WishlistHeader>
+          <NeedText>Your wishes &#40;{50}&#41;</NeedText>
+          <WishItemsWrapper>
+            <GiftCard
+              image="/assets/rectangle-175.png"
+              name="PS4 Controller"
+              price="23000"
+              raised="300"
+            />
+            <GiftCard
+              image="/assets/rectangle-175.png"
+              name="PS4 Controller"
+              price="23000"
+              raised="300"
+            />
+            <GiftCard
+              image="/assets/rectangle-175.png"
+              name="PS4 Controller"
+              price="23000"
+              raised="300"
+            />
+            <GiftCard
+              image="/assets/rectangle-175.png"
+              name="PS4 Controller"
+              price="23000"
+              raised="300"
+            />
+            <GiftCard
+              image="/assets/rectangle-175.png"
+              name="PS4 Controller"
+              price="23000"
+              raised="300"
+            />
+          </WishItemsWrapper>
         </DashboardContainer>
       </DashboardLayout>
       {explainer.show && (
@@ -114,13 +135,13 @@ const Event = ({ list, getWishlist }: ComponentProps) => {
         />
       )}
 
-      <ShareEventModal
+      {/* <ShareEventModal
         show={shareModal}
         close={toggleShareModal}
-        wishlist={list}
-      />
+        wishlist={[]}
+      /> */}
     </>
-  ) : null;
+  );
 };
 
 const mapStateToProps = (state: AppState) => {
