@@ -14,8 +14,19 @@ const headlineFont = css`
 
 export const ImageHolder = styled(BTN)`
   height: 30vh;
-  background: ${Colors.grey};
-  border-radius: 5px;
+  background: ${(props) => props.theme.appSecondaryColor};
+  border-radius: 10px;
+  border: 1px solid #4a4a4a;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  text-decoration: underline;
+  overflow: hidden;
+  svg {
+    margin-bottom: 20px;
+  }
 `;
 
 export const EventCard = styled.div`
@@ -72,8 +83,8 @@ export const WishlistHeader = styled.div`
 `;
 
 export const CopyLink = styled.div`
-  min-width: 335px;
-  max-width: 335px;
+  min-width: 93.7%;
+  max-width: fit-content;
   background: ${(props) => props.theme.appSecondaryColor};
   color: ${Colors.yellow};
   height: 53px;
@@ -108,6 +119,10 @@ export const CopyLink = styled.div`
   .copy {
     color: #80ba7c;
   }
+  @media (min-width: 767px) {
+    min-width: 335px;
+    max-width: 335px;
+  }
 `;
 
 export const WishlistHeaderEventDetails = styled.div`
@@ -129,6 +144,9 @@ export const CoverImage = styled.img`
   height: 25vh;
   width: 100%;
   object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #4a4a4a;
 `;
 
 export const CountDown = styled.div`
@@ -143,7 +161,6 @@ export const CountDown = styled.div`
 export const HeadlineInput = styled.textarea`
   border: none;
   background: transparent;
-  padding: 1rem 0;
   width: 100%;
   color: ${Colors.white};
   ${headlineFont}
@@ -300,4 +317,17 @@ export const ExplainerButton = styled.button`
   background: transparent;
   text-decoration: underline;
   font-size: 1rem;
+`;
+
+export const WishItemsWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20px auto;
+  justify-content: space-between;
+`;
+
+export const DatePickerWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
 `;

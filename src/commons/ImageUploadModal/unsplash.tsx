@@ -24,8 +24,16 @@ const UnsplashModal = ({ show, selectImage, close }: ModalComponentProps) => {
           orientation: 'landscape',
           perPage: +process.env.REACT_APP_UNSPLASH_PER_PAGE! as number,
         })
-        .then((result) => setPhotos(result.response!.results))
-        .catch((err) => Notify.bottom(err.errors[0]));
+        .then((result) => {
+          if (result.response) {
+            setPhotos(result.response!.results);
+          } else if (result.status === 401) {
+            Notify.bottom('An error occured. Kindly try again later');
+          }
+        })
+        .catch((err) => {
+          Notify.bottom(err.message);
+        });
     };
 
     if (query) {

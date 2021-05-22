@@ -11,6 +11,7 @@ import * as actions from './redux/actions';
 import {
   CopyLink,
   NeedText,
+  WishItemsWrapper,
   // ShareBox,
   WishlistHeader,
   WishlistHeaderEventDetails,
@@ -19,6 +20,7 @@ import ExplainerModal from './components/ExplainerModal';
 // import { PlainButton } from '../../../../components/Button/styles';
 // import ShareEventModal from '../../../../commons/ShareModal';
 import { setGlobalButtoLink } from '../../redux/actions';
+import GiftCard from './components/GiftCard';
 
 type ParamTypes = {
   id: string;
@@ -91,6 +93,38 @@ const Event = ({ list, getWishlist }: ComponentProps) => {
             <img src="/assets/rectangle-175.png" alt="event" />
           </WishlistHeader>
           <NeedText>Your wishes &#40;{50}&#41;</NeedText>
+          <WishItemsWrapper>
+            <GiftCard
+              image="/assets/rectangle-175.png"
+              name="PS4 Controller"
+              price="23000"
+              raised="300"
+            />
+            <GiftCard
+              image="/assets/rectangle-175.png"
+              name="PS4 Controller"
+              price="23000"
+              raised="300"
+            />
+            <GiftCard
+              image="/assets/rectangle-175.png"
+              name="PS4 Controller"
+              price="23000"
+              raised="300"
+            />
+            <GiftCard
+              image="/assets/rectangle-175.png"
+              name="PS4 Controller"
+              price="23000"
+              raised="300"
+            />
+            <GiftCard
+              image="/assets/rectangle-175.png"
+              name="PS4 Controller"
+              price="23000"
+              raised="300"
+            />
+          </WishItemsWrapper>
         </DashboardContainer>
       </DashboardLayout>
       {explainer.show && (

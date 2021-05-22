@@ -12,10 +12,22 @@ import { PlainButton } from '../../../../../components/Button/styles';
 import Input from '../../../../../components/Input';
 import { Category } from '../../../../../typings';
 import { createOrEditEvent } from '../service';
-import { CoverImage, HeadlineInput, ImageHolder } from '../styles';
+import {
+  CoverImage,
+  DatePickerWrapper,
+  HeadlineInput,
+  ImageHolder,
+} from '../styles';
 import { EventFormProps, EventParamsType } from '../types';
 import CategoriesModal from './CategoriesModal';
 import HeadlinesModal from './HeadlinesModal';
+import { ReactComponent as LogoEmblem } from '../../../../../assets/img/logo/logo_emblem.svg';
+import Select from '../../../../../components/Select';
+import {
+  generateYears,
+  months,
+  getDaysInMonth,
+} from '../../../../../utils/date';
 
 enum ModalsIndex {
   NONE = 0,
@@ -43,6 +55,11 @@ const EventForm = ({
     headline: '',
     date: '',
     note: '',
+  });
+  const [date, setDate] = useState({
+    day: new Date().getDay(),
+    month: new Date().getMonth(),
+    year: new Date().getFullYear(),
   });
 
   const { id } = useParams<EventParamsType>();
@@ -108,7 +125,7 @@ const EventForm = ({
       categoryID: category && category._id,
       coverImage: file,
       description: data.note,
-      date: data.date,
+      date: `${date.year}-${date.month}-${date.day}`,
       slug: slugify(data.headline, {
         replacement: '-',
         lower: true,
@@ -133,6 +150,16 @@ const EventForm = ({
     history.push(nextUrl);
   };
 
+  const handleYearSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setDate((prev) => ({ ...prev, year: parseInt(e.target.value) }));
+  };
+  const handleMonthSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setDate((prev) => ({ ...prev, month: parseInt(e.target.value) }));
+  };
+  const handleDaySelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setDate((prev) => ({ ...prev, day: parseInt(e.target.value) }));
+  };
+
   return (
     <>
       <DashboardLayout
@@ -148,6 +175,7 @@ const EventForm = ({
             />
           ) : (
             <ImageHolder onClick={() => setModal(ModalsIndex.IMAGE)}>
+              <LogoEmblem />
               Choose cover image
             </ImageHolder>
           )}
@@ -160,17 +188,41 @@ const EventForm = ({
               onChange={handleChange}
             />
             {!data.headline && (
-              <PlainButton onClick={() => setModal(ModalsIndex.CATEGORY)}>
+              <PlainButton
+                onClick={() => setModal(ModalsIndex.CATEGORY)}
+                style={{ padding: 0, paddingTop: '5px' }}
+              >
                 See examples
               </PlainButton>
             )}
           </SpaceBetween>
-          <Input
-            type="date"
-            name="date"
-            value={data.date}
-            onChange={handleChange}
-          />
+          <p className="tiny-section-header">When is it happening?</p>
+          <DatePickerWrapper>
+            <Select
+              id="year"
+              items={generateYears(new Date(), 10)}
+              label="Year"
+              handleChange={handleYearSelect}
+              required
+            />
+            <Select
+              id="months"
+              items={months}
+              label="Month"
+              handleChange={handleMonthSelect}
+              required
+            />
+            <Select
+              id="day"
+              items={getDaysInMonth(
+                new Date().getMonth(),
+                new Date().getFullYear()
+              )}
+              label="Day"
+              handleChange={handleDaySelect}
+              required
+            />
+          </DatePickerWrapper>
           <Input
             type="text"
             name="note"

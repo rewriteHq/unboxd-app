@@ -6,6 +6,10 @@ import Sizes from '../../constants/Sizes';
 export const DashboardContainer = styled.div`
   margin-top: 30px;
   min-height: 75vh;
+  .tiny-section-header {
+    margin: 15px 0;
+    font-size: 12px;
+  }
 `;
 
 export const NavItem = styled.li`

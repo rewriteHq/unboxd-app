@@ -19,7 +19,7 @@ const App: React.FC<ComponentProps> = ({ checkAuthenticated }) => {
     }
   `;
   checkAuthenticated();
-  console.log(appThemeContext?.theme);
+
   return (
     <Suspense fallback={() => <h1>Loading...</h1>}>
       <ThemeProvider theme={appThemes[appThemeContext?.theme!]}>
