@@ -11,6 +11,20 @@ export const SpaceBetween = styled.div<{ align?: string }>`
   }
   @media (max-width: 767px) {
     flex-direction: column;
+    * {
+      width: 100%;
+    }
+  }
+`;
+
+export const SpaceBetweenHeader = styled.div<{ align?: string }>`
+  display: flex;
+  justify-content: space-between;
+  align-items: ${({ align }) => align || 'flex-start'};
+  h2 {
+    color: #ffffff;
+    opacity: 0.8;
+    font-size: 25px;
   }
 `;
 
