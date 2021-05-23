@@ -9,6 +9,9 @@ export const SpaceBetween = styled.div<{ align?: string }>`
     opacity: 0.8;
     font-size: 25px;
   }
+  @media (max-width: 767px) {
+    flex-direction: column;
+  }
 `;
 
 export const Flex = styled.div`

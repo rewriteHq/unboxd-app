@@ -12,4 +12,7 @@ export interface InputComponentProps
   placeholder?: string;
   onChange?: (arg: any) => void;
   onFocus?: (arg: any) => void;
+  showCallToAction?: boolean;
+  callToAction?: React.FC;
+  isPassword?: boolean;
 }
