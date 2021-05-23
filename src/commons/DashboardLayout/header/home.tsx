@@ -4,6 +4,7 @@ import Logo from '../../../components/Logo';
 import Bell from '../../icons/Bell';
 import Wallet from '../../icons/Wallet';
 import Sidebar from '../../Sidebar';
+import { SpaceBetweenHeader } from '../../UtilityStyles/Flex';
 import { Hamburger, HeaderLeft, HeaderRight } from './styles';
 
 const Home = () => {
@@ -14,21 +15,25 @@ const Home = () => {
   return (
     <>
       <HeaderLeft>
-        <Hamburger onClick={toggleSidebar} className="marg-r">
-          <span className="ham-line"></span>
-          <span className="ham-line"></span>
-          <span className="ham-line"></span>
-        </Hamburger>
-        <Logo size="sm" />
+        <SpaceBetweenHeader align="center">
+          <Hamburger onClick={toggleSidebar} className="marg-r">
+            <span className="ham-line"></span>
+            <span className="ham-line"></span>
+            <span className="ham-line"></span>
+          </Hamburger>
+          <Logo size="sm" />
+        </SpaceBetweenHeader>
       </HeaderLeft>
 
       <HeaderRight>
-        <Link to="/wallet" className="marg-r">
-          <Wallet />
-        </Link>
-        <Link to="/notifications" className="marg-r">
-          <Bell />
-        </Link>
+        <SpaceBetweenHeader align="center">
+          <Link to="/wallet" className="marg-r">
+            <Wallet />
+          </Link>
+          <Link to="/notifications" className="marg-r">
+            <Bell />
+          </Link>
+        </SpaceBetweenHeader>
       </HeaderRight>
       <Sidebar show={showSidebar} onClose={toggleSidebar} />
     </>

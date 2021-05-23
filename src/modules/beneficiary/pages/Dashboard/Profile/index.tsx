@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import toast from 'react-hot-toast';
 import DashboardLayout from '../../../../../commons/DashboardLayout';
 import { SpaceBetween } from '../../../../../commons/UtilityStyles/Flex';
 import Button from '../../../../../components/Button';
 import Input from '../../../../../components/Input';
 import EditProfileImage from '../components/EditProfileImage';
+import { ContentWrapper } from '../styles';
 
 const Profile: React.FC<any> = () => {
   const [profileImage, setProfileImage] = useState<{
@@ -33,8 +33,6 @@ const Profile: React.FC<any> = () => {
     }
   };
 
-  console.log(profileImage);
-
   return (
     <DashboardLayout>
       <ContentWrapper>
@@ -55,13 +53,5 @@ const Profile: React.FC<any> = () => {
     </DashboardLayout>
   );
 };
-
-const ContentWrapper = styled.div`
-  margin-top: 2rem;
-  @media (min-width: 768px) {
-    width: 60%;
-    margin: 2rem auto;
-  }
-`;
 
 export default Profile;
