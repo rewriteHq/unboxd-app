@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import AppWrapper from '../AppWrapper';
 import DashboardSidebar from '../DashboardSidebar';
@@ -13,15 +13,25 @@ import {
 } from './styles';
 import { LayoutProps } from './types';
 import { ReactComponent as PlusIcon } from '../../assets/img/icons/plus.svg';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import AppState from '../../typings';
+import { GlobalStoreState } from '../../store/types';
+import { getUserData } from '../../modules/auth/pages/Login/redux/actions';
 
 const DashboardLayout: React.FC<LayoutProps> = ({
   children,
   isHome,
   hideWalletSection,
 }) => {
+  const dispatch = useDispatch();
   const { link } = useSelector((state: AppState) => state.beneficiary);
+  const { credentials } = useSelector((state: GlobalStoreState) => state.user);
+
+  useEffect(() => {
+    if (!credentials) {
+      dispatch(getUserData());
+    }
+  }, [credentials, dispatch]);
 
   return (
     <>
@@ -36,7 +46,7 @@ const DashboardLayout: React.FC<LayoutProps> = ({
                 <div className="profile-img">
                   <img src="/assets/dp.jpg" alt="profile" />
                 </div>
-                <p>Hi, Taofeeqat</p>
+                <p>Hi, {credentials?.username || credentials?.firstname}</p>
               </UserProfile>
               <WalletBalance>
                 <span>Wallet Balance</span>
