@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
 import {
   AuthDescriptionFooter,
   AuthDescriptionHeader,
@@ -13,7 +13,7 @@ import Button from '../../../../components/Button';
 import Input from '../../../../components/Input';
 import Layout from '../../../../Layout';
 import { loginUser } from './redux/actions';
-import { SpaceBetween } from '../../../../commons/UtilityStyles/Flex';
+import { SpaceBetweenHeader } from '../../../../commons/UtilityStyles/Flex';
 import { Auth } from '../../../../components/Header/styles';
 import SocialAuth from '../../../../components/SocialAuth';
 import { ReactComponent as GoogleIcon } from '../../../../assets/img/illustrations/google.svg';
@@ -23,8 +23,13 @@ import Logo from '../../../../components/Logo';
 import Header from '../../pages/Home/header';
 import { ReactComponent as LargeHeart } from '../../../../assets/img/illustrations/heart-large.svg';
 import { ReactComponent as SmallHeart } from '../../../../assets/img/illustrations/heart-small.svg';
+import { GlobalStoreState } from '../../../../store/types';
 
-const Login = (props: any) => {
+const Login = () => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const { loading } = useSelector((state: GlobalStoreState) => state.user);
+
   const [values, setValues] = useState({
     email: '',
     password: '',
@@ -38,8 +43,6 @@ const Login = (props: any) => {
     }));
   };
 
-  useEffect(() => {});
-
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
@@ -49,8 +52,7 @@ const Login = (props: any) => {
       email: values.email,
       password: values.password,
     };
-
-    await props.loginHandler(userData, props.history);
+    await dispatch(loginUser(userData, history));
   };
 
   return (
@@ -77,12 +79,12 @@ const Login = (props: any) => {
       <Layout>
         <Main>
           <div className="container">
-            <SpaceBetween align="center">
+            <SpaceBetweenHeader align="center">
               <h2>Sign in</h2>
               <Auth>
                 New here? <Link to="/register">Sign up</Link>
               </Auth>
-            </SpaceBetween>
+            </SpaceBetweenHeader>
             <Form onSubmit={handleSubmit}>
               <Input
                 label="Email address"
@@ -90,6 +92,7 @@ const Login = (props: any) => {
                 name="email"
                 id="email"
                 onChange={handleChange}
+                disabled={loading}
               />
               <Input
                 label="Password"
@@ -97,8 +100,11 @@ const Login = (props: any) => {
                 name="password"
                 id="password"
                 onChange={handleChange}
+                disabled={loading}
               />
-              <Button type="submit">Sign in</Button>
+              <Button type="submit" loading={loading}>
+                Sign in
+              </Button>
             </Form>
             <SocialAuth
               options={[
@@ -126,14 +132,4 @@ const Login = (props: any) => {
   );
 };
 
-const mapStateToProps = (state: any) => ({
-  user: state.user,
-  loading: state.user.loading,
-});
-
-const mapDispatchToProps = (dispatch: any) => ({
-  loginHandler: async (payload: any, history: any) =>
-    dispatch(loginUser(payload, history)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default Login;

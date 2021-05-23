@@ -10,7 +10,7 @@ import {
 
 const initialState = {
   authenticated: false,
-  credentials: {},
+  credentials: null,
   loading: false,
   errors: null,
 };
@@ -21,14 +21,16 @@ function reducer(state = initialState, action: any) {
       return {
         ...state,
         authenticated: true,
+        loading: false,
       };
     case SET_UNAUTHENTICATED:
       return initialState;
     case SET_USER:
       return {
+        ...state,
         authenticated: true,
         loading: false,
-        ...action.payload,
+        credentials: action.payload,
       };
     case LOADING_USER:
       return {
