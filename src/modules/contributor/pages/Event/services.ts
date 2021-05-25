@@ -23,3 +23,16 @@ export const getWishlistById = async (id: string) => {
     return handleRequestError(err);
   }
 };
+
+
+export const getGift = async (id: string) => {
+  const url = '/gift';
+
+  try {
+    const response = await API.get(`${url}/${id}`);
+
+    return [null, response.data.payload];
+  } catch (err) {
+    return handleRequestError(err);
+  }
+};
