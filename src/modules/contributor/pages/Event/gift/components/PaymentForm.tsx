@@ -13,6 +13,7 @@ import { getPaymentReference } from '../services';
 import { SuggestWrapper } from '../styles';
 import ThankYouModal from './ThankYouModal';
 import PrePaymentModal from './PrePayment';
+import { addUnboxdFee } from '../../../../../../utils/price';
 
 export interface EventData extends WishList {
   giftId: string;
@@ -37,7 +38,7 @@ const PaymentForm = ({ price, eventData, setLoading }: ComponentProps) => {
   const [next, setNext] = useState<boolean>(false);
 
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, name, checked } = e.target;
+    const { value, name } = e.target;
     if(e.target.name === "anonymous") {
       if(e.target.checked) {
         setData((prev) => ({...prev, anonymous: true}))
@@ -61,7 +62,7 @@ const PaymentForm = ({ price, eventData, setLoading }: ComponentProps) => {
     e.preventDefault();
     setNext(true);
   }
-  
+
   const handleClose = () => setNext(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -78,7 +79,7 @@ const PaymentForm = ({ price, eventData, setLoading }: ComponentProps) => {
     }
 
     const payload = {
-      amount: +amount,
+      amount: addUnboxdFee(+amount, +process.env.REACT_APP_UNBOXD_CHARGE!),
       email,
       listId: eventData._id,
       giftId: eventData.giftId,
@@ -132,7 +133,7 @@ const PaymentForm = ({ price, eventData, setLoading }: ComponentProps) => {
 
       {reference && (
         <PayWithFlutterwave
-          amount={+data.amount}
+          amount={addUnboxdFee(+data.amount, +process.env.REACT_APP_UNBOXD_CHARGE!)}
           email={data.email}
           event={eventData.title}
           reference={reference}

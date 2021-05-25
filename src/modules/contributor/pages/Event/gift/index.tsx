@@ -67,7 +67,7 @@ const Gift = () => {
     }
   }, [dispatch, slug]);
 
-  const daysLeft = wishlist ? differenceInDays(new Date(), new Date(wishlist.date)) : 1;
+  const daysLeft = wishlist ? differenceInDays(new Date(wishlist.date), new Date()) : 1;
   const percentageRaised = gift ? Math.round((gift.paid / gift.cost) * 100) : 0;
 
   const openGift = useCallback(

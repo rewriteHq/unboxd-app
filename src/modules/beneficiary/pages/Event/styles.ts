@@ -144,7 +144,6 @@ export const CoverImage = styled.img`
   height: 25vh;
   width: 100%;
   object-fit: cover;
-  object-position: top;
   border-radius: 10px;
   margin-bottom: 10px;
   border: 1px solid #4a4a4a;

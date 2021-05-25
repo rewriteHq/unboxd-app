@@ -10,3 +10,15 @@ export const GiftList = styled.div`
     grid-template-columns: repeat(4, 1fr);
   }
 `;
+
+export const EventCardContent = styled.div`
+  display: flex;
+  width: 100%;
+  position: absolute;
+  bottom: 20px;
+  left: 0px;
+  padding: 0 10px;
+  justify-content: space-between;
+  align-items: flex-end;
+  z-index: 3;
+`;

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router';
 import GiftCard from '../../../../components/GiftCard';
 import ContributorLayout from '../../../../commons/ContributorLayout';
-import AppState, { WishList } from '../../../../typings';
+import AppState from '../../../../typings';
 import { getWishlistBySlug } from './redux/actions';
 import {
   CountDown,
@@ -13,10 +13,10 @@ import {
   CoverImage,
   HeadlineText,
   NeedText,
-  EventCardContent,
 } from '../../../beneficiary/pages/Event/styles';
-import { GiftList } from './styles';
+import { GiftList, EventCardContent } from './styles';
 import WelcomeModal from './components/WelcomeModal';
+import Skeleton from 'react-loading-skeleton';
 
 type ParamTypes = {
   slug: string;
@@ -56,7 +56,7 @@ const Event = () => {
     })();
   }, [slug, dispatch, wishlist]);
 
-  const daysLeft = wishlist ? differenceInDays(new Date(), new Date(wishlist.date)) : 1;
+  const daysLeft = wishlist ? differenceInDays(new Date(wishlist.date), new Date()) : 1;
 
   const openGift = useCallback(
     (giftId: string) => {
@@ -68,30 +68,38 @@ const Event = () => {
   return wishlist ? (
     <ContributorLayout>
       <div className="container">
-        <EventCard>
-          <CoverImage src={wishlist.coverImage} alt={wishlist.coverImage} />
-          <EventCardContent>
-            <HeadlineText>
-              <h2>{wishlist.title}</h2>
-            </HeadlineText>
-            <CountDown>
-            {daysLeft} {daysLeft > 1 ? 'days ' : 'day'} left
+        {wishlist.coverImage ? (
+          <EventCard>
+            <CoverImage src={wishlist.coverImage} alt={wishlist.coverImage} />
+            <EventCardContent>
+              <HeadlineText>
+                <h2>{wishlist.title}</h2>
+              </HeadlineText>
+              <CountDown>
+                {daysLeft} {daysLeft > 1 ? 'days ' : 'day'} left
             </CountDown>
-          </EventCardContent>
-        </EventCard>
+            </EventCardContent>
+          </EventCard>
+        ) : (
+          <Skeleton height={250} />
+        )}
 
-        <NeedText>Choose what to gift <em>Lateef</em></NeedText>
+        <NeedText>Choose what to gift <em>Sandra</em></NeedText>
 
         <GiftList>
           {wishlist.gifts.map((gift) => (
-            <GiftCard
-              name={gift.name}
-              price={gift.cost}
-              raised={gift.paid}
-              image={gift.imageURL}
-              key={gift._id}
-              onClick={() => openGift(`${gift._id}`)}
-            />
+            gift.imageURL ? (
+              <GiftCard
+                name={gift.name}
+                price={gift.cost}
+                raised={gift.paid}
+                image={gift.imageURL}
+                key={gift._id}
+                onClick={() => openGift(`${gift._id}`)}
+              />
+            ) : (
+              <Skeleton height={350} />
+            )
           ))}
         </GiftList>
       </div>
