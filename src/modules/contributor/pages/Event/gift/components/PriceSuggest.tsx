@@ -27,7 +27,15 @@ const PricePill = styled.button`
 `;
 
 const PriceSuggest = ({ price, selectSuggestion }: ComponentProps) => {
-  const roundedHalfPrice = roundToThousands(price / 2);
+  let roundedHalfPrice = 0;
+  let amount = 0
+  if (price > 500000) {
+    amount = 500000;
+    roundedHalfPrice = roundToThousands(amount / 2);
+  } else {
+    amount = price;
+    roundedHalfPrice = roundToThousands(price / 2);
+  }
 
   return (
     <SuggestWrapper>
@@ -37,8 +45,8 @@ const PriceSuggest = ({ price, selectSuggestion }: ComponentProps) => {
         <PricePill onClick={() => selectSuggestion(roundedHalfPrice)}>
           ₦ {roundedHalfPrice.toLocaleString()}
         </PricePill>
-        <PricePill onClick={() => selectSuggestion(price)}>
-          ₦ {price.toLocaleString()}
+        <PricePill onClick={() => selectSuggestion(amount)}>
+          ₦ {amount.toLocaleString()}
         </PricePill>
         <PricePill onClick={() => selectSuggestion('')}>Others</PricePill>
       </PillWrapper>

@@ -7,13 +7,15 @@ const PriceInput: React.FC<InputComponentProps> = ({ register, ...props }) => {
   return (
     <InputField>
       <Label>{props.label}</Label>
-      <NumberInput
-        thousandSeparator
-        prefix="₦ "
-        value={props.value}
-        onValueChange={props.onChange}
-        decimalScale={2}
-      />
+      <div className="input-icon">
+        <NumberInput
+          thousandSeparator
+          prefix="₦ "
+          value={props.value}
+          onValueChange={props.onChange}
+          decimalScale={2}
+        />
+      </div>
     </InputField>
   );
 };

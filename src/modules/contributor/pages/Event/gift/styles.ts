@@ -46,6 +46,7 @@ export const GiftProgressPrice = styled(SpaceBetween)`
   .price {
     display: flex;
     flex-direction: column;
+    margin-left: 0.5rem;
 
     p {
       font-size: 1.3rem;
@@ -60,8 +61,85 @@ export const GiftProgressPrice = styled(SpaceBetween)`
 
 export const SuggestWrapper = styled.div`
   padding: 2rem 0 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
   p {
     color: ${Colors.darkGrey};
     margin-bottom: 1rem;
   }
+
+  form {
+    min-width: 300px
+  }
+
+  @media (min-width: 768px) {
+    form {
+      min-width: 420px;
+    }
+  }
+`;
+
+export const PrePaymentModal = styled.div`
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background: ${Colors.navy};
+  top: 0;
+  left: 0;
+  z-index: 10;
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    max-width: 768px;
+
+    .close {
+      margin: 1rem 0 1rem auto;
+      cursor: pointer;
+    }
+
+    .intro {
+      display: flex;
+      flex-direction: column;
+      margin: 1rem 0;
+
+      h3 {
+        padding-bottom: 2rem;
+      }
+
+      p {
+        font-weight: 400;
+
+        span {
+          font-weight: 200;
+          color: ${Colors.offWhite};
+        }
+      }
+    }
+
+  }
+
+  @media (min-width: 768px) {
+    .container {
+      .close {
+        margin-top: 2rem;
+      }
+    }
+  }
+`;
+
+export const PrePaymentForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+
+`;
+
+export const Spacer = styled.hr`
+  border-top: 1px solid ${Colors.lineBlack};
+  margin: 1rem 0;
+  opacity: 0.6;
 `;
