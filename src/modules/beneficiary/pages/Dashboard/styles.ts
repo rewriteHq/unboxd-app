@@ -46,3 +46,17 @@ export const WishList = styled.section`
   flex-wrap: wrap;
   margin-top: 42px;
 `;
+
+export const ContentWrapper = styled.div`
+  margin-top: 2rem;
+  @media (min-width: 768px) {
+    width: 60%;
+    margin: 2rem auto;
+  }
+`;
+
+export const SectionSeparator = styled.hr`
+  border-top: 1px solid #3f3f3f;
+  width: 100%;
+  margin: 30px auto;
+`;

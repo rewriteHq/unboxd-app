@@ -2,6 +2,8 @@ import { lazy } from 'react';
 import RouteType from '../../../routes/types';
 
 const dashboard = lazy(() => import('../pages/Dashboard'));
+const profile = lazy(() => import('../pages/Dashboard/Profile'));
+const settings = lazy(() => import('../pages/Dashboard/Settings'));
 
 const event = lazy(() => import('../pages/Event'));
 const createEvent = lazy(() => import('../pages/Event/create'));
@@ -18,6 +20,18 @@ const routes: RouteType[] = [
     exact: true,
     auth: true,
     component: dashboard,
+  },
+  {
+    path: '/profile',
+    exact: true,
+    auth: true,
+    component: profile,
+  },
+  {
+    path: '/settings',
+    exact: true,
+    auth: true,
+    component: settings,
   },
   {
     path: '/event/create',

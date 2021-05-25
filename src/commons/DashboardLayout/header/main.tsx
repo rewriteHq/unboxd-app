@@ -5,7 +5,7 @@ import Sidebar from '../../Sidebar';
 import { Hamburger } from './styles';
 import Wallet from '../../icons/Wallet';
 import Bell from '../../icons/Bell';
-import { SpaceBetween } from '../../UtilityStyles/Flex';
+import { SpaceBetweenHeader } from '../../UtilityStyles/Flex';
 
 const Main = () => {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -20,14 +20,14 @@ const Main = () => {
         <span className="ham-line"></span>
       </Hamburger>
       <Logo size="sm" />
-      <SpaceBetween>
+      <SpaceBetweenHeader>
         <Link to="/wallet" className="marg-r">
           <Wallet />
         </Link>
         <Link to="/notiications">
           <Bell />
         </Link>
-      </SpaceBetween>
+      </SpaceBetweenHeader>
 
       <Sidebar show={showSidebar} onClose={toggleSidebar} />
     </>

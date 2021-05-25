@@ -7,7 +7,7 @@ import wishes from '../../../../mocks/wishes.json';
 
 const Dashboard: React.FC<ComponentProps> = () => {
   return (
-    <DashboardLayout isHome>
+    <DashboardLayout>
       <MyUnboxdListHeader>
         <p>
           my&nbsp;

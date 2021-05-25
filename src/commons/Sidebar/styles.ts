@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import Colors from '../../constants/Colors';
 import { Cross } from '@styled-icons/icomoon';
-import Sizes from '../../constants/Sizes';
 
 export const SideBarWrapper = styled.div<{ show: boolean }>`
   position: fixed;
@@ -31,7 +30,15 @@ export const NavLinks = styled.ul`
 
 export const NavItem = styled.li`
   margin-bottom: 2rem;
-  font-size: ${Sizes.twenty}px;
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  font-weight: 300;
+  svg {
+    width: 20px;
+    height: 20px;
+    margin-right: 13px;
+  }
 `;
 
 export const FindOnline = styled.div`

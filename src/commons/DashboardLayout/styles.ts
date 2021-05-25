@@ -117,6 +117,7 @@ export const UserProfile = styled.div`
     font-weight: 300;
     font-size: 20px;
     color: ${(props) => props.theme.contentColor};
+    text-transform: capitalize;
   }
   @media (max-width: 767px) {
     margin-bottom: 20px;
