@@ -10,6 +10,7 @@ export const Card = Styled.div`
   width: 180px;
   max-width: 200px;
   margin-bottom: 20px;
+  cursor: pointer;
 
   .img-holder {
     width: 100%;
