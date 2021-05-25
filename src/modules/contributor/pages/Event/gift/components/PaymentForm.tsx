@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { AnyAction, Dispatch } from 'redux';
 import PayWithFlutterwave from '../../../../../../commons/Payment/flutterwave';
 import Button from '../../../../../../components/Button';
-import Input from '../../../../../../components/Input';
 import PriceInput from '../../../../../../components/Input/price';
 import { WishList } from '../../../../../../typings';
 import Notify from '../../../../../../utils/notify/notify';
@@ -13,6 +12,7 @@ import { LOADING_UI } from '../../../../../auth/pages/Login/redux/types';
 import { getPaymentReference } from '../services';
 import { SuggestWrapper } from '../styles';
 import ThankYouModal from './ThankYouModal';
+import PrePaymentModal from './PrePayment';
 
 export interface EventData extends WishList {
   giftId: string;
@@ -28,25 +28,46 @@ const PaymentForm = ({ price, eventData, setLoading }: ComponentProps) => {
   const [data, setData] = useState({
     amount: price,
     email: '',
+    phone: '',
+    name: '',
+    anonymous: false,
   });
   const [reference, setReference] = useState('');
   const [successModal, setSuccessModal] = useState(false);
+  const [next, setNext] = useState<boolean>(false);
 
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, name } = e.target;
-    setData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    const { value, name, checked } = e.target;
+    if(e.target.name === "anonymous") {
+      if(e.target.checked) {
+        setData((prev) => ({...prev, anonymous: true}))
+      }
+    } else {
+      setData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
   }, []);
 
   const changePrice = useCallback(({ value }: NumberFormatValues) => {
+    if (+value > 500000) {
+      return Notify.top('Kindly input an amount less than 500,000');
+    }
     setData((prev) => ({ ...prev, amount: value }));
   }, []);
 
+  const handleNext = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setNext(true);
+  }
+  
+  const handleClose = () => setNext(false);
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const { amount, email } = data;
+    const { amount, email, anonymous } = data;
+    const token = localStorage.getItem('token');
 
     if (!amount) {
       return Notify.top('Kindly input an amount to be paid');
@@ -61,7 +82,7 @@ const PaymentForm = ({ price, eventData, setLoading }: ComponentProps) => {
       email,
       listId: eventData._id,
       giftId: eventData.giftId,
-      givingType: 'guest',
+      givingType: token ? 'user' : (anonymous ? 'anonymous' : 'guest'),
       givingTo: eventData.userID,
     };
 
@@ -91,25 +112,23 @@ const PaymentForm = ({ price, eventData, setLoading }: ComponentProps) => {
       <SuggestWrapper>
         <p>State the amount you will be contributing</p>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleNext}>
           <PriceInput
             onChange={changePrice}
             name="amount"
             value={data.amount}
             label="Amount to pay"
           />
-          <Input
-            onChange={handleChange}
-            name="email"
-            value={data.email}
-            label="Email address"
-            type="email"
-            required
-          />
-
           <Button type="submit">Contribute</Button>
         </form>
       </SuggestWrapper>
+
+      {next && <PrePaymentModal
+        close={handleClose}
+        change={handleChange}
+        submit={handleSubmit}
+        data={data}
+      />}
 
       {reference && (
         <PayWithFlutterwave

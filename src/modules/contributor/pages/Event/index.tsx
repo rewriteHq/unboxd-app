@@ -1,48 +1,44 @@
 import { differenceInDays } from 'date-fns';
 import localforage from 'localforage';
-import React, { useCallback, useEffect, useState } from 'react';
-import { connect } from 'react-redux';
+import { useCallback, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router';
-import GiftCard from '../../../../commons/GiftCard';
-import Layout from '../../../../Layout';
+import GiftCard from '../../../../components/GiftCard';
+import ContributorLayout from '../../../../commons/ContributorLayout';
 import AppState, { WishList } from '../../../../typings';
 import { getWishlistBySlug } from './redux/actions';
 import {
   CountDown,
   EventCard,
   CoverImage,
-  GiftList,
   HeadlineText,
   NeedText,
   EventCardContent,
 } from '../../../beneficiary/pages/Event/styles';
+import { GiftList } from './styles';
 import WelcomeModal from './components/WelcomeModal';
 
 type ParamTypes = {
   slug: string;
 };
 
-type ComponentProps = {
-  list: WishList | null;
-  getWishlist: (slug: string) => void;
-  getWish: () => void;
-};
-
 const eventVisited = localforage.createInstance({
   name: 'Event Visited',
 });
 
-const Event = ({ list, getWishlist }: ComponentProps) => {
+const Event = () => {
   const { slug } = useParams<ParamTypes>();
   const [welcomeModal, setWelcomeModal] = useState(false);
   const history = useHistory();
+  const { wishlist } = useSelector((state: AppState) => state.contributor.event.data);
+  const dispatch = useDispatch()
 
   const toggleWelcomeModal = () => setWelcomeModal((prev) => !prev);
 
   useEffect(() => {
     (async function () {
-      if (!list || list.slug !== slug) {
-        getWishlist(slug);
+      if (!wishlist || wishlist.slug !== slug) {
+        dispatch(getWishlistBySlug(slug));
       } else {
         /**
          * check if this event has been visited before (saved with localforage),
@@ -58,9 +54,9 @@ const Event = ({ list, getWishlist }: ComponentProps) => {
         }
       }
     })();
-  }, [list, slug, getWishlist]);
+  }, [slug, dispatch, wishlist]);
 
-  const daysLeft = list ? differenceInDays(new Date(), new Date(list.date)) : 1;
+  const daysLeft = wishlist ? differenceInDays(new Date(), new Date(wishlist.date)) : 1;
 
   const openGift = useCallback(
     (giftId: string) => {
@@ -69,30 +65,32 @@ const Event = ({ list, getWishlist }: ComponentProps) => {
     [history, slug]
   );
 
-  return list ? (
-    <Layout>
+  return wishlist ? (
+    <ContributorLayout>
       <div className="container">
         <EventCard>
-          <CoverImage src={list.coverImage} alt={list.title} />
+          <CoverImage src={wishlist.coverImage} alt={wishlist.coverImage} />
           <EventCardContent>
             <HeadlineText>
-              <h2>{list.title}</h2>
+              <h2>{wishlist.title}</h2>
             </HeadlineText>
             <CountDown>
-              <span>
-                {daysLeft} {daysLeft > 1 ? 'days ' : 'day'} left
-              </span>
+            {daysLeft} {daysLeft > 1 ? 'days ' : 'day'} left
             </CountDown>
           </EventCardContent>
         </EventCard>
 
-        <NeedText>Choose what to gift Lateef</NeedText>
+        <NeedText>Choose what to gift <em>Lateef</em></NeedText>
+
         <GiftList>
-          {list.gifts.map((gift) => (
+          {wishlist.gifts.map((gift) => (
             <GiftCard
-              gift={gift}
+              name={gift.name}
+              price={gift.cost}
+              raised={gift.paid}
+              image={gift.imageURL}
               key={gift._id}
-              onClick={() => openGift(gift._id)}
+              onClick={() => openGift(`${gift._id}`)}
             />
           ))}
         </GiftList>
@@ -100,20 +98,10 @@ const Event = ({ list, getWishlist }: ComponentProps) => {
       <WelcomeModal
         show={welcomeModal}
         close={toggleWelcomeModal}
-        list={list}
+        list={wishlist}
       />
-    </Layout>
+    </ContributorLayout>
   ) : null;
 };
 
-const mapStateToProps = (state: AppState) => {
-  return {
-    list: state.contributor.event.data,
-  };
-};
-
-const mapDispatchToProps = (dispatch: any) => ({
-  getWishlist: (slug: string) => dispatch(getWishlistBySlug(slug)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Event);
+export default Event;

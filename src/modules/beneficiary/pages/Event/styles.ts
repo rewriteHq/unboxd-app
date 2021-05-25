@@ -144,6 +144,7 @@ export const CoverImage = styled.img`
   height: 25vh;
   width: 100%;
   object-fit: cover;
+  object-position: top;
   border-radius: 10px;
   margin-bottom: 10px;
   border: 1px solid #4a4a4a;
@@ -220,9 +221,13 @@ export const ShareBox = styled.div`
 `;
 
 export const NeedText = styled.p`
-  font-weight: bold;
+  font-weight: 300;
   text-align: center;
   margin: 1rem 0;
+
+  em {
+    font-weight: bold;
+  }
 `;
 
 export const GiftList = styled.div`

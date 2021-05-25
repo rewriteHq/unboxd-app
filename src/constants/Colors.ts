@@ -19,6 +19,9 @@ const Colors = {
   tintOrange: '#EBD6B7',
   burntOrange: '#734B0F',
   tintGrey: '#A2A2A2',
+  offWhite: '#979797',
+  realGreen: '#8CC087',
+  lineBlack: '#3F3F3F',
 };
 
 export default Colors;
