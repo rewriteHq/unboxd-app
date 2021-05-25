@@ -5,6 +5,13 @@ export const WelcomeWrapper = styled.div`
   background: ${Colors.navy};
   font-size: 1.2rem;
   border-radius: 18px;
+  cursor: default;
+
+  @media (min-width: 768px) {
+    width: 50%;
+    max-width: 700px;
+    margin: 0 auto;
+  }
 `;
 
 export const WelcomeHead = styled.div`
