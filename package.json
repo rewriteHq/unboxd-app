@@ -30,7 +30,6 @@
     "react-google-login": "^5.2.2",
     "react-hook-form": "^6.15.1",
     "react-number-format": "^4.4.4",
-    "react-phone-input-2": "^2.14.0",
     "react-redux": "^7.2.2",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
