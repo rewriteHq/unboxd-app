@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
 import { GiftDataType } from '../../../../beneficiary/pages/Gift/redux/types';
 import { useDispatch, useSelector } from 'react-redux';
-import GiftHeader from './header';
 import {
   GiftCountdown,
   GiftCoverTime,
