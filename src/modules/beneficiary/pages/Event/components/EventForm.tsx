@@ -6,7 +6,7 @@ import DashboardLayout from '../../../../../commons/DashboardLayout';
 import { DashboardContainer } from '../../../../../commons/DashboardLayout/styles';
 import ImageUploadModal from '../../../../../commons/ImageUploadModal';
 import PageBottom from '../../../../../commons/PageBottom';
-import { SpaceBetween } from '../../../../../commons/UtilityStyles/Flex';
+import { SpaceBetweenHeader } from '../../../../../commons/UtilityStyles/Flex';
 import Button from '../../../../../components/Button';
 import { PlainButton } from '../../../../../components/Button/styles';
 import Input from '../../../../../components/Input';
@@ -180,7 +180,7 @@ const EventForm = ({
             </ImageHolder>
           )}
 
-          <SpaceBetween>
+          <SpaceBetweenHeader>
             <HeadlineInput
               placeholder="Type headline here"
               value={data.headline}
@@ -195,7 +195,7 @@ const EventForm = ({
                 See examples
               </PlainButton>
             )}
-          </SpaceBetween>
+          </SpaceBetweenHeader>
           <p className="tiny-section-header">When is it happening?</p>
           <DatePickerWrapper>
             <Select
