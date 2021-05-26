@@ -1,91 +1,44 @@
-import React, { lazy } from 'react';
+import React, { lazy, useState } from 'react';
 import { PageHeading } from '../../../../commons/Heading';
 import { HomeComponentProps } from './types';
 
-import Layout from '../../../../Layout';
-import { Paragraph, UnboxdCarousel, GetStarted } from './styles';
-import { BTNLink } from '../../../../components/Button/styles';
+import { UnboxdCarousel, GetStarted, UnorderedList } from './styles';
+import { BTN } from '../../../../components/Button/styles';
 
-const WishItem = lazy(() => import('../../../../components/WishItem'));
+const Layout = lazy(() => import('../../../../Layout'));
+const Modal = lazy(() => import('../../../../components/EarlyAccess'));
 
 const Home: React.FC<HomeComponentProps> = () => {
+  const [openModal, setOpenModal] = useState(false);
 
-  const tabs = [
-    { name: "new home", active: false, icon: "🏛" },
-    { name: "social cause", active: false },
-    { name: "birthday", active: false },
-    { name: "graduation", active: true, icon: "🎉" },
-    { name: "anniversary", active: false },
-    { name: "wedding", active: false },
-    { name: "new business", active: false }
-  ]
+  const steps = [
+    "Create a list with pictures of items you want",
+    "Share with loved ones",
+    "Receive part or full contributions"
+  ];
 
-  const sample = [
-    {
-      name: "Work Space",
-      price: "245,999",
-      raised: "84,599.00",
-      image: "workstation"
-    },
-    {
-      name: "Macbook Pro",
-      price: "645,999",
-      raised: "324,099.00",
-      image: "laptop"
-    },
-    {
-      name: "Washing Machine",
-      price: "950,000",
-      raised: "284,898.00",
-      image: "washingmachine"
-    },
-    {
-      name: "HalfStation",
-      price: "350,000",
-      raised: "64,898.00",
-      image: "halfstation"
-    },
-    {
-      name: "HalfStation",
-      price: "350,000",
-      raised: "64,898.00",
-      image: "halfstation"
-    },
-    {
-      name: "HalfStation",
-      price: "350,000",
-      raised: "64,898.00",
-      image: "halfstation"
-    }
-  ]
+  const toggleModal = () => setOpenModal(!openModal);
 
   return (
     <Layout>
       <div className="container">
         <PageHeading centered large>
-          Whatever you want.
+          Gather funds for the things you need
         </PageHeading>
 
-        <Paragraph className="text-center">
-          List it, share it, and receive cash contributions from your loved ones.
-        </Paragraph>
+        <UnorderedList>
+          {steps.map((step, index) => <li key={index + 1}><span>{index + 1}</span>{step}</li>)}
+        </UnorderedList>
 
         <UnboxdCarousel>
-          <div className="carousel-tab">
-            <ul>
-              {tabs.map((item, index) => <li key={index} className={item.active ? "active list-item" : "list-item"}>{item.name} {item.active ? item.icon : null}</li>)}
-            </ul>
-          </div>
-          <div className="carousel">
-            {sample.map((item, index) =>
-              <WishItem key={index} image={item.image} name={item.name} price={item.price} raised={item.raised} />
-            )}
-          </div>
+          <div className="carousel"></div>
+          <div className="bottom-overlay"></div>
           <GetStarted>
-            <BTNLink to="/register">Get Started</BTNLink>
+            <BTN onClick={toggleModal}>Sign up for early access</BTN>
           </GetStarted>
         </UnboxdCarousel>
       </div>
+      {openModal && <Modal onClick={toggleModal} />}
     </Layout>
   );
 };

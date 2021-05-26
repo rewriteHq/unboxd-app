@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
-import { GiftDataType } from '../../../../beneficiary/pages/Gift/redux/types';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   GiftCountdown,
@@ -9,7 +8,7 @@ import {
   GiftProgressPrice,
 } from './styles';
 import { getGift, getWishlistBySlug } from '../redux/actions';
-import AppState, { WishList } from '../../../../../typings';
+import AppState from '../../../../../typings';
 import { differenceInDays } from 'date-fns';
 import {
   CoverImage,
@@ -23,15 +22,9 @@ import { SpaceBetween } from '../../../../../commons/UtilityStyles/Flex';
 import ContributorLayout from '../../../../../commons/ContributorLayout';
 import { GiftList } from '../styles';
 
-interface ComponentProps {
-  gifts: GiftDataType;
-  list: WishList | null;
-  getGift: (id: string) => void;
-  getWishlist: (slug: string) => void;
-}
-
 interface ParamType {
   id: string;
+  username: string;
   slug: string;
 }
 
@@ -41,7 +34,7 @@ interface PaymentState {
 }
 
 const Gift = () => {
-  const { id, slug } = useParams<ParamType>();
+  const { id, username, slug } = useParams<ParamType>();
   const history = useHistory();
   const dispatch = useDispatch();
   const { gift, wishlist } = useSelector((state: AppState) => state.contributor.event.data)
@@ -59,22 +52,22 @@ const Gift = () => {
 
   useEffect(() => {
     dispatch(getGift(id))
-  }, [id, getGift, dispatch]);
+  }, [id, dispatch]);
 
   useEffect(() => {
     if (!wishlist) {
-      dispatch(getWishlistBySlug(slug))
+      dispatch(getWishlistBySlug(username, slug))
     }
-  }, [dispatch, slug]);
+  }, [dispatch, wishlist, username, slug]);
 
   const daysLeft = wishlist ? differenceInDays(new Date(wishlist.date), new Date()) : 1;
   const percentageRaised = gift ? Math.round((gift.paid / gift.cost) * 100) : 0;
 
   const openGift = useCallback(
     (giftId: string) => {
-      history.push(`/${slug}/${giftId}`);
+      history.push(`/${username}/${slug}/${giftId}`);
     },
-    [history, slug]
+    [history, username, slug]
   );
 
   return gift && (

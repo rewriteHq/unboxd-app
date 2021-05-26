@@ -3,12 +3,12 @@ import { LOADING_UI } from '../../../../auth/pages/Login/redux/types';
 import * as services from '../services';
 import { SET_GIFT, SET_WISHLIST } from './types';
 
-export const getWishlistBySlug = (slug: string) => async (
+export const getWishlistBySlug = (username: string, slug: string) => async (
   dispatch: Dispatch
 ) => {
   dispatch({ type: LOADING_UI, payload: true });
 
-  const [err, response] = await services.getWishlistBySlug(slug);
+  const [err, response] = await services.getWishlistBySlug(username, slug);
   if (err) {
     return err;
   }
