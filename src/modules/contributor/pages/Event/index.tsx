@@ -55,7 +55,7 @@ const Event = () => {
         }
       }
     })();
-  }, [slug, dispatch, wishlist]);
+  }, [username, slug, dispatch, wishlist]);
 
   const daysLeft = wishlist ? differenceInDays(new Date(wishlist.date), new Date()) : 1;
 
@@ -63,7 +63,7 @@ const Event = () => {
     (giftId: string) => {
       history.push(`/${username}/${slug}/${giftId}`);
     },
-    [history, slug]
+    [history, username, slug]
   );
 
   return wishlist ? (
