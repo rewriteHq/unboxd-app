@@ -19,6 +19,7 @@ import WelcomeModal from './components/WelcomeModal';
 import Skeleton from 'react-loading-skeleton';
 
 type ParamTypes = {
+  username: string;
   slug: string;
 };
 
@@ -27,7 +28,7 @@ const eventVisited = localforage.createInstance({
 });
 
 const Event = () => {
-  const { slug } = useParams<ParamTypes>();
+  const { username, slug } = useParams<ParamTypes>();
   const [welcomeModal, setWelcomeModal] = useState(false);
   const history = useHistory();
   const { wishlist } = useSelector((state: AppState) => state.contributor.event.data);
@@ -38,7 +39,7 @@ const Event = () => {
   useEffect(() => {
     (async function () {
       if (!wishlist || wishlist.slug !== slug) {
-        dispatch(getWishlistBySlug(slug));
+        dispatch(getWishlistBySlug(username, slug));
       } else {
         /**
          * check if this event has been visited before (saved with localforage),
@@ -60,7 +61,7 @@ const Event = () => {
 
   const openGift = useCallback(
     (giftId: string) => {
-      history.push(`/${slug}/${giftId}`);
+      history.push(`/${username}/${slug}/${giftId}`);
     },
     [history, slug]
   );
