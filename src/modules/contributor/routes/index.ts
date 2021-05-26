@@ -6,13 +6,13 @@ const gift = lazy(() => import('../pages/Event/gift'));
 
 const routes: RouteType[] = [
   {
-    path: '/:slug',
+    path: '/:username/:slug',
     exact: true,
     auth: false,
     component: event,
   },
   {
-    path: '/:slug/:id',
+    path: '/:username/:slug/:id',
     exact: true,
     auth: false,
     component: gift,
