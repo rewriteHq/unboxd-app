@@ -1,4 +1,4 @@
-import { Suspense } from 'react';
+import { Suspense, lazy } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
@@ -7,6 +7,8 @@ import appThemes from './AppTheme';
 import { checkAuth } from './modules/auth/pages/Login/redux/actions';
 import RoutesHandler from './routes';
 import { useAppThemeContext } from './store/ThemeContex';
+
+const Loader = lazy(() => import('./components/PageLoader'));
 
 interface ComponentProps {
   checkAuthenticated: () => void;
@@ -22,7 +24,7 @@ const App: React.FC<ComponentProps> = ({ checkAuthenticated }) => {
   checkAuthenticated();
 
   return (
-    <Suspense fallback={() => <h1>Loading...</h1>}>
+    <Suspense fallback={() => <Loader />}>
       <ThemeProvider theme={appThemes[appThemeContext?.theme!]}>
         <GlobalStyle />
         <Router>
