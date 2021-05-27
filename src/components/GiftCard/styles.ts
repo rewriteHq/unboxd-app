@@ -7,20 +7,20 @@ export const Card = Styled.div`
   background: ${Colors.darkNavy};
   border-radius: 5px;
   overflow: hidden;
-  width: 180px;
-  max-width: 200px;
-  margin-bottom: 20px;
+  min-width: 110px;
+  max-width: 100%;
+  margin-bottom: 5px;
   cursor: pointer;
 
   .img-holder {
     width: 100%;
-    height: 166px;
+    height: 110px;
     overflow: hidden;
     position: relative;
 
     img {
       width: 100%;
-      height: 166px;
+      height: 110px;
       object-fit: cover;
     }
   }
@@ -43,7 +43,7 @@ export const Card = Styled.div`
 
     .progress {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
       width: 100%;
       margin-top: 1rem;
@@ -54,24 +54,50 @@ export const Card = Styled.div`
       }
 
       .progress-circle {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        background: ${Colors.tintOrange};
+        display: none;
       }
     }
   }
+
+  @media (min-width: 320px) {
+    min-width: 130px;
+
+    .img-holder {
+      height: 136px;
+  
+      img {
+        height: 136px;
+      }
+    }
+  }
+
+  @media (min-width: 375px) {
+    min-width: 155px;
+
+    .img-holder {
+      height: 145px;
+  
+      img {
+        height: 145px;
+      }
+    }
+
+    .card-content {
+      .progress {
+        justify-content: space-between;
+  
+        .progress-circle {
+          display: flex;
+        }
+      }
+    }
+  }
+  
+  @media (min-width: 425px){
+    min-width: 180px;
+  }
+
   @media(min-width: 768px) {
-    width: 170px;
-  }
-  @media (min-width: 160px) and (max-width: 320px) {
-    width: 100%;
-    max-width: fit-content;
-  }
-  @media (min-width: 330px) and (max-width: 550px) {
-    width: 180px;
-  }
-  @media (min-width: 560px) and (max-width: 768px) {
-    width: 170px;
+    min-width: 170px;
   }
 `;
