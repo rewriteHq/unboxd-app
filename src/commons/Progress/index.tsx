@@ -23,7 +23,7 @@ const Progress = styled.div`
     font-size: calc(${Sizes.small - 2}px);
     bottom: 50%;
     left: 0;
-    transform: translate(0, 70%);
+    transform: translate(-2%, 65%);
     width: 100%;
     text-align: center;
   }
@@ -33,9 +33,10 @@ type ComponentProps = {
   percentage: number;
   radius: number;
   stroke: number;
+  className?: string;
 };
 
-const ProgressBar = ({ percentage, radius, stroke }: ComponentProps) => {
+const ProgressBar = ({ percentage, radius, stroke, className }: ComponentProps) => {
   const normalizedRadius = useRef(radius - stroke * 2);
   const circumference = useRef(normalizedRadius.current * 2 * Math.PI);
 
@@ -43,7 +44,7 @@ const ProgressBar = ({ percentage, radius, stroke }: ComponentProps) => {
     circumference.current - (percentage / 100) * circumference.current;
 
   return (
-    <Progress>
+    <Progress className={className}>
       <Vector height={radius * 2.2} width={radius * 2.2}>
         {/* <circle /> */}
         <Circle
