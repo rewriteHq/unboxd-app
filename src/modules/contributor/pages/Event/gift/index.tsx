@@ -18,9 +18,9 @@ import ProgressBar from '../../../../../commons/Progress';
 import GiftCard from '../../../../../components/GiftCard';
 import PriceSuggest from './components/PriceSuggest';
 import PaymentForm from './components/PaymentForm';
-import { SpaceBetween } from '../../../../../commons/UtilityStyles/Flex';
 import ContributorLayout from '../../../../../commons/ContributorLayout';
-import { GiftList } from '../styles';
+import { GiftList, EventCardContent } from '../styles';
+import PageLoader from '../../../../../components/PageLoader';
 
 interface ParamType {
   id: string;
@@ -70,7 +70,7 @@ const Gift = () => {
     [history, username, slug]
   );
 
-  return gift && (
+  return gift ? (
     <ContributorLayout>
       <div className="container">
         <GiftCoverTime>
@@ -80,7 +80,7 @@ const Gift = () => {
             {daysLeft} {daysLeft > 1 ? 'days ' : 'day'} left
               </GiftCountdown>
           <GiftDescription>
-            <SpaceBetween align="flex-end">
+            <EventCardContent>
               <h3>{gift.name}</h3>
               <GiftProgressPrice>
                 <ProgressBar
@@ -99,7 +99,7 @@ const Gift = () => {
                       </small>
                 </div>
               </GiftProgressPrice>
-            </SpaceBetween>
+            </EventCardContent>
           </GiftDescription>
         </GiftCoverTime>
 
@@ -137,7 +137,7 @@ const Gift = () => {
         )}
       </div>
     </ContributorLayout>
-  );
+  ) : <PageLoader />;
 };
 
 export default Gift;

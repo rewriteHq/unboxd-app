@@ -84,7 +84,7 @@ const PaymentForm = ({ price, eventData, setLoading }: ComponentProps) => {
       listId: eventData._id,
       giftId: eventData.giftId,
       givingType: token ? 'user' : (anonymous ? 'anonymous' : 'guest'),
-      givingTo: eventData.userID,
+      givingTo: eventData.userID._id,
     };
 
     setLoading(true);

@@ -47,7 +47,10 @@ export interface WishList {
   coverImage: string;
   categoryID: Category;
   date: string;
-  userID: string;
+  userID: {
+    _id: string;
+    firstname: string;
+  };
   description?: string;
   slug: string;
 }
