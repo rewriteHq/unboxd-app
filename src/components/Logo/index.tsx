@@ -9,15 +9,16 @@ const LogoSizes = {
 
 type Size = keyof typeof LogoSizes;
 
-type LogoProps = {
+interface ILogoProps {
   size?: Size;
-};
+  click?: () => void;
+}
 
 const LogoStyle = styled.img<{ size: Size }>`
   width: ${({ size }) => LogoSizes[size]}px;
 `;
 
-const Logo = ({ size = 'md' }: LogoProps) => {
+const Logo = ({ size = 'md', click }: ILogoProps) => {
   const appThemeContext = useAppThemeContext();
   return (
     <LogoStyle
@@ -27,6 +28,7 @@ const Logo = ({ size = 'md' }: LogoProps) => {
       }
       alt="unboxd logo"
       className="ub-logo"
+      onClick={click}
     />
   );
 };

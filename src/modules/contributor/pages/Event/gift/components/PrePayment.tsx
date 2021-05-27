@@ -2,6 +2,7 @@ import React from 'react';
 import Button from '../../../../../../components/Button';
 import Input from '../../../../../../components/Input';
 import CheckInput from '../../../../../../components/Input/check';
+import Logo from '../../../../../../components/Logo';
 import { PrePaymentForm, PrePaymentModal, Spacer } from '../styles';
 
 type ComponentProps = {
@@ -68,6 +69,7 @@ const PrePayment = ({ close, change, submit, data }: ComponentProps) => {
 
           <Button type="submit">Contribute</Button>
         </PrePaymentForm>
+        <Logo />
       </div>
     </PrePaymentModal>
   );
