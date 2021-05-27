@@ -9,6 +9,6 @@ export const LoaderWrapper = Styled.div`
   z-index: 3;
   width: 100%;
   height: 100vh;
-  background: ${Colors.navy};
+  background: ${props => props.theme.appPrimaryColor};
   overflow: hidden;
 `;
