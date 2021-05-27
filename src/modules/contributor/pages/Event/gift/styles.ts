@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { SpaceBetween } from '../../../../../commons/UtilityStyles/Flex';
 import Colors from '../../../../../constants/Colors';
 import {
   CountDown,
@@ -40,7 +39,8 @@ export const GiftDescription = styled.div`
   width: 100%;
 `;
 
-export const GiftProgressPrice = styled(SpaceBetween)`
+export const GiftProgressPrice = styled.div`
+  display: flex;
   margin-top: 0.5rem;
 
   .price {
@@ -95,6 +95,7 @@ export const PrePaymentModal = styled.div`
     flex-direction: column;
     margin: 0 auto;
     max-width: 768px;
+    min-height: 95vh;
 
     .close {
       margin: 1rem 0 1rem auto;
@@ -120,10 +121,16 @@ export const PrePaymentModal = styled.div`
       }
     }
 
+    img {
+      margin: auto;
+    }
+
   }
 
   @media (min-width: 768px) {
     .container {
+      min-height: 100vh;
+
       .close {
         margin-top: 2rem;
       }
