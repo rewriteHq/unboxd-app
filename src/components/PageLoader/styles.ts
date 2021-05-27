@@ -1,5 +1,4 @@
 import Styled from 'styled-components';
-import Colors from '../../constants/Colors';
 
 export const LoaderWrapper = Styled.div`
   display: flex;
