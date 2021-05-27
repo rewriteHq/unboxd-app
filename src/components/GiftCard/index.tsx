@@ -25,6 +25,7 @@ const GiftCard: React.FC<GiftCardProps> = ({ image, name, price, raised, onClick
             percentage={percentageRaised}
             radius={21}
             stroke={1.5}
+            className={"progress-circle"}
           />
         </div>
       </div>
