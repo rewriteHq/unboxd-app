@@ -31,7 +31,7 @@ export const Heart = Styled.div<{ white?: boolean, size: Size }>`
     width: ${({ size }) => LogoSizes[size]}px;
 
     ${({ white }) => white && css`
-      fill: ${Colors.white};
+      fill: ${props => props.theme.contentColor};
     `}
   }
 
