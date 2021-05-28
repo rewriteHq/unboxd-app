@@ -30,4 +30,9 @@ export const WelcomeBody = styled.div`
   .hello {
     margin-bottom: 1.5rem;
   }
+
+  .note {
+    font-size: 18px;
+    line-height: 1;
+  }
 `;

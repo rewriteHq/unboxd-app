@@ -18,9 +18,9 @@ const GiftCard: React.FC<GiftCardProps> = ({ image, name, price, raised, onClick
       </div>
       <div className="card-content">
         <h3 className="name">{name}</h3>
-        <p className="price">₦{price}</p>
+        <p className="price">₦{price.toLocaleString()}</p>
         <div className="progress">
-          <p className="amount-raised">₦{raised} raised</p>
+          <p className="amount-raised">₦{raised.toLocaleString()} raised</p>
           <ProgressBar
             percentage={percentageRaised}
             radius={21}
