@@ -13,7 +13,6 @@ import { getPaymentReference } from '../services';
 import { SuggestWrapper } from '../styles';
 import ThankYouModal from './ThankYouModal';
 import PrePaymentModal from './PrePayment';
-import { addUnboxdFee } from '../../../../../../utils/price';
 
 export interface EventData extends WishList {
   giftId: string;
