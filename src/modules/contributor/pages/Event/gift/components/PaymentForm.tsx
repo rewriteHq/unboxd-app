@@ -79,7 +79,7 @@ const PaymentForm = ({ price, eventData, setLoading }: ComponentProps) => {
     }
 
     const payload = {
-      amount: addUnboxdFee(+amount, +process.env.REACT_APP_UNBOXD_CHARGE!),
+      amount: +amount,
       email,
       listId: eventData._id,
       giftId: eventData.giftId,
@@ -133,7 +133,7 @@ const PaymentForm = ({ price, eventData, setLoading }: ComponentProps) => {
 
       {reference && (
         <PayWithFlutterwave
-          amount={addUnboxdFee(+data.amount, +process.env.REACT_APP_UNBOXD_CHARGE!)}
+          amount={+data.amount}
           email={data.email}
           event={eventData.title}
           reference={reference}

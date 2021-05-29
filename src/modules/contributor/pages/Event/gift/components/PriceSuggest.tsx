@@ -43,10 +43,10 @@ const PriceSuggest = ({ price, selectSuggestion }: ComponentProps) => {
 
       <PillWrapper>
         <PricePill onClick={() => selectSuggestion(roundedHalfPrice)}>
-          ₦ {roundedHalfPrice.toLocaleString()}
+          ₦ {roundedHalfPrice?.toLocaleString()}
         </PricePill>
         <PricePill onClick={() => selectSuggestion(amount)}>
-          ₦ {amount.toLocaleString()}
+          ₦ {amount?.toLocaleString()}
         </PricePill>
         <PricePill onClick={() => selectSuggestion('')}>Others</PricePill>
       </PillWrapper>

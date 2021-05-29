@@ -33,6 +33,6 @@ export const WelcomeBody = styled.div`
 
   .note {
     font-size: 18px;
-    line-height: 1;
+    line-height: 1.35;
   }
 `;

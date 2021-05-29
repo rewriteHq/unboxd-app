@@ -93,8 +93,8 @@ const Event = () => {
             gift.imageURL ? (
               <GiftCard
                 name={gift.name}
-                price={gift.cost}
-                raised={gift.paid}
+                price={gift?.totalCost!}
+                raised={gift?.paid}
                 image={gift.imageURL}
                 key={gift._id}
                 onClick={() => openGift(`${gift._id}`)}

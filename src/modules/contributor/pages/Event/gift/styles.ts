@@ -71,9 +71,15 @@ export const SuggestWrapper = styled.div`
   }
 
   form {
-    min-width: 300px
+    min-width: 260px
   }
 
+  @media (min-width: 320px) {
+    form {
+      min-width: 300px;
+    }
+  }
+  
   @media (min-width: 768px) {
     form {
       min-width: 420px;
@@ -96,6 +102,8 @@ export const PrePaymentModal = styled.div`
     margin: 0 auto;
     max-width: 768px;
     min-height: 95vh;
+    overflow: scroll;
+    max-height: 100vh;
 
     .close {
       margin: 1rem 0 1rem auto;

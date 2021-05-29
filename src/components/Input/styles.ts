@@ -13,10 +13,12 @@ export const InputField = styled.div<{row?: boolean}>`
   border-radius: 18px;
   height: 64px;
   overflow: hidden;
+
   .input-icon {
     display: flex;
     align-items: baseline;
     justify-content: space-between;
+
     input {
       flex: 3.5;
       margin-top: 0.5rem;
@@ -56,7 +58,7 @@ export const InputField = styled.div<{row?: boolean}>`
     label {
       color: ${Colors.white};
       order: 0;
-      right: -160px;
+      right: -90px;
 
       >:not(:before) {
         color: black
@@ -72,6 +74,8 @@ export const InputField = styled.div<{row?: boolean}>`
         opacity: 0;
       
         & + label {
+          display: flex;
+          align-items: center;
           position: relative;
           cursor: pointer;
           padding: 0;
@@ -80,9 +84,10 @@ export const InputField = styled.div<{row?: boolean}>`
         // Box.
         & + label:before {
           content: '';
-          margin-right: 20px;
+          margin-right: 40px;
           display: inline-block;
           vertical-align: middle;
+          min-width: 33px;
           width: 33px;
           height: 33px;
           background: ${Colors.grey};
@@ -136,9 +141,31 @@ export const InputField = styled.div<{row?: boolean}>`
         }
       }      
     }
-
-
   `}
+
+  @media (min-width: 320px) {
+    ${({row}) => row && css`
+      label {
+        right: -125px;
+      }
+    `}
+  }
+
+  @media (min-width: 360px) {
+    ${({row}) => row && css`
+      label {
+        right: -140px;
+      }
+    `}
+  }
+
+  @media (min-width: 425px) {
+    ${({row}) => row && css`
+      label {
+        right: -180px;
+      }
+    `}
+  }
 `;
 
 export const Label = styled.label`

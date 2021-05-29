@@ -37,6 +37,7 @@ export interface GiftType {
   _id: string;
   name: string;
   cost: number;
+  totalCost?: number;
   imageURL: string;
 }
 
@@ -50,6 +51,7 @@ export interface WishList {
   userID: {
     _id: string;
     firstname: string;
+    username: string;
   };
   description?: string;
   slug: string;

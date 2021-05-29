@@ -6,7 +6,7 @@ export const ContributorContainer = styled.div`
   .container {
     display: flex;
     flex-direction: column;
-    min-height: 75vh;
+    min-height: calc(100vh - 80px);
     max-width: 780px;
     margin: auto;
   }
