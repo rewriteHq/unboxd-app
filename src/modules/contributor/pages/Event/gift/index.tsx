@@ -61,7 +61,7 @@ const Gift = () => {
   }, [dispatch, wishlist, username, slug]);
 
   const daysLeft = wishlist ? differenceInDays(new Date(wishlist.date), new Date()) : 1;
-  const percentageRaised = gift ? Math.round((gift.paid / gift.cost) * 100) : 0;
+  const percentageRaised = gift ? Math.round((gift.paid / gift.totalCost!) * 100) : 0;
 
   const openGift = useCallback(
     (giftId: string) => {
@@ -89,7 +89,7 @@ const Gift = () => {
                   stroke={1.5}
                 />
                 <div className="price">
-                  <p>₦{gift.cost.toLocaleString()}</p>
+                  <p>₦{gift.totalCost?.toLocaleString()}</p>
                   <small>
                     ₦{gift.paid.toLocaleString(undefined, {
                     minimumFractionDigits: 2,
@@ -112,12 +112,12 @@ const Gift = () => {
               />
             ) : (
               <PriceSuggest
-                price={gift.cost}
+                price={gift.totalCost!}
                 selectSuggestion={selectPrice}
               />
             )}
 
-            <NeedText>Choose another item to gift Lateef</NeedText>
+            <NeedText>Choose another item to gift {wishlist.userID.firstname}</NeedText>
 
             <GiftList>
               {wishlist.gifts.map((gift) =>
@@ -125,8 +125,8 @@ const Gift = () => {
                   <GiftCard
                     name={gift.name}
                     image={gift.imageURL}
-                    price={gift.cost}
-                    raised={gift.paid}
+                    price={gift?.totalCost!}
+                    raised={gift?.paid}
                     key={gift._id}
                     onClick={() => openGift(`${gift._id}`)}
                   />

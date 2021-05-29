@@ -16,7 +16,8 @@ const Vector = styled.svg`
 
 const Progress = styled.div`
   position: relative;
-  display: inline;
+  display: flex;
+  align-items: center;
 
   .percent {
     position: absolute;

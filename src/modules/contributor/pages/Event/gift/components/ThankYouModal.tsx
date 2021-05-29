@@ -1,6 +1,6 @@
 import React from 'react';
 import Avatar from '../../../../../../commons/Avatar';
-import { BTNLink } from '../../../../../../components/Button/styles';
+import { BTN } from '../../../../../../components/Button/styles';
 import Modal from '../../../../../../components/Modal';
 import {
   WelcomeBody,
@@ -16,13 +16,18 @@ type ComponentProps = {
 };
 
 const ThankYouModal = ({ show, close, eventData }: ComponentProps) => {
+
+  const goBack = () => {
+    window.location.href = `/${eventData.userID.username}/${eventData.slug}`;
+  }
+
   return (
     <Modal show={show} onClose={close}>
       <Modal.Centered>
         <WelcomeWrapper>
           <WelcomeHead>
             <Avatar src={eventData.coverImage} alt="User" />
-            <span className="name">Lateef</span>
+            <span className="name">{eventData.userID.firstname}</span>
           </WelcomeHead>
           <WelcomeBody>
             <p className="hello">Thank You 😊,</p>
@@ -32,7 +37,7 @@ const ThankYouModal = ({ show, close, eventData }: ComponentProps) => {
               Dolores voluptatem nihil nam enim eum velit minus in adipisci
               doloremque eligendi?
             </p>
-            <BTNLink to={`/${eventData.slug}`}>Finish</BTNLink>
+            <BTN onClick={goBack}>Finish</BTN>
           </WelcomeBody>
         </WelcomeWrapper>
       </Modal.Centered>
