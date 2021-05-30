@@ -15,7 +15,6 @@ type ComponentProps = {
 };
 
 const WelcomeModal = ({ show, close, list }: ComponentProps) => {
-  console.log(list);
   return (
     <Modal show={show} onClose={close}>
       <Modal.Centered>

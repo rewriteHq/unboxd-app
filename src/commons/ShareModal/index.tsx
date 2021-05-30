@@ -1,4 +1,3 @@
-import React from 'react';
 import { SpaceBetween } from '../UtilityStyles/Flex';
 import { PlainButton } from '../../components/Button/styles';
 import Modal from '../../components/Modal';

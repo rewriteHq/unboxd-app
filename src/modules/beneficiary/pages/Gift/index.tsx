@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { NumberFormatValues } from 'react-number-format';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router';

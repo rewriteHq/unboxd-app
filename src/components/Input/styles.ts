@@ -125,8 +125,8 @@ export const InputField = styled.div<{row?: boolean}>`
         &:checked + label:after {
           content: '';
           position: absolute;
-          left: 10px;
-          top: 16px;
+          left: 11px;
+          top: 19px;
           background: white;
           width: 2px;
           height: 2px;
@@ -163,6 +163,18 @@ export const InputField = styled.div<{row?: boolean}>`
     ${({row}) => row && css`
       label {
         right: -180px;
+      }
+    `}
+  }
+
+  @media (min-width: 432px) {
+    ${({row}) => row && css`
+      input {
+        &.styled-checkbox {
+          &:checked + label:after {
+            top: 16.5px;
+          }
+        }
       }
     `}
   }

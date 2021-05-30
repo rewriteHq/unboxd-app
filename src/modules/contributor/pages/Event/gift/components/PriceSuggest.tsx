@@ -13,7 +13,7 @@ const PillWrapper = styled(Flex)`
   flex-wrap: wrap;
 `;
 
-const PricePill = styled.button`
+const PricePill = styled.span`
   background: ${Colors.darkNavy};
   border-radius: 18px;
   padding: 1rem 1.5rem;
@@ -22,7 +22,13 @@ const PricePill = styled.button`
   color: ${Colors.white};
 
   &:not(:last-child) {
-    margin-right: 0.5rem;
+    margin-right: 0.25rem;
+  }
+
+  @media (min-width: 425px) {
+    &:not(:last-child) {
+      margin-right: 0.5rem;
+    }
   }
 `;
 

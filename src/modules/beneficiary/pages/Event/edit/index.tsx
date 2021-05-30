@@ -1,4 +1,3 @@
-import React from 'react';
 import AppState, { WishList } from '../../../../../typings';
 import * as actions from '../redux/actions';
 import { getCategories } from '../../../../resources/redux/actions';

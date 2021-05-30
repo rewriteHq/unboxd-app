@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Colors from '../../../constants/Colors';
 
 export const ContributorHeaderWrapper = styled.header`
   width: 100%;
@@ -48,4 +49,12 @@ export const AppMenu = styled.div`
       }
     }
   }
+`;
+
+export const Span = styled.span`
+  display: flex;
+  padding: 0.5rem 1rem;
+  background: ${Colors.green};
+  color: ${Colors.white};
+  border-radius: 12px;
 `;

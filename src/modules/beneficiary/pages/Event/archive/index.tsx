@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import DashboardLayout from '../../../../../commons/DashboardLayout';
 import { DashboardContainer } from '../../../../../commons/DashboardLayout/styles';
 import GiftCard from '../../../../../commons/GiftCard';

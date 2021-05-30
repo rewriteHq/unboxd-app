@@ -1,4 +1,3 @@
-import React from 'react';
 import { Total, TotalAmount } from '../styles';
 
 const TotalContribution = () => {
