@@ -20,6 +20,7 @@ const PricePill = styled.span`
   margin-bottom: 0.8rem;
   white-space: nowrap;
   color: ${Colors.white};
+  cursor: pointer;
 
   &:not(:last-child) {
     margin-right: 0.25rem;
