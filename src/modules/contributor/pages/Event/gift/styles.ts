@@ -6,6 +6,10 @@ import {
 } from '../../../../beneficiary/pages/Event/styles';
 
 export const GiftCoverTime = styled(EventCard)`
+  min-height: 250px;
+  max-height: 265px;
+  margin-left: -1rem;
+  margin-right: -1rem;
   &::after {
     content: '';
     position: absolute;
@@ -19,6 +23,15 @@ export const GiftCoverTime = styled(EventCard)`
       rgba(0, 0, 0, 0) 85.87%
     );
     z-index: 1;
+  }
+
+  img {
+    height: 100%;
+  }
+
+  @media (min-width: 375px) {
+    margin-left: 0rem;
+    margin-right: 0rem;
   }
 `;
 
@@ -60,7 +73,7 @@ export const GiftProgressPrice = styled.div`
 `;
 
 export const SuggestWrapper = styled.div`
-  padding: 2rem 0 3rem;
+  padding: 2rem 0 0;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -1,7 +1,7 @@
 import { Link, useHistory, useParams } from 'react-router-dom';
 import Logo from '../../../components/Logo';
 import AppWrapper from '../../AppWrapper';
-import { ContributorHeaderWrapper, AppMenu } from './styles';
+import { ContributorHeaderWrapper, AppMenu, Span } from './styles';
 
 type ParamTypes = {
   username: string;
@@ -11,7 +11,12 @@ type ParamTypes = {
 const ContributorHeader = () => {
   const history = useHistory();
   const { username, slug } = useParams<ParamTypes>();
-  const LogoClick = () => history.push(`/${username}/${slug}`);
+  const path = window.location.pathname;
+  const LogoClick = () => {
+    slug ? history.push(`/${username}/${slug}`) : history.push('/')
+  };
+
+  const GoBack = () => history.goBack();
 
   return (
     <ContributorHeaderWrapper>
@@ -19,7 +24,13 @@ const ContributorHeader = () => {
         <div className="header-content">
           <Logo click={LogoClick} />
           <AppMenu>
-            <Link to="/about">About Unboxd</Link>
+            {
+              path === '/about' ? (
+                <Span onClick={GoBack}>go back</Span>
+              ) : (
+                <Link to="/about">About Unboxd</Link>
+              )
+            }
           </AppMenu>
         </div>
       </AppWrapper>

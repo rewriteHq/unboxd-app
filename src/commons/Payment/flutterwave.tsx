@@ -9,6 +9,7 @@ type PropsTypes = {
   email: string;
   event: string;
   success: () => void;
+  close: () => void;
 };
 
 const PayWithFlutterwave = ({
@@ -17,6 +18,7 @@ const PayWithFlutterwave = ({
   email,
   event,
   success,
+  close,
 }: PropsTypes) => {
   const successReference = useRef('');
   const config = {
@@ -65,10 +67,10 @@ const PayWithFlutterwave = ({
             }
           }
         },
-        onClose: () => {},
+        onClose: () => close()
       });
     }
-  }, [handlePayment, reference, success]);
+  }, [handlePayment, reference, success, close]);
 
   return null;
 };

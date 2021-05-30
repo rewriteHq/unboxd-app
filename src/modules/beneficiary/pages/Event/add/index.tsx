@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import shortid from 'shortid';
 import * as R from 'ramda';
 import { useHistory, useParams } from 'react-router';

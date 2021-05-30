@@ -1,4 +1,4 @@
-import React from 'react';
+import { Link } from 'react-router-dom';
 import Avatar from '../../../../../../commons/Avatar';
 import { BTN } from '../../../../../../components/Button/styles';
 import Modal from '../../../../../../components/Modal';
@@ -7,7 +7,7 @@ import {
   WelcomeHead,
   WelcomeWrapper,
 } from '../../../../routes/styles';
-import { EventData } from './PaymentForm';
+import { EventData } from '../index'
 
 type ComponentProps = {
   show: boolean;
@@ -26,18 +26,19 @@ const ThankYouModal = ({ show, close, eventData }: ComponentProps) => {
       <Modal.Centered>
         <WelcomeWrapper>
           <WelcomeHead>
-            <Avatar src={eventData.coverImage} alt="User" />
-            <span className="name">{eventData.userID.firstname}</span>
+            <Avatar src={eventData?.coverImage} alt="User" />
+            <span className="name">{eventData?.userID.firstname}</span>
           </WelcomeHead>
           <WelcomeBody>
             <p className="hello">Thank You 😊,</p>
             <p className="note">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore,
-              cum culpa! Assumenda dolor culpa asperiores vel ea dolorem?
-              Dolores voluptatem nihil nam enim eum velit minus in adipisci
-              doloremque eligendi?
+              I sincerely appreciate you for this gesture, 
+              you don't know how much it means to me, 
+              but I want you to know it means a lot. 
+              I can't thank you enough.
             </p>
             <BTN onClick={goBack}>Finish</BTN>
+            <Link to="/">Create your own list</Link>
           </WelcomeBody>
         </WelcomeWrapper>
       </Modal.Centered>

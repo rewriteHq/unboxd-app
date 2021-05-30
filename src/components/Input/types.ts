@@ -15,5 +15,6 @@ export interface InputComponentProps
   showCallToAction?: boolean;
   callToAction?: React.FC;
   isPassword?: boolean;
+  isPhone?: boolean;
   ctaClick?: () => void;
 }

@@ -1,156 +1,144 @@
-import { useCallback, useState } from 'react';
-import { NumberFormatValues } from 'react-number-format';
-import { connect } from 'react-redux';
-import { AnyAction, Dispatch } from 'redux';
-import PayWithFlutterwave from '../../../../../../commons/Payment/flutterwave';
-import Button from '../../../../../../components/Button';
-import PriceInput from '../../../../../../components/Input/price';
-import { WishList } from '../../../../../../typings';
-import Notify from '../../../../../../utils/notify/notify';
-import { isEmail } from '../../../../../../utils/validate';
-import { LOADING_UI } from '../../../../../auth/pages/Login/redux/types';
-import { getPaymentReference } from '../services';
-import { SuggestWrapper } from '../styles';
-import ThankYouModal from './ThankYouModal';
-import PrePaymentModal from './PrePayment';
+// import { useCallback, useState } from 'react';
+// import { NumberFormatValues } from 'react-number-format';
+// import { connect } from 'react-redux';
+// import { AnyAction, Dispatch } from 'redux';
+// import PayWithFlutterwave from '../../../../../../commons/Payment/flutterwave';
+// import PriceInput from '../../../../../../components/Input/price';
+// import { WishList } from '../../../../../../typings';
+// import Notify from '../../../../../../utils/notify/notify';
+// import { isEmail } from '../../../../../../utils/validate';
+// import { LOADING_UI } from '../../../../../auth/pages/Login/redux/types';
+// import { getPaymentReference } from '../services';
+// import ThankYouModal from './ThankYouModal';
+// import PrePaymentModal from './PrePayment';
 
-export interface EventData extends WishList {
-  giftId: string;
-}
+// export interface EventData extends WishList {
+//   giftId: string;
+// }
 
-type ComponentProps = {
-  price: number | string;
-  eventData: EventData;
-  setLoading: (payload: boolean) => void;
-};
+// type ComponentProps = {
+//   price: number | string;
+//   eventData: EventData;
+//   setLoading: (payload: boolean) => void;
+//   next: boolean;
+//   close: () => void;
+// };
 
-const PaymentForm = ({ price, eventData, setLoading }: ComponentProps) => {
-  const [data, setData] = useState({
-    amount: price,
-    email: '',
-    phone: '',
-    name: '',
-    anonymous: false,
-  });
-  const [reference, setReference] = useState('');
-  const [successModal, setSuccessModal] = useState(false);
-  const [next, setNext] = useState<boolean>(false);
+// const PaymentForm = ({ price, eventData, setLoading, next, close }: ComponentProps) => {
+//   const [data, setData] = useState({
+//     amount: price,
+//     email: '',
+//     phone: '',
+//     name: '',
+//     anonymous: false,
+//   });
+//   const [reference, setReference] = useState('');
+//   const [successModal, setSuccessModal] = useState(false);
 
-  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, name } = e.target;
-    if(e.target.name === "anonymous") {
-      if(e.target.checked) {
-        setData((prev) => ({...prev, anonymous: true}))
-      }
-    } else {
-      setData((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
-    }
-  }, []);
+//   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+//     const { value, name } = e.target;
+//     if (e.target.name === 'anonymous') {
+//       if (e.target.checked) {
+//         setData((prev) => ({ ...prev, anonymous: true }));
+//       }
+//     } else {
+//       setData((prev) => ({
+//         ...prev,
+//         [name]: value,
+//       }));
+//     }
+//   }, []);
 
-  const changePrice = useCallback(({ value }: NumberFormatValues) => {
-    if (+value > 500000) {
-      return Notify.top('Kindly input an amount less than 500,000');
-    }
-    setData((prev) => ({ ...prev, amount: value }));
-  }, []);
+//   const changePrice = useCallback(({ value }: NumberFormatValues) => {
+//     if (+value > 500000) {
+//       return Notify.top('Kindly input an amount less than 500,000');
+//     }
+//     setData((prev) => ({ ...prev, amount: value }));
+//   }, []);
 
-  const handleNext = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setNext(true);
-  }
+//   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+//     e.preventDefault();
+//     const { amount, email, anonymous } = data;
+//     const token = localStorage.getItem('token');
 
-  const handleClose = () => setNext(false);
+//     if (!amount) {
+//       return Notify.top('Kindly input an amount to be paid');
+//     }
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const { amount, email, anonymous } = data;
-    const token = localStorage.getItem('token');
+//     if (!email || !isEmail(email)) {
+//       return Notify.top('Please enter a valid email address');
+//     }
 
-    if (!amount) {
-      return Notify.top('Kindly input an amount to be paid');
-    }
+//     const payload = {
+//       amount: +amount,
+//       email,
+//       listId: eventData._id,
+//       giftId: eventData.giftId,
+//       givingType: token ? 'user' : anonymous ? 'anonymous' : 'guest',
+//       givingTo: eventData.userID._id,
+//     };
 
-    if (!email || !isEmail(email)) {
-      return Notify.top('Please enter a valid email address');
-    }
+//     setLoading(true);
+//     const [err, result] = await getPaymentReference(payload);
+//     setLoading(false);
 
-    const payload = {
-      amount: +amount,
-      email,
-      listId: eventData._id,
-      giftId: eventData.giftId,
-      givingType: token ? 'user' : (anonymous ? 'anonymous' : 'guest'),
-      givingTo: eventData.userID._id,
-    };
+//     if (err) {
+//       return;
+//     }
 
-    setLoading(true);
-    const [err, result] = await getPaymentReference(payload);
-    setLoading(false);
+//     setReference(result.reference);
+//   };
 
-    if (err) {
-      return;
-    }
+//   const toggleSuccessModal = useCallback(
+//     () => setSuccessModal((prev) => !prev),
+//     []
+//   );
 
-    setReference(result.reference);
-  };
+//   const paymentSuccess = useCallback(() => {
+//     setReference('');
+//     setSuccessModal(true);
+//   }, []);
 
-  const toggleSuccessModal = useCallback(
-    () => setSuccessModal((prev) => !prev),
-    []
-  );
+//   return (
+//     <>
+//       <PriceInput
+//         onChange={changePrice}
+//         name="amount"
+//         value={data.amount}
+//         label="Amount to pay"
+//       />
 
-  const paymentSuccess = useCallback(() => {
-    setReference('');
-    setSuccessModal(true);
-  }, []);
+//       {next && (
+//         <PrePaymentModal
+//           close={close}
+//           change={handleChange}
+//           submit={handleSubmit}
+//           data={data}
+//         />
+//       )}
 
-  return (
-    <>
-      <SuggestWrapper>
-        <p>State the amount you will be contributing</p>
+//       {reference && (
+//         <PayWithFlutterwave
+//           amount={+data.amount}
+//           email={data.email}
+//           event={eventData.title}
+//           reference={reference}
+//           success={paymentSuccess}
+//         />
+//       )}
 
-        <form onSubmit={handleNext}>
-          <PriceInput
-            onChange={changePrice}
-            name="amount"
-            value={data.amount}
-            label="Amount to pay"
-          />
-          <Button type="submit">Contribute</Button>
-        </form>
-      </SuggestWrapper>
+//       <ThankYouModal
+//         show={successModal}
+//         close={toggleSuccessModal}
+//         eventData={eventData}
+//       />
+//     </>
+//   );
+// };
 
-      {next && <PrePaymentModal
-        close={handleClose}
-        change={handleChange}
-        submit={handleSubmit}
-        data={data}
-      />}
+// const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
+//   setLoading: (payload: boolean) => dispatch({ type: LOADING_UI, payload }),
+// });
 
-      {reference && (
-        <PayWithFlutterwave
-          amount={+data.amount}
-          email={data.email}
-          event={eventData.title}
-          reference={reference}
-          success={paymentSuccess}
-        />
-      )}
-
-      <ThankYouModal
-        show={successModal}
-        close={toggleSuccessModal}
-        eventData={eventData}
-      />
-    </>
-  );
-};
-
-const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
-  setLoading: (payload: boolean) => dispatch({ type: LOADING_UI, payload }),
-});
-
-export default connect(null, mapDispatchToProps)(PaymentForm);
+// export default connect(null, mapDispatchToProps)(PaymentForm);
+export const PaymentForm = () => {}

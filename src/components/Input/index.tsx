@@ -7,6 +7,7 @@ const Input: React.FC<InputComponentProps> = ({
   showCallToAction,
   callToAction: CallToAction,
   isPassword,
+  isPhone,
   ctaClick,
   ...props
 }) => {
@@ -21,6 +22,7 @@ const Input: React.FC<InputComponentProps> = ({
         <input
           {...props}
           type={isPassword ? (showPassword ? 'text' : 'password') : props.type}
+          inputMode={isPhone ? 'numeric' : 'text'}
           ref={register}
         />
         {showCallToAction && CallToAction && (

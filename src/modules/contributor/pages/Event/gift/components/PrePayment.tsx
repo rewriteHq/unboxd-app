@@ -28,7 +28,7 @@ const PrePayment = ({ close, change, submit, data }: ComponentProps) => {
           <p>You're contributing for the first time,<span> filling the information below will enable you make contributions seamlessly from here on. You will only need to do this once.</span></p>
         </div>
         <PrePaymentForm onSubmit={submit}>
-          <p>Select contrubutor display name</p>
+          <p>Enter sender details</p>
 
           <Input
             onChange={change}
