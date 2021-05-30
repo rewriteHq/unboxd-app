@@ -1,5 +1,4 @@
 import { Link, useHistory, useParams } from 'react-router-dom';
-import Button from '../../../components/Button';
 import Logo from '../../../components/Logo';
 import AppWrapper from '../../AppWrapper';
 import { ContributorHeaderWrapper, AppMenu, Span } from './styles';
