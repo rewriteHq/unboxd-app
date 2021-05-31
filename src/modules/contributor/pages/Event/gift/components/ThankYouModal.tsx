@@ -38,7 +38,7 @@ const ThankYouModal = ({ show, close, eventData }: ComponentProps) => {
               I can't thank you enough.
             </p>
             <BTN onClick={goBack}>Finish</BTN>
-            <Link to="/">Create your own list</Link>
+            <Link className="create" to="/">create your own list</Link>
           </WelcomeBody>
         </WelcomeWrapper>
       </Modal.Centered>
