@@ -35,4 +35,8 @@ export const WelcomeBody = styled.div`
     font-size: 18px;
     line-height: 1.35;
   }
+
+  .create {
+    margin: 0.25rem auto;
+  }
 `;
