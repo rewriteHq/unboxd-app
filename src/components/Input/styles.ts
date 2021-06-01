@@ -79,6 +79,7 @@ export const InputField = styled.div<{row?: boolean}>`
           position: relative;
           cursor: pointer;
           padding: 0;
+          color: ${Colors.darkNavy};
         }
       
         // Box.
