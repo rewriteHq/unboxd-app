@@ -147,7 +147,7 @@ const Gift = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const { amount, email, anonymous } = paymentData;
+    const { amount, email, anonymous, name, phone } = paymentData;
     const token = localStorage.getItem('token');
 
     if (!amount) {
@@ -165,6 +165,11 @@ const Gift = () => {
       giftId: eventData?.giftId!,
       givingType: token ? 'user' : anonymous ? 'anonymous' : 'guest',
       givingTo: eventData?.userID!._id!,
+      giver: {
+        email,
+        name,
+        phoneNumber: phone,
+      }
     };
 
     setLoading(true);
