@@ -8,6 +8,11 @@ interface RequestData {
   givingTo: string;
   amount: number;
   email: string;
+  giver: {
+    email: string;
+    name: string;
+    phoneNumber: string;
+  }
 }
 
 interface VerifyTypes {
