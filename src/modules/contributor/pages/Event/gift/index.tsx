@@ -244,7 +244,7 @@ const Gift = () => {
                   label="Amount to pay"
                 />
               )}
-              <Button onClick={complete}>Contribute</Button>
+              <Button className={+paymentData.amount > 0 ? "null" : "disabled"} onClick={complete} disabled={+paymentData.amount > 0 ? false : true}>Contribute</Button>
 
               {next && (
                 <PrePaymentModal

@@ -14,6 +14,8 @@ const PriceInput: React.FC<InputComponentProps> = ({ register, ...props }) => {
           value={props.value}
           onValueChange={props.onChange}
           decimalScale={2}
+          defaultValue="0.00"
+          allowNegative={false}
         />
       </div>
     </InputField>
