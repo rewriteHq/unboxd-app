@@ -16,6 +16,11 @@ export const button = css`
   font-weight: ${Sizes.normalWeight};
   font-size: calc(${Sizes.fourteen}px + 1px);
   height: 64px;
+
+  &.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 `;
 
 export const BTN = styled.button`
