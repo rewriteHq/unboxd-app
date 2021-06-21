@@ -27,7 +27,7 @@ export const Card = Styled.div`
 
   .card-content {
     display: grid;
-    grid-template-colums: 1fr;
+    grid-template-columns: 1fr;
     align-items: center;
     padding: 1rem;
     flex: 1;
