@@ -26,15 +26,22 @@ export const Card = Styled.div`
   }
 
   .card-content {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-colums: 1fr;
     align-items: center;
     padding: 1rem;
+    flex: 1;
+
+    &__bottom {
+     align-self: flex-end;
+     padding-top: 0.25rem;
+    }
 
     .name {
       font-size: 14px;
       font-weight: 100;
       padding-bottom: 0.25rem;
+      align-self: flex-start;
     }
 
     .price {
