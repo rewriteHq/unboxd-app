@@ -171,3 +171,7 @@ export const Spacer = styled.hr`
   margin: 1rem 0;
   opacity: 0.6;
 `;
+
+export const Row = styled.div`
+  display: flex;
+`;
