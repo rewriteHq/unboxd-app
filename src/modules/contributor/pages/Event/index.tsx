@@ -18,6 +18,7 @@ import { GiftList, EventCardContent } from './styles';
 import WelcomeModal from './components/WelcomeModal';
 import Skeleton from 'react-loading-skeleton';
 import PageLoader from '../../../../components/PageLoader';
+import { configureListName } from '../../../../utils/helpers/configureName';
 
 type ParamTypes = {
   username: string;
@@ -86,7 +87,7 @@ const Event = () => {
           <Skeleton height={250} />
         )}
 
-        <NeedText>Choose what to gift <em>{wishlist.userID.firstname}</em></NeedText>
+        <NeedText>Choose what to gift <em>{wishlist.categoryID.name === 'Wedding' ? configureListName(slug) : wishlist.userID.firstname}</em></NeedText>
 
         <GiftList>
           {wishlist.gifts.map((gift) => (
