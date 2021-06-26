@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import AppState from '../../typings';
 import { GlobalStoreState } from '../../store/types';
 import { getUserData } from '../../modules/auth/pages/Login/redux/actions';
+import { getUserWishList } from '../../modules/beneficiary/pages/Dashboard/redux/actions';
 
 const DashboardLayout: React.FC<LayoutProps> = ({
   children,
@@ -30,6 +31,7 @@ const DashboardLayout: React.FC<LayoutProps> = ({
   useEffect(() => {
     if (!credentials) {
       dispatch(getUserData());
+      dispatch(getUserWishList());
     }
   }, [credentials, dispatch]);
 

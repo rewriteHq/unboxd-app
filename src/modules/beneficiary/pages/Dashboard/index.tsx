@@ -3,9 +3,13 @@ import DashboardLayout from '../../../../commons/DashboardLayout';
 import { MyUnboxdListHeader, WishList } from './styles';
 import Logo from '../../../../components/Logo';
 import WishCard from '../../../../components/WishCard';
-import wishes from '../../../../mocks/wishes.json';
+import { useSelector } from 'react-redux';
+import { GlobalStoreState } from '../../../../store/types';
+
+const fallbackImage =  "/assets/birthday.jpg";
 
 const Dashboard: React.FC<ComponentProps> = () => {
+  const {data: wishlist} = useSelector((state : GlobalStoreState ) => state.wishlist);
   return (
     <DashboardLayout>
       <MyUnboxdListHeader>
@@ -16,12 +20,12 @@ const Dashboard: React.FC<ComponentProps> = () => {
         </p>
       </MyUnboxdListHeader>
       <WishList>
-        {wishes.map((wish) => (
+        {wishlist.map((wish) => (
           <WishCard
-            key={wish.title}
+            key={wish._id}
             title={wish.title}
-            wishCount={wish.count}
-            imgSrc={wish.imgSrc}
+            wishCount={wish.gifts.length}
+            imgSrc={wish.coverImage || fallbackImage}
           />
         ))}
       </WishList>

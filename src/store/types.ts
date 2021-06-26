@@ -1,4 +1,5 @@
 import store from '.';
+import { WishList } from '../typings';
 
 export type AppDispatch = typeof store.dispatch;
 
@@ -15,6 +16,7 @@ export type GlobalStoreState = {
   };
 
   gifts: { data: any; error: string | null };
+  wishlist: { data: WishList[]};
   resources: { data: { categories: Array<any> }; error: string | null };
   user: {
     authenticated: boolean;
