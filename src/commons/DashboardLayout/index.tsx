@@ -27,13 +27,14 @@ const DashboardLayout: React.FC<LayoutProps> = ({
   const dispatch = useDispatch();
   const { link } = useSelector((state: AppState) => state.beneficiary);
   const { credentials } = useSelector((state: GlobalStoreState) => state.user);
+  const { data:wishlist } = useSelector((state: GlobalStoreState) => state.wishlist);
 
   useEffect(() => {
     if (!credentials) {
       dispatch(getUserData());
       dispatch(getUserWishList());
     }
-  }, [credentials, dispatch]);
+  }, [credentials, dispatch, wishlist]);
 
   return (
     <>
