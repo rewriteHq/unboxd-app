@@ -1,7 +1,6 @@
 import { TabItemContainer } from '../styles';
 import dayjs from 'dayjs';
 import { formatNumber } from 'utils/helpers/formatNumber';
-import isWithinInterval from 'date-fns/fp/isWithinInterval';
 import { ReactComponent as RequestIcon } from 'assets/img/icons/request.svg';
 import { ReactComponent as ReceivedIcon } from 'assets/img/icons/received.svg';
 
@@ -23,7 +22,7 @@ export const TabItem = ({
   return (
     <TabItemContainer>
       <div className="left">
-        {isWithDrawal ? <RequestIcon /> : <ReceivedIcon />}
+        {isWithDrawal ? <RequestIcon/> : <ReceivedIcon  style={{transform:"rotate(180deg)"}} />}
         <div>
           <p>
             {isWithDrawal ? 'Requested' : 'Received'} <span>from</span> {source}
