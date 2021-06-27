@@ -13,6 +13,7 @@ const addGift = lazy(() => import('../pages/Gift/add'));
 const editGift = lazy(() => import('../pages/Gift/edit'));
 const gift = lazy(() => import('../pages/Gift'));
 const archive = lazy(() => import('../pages/Event/archive'));
+const walletPage = lazy(() => import('../pages/Wallet/WalletPage'))
 
 const routes: RouteType[] = [
   {
@@ -32,6 +33,12 @@ const routes: RouteType[] = [
     exact: true,
     auth: true,
     component: settings,
+  },
+  {
+    path: '/wallet',
+    exact: true,
+    auth: true,
+    component: walletPage,
   },
   {
     path: '/event/create',
