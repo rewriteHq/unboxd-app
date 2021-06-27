@@ -13,7 +13,6 @@ interface IDispatch {
 export const getUserWishList = () => (dispatch: Dispatch<IDispatch>) => {
   API.get('/list/user')
     .then((res) => {
-      console.log('WISH LIST', res);
       dispatch({
         type: SET_WISH_LIST,
         payload: res.data.payload,
