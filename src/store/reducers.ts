@@ -5,6 +5,7 @@ import giftReducer from '../modules/beneficiary/pages/Gift/redux/reducer';
 import resourcesReducer from '../modules/resources/redux/reducer';
 import contributorReducer from '../modules/contributor/redux/reducer';
 import beneficiaryReducer from '../modules/beneficiary/redux/reducers';
+import wishlistReducer from '../modules/beneficiary/pages/Dashboard/redux/reducer'
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   resources: resourcesReducer,
   contributor: contributorReducer,
   beneficiary: beneficiaryReducer,
+  wishlist: wishlistReducer
 });
 
 export default rootReducer;
