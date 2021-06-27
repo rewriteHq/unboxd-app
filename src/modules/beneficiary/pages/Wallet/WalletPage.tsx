@@ -11,6 +11,7 @@ const WalletPage: React.FC<any> = () => {
 
   const handleChangeTab = (index: number) => {
     setCurrentTab(index);
+    // OTHER ACTIONS HERE
   };
   return (
     <DashboardLayout hideWalletSection>
