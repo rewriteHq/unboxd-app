@@ -23,30 +23,33 @@ const WalletPage = () => {
             <TabPane
               title="Contributions"
               isActive={currentTab === 0}
-              onChange={() => handleChangeTab(0)}
+              onChangeTab={() => handleChangeTab(0)}
             />
             <TabPane
               title="Withdrawals"
               isActive={currentTab === 1}
-              onChange={() => handleChangeTab(1)}
+              onChangeTab={() => handleChangeTab(1)}
             />
           </TabList>
 
           <TabPanels>
             {currentTab === 0 ? (
               <TabPanel>
-                {walletHistory.map((item) => (
+                {walletHistory.map((item, index) => (
+                  <React.Fragment key={index}>
                   <TabItem
                     date={item.date}
                     source={item.source}
                     amount={item.amount}
                     giftTitle={item.giftTitle}
                   />
+                  </React.Fragment>
                 ))}
               </TabPanel>
             ) : (
               <TabPanel>
-                {walletHistory.map((item) => (
+                {walletHistory.map((item, index) => (
+                  <React.Fragment key={index}>
                   <TabItem
                     isWithDrawal
                     date={item.date}
@@ -54,6 +57,7 @@ const WalletPage = () => {
                     amount={item.amount}
                     giftTitle={item.giftTitle}
                   />
+                  </React.Fragment>
                 ))}
               </TabPanel>
             )}

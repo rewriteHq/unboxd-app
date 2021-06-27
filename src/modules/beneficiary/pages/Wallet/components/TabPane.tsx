@@ -4,12 +4,12 @@ import { Tab } from '../styles'
 interface ITabProps {
     title:string;
     isActive: boolean;
-    onChange: () => void;
+    onChangeTab: () => void;
 }
 
-export const TabPane = ({title, isActive, onChange}: ITabProps) => {
+export const TabPane = ({title, isActive, onChangeTab}: ITabProps) => {
     return (
-       <Tab className={`${isActive && 'activeTab'}`} onClick={onChange}>
+       <Tab className={`${isActive && 'activeTab'}`} onClick={onChangeTab}>
            {title}
        </Tab>
     )
