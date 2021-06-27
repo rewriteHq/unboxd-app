@@ -6,7 +6,7 @@ import { TabPane } from './components/TabPane';
 import { TabItem } from './components/TabItem';
 import walletHistory from './walletHistory.json';
 
-const WalletPage: React.FC<any> = () => {
+const WalletPage = () => {
   const [currentTab, setCurrentTab] = useState(0);
 
   const handleChangeTab = (index: number) => {
