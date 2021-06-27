@@ -22,6 +22,7 @@ const Colors = {
   offWhite: '#979797',
   realGreen: '#8CC087',
   lineBlack: '#3F3F3F',
+  grey100: '#838383'
 };
 
 export default Colors;
