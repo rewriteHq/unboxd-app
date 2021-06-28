@@ -1,6 +1,8 @@
 import { WalletBalanceBig } from '../styles'
 import {ReactComponent as RequestIcon} from "assets/img/icons/request.svg";
 import { formatNumber } from 'utils/helpers/formatNumber';
+import { Link, useRouteMatch } from "react-router-dom";
+
 
 interface IWalletOverviewCardProps {
   balance: number;
@@ -8,6 +10,7 @@ interface IWalletOverviewCardProps {
 }
 
 export const WalletOverviewCard = ({balance}: IWalletOverviewCardProps) => {
+  const { url } = useRouteMatch();
     return (
         <WalletBalanceBig>
         <div className="circle-1"/>
@@ -19,8 +22,10 @@ export const WalletOverviewCard = ({balance}: IWalletOverviewCardProps) => {
         </div>
 
         <div className="right">
-          <span>Request payout</span>
+          <Link to={`${url}/request-payout`}>
+            <span>Request payout</span>
           <RequestIcon/>
+            </Link>
         </div>
       </WalletBalanceBig>
     )

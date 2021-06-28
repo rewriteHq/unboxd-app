@@ -13,7 +13,8 @@ const addGift = lazy(() => import('../pages/Gift/add'));
 const editGift = lazy(() => import('../pages/Gift/edit'));
 const gift = lazy(() => import('../pages/Gift'));
 const archive = lazy(() => import('../pages/Event/archive'));
-const walletPage = lazy(() => import('../pages/Wallet/WalletPage'))
+const wallet = lazy(() => import('../pages/Wallet/Wallet'))
+const walletPayout = lazy(() => import('../pages/Wallet/WalletPayout'))
 
 const routes: RouteType[] = [
   {
@@ -38,7 +39,13 @@ const routes: RouteType[] = [
     path: '/wallet',
     exact: true,
     auth: true,
-    component: walletPage,
+    component: wallet,
+  },
+  {
+    path: '/wallet/request-payout',
+    exact: true,
+    auth: true,
+    component: walletPayout,
   },
   {
     path: '/event/create',
