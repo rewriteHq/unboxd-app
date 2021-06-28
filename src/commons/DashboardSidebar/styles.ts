@@ -1,3 +1,4 @@
+import Colors from 'constants/Colors';
 import styled from 'styled-components';
 
 export const SidebarWrapper = styled.aside`
@@ -26,12 +27,16 @@ export const SidebarWrapper = styled.aside`
       transition: all .2s ease-in;
 
       :hover{
-        background-color: #22242C;
+        background-color: ${Colors.navy};
       }
       svg {
         margin-right: 10px;
         min-width: 22px;
       }
+    }
+
+    a.activeLink{
+      background-color: ${Colors.navy};
     }
     a.feedback {
       margin-top: auto;
