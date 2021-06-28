@@ -3,6 +3,7 @@ import Colors from '../../constants/Colors';
 
 export const WishCardWrapper = styled.div`
   min-width: 366px;
+  max-height: 177px;
   flex: 0 0 48%;
   border-radius: 18px;
   position: relative;
