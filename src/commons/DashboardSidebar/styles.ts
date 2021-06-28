@@ -15,15 +15,19 @@ export const SidebarWrapper = styled.aside`
     border-radius: 18px;
     display: flex;
     flex-direction: column;
-    padding: 50px 30px 20px 30px;
+    padding: 50px 0;
     a {
       font-size: 17px;
       display: flex;
       align-items: center;
-      margin-bottom: 30px;
       width: 100%;
       font-weight: 300;
+      padding: 1em 1.7em;
+      transition: all .2s ease-in;
 
+      :hover{
+        background-color: #22242C;
+      }
       svg {
         margin-right: 10px;
         min-width: 22px;
@@ -35,6 +39,7 @@ export const SidebarWrapper = styled.aside`
     }
     .nav-footer {
       margin-top: auto;
+      padding: 1em 1.7em;
       h3 {
         font-weight: 400;
         margin-bottom: 15px;
