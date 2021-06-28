@@ -14,19 +14,19 @@ const DashboardSidebar: React.FC = () => {
   return (
     <SidebarWrapper>
       <nav className="main-nav">
-        <NavLink to="/wallet">
+        <NavLink to="/wallet" activeClassName="activeLink">
           <WalletIcon />
           <span>Wallet</span>
         </NavLink>
-        <NavLink to="/dashboard">
+        <NavLink to="/dashboard" activeClassName="activeLink">
           <HeartIcon />
           <span>Wishlist</span>
         </NavLink>
-        <NavLink to="/profile">
+        <NavLink to="/profile" activeClassName="activeLink">
           <UserIcon />
           <span>Edit Profile</span>
         </NavLink>
-        <NavLink to="/settings">
+        <NavLink to="/settings" activeClassName="activeLink">
           <SettingsIcon />
           <span>Settings</span>
         </NavLink>
