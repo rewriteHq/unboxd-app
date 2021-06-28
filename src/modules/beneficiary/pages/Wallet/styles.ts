@@ -120,7 +120,7 @@ export const Tab = styled.button`
   font-size: 1rem;
   font-weight: lighter;
   padding: 0em 3em 0.5em 3em;
-  color: ${Colors.grey100};
+  color: ${Colors.black100};
   background-color: transparent;
 
   @media (max-width: 767px) {
@@ -134,13 +134,13 @@ export const Tab = styled.button`
 
 export const TabList = styled.div`
   display: flex;
-  border-bottom: 1px solid ${Colors.grey100};
+  border-bottom: 1px solid ${Colors.black100};
 `;
 
 export const TabItemContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  border-bottom: 0.5px solid #353535;
+  border-bottom: 0.5px solid ${Colors.black200};
   padding: 1em 0em;
   line-height: 1.3rem;
 
@@ -154,7 +154,7 @@ export const TabItemContainer = styled.div`
     }
   }
   span {
-    color: ${Colors.grey100};
+    color: ${Colors.black100};
     font-weight: lighter;
     font-size: 0.9rem;
   }
