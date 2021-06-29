@@ -25,6 +25,14 @@ export const button = css`
 
 export const BTN = styled.button`
   ${button}
+  transition: all .2s ease;
+  :hover{
+    transform: translateY(-4px);
+    background-color: ${Colors.textGreen};
+  }
+  :active{
+    transform: translateY(0);
+  }
 `;
 
 export const BTNLink = styled(Link)`

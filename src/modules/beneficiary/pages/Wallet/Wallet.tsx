@@ -6,7 +6,7 @@ import { TabPane } from './components/TabPane';
 import { TabItem } from './components/TabItem';
 import walletHistory from './walletHistory.json';
 
-const WalletPage = () => {
+const Wallet = () => {
   const [currentTab, setCurrentTab] = useState(0);
 
   const handleChangeTab = (index: number) => {
@@ -68,4 +68,4 @@ const WalletPage = () => {
   );
 };
 
-export default WalletPage;
+export default Wallet;

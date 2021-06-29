@@ -81,6 +81,10 @@ export const WalletBalanceBig = styled.div`
   }
 
   .right {
+    a {
+      display: flex;
+      align-items: center;
+    }
     align-self: flex-end;
     display: flex;
     align-items: center;
@@ -112,6 +116,13 @@ export const WalletBalanceBig = styled.div`
 export const WalletContainer = styled.div`
   display: grid;
   row-gap: 2rem;
+
+  header.breadCrumb {
+    span {
+      font-size: 0.8rem;
+      font-weight: normal;
+    }
+  }
 `;
 
 export const Tabs = styled.div``;
@@ -165,3 +176,51 @@ export const TabItemContainer = styled.div`
 export const TabPanels = styled.div``;
 
 export const TabPanel = styled.div``;
+
+export const FormContainer = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+
+  form {
+    h3 {
+      font-weight: normal;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .walletBalance{
+      font-size: .8rem;
+      font-weight: lighter;
+      margin-top: .8rem;
+      margin-bottom: 3rem;
+    }
+  }
+`;
+
+export const InputGroup = styled.div`
+  border-radius: 20px;
+  background-color: ${Colors.darkNavy};
+  display: flex;
+  flex-direction: column;
+  padding: 0.5em 1.5em;
+  height: 64px;
+  width: 100%;
+
+  span {
+    color: ${Colors.yellow};
+    font-size: 0.8rem;
+  }
+
+  input {
+    background-color: transparent;
+    flex: 1;
+    font-size: 1rem;    
+    color: ${Colors.white};
+
+    ::-webkit-outer-spin-button,
+    ::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+`;
