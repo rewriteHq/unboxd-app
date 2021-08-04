@@ -30,8 +30,6 @@ const Login = () => {
   const history = useHistory();
   const { loading } = useSelector((state: GlobalStoreState) => state.user);
 
-  console.log('++', loading);
-
   const [values, setValues] = useState({
     email: '',
     password: '',
