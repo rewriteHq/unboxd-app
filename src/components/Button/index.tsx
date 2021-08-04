@@ -6,7 +6,7 @@ const Button: React.FC<ButtonComponentProps> = (props) => {
     <BTN {...props}>
       {props.loading ? (
         <Spinner>
-          <img src="/assets/icons/rolling.svg" alt="loading spinner" />
+          <i className="fa fa-spinner fa-spin" aria-hidden="true"></i>
         </Spinner>
       ) : (
         props.children
