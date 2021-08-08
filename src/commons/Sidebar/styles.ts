@@ -39,6 +39,10 @@ export const NavItem = styled.li`
     height: 20px;
     margin-right: 13px;
   }
+
+  &.logout {
+    margin-top: 3.25rem;
+  }
 `;
 
 export const FindOnline = styled.div`

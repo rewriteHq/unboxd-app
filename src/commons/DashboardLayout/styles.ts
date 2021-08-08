@@ -26,7 +26,6 @@ export const Head = styled.div`
   height: 70px;
   width: 100%;
   padding: 20px;
-  margin-top: 1rem;
   @media (min-width: 769px) {
     display: none;
   }
