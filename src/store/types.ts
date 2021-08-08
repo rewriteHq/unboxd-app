@@ -16,7 +16,12 @@ export type GlobalStoreState = {
   };
 
   gifts: { data: any; error: string | null };
-  wishlist: { data: WishList[]};
+  wallet: {
+    data: { balance: number };
+    error: string | null;
+    isLoading: boolean;
+  };
+  wishlist: { data: WishList[] };
   resources: { data: { categories: Array<any> }; error: string | null };
   user: {
     authenticated: boolean;

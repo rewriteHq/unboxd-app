@@ -6,10 +6,13 @@ import WishCard from '../../../../components/WishCard';
 import { useSelector } from 'react-redux';
 import { GlobalStoreState } from '../../../../store/types';
 
-const fallbackImage =  "/assets/birthday.jpg";
+const fallbackImage = '/assets/birthday.jpg';
 
 const Dashboard: React.FC<ComponentProps> = () => {
-  const {data: wishlist} = useSelector((state : GlobalStoreState ) => state.wishlist);
+  const { data: wishlist } = useSelector(
+    (state: GlobalStoreState) => state.wishlist
+  );
+
   return (
     <DashboardLayout>
       <MyUnboxdListHeader>
