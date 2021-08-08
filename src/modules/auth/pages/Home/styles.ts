@@ -276,7 +276,9 @@ export const GetStarted = Styled.div`
 export const HowItWorks = Styled.div`
   display: flex;
   margin: 1rem auto 2rem;
-  .container {
+  .contentContainer {
+    display: flex;
+    flex-direction: column;
     min-height: 0;
   }
 `;
@@ -289,10 +291,10 @@ export const StatsArea = Styled.div`
   margin-left: -20px;
   margin-right: -20px;
   
-  .container {
-    min-height: 0;
+  .contentContainer {
     display: flex;
     flex-direction: column;
+    width: 100%;
 
     .content-stat {
       ul {
@@ -314,7 +316,7 @@ export const StatsArea = Styled.div`
   }
 
   @media (min-width: 425px) {
-    .container {
+    .contentContainer {
       flex-direction: column;
       .content-stat {
         ul {
@@ -334,7 +336,7 @@ export const StatsArea = Styled.div`
     padding: 3rem 2rem;
     margin-top: 2rem;
 
-    .container {
+    .contentContainer {
       flex-direction: row;
 
       h1 { 
@@ -359,9 +361,9 @@ export const StatsArea = Styled.div`
         background-position: top center;
         background-size: cover;
         background-repeat: no-repeat;
-        margin-bottom: -3.7rem;
+        margin-bottom: -3.1rem;
         margin-top: -7rem;
-        margin-right: -2.5rem;
+        margin-right: -1.5rem;
         margin-left: 1.5rem;
       }
     }

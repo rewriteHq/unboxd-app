@@ -77,7 +77,7 @@ const Home: React.FC<HomeComponentProps> = () => {
         </UnboxdCarousel>
 
         <HowItWorks>
-          <div className="container">
+          <div className="contentContainer">
             <PageHeading centered>How it works</PageHeading>
             <UnorderedList>
               {steps.map((step, index) => (
@@ -91,7 +91,7 @@ const Home: React.FC<HomeComponentProps> = () => {
         </HowItWorks>
 
         <StatsArea>
-          <div className="container">
+          <div className="contentContainer">
             <div className="content-stat">
               <PageHeading centered>Unboxd is growing</PageHeading>
               <Paragraph className="text-center-left">
