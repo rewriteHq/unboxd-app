@@ -22,6 +22,7 @@ export const HomeHeader = Styled(HeadWrapper)`
 export const HomeFooter = Styled(FooterWrapper)`
   padding: 3rem 0;
   opacity: 0.75;
+  border-top: 0.25px solid ${Colors.burntOrange};
   .container {
     display: flex;
     flex-direction: column;
@@ -33,15 +34,40 @@ export const HomeFooter = Styled(FooterWrapper)`
       margin-top: 1rem;
 
       a {
-        margin: 0 1rem;
+        margin: 0 0.5rem;
       }
     }
   }
 
   @media (min-width: 768px) {
-    width: 50%;
-    max-width: 1000px;
+    max-width: 800px;
     margin: 0 auto;
+
+    .container {
+      flex-direction: row;
+      justify-content: space-between;
+  
+      .nav {
+        display: flex;
+        align-items: center;
+        margin-top: 0;
+        margin-right: 2rem;
+  
+        a {
+          margin: 0 0.5rem;
+        }
+      }
+    }
+  }
+`;
+
+export const NavSide = Styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
   }
 `;
 
@@ -87,9 +113,9 @@ export const Paragraph = Styled.p`
 export const UnorderedList = Styled.ul`
   display: flex;
   flex-direction: column;
-  margin: 1rem auto;
+  margin: 2rem auto;
   li {
-    margin: 0.5rem;
+    margin: 0.5rem 0.5rem 2rem;
     display: flex;
     align-items: flex-start;
     span {
@@ -207,7 +233,7 @@ export const UnboxdCarousel = Styled.div`
   }
   @media (min-width: 780px) {
     max-height: 45vh;
-    margin-top: 0;
+    margin-top: 1rem;
     .carousel-tab {
       margin: 4rem 0;
       ul {
@@ -262,7 +288,7 @@ export const GetStarted = Styled.div`
   padding: 0 2rem;
   z-index: 3;
 
-  button {
+  a {
     max-width: 420px;
     margin: 0 auto;
   }
@@ -275,7 +301,7 @@ export const GetStarted = Styled.div`
 
 export const HowItWorks = Styled.div`
   display: flex;
-  margin: 1rem auto 2rem;
+  margin: 5rem auto;
   .contentContainer {
     display: flex;
     flex-direction: column;
@@ -374,4 +400,35 @@ export const StatsArea = Styled.div`
     margin-right: -4rem;
     margin-top: 4rem;
   }
+`;
+
+export const FindOnline = Styled.div`
+  margin: 1rem auto;
+`;
+
+export const SocialIcon = Styled.a.attrs(() => ({
+  target: '_blank',
+  rel: 'noopener noreferrer',
+}))`
+  background: ${Colors.white};
+  border-radius: 17px;
+  color: ${Colors.black};
+  font-size: 0.5rem;
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  padding: 0.4rem;
+
+  &:not(:last-child) {
+    margin-right: 1rem;
+  }
+`;
+
+export const StepTitle = Styled.h3`
+  font-size: 24px;
+  margin-bottom: 1rem;
+`;
+
+export const StepContent = Styled.p`
+  font-size: 16px;
 `;

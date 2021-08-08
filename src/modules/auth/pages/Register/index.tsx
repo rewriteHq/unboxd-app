@@ -9,7 +9,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import API from '../../../../utils/api';
 import Notify from '../../../../utils/notify/notify';
-import { SpaceBetween } from '../../../../commons/UtilityStyles/Flex';
+import { SpaceBetween, SpaceBetweenHeader } from '../../../../commons/UtilityStyles/Flex';
 import { Auth } from '../../../../components/Header/styles';
 import SocialAuth from '../../../../components/SocialAuth';
 import { ReactComponent as GoogleIcon } from '../../../../assets/img/illustrations/google.svg';
@@ -24,7 +24,6 @@ import {
 import { ReactComponent as LargeHeart } from '../../../../assets/img/illustrations/heart-large.svg';
 import { ReactComponent as SmallHeart } from '../../../../assets/img/illustrations/heart-small.svg';
 import Logo from '../../../../components/Logo';
-import Header from '../../pages/Home/header';
 import { useSelector } from 'react-redux';
 import { GlobalStoreState } from 'store/types';
 
@@ -60,9 +59,6 @@ const Register = () => {
 
   return (
     <MainContainer>
-      <div className="header">
-        <Header />
-      </div>
       <div className="description">
         <LargeHeart className="large-heart" />
         <SmallHeart className="small-heart" />
@@ -82,12 +78,12 @@ const Register = () => {
       <Layout>
         <Main>
           <div className="container">
-            <SpaceBetween align="center">
+            <SpaceBetweenHeader align="center">
               <h2>Sign up</h2>
               <Auth>
                 Got account? <Link to="/login">Sign in</Link>
               </Auth>
-            </SpaceBetween>
+            </SpaceBetweenHeader>
 
             <Form onSubmit={handleSubmit(onHandleSubmit)}>
               <SpaceBetween>

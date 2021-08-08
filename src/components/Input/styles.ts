@@ -9,7 +9,7 @@ export const InputField = styled.div<{row?: boolean}>`
   position: relative;
   padding: 10px 20px;
   margin: 10px 0;
-  background: ${(props) => props.theme.appSecondaryColor};
+  background: ${(props) => props.theme.appPrimaryColor};
   border-radius: 18px;
   height: 64px;
   overflow: hidden;
@@ -22,7 +22,7 @@ export const InputField = styled.div<{row?: boolean}>`
     input {
       flex: 3.5;
       margin-top: 0.5rem;
-      background: ${(props) => props.theme.appSecondaryColor};
+      background: ${(props) => props.theme.appPrimaryColor};
       color: ${(props) => props.theme.contentColor} !important;
       -webkit-text-fill-color: ${(props) =>
         props.theme.contentColor} !important;
@@ -79,7 +79,7 @@ export const InputField = styled.div<{row?: boolean}>`
           position: relative;
           cursor: pointer;
           padding: 0;
-          color: ${Colors.darkNavy};
+          color: ${Colors.navy};
         }
       
         // Box.

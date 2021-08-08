@@ -97,6 +97,10 @@ button {
   }
 }
 
+.hide-mobile {
+  display: none;
+}
+
 .d-flex-center {
   display: flex;
   align-items: center;
@@ -152,5 +156,9 @@ button {
 @media (min-width: 768px) {
   .text-center-left {
     text-align: left;
+  }
+
+  .hide-mobile {
+    display: flex;
   }
 }
