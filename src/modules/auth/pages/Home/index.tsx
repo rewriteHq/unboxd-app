@@ -16,9 +16,9 @@ const Layout = lazy(() => import('../../../../Layout'));
 
 const Home: React.FC<HomeComponentProps> = () => {
   const steps = [
-    "Create a list with pictures of items you want",
-    "Share with loved ones",
-    "Receive part or full contributions"
+    'Create a list with pictures of items you want',
+    'Share with loved ones',
+    'Receive part or full contributions',
   ];
 
   const tabs = [
@@ -79,12 +79,16 @@ const Home: React.FC<HomeComponentProps> = () => {
         <HowItWorks>
           <div className="container">
             <PageHeading centered>How it works</PageHeading>
+            <UnorderedList>
+              {steps.map((step, index) => (
+                <li key={index + 1}>
+                  <span>{index + 1}</span>
+                  <p>{step}</p>
+                </li>
+              ))}
+            </UnorderedList>
           </div>
         </HowItWorks>
-
-        <UnorderedList>
-          {steps.map((step, index) => <li key={index + 1}><span>{index + 1}</span>{step}</li>)}
-        </UnorderedList>
 
         <StatsArea>
           <div className="container">
