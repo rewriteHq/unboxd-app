@@ -2,10 +2,11 @@ import styled from 'styled-components';
 
 export const DashboardHeaderWrapper = styled.header`
   width: 100%;
-  background: ${(props) => props.theme.appSecondaryColor};
+  background: ${(props) => props.theme.appPrimaryColor};
   height: 80px;
   display: flex;
   align-items: center;
+
   .header-content {
     width: 100%;
     height: 100%;

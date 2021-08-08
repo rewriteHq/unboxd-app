@@ -31,3 +31,21 @@ export const SpaceBetweenHeader = styled.div<{ align?: string }>`
 export const Flex = styled.div`
   display: flex;
 `;
+
+export const SpaceBetweenForm = styled.div`
+  display: flex;
+  flex-direction: column;
+  
+  div {
+    width: 100%;
+  }
+  
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+
+    div {
+      width: 47.5%;
+    }
+  }
+`;

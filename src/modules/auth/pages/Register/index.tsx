@@ -9,7 +9,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import API from '../../../../utils/api';
 import Notify from '../../../../utils/notify/notify';
-import { SpaceBetween, SpaceBetweenHeader } from '../../../../commons/UtilityStyles/Flex';
+import { SpaceBetweenForm, SpaceBetweenHeader } from '../../../../commons/UtilityStyles/Flex';
 import { Auth } from '../../../../components/Header/styles';
 import SocialAuth from '../../../../components/SocialAuth';
 import { ReactComponent as GoogleIcon } from '../../../../assets/img/illustrations/google.svg';
@@ -86,8 +86,7 @@ const Register = () => {
             </SpaceBetweenHeader>
 
             <Form onSubmit={handleSubmit(onHandleSubmit)}>
-              <SpaceBetween>
-                <div className="marg-r">
+              <SpaceBetweenForm>
                   <Input
                     label="First name"
                     type="text"
@@ -96,7 +95,6 @@ const Register = () => {
                     register={register}
                     required
                   />
-                </div>
 
                 <Input
                   label="Last name"
@@ -106,7 +104,7 @@ const Register = () => {
                   register={register}
                   required
                 />
-              </SpaceBetween>
+              </SpaceBetweenForm>
 
               <Input
                 label="Email address"
