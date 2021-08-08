@@ -31,12 +31,12 @@ export const MainContainer = styled.div`
   width: 100%;
   height: 100vh;
   main {
-    flex: 1.7;
+    flex: 2;
     height: 100%;
     padding-top: 2rem;
   }
   .description {
-    flex: 2;
+    flex: 1.5;
   }
   .container {
     width: 70%;

@@ -21,7 +21,7 @@ export const ContributorHeaderWrapper = styled.header`
   }
 
   @media (min-width: 768px) {
-    background: ${(props) => props.theme.appSecondaryColor};
+    background: ${(props) => props.theme.appPrimaryColor};
     .header-content {
       .ub-logo {
         margin-left: 0;
