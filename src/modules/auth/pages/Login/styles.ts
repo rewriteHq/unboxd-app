@@ -33,6 +33,7 @@ export const MainContainer = styled.div`
   main {
     flex: 1.7;
     height: 100%;
+    padding-top: 2rem;
   }
   .description {
     flex: 2;
@@ -44,9 +45,11 @@ export const MainContainer = styled.div`
   .description {
     display: flex;
     flex-direction: column;
-    background: ${(props) => props.theme.appSecondaryColor};
+    background: ${(props) => props.theme.appPrimaryColor};
     position: relative;
     color: ${(props) => props.theme.contentColor};
+    overflow: hidden;
+
     .large-heart,
     .small-heart {
       position: absolute;

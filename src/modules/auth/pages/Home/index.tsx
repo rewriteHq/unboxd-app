@@ -9,6 +9,8 @@ import {
   UnorderedList,
   StatsArea,
   HowItWorks,
+  StepTitle,
+  StepContent,
 } from './styles';
 import { BTNLink } from '../../../../components/Button/styles';
 
@@ -16,9 +18,9 @@ const Layout = lazy(() => import('../../../../Layout'));
 
 const Home: React.FC<HomeComponentProps> = () => {
   const steps = [
-    'Create a list with pictures of items you want',
-    'Share with loved ones',
-    'Receive part or full contributions',
+    {title: 'Create Wishlist', content: 'With unboxd, you can do more than a bland list on notes. You can add image, price and description'},
+    {title: 'Share Around', content: 'You get a customized link to share your wish on any social platform of choice'},
+    {title: 'Request Payout', content: 'Whether you have raised all that you need or part of it, your monry is sent to your local account when you request for it'},
   ];
 
   const tabs = [
@@ -57,23 +59,8 @@ const Home: React.FC<HomeComponentProps> = () => {
           <div className="carousel"></div>
           <div className="bottom-overlay"></div>
           <GetStarted>
-            <BTNLink to="/register">Get Started</BTNLink>
+            <BTNLink to="/register">Try Unboxd</BTNLink>
           </GetStarted>
-        </UnboxdCarousel>
-
-        <UnboxdCarousel>
-          <div className="carousel-tab">
-            <ul>
-              {tabs.map((item, index) => (
-                <li
-                  key={index}
-                  className={item.active ? 'active list-item' : 'list-item'}
-                >
-                  {item.name} {item.active ? item.icon : null}
-                </li>
-              ))}
-            </ul>
-          </div>
         </UnboxdCarousel>
 
         <HowItWorks>
@@ -83,7 +70,10 @@ const Home: React.FC<HomeComponentProps> = () => {
               {steps.map((step, index) => (
                 <li key={index + 1}>
                   <span>{index + 1}</span>
-                  <p>{step}</p>
+                  <div>
+                    <StepTitle>{step.title}</StepTitle>
+                    <StepContent>{step.content}</StepContent>
+                  </div>
                 </li>
               ))}
             </UnorderedList>
@@ -111,6 +101,21 @@ const Home: React.FC<HomeComponentProps> = () => {
             <div className="image-stat"></div>
           </div>
         </StatsArea>
+
+        <UnboxdCarousel>
+          <div className="carousel-tab">
+            <ul>
+              {tabs.map((item, index) => (
+                <li
+                  key={index}
+                  className={item.active ? 'active list-item' : 'list-item'}
+                >
+                  {item.name} {item.active ? item.icon : null}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </UnboxdCarousel>
       </div>
     </Layout>
   );
