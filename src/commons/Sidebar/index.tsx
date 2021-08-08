@@ -13,6 +13,9 @@ import { ReactComponent as HeartIcon } from '../../assets/img/icons/heart.svg';
 import { ReactComponent as UserIcon } from '../../assets/img/icons/user.svg';
 import { ReactComponent as HomeIcon } from '../../assets/img/icons/home.svg';
 import { ReactComponent as SettingsIcon } from '../../assets/img/icons/settings.svg';
+import { ReactComponent as LogoutIcon } from '../../assets/img/icons/logout.svg';
+import { useDispatch } from 'react-redux';
+import { logoutUser } from 'modules/auth/pages/Login/redux/actions';
 
 type ComponentProps = {
   show: boolean;
@@ -20,6 +23,9 @@ type ComponentProps = {
 };
 
 const Sidebar = ({ show, onClose }: ComponentProps) => {
+  const dispatch = useDispatch();
+
+  const logout = () => dispatch(logoutUser());
   return (
     <SideBarWrapper show={show}>
       <CloseIcon onClick={onClose} />
@@ -43,6 +49,10 @@ const Sidebar = ({ show, onClose }: ComponentProps) => {
         <NavItem>
           <SettingsIcon />
           <Link to="/settings">Settings</Link>
+        </NavItem>
+        <NavItem className="logout" onClick={logout}>
+          <LogoutIcon />
+          <p>Logout</p>
         </NavItem>
       </NavLinks>
       <FindOnline>

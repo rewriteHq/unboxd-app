@@ -87,11 +87,11 @@ export const Paragraph = Styled.p`
 export const UnorderedList = Styled.ul`
   display: flex;
   flex-direction: column;
-  margin: 1rem 0;
+  margin: 1rem auto;
   li {
     margin: 0.5rem;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     span {
       display: flex;
       justify-content: center;
@@ -106,8 +106,17 @@ export const UnorderedList = Styled.ul`
     }
   }
   @media (min-width: 768px) {
-    width: 55%;
-    margin: 2rem auto 1rem;
+    margin: 2rem -2rem 1rem;
+    flex-direction: row;
+    justify-content: space-between;
+
+    li {
+      flex: 0 0 30%;
+    }
+  }
+  @media (min-width: 890px) {
+    margin-left: -4rem;
+    margin-right: -4rem;
   }
 `;
 
@@ -266,6 +275,10 @@ export const GetStarted = Styled.div`
 
 export const HowItWorks = Styled.div`
   display: flex;
+  margin: 1rem auto 2rem;
+  .container {
+    min-height: 0;
+  }
 `;
 
 export const StatsArea = Styled.div`
@@ -316,11 +329,10 @@ export const StatsArea = Styled.div`
     }
   }
   
-  @media (min-width: 750px) {
+  @media (min-width: 768px) {
     border-radius: 20px;
     padding: 3rem 2rem;
-    margin-left: -2rem;
-    margin-right: -2rem;
+    margin-top: 2rem;
 
     .container {
       flex-direction: row;
@@ -353,5 +365,11 @@ export const StatsArea = Styled.div`
         margin-left: 1.5rem;
       }
     }
+  }
+
+  @media (min-width: 890px) {
+    margin-left: -4rem;
+    margin-right: -4rem;
+    margin-top: 4rem;
   }
 `;
