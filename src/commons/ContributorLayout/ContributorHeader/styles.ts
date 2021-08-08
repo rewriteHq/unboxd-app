@@ -12,6 +12,7 @@ export const ContributorHeaderWrapper = styled.header`
     display: flex;
     align-items: center;
     .ub-logo {
+      cursor: pointer;
       margin: auto;
     }
     a {

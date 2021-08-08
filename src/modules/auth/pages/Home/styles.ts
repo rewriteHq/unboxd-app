@@ -316,11 +316,10 @@ export const StatsArea = Styled.div`
     }
   }
   
-  @media (min-width: 750px) {
+  @media (min-width: 768px) {
     border-radius: 20px;
     padding: 3rem 2rem;
-    margin-left: -2rem;
-    margin-right: -2rem;
+    margin-top: 2rem;
 
     .container {
       flex-direction: row;
@@ -353,5 +352,11 @@ export const StatsArea = Styled.div`
         margin-left: 1.5rem;
       }
     }
+  }
+
+  @media (min-width: 890px) {
+    margin-left: -4rem;
+    margin-right: -4rem;
+    margin-top: 4rem;
   }
 `;
