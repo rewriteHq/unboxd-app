@@ -3,7 +3,7 @@ import { LOADING_UI } from '../../../../auth/pages/Login/redux/types';
 import * as services from '../service';
 import { SET_WALLET } from './types';
 
-export const getWallet = () => async (dispatch: Dispatch) => {
+export const getUserWallet = () => async (dispatch: Dispatch) => {
   dispatch({ type: LOADING_UI });
 
   const [err, result] = await services.getWallet();

@@ -18,6 +18,8 @@ import AppState from '../../typings';
 import { GlobalStoreState } from '../../store/types';
 import { getUserData } from '../../modules/auth/pages/Login/redux/actions';
 import { getUserWishList } from '../../modules/beneficiary/pages/Dashboard/redux/actions';
+import { getUserWallet } from '../../modules/beneficiary/pages/Wallet/redux/actions';
+import { formatNumber } from '../../utils/helpers/formatNumber';
 
 const DashboardLayout: React.FC<LayoutProps> = ({
   children,
@@ -27,7 +29,18 @@ const DashboardLayout: React.FC<LayoutProps> = ({
   const dispatch = useDispatch();
   const { link } = useSelector((state: AppState) => state.beneficiary);
   const { credentials } = useSelector((state: GlobalStoreState) => state.user);
-  const { data:wishlist } = useSelector((state: GlobalStoreState) => state.wishlist);
+  const { data: wishlist } = useSelector(
+    (state: GlobalStoreState) => state.wishlist
+  );
+
+  const {
+    data: { balance },
+    isLoading,
+  } = useSelector((state: GlobalStoreState) => state.wallet);
+
+  useEffect(() => {
+    dispatch(getUserWallet());
+  }, [balance, dispatch]);
 
   useEffect(() => {
     if (!credentials) {
@@ -53,7 +66,11 @@ const DashboardLayout: React.FC<LayoutProps> = ({
               </UserProfile>
               <WalletBalance>
                 <span>Wallet Balance</span>
-                <p>NGN 150,000.00</p>
+                {isLoading ? (
+                  <p>Loading...</p>
+                ) : (
+                  <p>NGN {formatNumber(balance)}</p>
+                )}
               </WalletBalance>
             </DashboardWalletSection>
           ) : null}

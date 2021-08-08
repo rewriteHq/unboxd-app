@@ -8,6 +8,7 @@ interface SetWallet {
 export interface InitialState {
   data: {};
   error: null;
+  isLoading: boolean;
 }
 
 export type WalletActionTypes = SetWallet;
