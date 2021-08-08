@@ -9,9 +9,12 @@ export const PageHeading = styled.h1<{ large?: boolean; centered?: boolean }>`
     css`
       font-weight: 900;
       font-size: 53px;
+      margin-top: 2rem;
 
       @media (min-width: 780px) {
         font-size: 62px;
+        letter-spacing: 0.5px;
+        margin-top: 3.5rem;
       }
     `}
 

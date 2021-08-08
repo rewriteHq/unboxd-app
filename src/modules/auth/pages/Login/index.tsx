@@ -20,15 +20,16 @@ import { ReactComponent as GoogleIcon } from '../../../../assets/img/illustratio
 import { ReactComponent as FacebookIcon } from '../../../../assets/img/illustrations/facebook.svg';
 import Footer from '../../../../components/Footer';
 import Logo from '../../../../components/Logo';
-import Header from '../../pages/Home/header';
 import { ReactComponent as LargeHeart } from '../../../../assets/img/illustrations/heart-large.svg';
 import { ReactComponent as SmallHeart } from '../../../../assets/img/illustrations/heart-small.svg';
 import { GlobalStoreState } from '../../../../store/types';
 
 const Login = () => {
-  const dispatch = useDispatch();
+  const { loading, authenticated } = useSelector((state: GlobalStoreState) => state.user);
   const history = useHistory();
-  const { loading } = useSelector((state: GlobalStoreState) => state.user);
+
+  if (authenticated) history.push('/dashboard');
+  const dispatch = useDispatch();
 
   const [values, setValues] = useState({
     email: '',
@@ -57,9 +58,6 @@ const Login = () => {
 
   return (
     <MainContainer>
-      <div className="header">
-        <Header />
-      </div>
       <div className="description">
         <LargeHeart className="large-heart" />
         <SmallHeart className="small-heart" />

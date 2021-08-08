@@ -1,4 +1,16 @@
+import { HeadWrapper } from '../../../../components/Header/styles';
 import styled from 'styled-components';
+
+export const HomeHeader = styled(HeadWrapper)`
+  padding: 3rem 0;
+  .container {
+    justify-content: center;
+  }
+
+  @media (min-width: 830px) {
+    display: none;
+  }
+`;
 
 export const Main = styled.div`
   display: flex;

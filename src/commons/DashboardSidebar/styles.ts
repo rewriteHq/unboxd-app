@@ -10,7 +10,7 @@ export const SidebarWrapper = styled.aside`
   position: sticky;
   top: 0;
   .main-nav {
-    background: ${(props) => props.theme.appSecondaryColor};
+    background: ${(props) => props.theme.appPrimaryColor};
     height: 97%;
     width: 100%;
     border-radius: 18px;
@@ -27,7 +27,7 @@ export const SidebarWrapper = styled.aside`
       transition: all .2s ease-in;
 
       :hover{
-        background-color: ${Colors.navy};
+        background-color: ${Colors.darkNavy};
       }
       svg {
         margin-right: 10px;
@@ -38,7 +38,7 @@ export const SidebarWrapper = styled.aside`
     a.activeLink{
       background-color: ${Colors.navy};
     }
-    a.feedback {
+    a.logout {
       margin-top: auto;
       margin-bottom: auto;
     }
@@ -69,5 +69,23 @@ export const SidebarWrapper = styled.aside`
   }
   @media (max-width: 768px) {
     display: none;
+  }
+`;
+
+export const NavLookLink = styled.a`
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  font-weight: 300;
+  padding: 1em 1.7em;
+  transition: all .2s ease-in;
+
+  :hover{
+    background-color: ${Colors.navy};
+  }
+  svg {
+    margin-right: 10px;
+    min-width: 22px;
   }
 `;

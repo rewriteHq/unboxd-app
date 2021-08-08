@@ -25,11 +25,18 @@ import { ReactComponent as LargeHeart } from '../../../../assets/img/illustratio
 import { ReactComponent as SmallHeart } from '../../../../assets/img/illustrations/heart-small.svg';
 import Logo from '../../../../components/Logo';
 import Header from '../../pages/Home/header';
+import { useSelector } from 'react-redux';
+import { GlobalStoreState } from 'store/types';
 
 const Register = () => {
-  const [loading, setLoading] = useState(false);
-  const { handleSubmit, errors, register } = useForm();
+  const { authenticated } = useSelector((state: GlobalStoreState) => state.user);
   const history = useHistory();
+
+  if (authenticated) history.push('/dashboard');
+
+  const [loading, setLoading] = useState(false);
+  
+  const { handleSubmit, errors, register } = useForm();
 
   const onHandleSubmit = async (restFormData: IRegisterState, event: any) => {
     event.preventDefault();

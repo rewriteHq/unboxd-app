@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import Colors from '../../constants/Colors';
 import Sizes from '../../constants/Sizes';
 
-export const button = css`
+export const button = css<{small?: boolean}>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,6 +21,13 @@ export const button = css`
     opacity: 0.5;
     cursor: not-allowed;
   }
+
+  ${({small}) => small && css`
+    padding: 0.5rem 1.5rem;
+    margin: 0.75rem 0;
+    height: 50px;
+    border-radius: 15px;
+  `}
 `;
 
 export const BTN = styled.button`
@@ -28,7 +35,7 @@ export const BTN = styled.button`
   transition: all .2s ease;
   :hover{
     transform: translateY(-4px);
-    background-color: ${Colors.textGreen};
+    background-color: ${Colors.darkGreen};
   }
   :active{
     transform: translateY(0);

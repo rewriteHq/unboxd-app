@@ -57,4 +57,5 @@ export const Span = styled.span`
   background: ${Colors.green};
   color: ${Colors.white};
   border-radius: 12px;
+  cursor: pointer;
 `;
