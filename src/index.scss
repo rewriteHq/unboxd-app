@@ -83,6 +83,10 @@ button {
   text-align: center;
 }
 
+.text-center-left {
+  text-align: center;
+}
+
 .danger {
   color: #ff4646;
 }
@@ -142,5 +146,11 @@ button {
   100% {
     -webkit-transform: scale(1);
     transform: scale(1);
+  }
+}
+
+@media (min-width: 768px) {
+  .text-center-left {
+    text-align: left;
   }
 }

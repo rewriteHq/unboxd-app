@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { SidebarWrapper } from './styles';
+import { SidebarWrapper, NavLookLink } from './styles';
 import { ReactComponent as WalletIcon } from '../../assets/img/icons/wallet.svg';
 import { ReactComponent as HeartIcon } from '../../assets/img/icons/heart.svg';
 import { ReactComponent as UserIcon } from '../../assets/img/icons/user.svg';
@@ -8,9 +8,15 @@ import { ReactComponent as SettingsIcon } from '../../assets/img/icons/settings.
 import { ReactComponent as FacebookIcon } from '../../assets/img/icons/facebook.svg';
 import { ReactComponent as WhatsappIcon } from '../../assets/img/icons/whatsapp.svg';
 import { ReactComponent as TwitterIcon } from '../../assets/img/icons/twitter.svg';
-import { ReactComponent as PlaneIcon } from '../../assets/img/icons/plane.svg';
+import { ReactComponent as LogoutIcon } from '../../assets/img/icons/logout.svg';
+import { useDispatch } from 'react-redux';
+import { logoutUser } from 'modules/auth/pages/Login/redux/actions';
 
 const DashboardSidebar: React.FC = () => {
+  const dispatch = useDispatch();
+
+  const logout = () => dispatch(logoutUser());
+
   return (
     <SidebarWrapper>
       <nav className="main-nav">
@@ -30,10 +36,10 @@ const DashboardSidebar: React.FC = () => {
           <SettingsIcon />
           <span>Settings</span>
         </NavLink>
-        <NavLink to="/" className="feedback">
-          <PlaneIcon />
-          <span>Share feedback</span>
-        </NavLink>
+        <NavLookLink className="logout" onClick={logout}>
+          <LogoutIcon />
+          <span>Logout</span>
+        </NavLookLink>
         <div className="nav-footer">
           <h3>Find unboxd online</h3>
           <div className="media-links">

@@ -8,4 +8,5 @@ export default interface RouteType {
   auth: boolean;
   component: LazyComponent;
   header?: LazyComponent;
+  footer?: LazyComponent;
 }

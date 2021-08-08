@@ -18,7 +18,7 @@ const App: React.FC<ComponentProps> = ({ checkAuthenticated }) => {
   const appThemeContext = useAppThemeContext();
   const GlobalStyle = createGlobalStyle`
     body {
-      background: ${(props) => props.theme.appPrimaryColor}
+      background: ${(props) => props.theme.appSecondaryColor}
     }
   `;
   checkAuthenticated();
