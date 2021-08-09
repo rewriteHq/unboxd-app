@@ -17,7 +17,7 @@ const Header: React.FC = () => {
         </Link>
 
         <Nav>
-          <Link to="/">About</Link>
+          <Link to="/faq">FAQs</Link>
           <BTNLink small to={authenticated ? "/dashboard" : "/login"}>{authenticated ? 'Dashboard' : 'Login'}</BTNLink>
         </Nav>
       </div>

@@ -15,10 +15,9 @@ const Footer: React.FC = () => {
 
         <NavSide>
           <div className="nav">
-            <Link to="/">About</Link>
-            <Link to="/">Contact</Link>
-            <Link to="/" className="hide-mobile">Terms of use</Link>
-            <Link to="/" className="hide-mobile">Privacy Policy</Link>
+            <Link to="/faq">FAQ</Link>
+            <Link to="/terms" className="hide-mobile">Terms of use</Link>
+            <Link to="/privacy" className="hide-mobile">Privacy Policy</Link>
           </div>
 
           <FindOnline>
