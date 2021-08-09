@@ -162,6 +162,8 @@ export const HeadlineInput = styled.textarea`
   border: none;
   background: transparent;
   width: 100%;
+  resize: none;
+  padding: 2rem 0;
   color: ${Colors.white};
   ${headlineFont}
 
