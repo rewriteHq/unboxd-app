@@ -164,12 +164,13 @@ export const HeadlineInput = styled.textarea`
   width: 100%;
   resize: none;
   padding: 2rem 0;
+  font-family: Lato;
   color: ${Colors.white};
   ${headlineFont}
 
   &::placeholder {
     opacity: 0.5;
-    font-weight: bold;
+    font-size: 1.5rem;
   }
 `;
 
