@@ -1,11 +1,11 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { SidebarWrapper, NavLookLink } from './styles';
 import { ReactComponent as WalletIcon } from '../../assets/img/icons/wallet.svg';
 import { ReactComponent as HeartIcon } from '../../assets/img/icons/heart.svg';
 import { ReactComponent as UserIcon } from '../../assets/img/icons/user.svg';
 import { ReactComponent as SettingsIcon } from '../../assets/img/icons/settings.svg';
-import { ReactComponent as FacebookIcon } from '../../assets/img/icons/facebook.svg';
+// import { ReactComponent as FacebookIcon } from '../../assets/img/icons/facebook.svg';
 import { ReactComponent as WhatsappIcon } from '../../assets/img/icons/whatsapp.svg';
 import { ReactComponent as TwitterIcon } from '../../assets/img/icons/twitter.svg';
 import { ReactComponent as LogoutIcon } from '../../assets/img/icons/logout.svg';
@@ -43,15 +43,15 @@ const DashboardSidebar: React.FC = () => {
         <div className="nav-footer">
           <h3>Find unboxd online</h3>
           <div className="media-links">
-            <Link to="/">
+            {/* <Link to="/">
               <FacebookIcon />
-            </Link>
-            <Link to="/">
+            </Link> */}
+            <a href="https://whatsapp.com/" target="_blank" rel="noopener noreferrer">
               <WhatsappIcon />
-            </Link>
-            <Link to="/">
+            </a>
+            <a href="https://twitter.com/unboxdgifts" target="_blank" rel="noopener noreferrer">
               <TwitterIcon />
-            </Link>
+            </a>
           </div>
         </div>
       </nav>

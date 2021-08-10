@@ -6,11 +6,12 @@ interface WishCardProps {
   title: string;
   wishCount: number;
   imgSrc: string;
+  click?: () => void;
 }
 
-const WishCard: React.FC<WishCardProps> = ({ title, wishCount, imgSrc }) => {
+const WishCard: React.FC<WishCardProps> = ({ title, wishCount, imgSrc, click }) => {
   return (
-    <WishCardWrapper>
+    <WishCardWrapper onClick={click}>
       <div className="overlay"></div>
       <div className="wish-details">
         <h1>{title}</h1>

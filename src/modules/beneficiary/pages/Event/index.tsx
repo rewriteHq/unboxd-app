@@ -24,19 +24,21 @@ import GiftCard from './components/GiftCard';
 
 type ParamTypes = {
   id: string;
+  slug: string;
 };
 
 type ComponentProps = {
   list: WishList | null;
-  getWishlist: (id: string) => void;
+  isLoading: boolean;
+  getWishlist: (slug: string) => void;
 };
 
 type LocationState = {
   showIntro?: boolean;
 };
 
-const Event = ({ list, getWishlist }: ComponentProps) => {
-  const { id } = useParams<ParamTypes>();
+const Event = ({ list, isLoading, getWishlist }: ComponentProps) => {
+  const { slug } = useParams<ParamTypes>();
   const { state } = useLocation<LocationState>();
   const [explainer, setExplainer] = useState({
     show: state && state.showIntro,
@@ -47,22 +49,26 @@ const Event = ({ list, getWishlist }: ComponentProps) => {
   const [, setShareModal] = useState(false);
   const toggleShareModal = () => setShareModal((prev) => !prev);
 
+  useEffect(() => {
+    async function getListDetails() {
+      if (!list || list!.slug !== slug) {
+        const data = await getWishlist(slug);
+        console.log(data);
+      }
+    }
+    getListDetails()
+  }, [list, slug, getWishlist]);
+  
   const navItems = [
-    () => <Link to={`/archive/${id}`}>Archive</Link>,
-    () => <Link to={`/event/edit/${id}`}>Edit</Link>,
+    () => <Link to={`/archive/${list!._id}`}>Archive</Link>,
+    () => <Link to={`/event/edit/${list!._id}`}>Edit</Link>,
     () => (
       <Link to="#0" onClick={toggleShareModal}>
         Share
       </Link>
     ),
-    () => <Link to={`/event/wallet/${id}`}>Wallet</Link>,
+    () => <Link to={`/event/wallet/${list!._id}`}>Wallet</Link>,
   ];
-
-  useEffect(() => {
-    if (!list || list._id !== id) {
-      getWishlist(id);
-    }
-  }, [list, id, getWishlist]);
 
   const incrementExplainerIndex = () =>
     setExplainer(({ active, show }) => ({ active: active + 1, show }));
@@ -72,12 +78,19 @@ const Event = ({ list, getWishlist }: ComponentProps) => {
   // const daysLeft = list ? differenceInDays(new Date(), new Date(list.date)) : 1;
 
   useEffect(() => {
-    dispatch(setGlobalButtoLink(`/event/add-gift/${id}`));
-  }, [id, dispatch]);
+    if (list) {
+      dispatch(setGlobalButtoLink(`/event/add-gift/${list._id}`));
+    }
+  }, [dispatch, list]);
 
   return (
     <>
-      <DashboardLayout pageTitle="" navItems={navItems} showBack>
+      <DashboardLayout
+        pageTitle=""
+        navItems={navItems}
+        showBack
+        loading={isLoading}
+      >
         <DashboardContainer>
           <WishlistHeader>
             <div className="list-header-content">
@@ -86,7 +99,7 @@ const Event = ({ list, getWishlist }: ComponentProps) => {
                 <span className="copy">copy</span>
               </CopyLink>
               <WishlistHeaderEventDetails>
-                <h2>Make my birthday fabulous</h2>
+                <h2>{list?.title}</h2>
                 <span className="days">28 days left</span>
               </WishlistHeaderEventDetails>
             </div>
@@ -147,11 +160,13 @@ const Event = ({ list, getWishlist }: ComponentProps) => {
 const mapStateToProps = (state: AppState) => {
   return {
     list: state.event.list.data,
+    isLoading: state.event.list.isLoading,
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => ({
-  getWishlist: (id: string) => dispatch(actions.getWishlist(id)),
+  getWishlist: (slug: string) =>
+    dispatch(actions.getWishlistBySlug(slug)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Event);

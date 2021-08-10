@@ -15,7 +15,9 @@ export const loginUser = (userData: any, history: any) => (dispatch: any) => {
   API.post('/auth/signin', userData)
     .then((res) => {
       const token = `Bearer ${res.data.token}`;
+      const username = res.data.payload.username;
       localStorage.setItem('token', token); //setting token to local storage
+      localStorage.setItem('username', username); //setting token to local storage
       API.defaults.headers.common['Authorization'] = token; //setting authorize token to header in axios
       dispatch(getUserData());
       dispatch({ type: CLEAR_ERRORS });

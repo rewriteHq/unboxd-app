@@ -1,17 +1,11 @@
 import { lazy } from 'react';
 import { PageHeading } from 'commons/Heading';
-import { Paragraph } from '../../../auth/pages/Home/styles';
+import { Paragraph } from '../styles';
 
 const Layout = lazy(() => import('../../../../Layout'));
 
 
 const Faq = () => {
-
-  // const steps = [
-  //   "Create a list with pictures of items you want",
-  //   "Share with loved ones",
-  //   "Receive part or full contributions"
-  // ];
 
   return (
     <Layout>

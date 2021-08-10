@@ -66,7 +66,7 @@ const routes: RouteType[] = [
     component: gift,
   },
   {
-    path: '/event/:id',
+    path: '/event/:slug',
     exact: true,
     auth: false,
     component: event,
