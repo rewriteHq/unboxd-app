@@ -11,6 +11,7 @@ export const WishCardWrapper = styled.div`
   overflow: hidden;
   display: flex;
   align-items: flex-end;
+  cursor: pointer;
   .img {
     width: 100%;
     height: 100%;

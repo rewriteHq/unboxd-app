@@ -74,7 +74,7 @@ export const DashboardWalletSection = styled.section`
 export const WalletBalance = styled.div`
   height: 80px;
   width: 291px;
-  background: ${(props) => props.theme.appSecondaryColor};
+  background: ${(props) => props.theme.appPrimaryColor};
   border-radius: 18px;
   padding: 10px 26px;
   display: flex;

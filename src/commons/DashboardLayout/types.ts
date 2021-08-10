@@ -1,6 +1,8 @@
 export interface LayoutProps
   extends React.PropsWithChildren<unknown>,
-    HeaderProps {}
+    HeaderProps {
+      loading?: boolean,
+    }
 
 export interface HeaderProps {
   pageTitle?: string | React.ReactNode;

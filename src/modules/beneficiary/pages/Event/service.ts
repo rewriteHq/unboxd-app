@@ -31,3 +31,14 @@ export const getWishlist = async (id: string) => {
     return [err.response.data];
   }
 };
+
+export const getWishlistBySlug = async (slug: string, username: string) => {
+  try {
+    const response = await API.get(`/list/${username}/${slug}`);
+    return [null, response.data.payload];
+  } catch (err) {
+    const message = err.response.data.message;
+    Notify.bottom(message ? message : 'Something happened. Kindly try again');
+    return [err.response.data];
+  }
+}

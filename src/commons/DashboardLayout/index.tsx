@@ -25,6 +25,7 @@ const DashboardLayout: React.FC<LayoutProps> = ({
   children,
   isHome,
   hideWalletSection,
+  loading,
 }) => {
   const dispatch = useDispatch();
   const { link } = useSelector((state: AppState) => state.beneficiary);
@@ -48,7 +49,6 @@ const DashboardLayout: React.FC<LayoutProps> = ({
       dispatch(getUserWishList());
     }
   }, [credentials, dispatch, wishlist]);
-
   return (
     <>
       <DashboardHeader></DashboardHeader>
@@ -74,7 +74,7 @@ const DashboardLayout: React.FC<LayoutProps> = ({
               </WalletBalance>
             </DashboardWalletSection>
           ) : null}
-          {children}
+          {loading ? 'Loading ...' : children}
         </DashboardContent>
         <UnboxdAddButton>
           <div className="under-layer pulsate-fwd"></div>

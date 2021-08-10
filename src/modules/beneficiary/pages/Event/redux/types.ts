@@ -4,6 +4,7 @@ import { WishList } from '../../../../../typings';
 export const SET_CATEGORIES = 'SET_CATEGORIES';
 export const SET_WISHLIST = 'SET_WISHLIST';
 export const SET_WALLET = 'SET_WALLET';
+export const SET_WISHLIST_LOADING = "SET_WISHLIST_LOADING";
 
 export interface Category {
   name: string;
@@ -16,13 +17,18 @@ interface SetWishlist {
 }
 
 interface SetWallet {
-  type: typeof SET_WISHLIST;
+  type: typeof SET_WALLET;
   payload: WishList;
+}
+
+interface SetWishlistLoading {
+  type: typeof SET_WISHLIST_LOADING;
 }
 
 export interface WishlistState {
   data: WishList | null;
   error: null;
+  isLoading: boolean;
 }
 
 export interface WalletState {
@@ -30,4 +36,4 @@ export interface WalletState {
   error: null;
 }
 
-export type EventActionTypes = SetWishlist | SetWallet;
+export type EventActionTypes = SetWishlist | SetWallet | SetWishlistLoading;
