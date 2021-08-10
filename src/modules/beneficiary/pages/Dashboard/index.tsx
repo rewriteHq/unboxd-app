@@ -34,7 +34,7 @@ const Dashboard: React.FC<ComponentProps> = () => {
     <DashboardLayout>
       <MyUnboxdListHeader>
         <p>
-          my&nbsp;
+          my &nbsp;
           <Logo />
           &nbsp; list
         </p>
