@@ -20,6 +20,8 @@ import { getUserData } from '../../modules/auth/pages/Login/redux/actions';
 import { getUserWishList } from '../../modules/beneficiary/pages/Dashboard/redux/actions';
 import { getUserWallet } from '../../modules/beneficiary/pages/Wallet/redux/actions';
 import { formatNumber } from '../../utils/helpers/formatNumber';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import Colors from 'constants/Colors';
 
 const DashboardLayout: React.FC<LayoutProps> = ({
   children,
@@ -74,7 +76,14 @@ const DashboardLayout: React.FC<LayoutProps> = ({
               </WalletBalance>
             </DashboardWalletSection>
           ) : null}
-          {loading ? 'Loading ...' : children}
+          {loading ? (
+            <SkeletonTheme color={Colors.navy}>
+              <Skeleton height={200} delay={2} />
+              <Skeleton count={5} delay={2} />
+            </SkeletonTheme>
+          ) : (
+            children
+          )}
         </DashboardContent>
         <UnboxdAddButton>
           <div className="under-layer pulsate-fwd"></div>

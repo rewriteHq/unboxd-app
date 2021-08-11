@@ -18,8 +18,7 @@ export const UploadButton = styled(BTN)<{ color?: string }>`
   border: 1px solid ${Colors.black};
   position: absolute;
   bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: calc(50% - 80px);
   width: unset;
   border-radius: 5px;
 `;
