@@ -12,7 +12,7 @@ import { getUserWishList } from './redux/actions';
 const fallbackImage = '/assets/birthday.jpg';
 
 const Dashboard: React.FC<ComponentProps> = () => {
-  const { data: wishlist } = useSelector(
+  const { data: wishlist, isLoading } = useSelector(
     (state: GlobalStoreState) => state.wishlist
   );
 
@@ -40,15 +40,19 @@ const Dashboard: React.FC<ComponentProps> = () => {
         </p>
       </MyUnboxdListHeader>
       <WishList>
-        {wishlist.map((wish) => (
-          <WishCard
-            key={wish._id}
-            title={wish.title}
-            wishCount={wish.gifts.length}
-            imgSrc={wish.coverImage || fallbackImage}
-            click={() => openList(wish.slug)}
-          />
-        ))}
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          wishlist.map((wish) => (
+            <WishCard
+              key={wish._id}
+              title={wish.title}
+              wishCount={wish.gifts.length}
+              imgSrc={wish.coverImage || fallbackImage}
+              click={() => openList(wish.slug)}
+            />
+          ))
+        )}
       </WishList>
     </DashboardLayout>
   );
