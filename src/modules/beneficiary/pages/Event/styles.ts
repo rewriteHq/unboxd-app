@@ -97,11 +97,14 @@ export const CopyLink = styled.div`
   padding: 15px 20px;
   font-size: 15px;
   font-weight: normal;
+  cursor: pointer;
   p {
     position: relative;
     overflow: hidden;
     width: max-content;
     max-width: 70%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     &::after {
       content: '';
       position: absolute;
@@ -118,6 +121,7 @@ export const CopyLink = styled.div`
   }
   .copy {
     color: #80ba7c;
+    cursor: pointer;
   }
   @media (min-width: 767px) {
     min-width: 335px;

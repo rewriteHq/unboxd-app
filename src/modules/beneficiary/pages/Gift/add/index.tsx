@@ -27,6 +27,7 @@ interface ParamTypes {
 }
 
 const AddGift = ({ getWishlist }: ComponentProps) => {
+  const [loading, setLoading] = useState(false);
   const { id } = useParams<ParamTypes>();
   const history = useHistory();
 
@@ -53,6 +54,7 @@ const AddGift = ({ getWishlist }: ComponentProps) => {
   );
 
   const createGift = async () => {
+    setLoading(true);
     const payload = new FormData();
 
     payload.append('name', data.title);
@@ -60,11 +62,13 @@ const AddGift = ({ getWishlist }: ComponentProps) => {
     payload.append('image', image.file);
 
     const [err] = await addGift({ data: payload, id });
+
     if (err) {
       return [err];
     }
 
     getWishlist(id);
+    setLoading(false);
     history.goBack();
   };
 
@@ -91,10 +95,10 @@ const AddGift = ({ getWishlist }: ComponentProps) => {
           onChange={(e) => setData({ ...data, title: e.target.value })}
         />
         <PriceInput label="Price" value={data.price} onChange={changePrice} />
+      <Button onClick={createGift} loading={loading}>
+        Save
+      </Button>
       </DashboardContainer>
-      <PageBottom>
-        <Button onClick={createGift}>Save</Button>
-      </PageBottom>
       <ImageUploadModal
         show={showImageModal}
         fromGallery={fromGallery}

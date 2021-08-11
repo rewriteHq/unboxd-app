@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { useLocation, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
-// import { differenceInDays } from 'date-fns';
 
 import DashboardLayout from '../../../../commons/DashboardLayout';
 import { DashboardContainer } from '../../../../commons/DashboardLayout/styles';
@@ -18,9 +17,12 @@ import {
 } from './styles';
 import ExplainerModal from './components/ExplainerModal';
 // import { PlainButton } from '../../../../components/Button/styles';
-// import ShareEventModal from '../../../../commons/ShareModal';
+import ShareEventModal from '../../../../commons/ShareModal';
 import { setGlobalButtoLink } from '../../redux/actions';
-import GiftCard from './components/GiftCard';
+// import GiftCard from '../../../../components/GiftCard';
+import GiftCard from '../../../../commons/GiftCard';
+import { differenceInDays } from 'date-fns';
+import Skeleton from 'react-loading-skeleton';
 
 type ParamTypes = {
   id: string;
@@ -44,9 +46,9 @@ const Event = ({ list, isLoading, getWishlist }: ComponentProps) => {
     show: state && state.showIntro,
     active: 0,
   });
-
+  const username = localStorage.getItem('username');
   const dispatch = useDispatch();
-  const [, setShareModal] = useState(false);
+  const [shareModal, setShareModal] = useState(false);
   const toggleShareModal = () => setShareModal((prev) => !prev);
 
   useEffect(() => {
@@ -56,9 +58,9 @@ const Event = ({ list, isLoading, getWishlist }: ComponentProps) => {
         console.log(data);
       }
     }
-    getListDetails()
+    getListDetails();
   }, [list, slug, getWishlist]);
-  
+
   const navItems = [
     () => <Link to={`/archive/${list!._id}`}>Archive</Link>,
     () => <Link to={`/event/edit/${list!._id}`}>Edit</Link>,
@@ -75,7 +77,7 @@ const Event = ({ list, isLoading, getWishlist }: ComponentProps) => {
 
   const closeExplainer = () => setExplainer({ active: 0, show: false });
 
-  // const daysLeft = list ? differenceInDays(new Date(), new Date(list.date)) : 1;
+  const daysLeft = list ? differenceInDays(new Date(list.date), new Date()) : 1;
 
   useEffect(() => {
     if (list) {
@@ -94,49 +96,36 @@ const Event = ({ list, isLoading, getWishlist }: ComponentProps) => {
         <DashboardContainer>
           <WishlistHeader>
             <div className="list-header-content">
-              <CopyLink>
-                <p>unboxd.com/taofeeqat30th</p>
+              <CopyLink onClick={toggleShareModal}>
+                <p>
+                  unboxd.com/{username}/{list?.slug}
+                </p>
                 <span className="copy">copy</span>
               </CopyLink>
               <WishlistHeaderEventDetails>
                 <h2>{list?.title}</h2>
-                <span className="days">28 days left</span>
+                <span className="days">{daysLeft} days left</span>
               </WishlistHeaderEventDetails>
             </div>
-            <img src="/assets/rectangle-175.png" alt="event" />
+            <img src={list?.coverImage} alt="event" />
           </WishlistHeader>
-          <NeedText>Your wishes &#40;{50}&#41;</NeedText>
+          <NeedText>Your wishes &#40;{list?.gifts.length}&#41;</NeedText>
           <WishItemsWrapper>
-            <GiftCard
-              image="/assets/rectangle-175.png"
-              name="PS4 Controller"
-              price="23000"
-              raised="300"
-            />
-            <GiftCard
-              image="/assets/rectangle-175.png"
-              name="PS4 Controller"
-              price="23000"
-              raised="300"
-            />
-            <GiftCard
-              image="/assets/rectangle-175.png"
-              name="PS4 Controller"
-              price="23000"
-              raised="300"
-            />
-            <GiftCard
-              image="/assets/rectangle-175.png"
-              name="PS4 Controller"
-              price="23000"
-              raised="300"
-            />
-            <GiftCard
-              image="/assets/rectangle-175.png"
-              name="PS4 Controller"
-              price="23000"
-              raised="300"
-            />
+            {list?.gifts.map((gift) => (
+            gift.imageURL ? (<GiftCard
+              gift={gift}
+              // image={gift.imageURL}
+              // name={gift.name}
+              // price={gift.cost}
+              // raised={gift.paid}
+              // key={gift._id}
+              // onClick={() => {}}
+            >
+              {navItems}
+              </GiftCard>) : (
+              <Skeleton height={350} />
+            )
+            ))}
           </WishItemsWrapper>
         </DashboardContainer>
       </DashboardLayout>
@@ -148,11 +137,11 @@ const Event = ({ list, isLoading, getWishlist }: ComponentProps) => {
         />
       )}
 
-      {/* <ShareEventModal
+      {list && <ShareEventModal
         show={shareModal}
         close={toggleShareModal}
-        wishlist={[]}
-      /> */}
+        wishlist={list}
+      />}
     </>
   );
 };
@@ -165,8 +154,7 @@ const mapStateToProps = (state: AppState) => {
 };
 
 const mapDispatchToProps = (dispatch: any) => ({
-  getWishlist: (slug: string) =>
-    dispatch(actions.getWishlistBySlug(slug)),
+  getWishlist: (slug: string) => dispatch(actions.getWishlistBySlug(slug)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Event);

@@ -4,7 +4,7 @@ import Colors from '../../constants/Colors';
 export const Card = Styled.div`
   display: flex;
   flex-direction: column;
-  background: ${Colors.darkNavy};
+  background: ${Colors.navy};
   border-radius: 5px;
   overflow: hidden;
   min-width: 110px;
