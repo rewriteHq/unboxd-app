@@ -5,7 +5,6 @@ import { useHistory, useParams } from 'react-router';
 import DashboardLayout from '../../../../../commons/DashboardLayout';
 import { DashboardContainer } from '../../../../../commons/DashboardLayout/styles';
 import ImageUploadModal from '../../../../../commons/ImageUploadModal';
-import PageBottom from '../../../../../commons/PageBottom';
 import Button from '../../../../../components/Button';
 import Input from '../../../../../components/Input';
 import PriceInput from '../../../../../components/Input/price';
