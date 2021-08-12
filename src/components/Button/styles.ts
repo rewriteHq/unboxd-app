@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import Colors from '../../constants/Colors';
 import Sizes from '../../constants/Sizes';
 
-export const button = css<{small?: boolean}>`
+export const button = css<{small?: boolean, disabled?: boolean}>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,6 +27,11 @@ export const button = css<{small?: boolean}>`
     margin: 0.75rem 0;
     height: 50px;
     border-radius: 15px;
+  `}
+
+  ${({disabled}) => disabled && css`
+    opacity: 0.5;
+    cursor: not-allowed;
   `}
 `;
 
