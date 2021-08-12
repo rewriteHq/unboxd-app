@@ -23,6 +23,7 @@ import {
 } from '../Login/styles';
 import { ReactComponent as LargeHeart } from '../../../../assets/img/illustrations/heart-large.svg';
 import { ReactComponent as SmallHeart } from '../../../../assets/img/illustrations/heart-small.svg';
+import { ReactComponent as EyeIcon } from '../../../../assets/img/icons/eye.svg';
 import Logo from '../../../../components/Logo';
 import { useSelector } from 'react-redux';
 import { GlobalStoreState } from 'store/types';
@@ -48,7 +49,7 @@ const Register = () => {
 
       Notify.bottom(response.data.message);
 
-      setTimeout(() => history.push('/event/create'), 500);
+      setTimeout(() => history.push('/login'), 500);
     } catch (err) {
       const message = err.response.data.message;
       Notify.bottom(message ? message : 'Something happened. Kindly try again');
@@ -129,6 +130,9 @@ const Register = () => {
                 error={errors}
                 register={register}
                 required
+                isPassword
+                showCallToAction
+                callToAction={() => <EyeIcon />}
               />
               <Button loading={loading} disabled={loading}>
                 Create account

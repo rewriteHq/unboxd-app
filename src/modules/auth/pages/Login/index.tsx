@@ -22,6 +22,7 @@ import Footer from '../../../../components/Footer';
 import Logo from '../../../../components/Logo';
 import { ReactComponent as LargeHeart } from '../../../../assets/img/illustrations/heart-large.svg';
 import { ReactComponent as SmallHeart } from '../../../../assets/img/illustrations/heart-small.svg';
+import { ReactComponent as EyeIcon } from '../../../../assets/img/icons/eye.svg';
 import { GlobalStoreState } from '../../../../store/types';
 
 const Login = () => {
@@ -99,6 +100,9 @@ const Login = () => {
                 id="password"
                 onChange={handleChange}
                 disabled={loading}
+                isPassword
+                showCallToAction
+                callToAction={() => <EyeIcon />}
               />
               <Button type="submit" loading={loading}>
                 Sign in
