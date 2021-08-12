@@ -111,21 +111,24 @@ const Event = ({ list, isLoading, getWishlist }: ComponentProps) => {
           </WishlistHeader>
           <NeedText>Your wishes &#40;{list?.gifts.length}&#41;</NeedText>
           <WishItemsWrapper>
-            {list?.gifts.map((gift) => (
-            gift.imageURL ? (<GiftCard
-              gift={gift}
-              // image={gift.imageURL}
-              // name={gift.name}
-              // price={gift.cost}
-              // raised={gift.paid}
-              // key={gift._id}
-              // onClick={() => {}}
-            >
-              {navItems}
-              </GiftCard>) : (
-              <Skeleton height={350} />
-            )
-            ))}
+            {list?.gifts.map((gift) =>
+              gift.imageURL ? (
+                <GiftCard
+                  gift={gift}
+                  // image={gift.imageURL}
+                  // name={gift.name}
+                  // price={gift.cost}
+                  // raised={gift.paid}
+                  // key={gift._id}
+                  // onClick={() => {}}
+                >
+                  <GiftCard.Menu />
+                  {navItems}
+                </GiftCard>
+              ) : (
+                <Skeleton height={350} />
+              )
+            )}
           </WishItemsWrapper>
         </DashboardContainer>
       </DashboardLayout>
@@ -137,11 +140,13 @@ const Event = ({ list, isLoading, getWishlist }: ComponentProps) => {
         />
       )}
 
-      {list && <ShareEventModal
-        show={shareModal}
-        close={toggleShareModal}
-        wishlist={list}
-      />}
+      {list && (
+        <ShareEventModal
+          show={shareModal}
+          close={toggleShareModal}
+          wishlist={list}
+        />
+      )}
     </>
   );
 };

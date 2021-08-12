@@ -70,7 +70,7 @@ export const WishlistHeader = styled.div`
     width: 100%;
     height: 100%;
     position: absolute;
-    z-index: 999;
+    z-index: 4;
     padding: 10px;
     background: rgba(0, 0, 0, 0.2);
     display: flex;
