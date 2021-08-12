@@ -113,17 +113,8 @@ const Event = ({ list, isLoading, getWishlist }: ComponentProps) => {
           <WishItemsWrapper>
             {list?.gifts.map((gift) =>
               gift.imageURL ? (
-                <GiftCard
-                  gift={gift}
-                  // image={gift.imageURL}
-                  // name={gift.name}
-                  // price={gift.cost}
-                  // raised={gift.paid}
-                  // key={gift._id}
-                  // onClick={() => {}}
-                >
+                <GiftCard gift={gift}>
                   <GiftCard.Menu />
-                  {navItems}
                 </GiftCard>
               ) : (
                 <Skeleton height={350} />
