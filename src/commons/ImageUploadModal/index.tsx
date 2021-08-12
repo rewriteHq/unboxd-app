@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 import styled from 'styled-components';
-import Modal from '../../components/Modal';
+import ImageModal from '../../components/Modal/ImageModal';
 import { Button, FileInput, FileLabel } from './styles';
 import UnsplashModal from './unsplash';
 
@@ -43,25 +43,24 @@ const ImageUploadModal = ({
 
   return (
     <>
-      <Modal show={show} onClose={close}>
-        <Modal.Bottom>
-          <Container className="container">
-            <FileLabel htmlFor="file">
-              Choose from gallery
-              <FileInput
-                name="file"
-                type="file"
-                id="file"
-                accept="image/png, image/jpeg"
-                onChange={changeFile}
-              />
-            </FileLabel>
-            <Button onClick={() => setUnsplashModal(true)}>
-              Search on Unsplash
-            </Button>
-          </Container>
-        </Modal.Bottom>
-      </Modal>
+      <ImageModal show={show} onClose={close}>
+        <Container className="container">
+          <FileLabel htmlFor="file">
+            Choose from gallery
+            <FileInput
+              name="file"
+              type="file"
+              id="file"
+              accept="image/png, image/jpeg"
+              onChange={changeFile}
+            />
+          </FileLabel>
+          <Button onClick={() => setUnsplashModal(true)}>
+            Search on Unsplash
+          </Button>
+        </Container>
+      </ImageModal>
+
       <UnsplashModal
         show={unsplashModal}
         selectImage={selectImage}
