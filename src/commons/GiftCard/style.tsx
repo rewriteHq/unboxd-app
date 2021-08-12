@@ -8,7 +8,6 @@ export const GiftThumb = styled.div`
   flex-direction: column;
   background: ${Colors.darkNavy};
   border-radius: 10px;
-  overflow: hidden;
   height: 270px;
   position: relative;
 `;
@@ -17,6 +16,7 @@ export const GiftThumbImage = styled.img`
   width: 100%;
   height: 55%;
   object-fit: cover;
+  border-radius: 10px 10px 0 0;
 `;
 
 export const Raised = styled(SpaceBetween)`
@@ -70,7 +70,7 @@ export const MenuButton = styled.button<{ active: boolean }>`
 export const MenuOverlay = styled.div`
   &::before {
     content: ' ';
-    background-color: #00000090;
+    background-color: #000000dd;
     position: fixed;
     top: 0;
     left: 0;
@@ -83,17 +83,25 @@ export const MenuOverlay = styled.div`
 export const MenuItems = styled.div`
   position: absolute;
   top: 55px;
+  right: 10px;
   background: ${Colors.white};
   width: 100%;
-  z-index: 5;
+  z-index: 10;
   display: flex;
   flex-direction: column;
   border-radius: 5px;
+  color: ${Colors.black};
+  overflow: hidden;
 
   a {
     padding: 0.7rem 1rem;
+    transition: 0.5s ease all;
+
     &:not(:last-child) {
       border-bottom: 1px solid ${Colors.grey};
+    }
+    &:hover {
+      background: ${Colors.lightGrey};
     }
   }
 `;

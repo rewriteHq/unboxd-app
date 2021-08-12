@@ -1,8 +1,10 @@
+import useOnClickOutside from 'hooks/useOnClickOutside';
 import React, {
   ButtonHTMLAttributes,
   useCallback,
   useContext,
   useMemo,
+  useRef,
   useState,
 } from 'react';
 import { Link } from 'react-router-dom';
@@ -57,16 +59,19 @@ const GiftMenuButton = ({ onClick, active }: MenuButtonProps) => {
 };
 
 const GiftMenu = ({ close, id }: MenuProps) => {
+  const clickRef = useRef(null);
+  useOnClickOutside(clickRef, close);
+
   return (
     <>
-      <MenuItems>
+      <MenuItems ref={clickRef}>
         <Link to={`/event/gift/${id}`}>Edit</Link>
         <Link to="event">Hide Item</Link>
         <Link to="event" className="danger">
           Delete
         </Link>
       </MenuItems>
-      <MenuOverlay onClick={close} />
+      <MenuOverlay />
     </>
   );
 };
@@ -75,17 +80,16 @@ const GiftCard = ({ gift, children, onClick }: ComponentProps) => {
   const [showMenu, setShowMenu] = useState(false);
   const toggleMenu = useCallback(() => setShowMenu((prev) => !prev), []);
 
-  const value = useMemo(() => ({ show: showMenu, toggle: toggleMenu, gift }), [
-    showMenu,
-    toggleMenu,
-    gift,
-  ]);
+  const value = useMemo(
+    () => ({ show: showMenu, toggle: toggleMenu, gift }),
+    [showMenu, toggleMenu, gift]
+  );
 
   const percentageRaised = Math.round((gift.paid / gift.cost) * 100);
 
   return (
     <GiftCardContext.Provider value={value}>
-      <GiftThumb onClick={onClick ? onClick : toggleMenu}>
+      <GiftThumb onClick={onClick}>
         {children}
         <GiftThumbImage src={gift.imageURL} alt={gift.name} />
         <GiftThumbText>

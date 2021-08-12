@@ -12,7 +12,7 @@ import { ModalComponentProps, ModalHeaderComponentProps } from './types';
 
 const Modal = ({ show, children, onClose }: ModalComponentProps) => {
   const ref = useRef<HTMLDivElement | null>(null);
-  useOnClickOutside(ref, onClose);
+  useOnClickOutside(ref, onClose, show);
   return show ? (
     <ModalWrapper>
       <div ref={ref}>{children}</div>
