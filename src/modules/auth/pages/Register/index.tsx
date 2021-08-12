@@ -1,15 +1,16 @@
 import { useState } from 'react';
-import { IRegisterState } from './types';
 import { Form } from './styles';
 import Input from '../../../../components/Input';
 import Layout from '../../../../Layout';
 import Button from '../../../../components/Button';
 import { Link, useHistory } from 'react-router-dom';
 
-import { useForm } from 'react-hook-form';
 import API from '../../../../utils/api';
 import Notify from '../../../../utils/notify/notify';
-import { SpaceBetweenForm, SpaceBetweenHeader } from '../../../../commons/UtilityStyles/Flex';
+import {
+  SpaceBetweenForm,
+  SpaceBetweenHeader,
+} from '../../../../commons/UtilityStyles/Flex';
 import { Auth } from '../../../../components/Header/styles';
 import SocialAuth from '../../../../components/SocialAuth';
 import { ReactComponent as GoogleIcon } from '../../../../assets/img/illustrations/google.svg';
@@ -29,32 +30,64 @@ import { useSelector } from 'react-redux';
 import { GlobalStoreState } from 'store/types';
 
 const Register = () => {
-  const { authenticated } = useSelector((state: GlobalStoreState) => state.user);
+  const { authenticated } = useSelector(
+    (state: GlobalStoreState) => state.user
+  );
   const history = useHistory();
+
+  const [values, setValues] = useState({
+    firstname: '',
+    lastname: '',
+    email: '',
+    phone: '',
+    password: '',
+    signType: 'direct',
+  });
+  const [valid, setValid] = useState<boolean>(false);
 
   if (authenticated) history.push('/dashboard');
 
   const [loading, setLoading] = useState(false);
-  
-  const { handleSubmit, errors, register } = useForm();
 
-  const onHandleSubmit = async (restFormData: IRegisterState, event: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.persist();
+    setValues((values: any) => ({
+      ...values,
+      [e.target.name]: e.target.value,
+    }));
+    if (values.firstname && values.lastname && values.email && values.phone && values.password) {
+      setValid(true);
+    }
+  };
+
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
-
     setLoading(true);
-    restFormData.signType = 'direct';
+    setValid(false);
+    
+    console.log(values.phone.length);
+    
+    if (values.phone.length < 11 || values.phone.length > 12) {
+      Notify.bottom('Phone Number must be of the number format. Kindly try again');
+      setLoading(false);
+      setValid(false);
+      return;
+    }
+
+    const payload = { ...values };
 
     try {
-      const response = await API.post('/auth/signup', restFormData);
+      const response = await API.post('/auth/signup', payload);
 
       Notify.bottom(response.data.message);
 
       setTimeout(() => history.push('/login'), 500);
+      setLoading(false);
     } catch (err) {
       const message = err.response.data.message;
       Notify.bottom(message ? message : 'Something happened. Kindly try again');
-    } finally {
       setLoading(false);
+      setValid(false);
     }
   };
 
@@ -86,55 +119,56 @@ const Register = () => {
               </Auth>
             </SpaceBetweenHeader>
 
-            <Form onSubmit={handleSubmit(onHandleSubmit)}>
+            <Form onSubmit={handleSubmit}>
               <SpaceBetweenForm>
-                  <Input
-                    label="First name"
-                    type="text"
-                    name="firstname"
-                    error={errors}
-                    register={register}
-                    required
-                  />
+                <Input
+                  label="First name"
+                  type="text"
+                  name="firstname"
+                  id="firstname"
+                  onChange={handleChange}
+                  required
+                />
 
                 <Input
                   label="Last name"
                   type="text"
                   name="lastname"
-                  error={errors}
-                  register={register}
+                  id="lastname"
+                  onChange={handleChange}
                   required
                 />
               </SpaceBetweenForm>
 
               <Input
                 label="Email address"
-                type="text"
+                type="email"
                 name="email"
-                error={errors}
-                register={register}
+                id="email"
+                onChange={handleChange}
                 required
               />
               <Input
                 label="Phone number"
                 type="number"
                 name="phone"
-                error={errors}
-                register={register}
+                id="phone"
+                onChange={handleChange}
                 required
               />
               <Input
                 label="Password"
                 type="password"
                 name="password"
-                error={errors}
-                register={register}
-                required
+                id="password"
+                onChange={handleChange}
+                disabled={loading}
                 isPassword
                 showCallToAction
                 callToAction={() => <EyeIcon />}
+                required
               />
-              <Button loading={loading} disabled={loading}>
+              <Button loading={loading} disabled={!valid}>
                 Create account
               </Button>
             </Form>
