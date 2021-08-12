@@ -3,7 +3,6 @@ import { SET_WISH_LIST, GET_WISH_LIST, IAction } from './types';
 const initialState = {
   data: [],
   isLoading: false,
-
 };
 
 function reducer(state = initialState, { type, payload }: IAction) {
