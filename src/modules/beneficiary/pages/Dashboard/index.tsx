@@ -1,5 +1,4 @@
 import { useEffect, useCallback } from 'react';
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import { ComponentProps } from './types';
 import DashboardLayout from '../../../../commons/DashboardLayout';
 import { MyUnboxdListHeader, WishList } from './styles';
@@ -9,12 +8,11 @@ import { useHistory } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import { GlobalStoreState } from '../../../../store/types';
 import { getUserWishList } from './redux/actions';
-import Colors from 'constants/Colors';
 
 const fallbackImage = '/assets/birthday.jpg';
 
 const Dashboard: React.FC<ComponentProps> = () => {
-  const { data: wishlist, loading } = useSelector(
+  const { data: wishlist, isLoading } = useSelector(
     (state: GlobalStoreState) => state.wishlist
   );
 
@@ -42,19 +40,19 @@ const Dashboard: React.FC<ComponentProps> = () => {
         </p>
       </MyUnboxdListHeader>
       <WishList>
-        {!loading ? (wishlist.map((wish) => (
-          <WishCard
-            key={wish._id}
-            title={wish.title}
-            wishCount={wish.gifts.length}
-            imgSrc={wish.coverImage || fallbackImage}
-            click={() => openList(wish.slug)}
-          />
-        ))) : (
-          <SkeletonTheme color={Colors.navy}>
-            <Skeleton height={200} />
-            <Skeleton height={200} />
-          </SkeletonTheme>
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          wishlist.map((wish) => (
+            <WishCard
+              key={wish._id}
+              title={wish.title}
+              wishCount={wish.gifts.length}
+              imgSrc={wish.coverImage || fallbackImage}
+              click={() => openList(wish.slug)}
+            />
+          ))
+
         )}
       </WishList>
     </DashboardLayout>

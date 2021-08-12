@@ -1,23 +1,21 @@
-import { SET_WISH_LIST, SET_LOADING, WishListDataTypes } from './types';
+import { SET_WISH_LIST, GET_WISH_LIST, IAction } from './types';
 
 const initialState = {
   data: [],
-  loading: false,
+  isLoading: false,
 };
 
-function reducer(state = initialState, { type, payload }: WishListDataTypes) {
+function reducer(state = initialState, { type, payload }: IAction) {
   switch (type) {
+    case GET_WISH_LIST:
+      return { ...state, isLoading: true };
     case SET_WISH_LIST:
       return {
         ...state,
+        isLoading: false,
         data: payload,
         loading: false,
       };
-    case SET_LOADING:
-      return {
-        ...state,
-        loading: true
-      }
     default:
       return state;
   }

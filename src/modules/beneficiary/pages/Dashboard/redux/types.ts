@@ -1,16 +1,10 @@
 import { WishList } from '../../../../../typings';
 
 export const SET_WISH_LIST = 'SET_WISH_LIST';
-export const SET_LOADING = 'SET_LOADING';
+export const GET_WISH_LIST = 'GET_WISH_LIST';
 
 export interface IAction {
   payload: WishList[] | any;
   type: string;
+  isLoading: boolean;
 }
-
-export interface ISetLoading {
-  type: boolean;
-  payload: false;
-}
-
-export type WishListDataTypes = ISetLoading | IAction;

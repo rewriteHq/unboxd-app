@@ -1,13 +1,19 @@
-import {
-  SET_WISH_LIST,
-  SET_LOADING,
-  WishListDataTypes,
-} from './types';
+import { SET_WISH_LIST, GET_WISH_LIST } from './types';
+
 import API from '../../../../../utils/api';
 import { Dispatch } from 'react';
+import { WishList } from '../../../../../typings';
 
-export const getUserWishList = () => (dispatch: Dispatch<WishListDataTypes>) => {
-  dispatch({ type: SET_LOADING, payload: true })
+interface IDispatch {
+  type: string;
+  payload?: WishList[];
+}
+
+export const getUserWishList = () => (dispatch: Dispatch<IDispatch>) => {
+  dispatch({
+    type: GET_WISH_LIST,
+  });
+
   API.get('/list/user')
     .then((res) => {
       dispatch({

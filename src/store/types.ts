@@ -21,7 +21,7 @@ export type GlobalStoreState = {
     error: string | null;
     isLoading: boolean;
   };
-  wishlist: { data: WishList[], loading: boolean };
+  wishlist: { data: WishList[]; isLoading: boolean };
   resources: { data: { categories: Array<any> }; error: string | null };
   user: {
     authenticated: boolean;
