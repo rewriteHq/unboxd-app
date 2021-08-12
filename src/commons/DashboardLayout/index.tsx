@@ -64,7 +64,7 @@ const DashboardLayout: React.FC<LayoutProps> = ({
                 <div className="profile-img">
                   <img src="/assets/dp.jpg" alt="profile" />
                 </div>
-                <p>Hi, {credentials?.username || credentials?.firstname}</p>
+                <p>Hi, {credentials?.firstname}</p>
               </UserProfile>
               <WalletBalance>
                 <span>Wallet Balance</span>
