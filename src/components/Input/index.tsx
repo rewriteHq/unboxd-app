@@ -7,28 +7,34 @@ const Input: React.FC<InputComponentProps> = ({
   showCallToAction,
   callToAction: CallToAction,
   isPassword,
+  isEdit,
   isPhone,
   ctaClick,
   ...props
 }) => {
-  const [showPassword, setShowPassword] = useState(false);
-  const handleShowPassword = () => {
-    setShowPassword((prev) => !prev);
+  const [show, setShow] = useState(false);
+  const handleShow = () => {
+    setShow((prev) => !prev);
   };
+  // const [edit, setEdit] = useState(false);
+  // const enableEdit = () => {
+  //   setEdit((prev) => !prev);
+  // }
   return (
     <InputField>
       <Label htmlFor={props.id}>{props.label}</Label>
       <div className="input-icon">
         <input
           {...props}
-          type={isPassword ? (showPassword ? 'text' : 'password') : props.type}
+          type={isPassword ? (show ? 'text' : 'password') : props.type}
           inputMode={isPhone ? 'numeric' : 'text'}
           ref={register}
+          disabled={isEdit && !show}
         />
         {showCallToAction && CallToAction && (
           <span
             className="icon-area"
-            onClick={isPassword ? handleShowPassword : ctaClick}
+            onClick={isPassword || isEdit ? handleShow : ctaClick}
           >
             <CallToAction />
           </span>

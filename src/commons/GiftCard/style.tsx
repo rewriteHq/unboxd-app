@@ -6,9 +6,11 @@ import { SpaceBetween } from '../UtilityStyles/Flex';
 export const GiftThumb = styled.div`
   display: flex;
   flex-direction: column;
-  background: ${Colors.darkNavy};
+  background: ${Colors.navy};
   border-radius: 10px;
   height: 270px;
+  min-width: 230px;
+  margin: 0.5rem;
   position: relative;
 `;
 
@@ -48,16 +50,16 @@ export const MenuButton = styled.button<{ active: boolean }>`
   position: absolute;
   top: 10px;
   right: 10px;
-  padding: 0.7rem 1rem;
+  padding: 0.5rem 0.75rem;
   border-radius: 30px;
-  box-shadow: 0 4px 6px #00000090;
+  box-shadow: 0 1px 6px #0000006b;
   display: flex;
 
   span {
-    padding: 3px;
-    background-color: ${Colors.black};
+    padding: 2.5px;
+    background-color: #000;
     border-radius: 50%;
-    margin: 0 1px;
+    margin: 0 2px;
   }
 
   ${({ active }) =>

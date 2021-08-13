@@ -47,6 +47,7 @@ export const InputField = styled.div<{row?: boolean}>`
       margin-left: auto;
       display: block;
       text-align: right;
+      cursor: pointer;
     }
   }
 

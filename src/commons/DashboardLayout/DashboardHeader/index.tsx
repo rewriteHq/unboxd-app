@@ -10,7 +10,7 @@ const DashboardHeader: React.FC = () => {
       <AppWrapper>
         <div className="header-content">
           <Logo />
-          <Link to="/about">About Unboxd</Link>
+          <Link to="/faq">FAQs</Link>
         </div>
       </AppWrapper>
     </DashboardHeaderWrapper>
