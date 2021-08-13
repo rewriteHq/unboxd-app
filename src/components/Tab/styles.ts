@@ -16,6 +16,7 @@ export const TabItem = styled.button<{ active: boolean }>`
   justify-content: center;
   align-items: center;
   font-size: 1.1rem;
-  border-bottom: 1px solid ${Colors.black};
+  border-bottom: 1px solid ${Colors.white};
   opacity: ${({ active }) => (active ? '1' : '0.4')};
+  color: ${Colors.white};
 `;

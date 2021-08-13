@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { NumberFormatValues } from 'react-number-format';
 import { connect } from 'react-redux';
-import { useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import DashboardLayout from '../../../../commons/DashboardLayout';
 import { DashboardContainer } from '../../../../commons/DashboardLayout/styles';
 import ImageUploadModal from '../../../../commons/ImageUploadModal';
@@ -13,6 +13,7 @@ import PriceInput from '../../../../components/Input/price';
 import Tab from '../../../../components/Tab';
 import TotalContribution from './components/TotalContribution';
 import { addGift } from './redux/actions';
+import { updateGift } from './service';
 import { CoverImage, ImageHolder, ImageWrapper, UploadButton } from './styles';
 import { ParamType, ComponentProps, ImageState } from './types';
 
@@ -24,6 +25,7 @@ enum tabIndex {
 
 const Gift = ({ gifts, getGift }: ComponentProps) => {
   const { id } = useParams<ParamType>();
+  const history = useHistory();
   const [image, setImage] = useState<ImageState>({
     modal: false,
     file: '',
@@ -68,6 +70,21 @@ const Gift = ({ gifts, getGift }: ComponentProps) => {
     setData({ ...data, price: value });
 
   const changeActive = useCallback((tab: number) => setActiveTab(tab), []);
+
+  const editGift = async () => {
+    const payload = new FormData();
+
+    payload.append('name', data.title);
+    payload.append('cost', data.price);
+    payload.append('imageURL', image.file);
+
+    const [err] = await updateGift({ data: payload, id });
+    if (err) {
+      return;
+    }
+
+    history.goBack();
+  };
 
   return (
     <DashboardLayout pageTitle="Add Item" showBack>
@@ -115,7 +132,9 @@ const Gift = ({ gifts, getGift }: ComponentProps) => {
       />
 
       <PageBottom>
-        {activeTab === tabIndex.edit && <Button>Save</Button>}
+        {activeTab === tabIndex.edit && (
+          <Button onClick={editGift}>Save</Button>
+        )}
         {activeTab === tabIndex.contibutors && <TotalContribution />}
       </PageBottom>
     </DashboardLayout>

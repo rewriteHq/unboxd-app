@@ -21,6 +21,7 @@ export const UploadButton = styled(BTN)<{ color?: string }>`
   left: calc(50% - 80px);
   width: unset;
   border-radius: 5px;
+  color: ${Colors.black};
 `;
 
 export const ImageWrapper = styled.div`
@@ -35,7 +36,7 @@ export const CoverImage = styled.img`
 
 export const Total = styled(SpaceBetween)`
   align-items: center;
-  background-color: ${Colors.lightGrey};
+  background-color: ${Colors.navy};
   padding: 20px 20px 30px;
   position: fixed;
   bottom: 0;
