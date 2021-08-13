@@ -25,7 +25,6 @@ export const WishCardWrapper = styled.div`
   }
   .wish-details {
     position: absolute;
-    z-index: 9;
     padding: 20px;
     display: flex;
     justify-content: space-between;
