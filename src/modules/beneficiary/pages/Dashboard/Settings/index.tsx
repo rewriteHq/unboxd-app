@@ -4,23 +4,39 @@ import Button from '../../../../../components/Button';
 import Input from '../../../../../components/Input';
 import { ContentWrapper, SectionSeparator } from '../styles';
 import { ReactComponent as EyeIcon } from '../../../../../assets/img/icons/eye.svg';
+import { ReactComponent as EditIcon } from '../../../../../assets/img/icons/edit.svg';
+import { useSelector } from 'react-redux';
+import { GlobalStoreState } from 'store/types';
 
 const Settings: React.FC<any> = () => {
+  const { loading, credentials } = useSelector((state: GlobalStoreState) => state.user);
+
+  const handleChange = () => {}
+
+  const handleSubmit = () => {}
   return (
     <DashboardLayout>
       <ContentWrapper>
-        <form>
+        <form onSubmit={handleSubmit}>
           <Input
             type="email"
-            value="tao_23293@gmail.com"
+            value={credentials ? credentials.email : 'user@unboxd.gifts'}
             label="Email Address"
             disabled
+            callToAction={() => <EditIcon />}
+            showCallToAction
+            isEdit
+            onChange={handleChange}
           />
           <Input
-            type="password"
-            value="tao_23293@gmail.com"
-            label="Password"
+            type="text"
+            value={credentials ? credentials.username : 'username'}
+            label="Username"
             disabled
+            callToAction={() => <EditIcon />}
+            showCallToAction
+            isEdit
+            onChange={handleChange}
           />
           <SectionSeparator />
           <Input
@@ -30,6 +46,7 @@ const Settings: React.FC<any> = () => {
             callToAction={() => <EyeIcon />}
             showCallToAction
             isPassword
+            onChange={handleChange}
           />
           <Input
             type="password"
@@ -38,6 +55,7 @@ const Settings: React.FC<any> = () => {
             callToAction={() => <EyeIcon />}
             showCallToAction
             isPassword
+            onChange={handleChange}
           />
           <Input
             type="Confirm new password"
@@ -46,8 +64,9 @@ const Settings: React.FC<any> = () => {
             callToAction={() => <EyeIcon />}
             showCallToAction
             isPassword
+            onChange={handleChange}
           />
-          <Button>Save changes</Button>
+          <Button type="submit" loading={loading} disabled={loading}>Save changes</Button>
         </form>
       </ContentWrapper>
     </DashboardLayout>

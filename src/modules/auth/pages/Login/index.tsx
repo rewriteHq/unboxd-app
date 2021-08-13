@@ -87,11 +87,12 @@ const Login = () => {
             <Form onSubmit={handleSubmit}>
               <Input
                 label="Email address"
-                type="text"
+                type="email"
                 name="email"
                 id="email"
                 onChange={handleChange}
                 disabled={loading}
+                required
               />
               <Input
                 label="Password"
@@ -103,8 +104,9 @@ const Login = () => {
                 isPassword
                 showCallToAction
                 callToAction={() => <EyeIcon />}
+                required
               />
-              <Button type="submit" loading={loading}>
+              <Button type="submit" loading={loading} disabled={loading}>
                 Sign in
               </Button>
             </Form>

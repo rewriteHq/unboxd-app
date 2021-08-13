@@ -74,6 +74,13 @@ const Register = () => {
       return;
     }
 
+    if (values.password.length < 8) {
+      Notify.bottom('Password should be 8 characters or more');
+      setLoading(false);
+      setValid(false);
+      return;
+    }
+
     const payload = { ...values };
 
     try {

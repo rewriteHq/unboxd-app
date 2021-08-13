@@ -14,7 +14,7 @@ const headlineFont = css`
 
 export const ImageHolder = styled(BTN)`
   height: 30vh;
-  background: ${(props) => props.theme.appSecondaryColor};
+  background: ${(props) => props.theme.appPrimaryColor};
   border-radius: 10px;
   border: 1px solid #4a4a4a;
   display: flex;

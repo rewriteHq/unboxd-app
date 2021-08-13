@@ -32,6 +32,7 @@ export type GlobalStoreState = {
       firstname: string;
       lastname: string;
       username: string;
+      phone: string;
       role: string;
       signType: string;
       updatedAt: string;

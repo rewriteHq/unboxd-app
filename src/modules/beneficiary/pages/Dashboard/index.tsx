@@ -8,6 +8,8 @@ import { useHistory } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import { GlobalStoreState } from '../../../../store/types';
 import { getUserWishList } from './redux/actions';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import Colors from 'constants/Colors';
 
 const fallbackImage = '/assets/birthday.jpg';
 
@@ -34,14 +36,16 @@ const Dashboard: React.FC<ComponentProps> = () => {
     <DashboardLayout>
       <MyUnboxdListHeader>
         <p>
-          my &nbsp;
+          {wishlist ? 'my ' : 'create your first '} &nbsp;
           <Logo />
           &nbsp; list
         </p>
       </MyUnboxdListHeader>
       <WishList>
         {isLoading ? (
-          <p>Loading...</p>
+          <SkeletonTheme color={Colors.navy}>
+            <Skeleton height={150} />
+          </SkeletonTheme>
         ) : (
           wishlist.map((wish) => (
             <WishCard
