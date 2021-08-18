@@ -41,4 +41,9 @@ export type GlobalStoreState = {
     errors: string | null;
     loading: boolean;
   };
+  resetUser: {
+    loading: boolean;
+    errors: string | null;
+    email: string;
+  }
 };

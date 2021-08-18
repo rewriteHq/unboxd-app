@@ -24,6 +24,7 @@ import { ReactComponent as LargeHeart } from '../../../../assets/img/illustratio
 import { ReactComponent as SmallHeart } from '../../../../assets/img/illustrations/heart-small.svg';
 import { ReactComponent as EyeIcon } from '../../../../assets/img/icons/eye.svg';
 import { GlobalStoreState } from '../../../../store/types';
+import ResetLink from 'components/ResetLink';
 
 const Login = () => {
   const { loading, authenticated } = useSelector((state: GlobalStoreState) => state.user);
@@ -110,6 +111,7 @@ const Login = () => {
                 Sign in
               </Button>
             </Form>
+            <ResetLink />
             <SocialAuth
               options={[
                 {
