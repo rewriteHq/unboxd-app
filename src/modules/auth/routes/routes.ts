@@ -8,6 +8,7 @@ const homeFooter = lazy(() => import('../pages/Home/footer'));
 const login = lazy(() => import('../pages/Login'));
 const authHeader = lazy(() => import('../pages/Login/header'));
 const register = lazy(() => import('../pages/Register'));
+const forgotPassword = lazy(() => import('../pages/ForgotPassword'));
 
 const routes: RouteType[] = [
   {
@@ -32,6 +33,13 @@ const routes: RouteType[] = [
     component: register,
     header: authHeader,
   },
+  {
+    path: '/auth-reset',
+    exact: true,
+    auth: false,
+    component: forgotPassword,
+    header: authHeader,
+  }
 ];
 
 export default routes;

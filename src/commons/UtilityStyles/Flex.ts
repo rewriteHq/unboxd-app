@@ -32,6 +32,11 @@ export const Flex = styled.div`
   display: flex;
 `;
 
+export const FlexTextCenter = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
 export const SpaceBetweenForm = styled.div`
   display: flex;
   flex-direction: column;
