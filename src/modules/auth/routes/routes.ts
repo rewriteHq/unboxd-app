@@ -9,6 +9,7 @@ const login = lazy(() => import('../pages/Login'));
 const authHeader = lazy(() => import('../pages/Login/header'));
 const register = lazy(() => import('../pages/Register'));
 const forgotPassword = lazy(() => import('../pages/ForgotPassword'));
+const verifyUser = lazy(() => import('../pages/VerifyUser'));
 
 const routes: RouteType[] = [
   {
@@ -38,6 +39,13 @@ const routes: RouteType[] = [
     exact: true,
     auth: false,
     component: forgotPassword,
+    header: authHeader,
+  },
+  {
+    path: '/verify-user',
+    exact: true,
+    auth: false,
+    component: verifyUser,
     header: authHeader,
   }
 ];

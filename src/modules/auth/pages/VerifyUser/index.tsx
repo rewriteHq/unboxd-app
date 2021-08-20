@@ -12,23 +12,20 @@ import {
 import Button from '../../../../components/Button';
 import Input from '../../../../components/Input';
 import Layout from '../../../../Layout';
-import { verifyUser as changePassword, sendEmail } from '../VerifyUser/redux/actions';
-import {
-  FlexTextCenter,
-  SpaceBetweenHeader,
-} from '../../../../commons/UtilityStyles/Flex';
-import { Auth } from '../../../../components/Header/styles';
+import { verifyUser, sendEmail } from './redux/actions';
+import { SpaceBetweenHeader } from '../../../../commons/UtilityStyles/Flex';
 import Footer from '../../../../components/Footer';
 import Logo from '../../../../components/Logo';
 import { ReactComponent as LargeHeart } from '../../../../assets/img/illustrations/heart-large.svg';
 import { ReactComponent as SmallHeart } from '../../../../assets/img/illustrations/heart-small.svg';
-import { ReactComponent as EyeIcon } from '../../../../assets/img/icons/eye.svg';
 import { GlobalStoreState } from '../../../../store/types';
+import { SET_STEP } from './redux/types';
 
-const ForgotPassword = () => {
+const VerifyUser = () => {
   const { authenticated } = useSelector(
     (state: GlobalStoreState) => state.user
   );
+  const { step } = useSelector((state: GlobalStoreState) => state.verifyUser);
   const history = useHistory();
 
   if (authenticated) history.push('/dashboard');
@@ -36,12 +33,11 @@ const ForgotPassword = () => {
 
   const [values, setValues] = useState({
     email: '',
-    newPassword: '',
+    type: 'register ',
     otp: '',
-    type: 'password',
   });
 
-  const [step, setStep] = useState<number>(1);
+  // const [step, setStep] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,8 +53,10 @@ const ForgotPassword = () => {
     setLoading(true);
     const payload = { email: values.email, type: values.type };
     try {
+      console.log(payload);
       await dispatch(sendEmail(payload));
-      setStep(2);
+      // setStep(2);
+      dispatch({ type: SET_STEP });
       setLoading(false);
     } catch (error) {}
   };
@@ -69,7 +67,7 @@ const ForgotPassword = () => {
     //your client side validation here
     //after success validation
     const payload = { ...values };
-    await dispatch(changePassword(payload, history));
+    await dispatch(verifyUser(payload, history));
     setLoading(false);
   };
 
@@ -95,7 +93,7 @@ const ForgotPassword = () => {
         <Main>
           <div className="container">
             <SpaceBetweenHeader align="center">
-              <h2>Forgot Password</h2>
+              <h2>Please Verify Account</h2>
             </SpaceBetweenHeader>
             {step === 1 && (
               <Form onSubmit={handleSendEmail}>
@@ -109,24 +107,12 @@ const ForgotPassword = () => {
                   required
                 />
                 <Button type="submit" loading={loading} disabled={loading}>
-                  Send
+                  Continue
                 </Button>
               </Form>
             )}
             {step === 2 && (
               <Form onSubmit={handleSubmit}>
-                <Input
-                  label="New Password"
-                  type="password"
-                  name="newPassword"
-                  id="password"
-                  onChange={handleChange}
-                  disabled={loading}
-                  isPassword
-                  showCallToAction
-                  callToAction={() => <EyeIcon />}
-                  required
-                />
                 <Input
                   label="OTP"
                   type="number"
@@ -137,15 +123,10 @@ const ForgotPassword = () => {
                   required
                 />
                 <Button type="submit" loading={loading} disabled={loading}>
-                  Change Password
+                  Verify Account
                 </Button>
               </Form>
             )}
-            <FlexTextCenter>
-              <Auth centered>
-                Remember Password? <Link to="/login">Sign in</Link>
-              </Auth>
-            </FlexTextCenter>
           </div>
         </Main>
         <Footer />
@@ -154,4 +135,4 @@ const ForgotPassword = () => {
   );
 };
 
-export default ForgotPassword;
+export default VerifyUser;

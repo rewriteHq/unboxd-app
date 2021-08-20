@@ -6,6 +6,7 @@ import {
   SET_ERRORS,
   LOADING_UI,
   CLEAR_ERRORS,
+  SET_VERIFIED,
 } from './types';
 
 const initialState = {
@@ -13,6 +14,7 @@ const initialState = {
   credentials: null,
   loading: false,
   errors: null,
+  isVerified: false,
 };
 
 function reducer(state = initialState, action: any) {
@@ -25,6 +27,12 @@ function reducer(state = initialState, action: any) {
       };
     case SET_UNAUTHENTICATED:
       return initialState;
+    case SET_VERIFIED:
+      return {
+        ...state,
+        isVerified: true,
+        loading: false,
+      }
     case SET_USER:
       return {
         ...state,

@@ -5,6 +5,7 @@ import {
   SET_UNAUTHENTICATED,
   LOADING_USER,
   SET_AUTHENTICATED,
+  SET_VERIFIED,
 } from './types';
 import API from '../../../../../utils/api';
 import Notify from '../../../../../utils/notify/notify';
@@ -16,11 +17,13 @@ export const loginUser = (userData: any, history: any) => (dispatch: any) => {
     .then((res) => {
       const token = `Bearer ${res.data.token}`;
       const username = res.data.payload.username;
+      const isVerified = res.data.payload.isVerified;
       localStorage.setItem('token', token); //setting token to local storage
       localStorage.setItem('username', username); //setting token to local storage
       API.defaults.headers.common['Authorization'] = token; //setting authorize token to header in axios
       dispatch(getUserData());
       dispatch({ type: CLEAR_ERRORS });
+      dispatch({ type: SET_VERIFIED, isVerified })
       dispatch({ type: SET_AUTHENTICATED });
       history.push('/dashboard'); //redirecting to index page after login success
     })
@@ -29,6 +32,13 @@ export const loginUser = (userData: any, history: any) => (dispatch: any) => {
         type: SET_ERRORS,
         payload: err.response.data,
       });
+      dispatch({
+        type: SET_UNAUTHENTICATED,
+      });
+      if (err.response.data.payload) {
+        const notVerified = err.response.data.payload.isVerified;
+        if (!notVerified) history.push('/verify-user');
+      }
       Notify.bottom(err.response.data.message);
     });
 };

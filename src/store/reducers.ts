@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import userReducer from '../modules/auth/pages/Login/redux/reducer';
-import resetUserReducer from '../modules/auth/pages/ForgotPassword/redux/reducer';
+import verifyUserReducer from '../modules/auth/pages/VerifyUser/redux/reducer';
 import eventReducer from '../modules/beneficiary/pages/Event/redux/reducers/';
 import giftReducer from '../modules/beneficiary/pages/Gift/redux/reducer';
 import resourcesReducer from '../modules/resources/redux/reducer';
@@ -11,7 +11,7 @@ import reducer from 'modules/beneficiary/pages/Wallet/redux/reducer';
 
 const rootReducer = combineReducers({
   user: userReducer,
-  reset: resetUserReducer,
+  verifyUser: verifyUserReducer,
   event: eventReducer,
   gifts: giftReducer,
   resources: resourcesReducer,
