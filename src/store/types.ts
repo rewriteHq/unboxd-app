@@ -25,6 +25,7 @@ export type GlobalStoreState = {
   resources: { data: { categories: Array<any> }; error: string | null };
   user: {
     authenticated: boolean;
+    isVerified: boolean;
     credentials: {
       DOB: string | null;
       createdAt: string;

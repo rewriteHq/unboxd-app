@@ -10,7 +10,7 @@ import Notify from '../../../../../utils/notify/notify';
 
 export const sendEmail = (payload: any) => (dispatch: any) => {
   dispatch({ type: LOADING_USER });
-  API.post('/auth/forgotpassword', payload)
+  API.post('/auth/sendOtp', payload)
     .then((res) => {
       console.log(res);
       Notify.bottom('OTP sent to your email');
@@ -27,9 +27,9 @@ export const sendEmail = (payload: any) => (dispatch: any) => {
     });
 };
 
-export const changePassword = (userData: any, history: any) => (dispatch: any) => {
+export const verifyUser = (userData: any, history: any) => (dispatch: any) => {
   dispatch({ type: LOADING_USER });
-  API.post('/auth/confirmpassword', userData)
+  API.post('/auth/verifyOtp', userData)
     .then((res) => {
       dispatch({ type: CLEAR_ERRORS });
       history.push('/dashboard'); //redirecting to index page after login success
