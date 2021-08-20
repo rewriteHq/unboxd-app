@@ -4,12 +4,15 @@ import {
   CLEAR_ERRORS,
   SEND_EMAIL,
   CHANGE_PASSWORD,
+  SET_STEP,
+  UNSET_STEP,
 } from './types';
 
 const initialState = {
   loading: false,
   errors: null,
-  email: ''
+  email: '',
+  step: 1,
 };
 
 function reducer(state = initialState, action: any) {
@@ -25,6 +28,16 @@ function reducer(state = initialState, action: any) {
         ...state,
         loading: false,
       };
+    case SET_STEP:
+      return {
+        ...state,
+        step: 2,
+      };
+    case UNSET_STEP:
+      return {
+        ...state,
+        step: 1,
+      }
     case LOADING_USER:
       return {
         ...state,

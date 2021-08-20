@@ -13,19 +13,19 @@ import Button from '../../../../components/Button';
 import Input from '../../../../components/Input';
 import Layout from '../../../../Layout';
 import { verifyUser, sendEmail } from './redux/actions';
-import {
-  SpaceBetweenHeader,
-} from '../../../../commons/UtilityStyles/Flex';
+import { SpaceBetweenHeader } from '../../../../commons/UtilityStyles/Flex';
 import Footer from '../../../../components/Footer';
 import Logo from '../../../../components/Logo';
 import { ReactComponent as LargeHeart } from '../../../../assets/img/illustrations/heart-large.svg';
 import { ReactComponent as SmallHeart } from '../../../../assets/img/illustrations/heart-small.svg';
 import { GlobalStoreState } from '../../../../store/types';
+import { SET_STEP } from './redux/types';
 
 const VerifyUser = () => {
   const { authenticated } = useSelector(
     (state: GlobalStoreState) => state.user
   );
+  const { step } = useSelector((state: GlobalStoreState) => state.verifyUser);
   const history = useHistory();
 
   if (authenticated) history.push('/dashboard');
@@ -37,7 +37,7 @@ const VerifyUser = () => {
     otp: '',
   });
 
-  const [step, setStep] = useState<number>(1);
+  // const [step, setStep] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,7 +55,8 @@ const VerifyUser = () => {
     try {
       console.log(payload);
       await dispatch(sendEmail(payload));
-      setStep(2);
+      // setStep(2);
+      dispatch({ type: SET_STEP });
       setLoading(false);
     } catch (error) {}
   };

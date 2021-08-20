@@ -26,13 +26,15 @@ import { ReactComponent as LargeHeart } from '../../../../assets/img/illustratio
 import { ReactComponent as SmallHeart } from '../../../../assets/img/illustrations/heart-small.svg';
 import { ReactComponent as EyeIcon } from '../../../../assets/img/icons/eye.svg';
 import Logo from '../../../../components/Logo';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { GlobalStoreState } from 'store/types';
+import { SET_STEP } from '../VerifyUser/redux/types';
 
 const Register = () => {
   const { authenticated } = useSelector(
     (state: GlobalStoreState) => state.user
   );
+  const dispatch = useDispatch();
   const history = useHistory();
 
   const [values, setValues] = useState({
@@ -65,8 +67,6 @@ const Register = () => {
     setLoading(true);
     setValid(false);
     
-    console.log(values.phone.length);
-    
     if (values.phone.length < 11 || values.phone.length > 12) {
       Notify.bottom('Phone Number must be of the number format. Kindly try again');
       setLoading(false);
@@ -88,7 +88,9 @@ const Register = () => {
 
       Notify.bottom(response.data.message);
 
-      setTimeout(() => history.push('/login'), 500);
+      setTimeout(() => history.push('/verify-user'), 500);
+      dispatch({ type: SET_STEP })
+      Notify.bottom('Check your email for verification OTP');
       setLoading(false);
     } catch (err) {
       const message = err.response.data.message;

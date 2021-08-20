@@ -42,9 +42,10 @@ export type GlobalStoreState = {
     errors: string | null;
     loading: boolean;
   };
-  resetUser: {
+  verifyUser: {
     loading: boolean;
     errors: string | null;
     email: string;
+    step: number;
   }
 };
