@@ -4,7 +4,7 @@ import Notify from '../../../utils/notify/notify';
 export const getCategories = async () => {
   try {
     const result = await API.get('/category');
-
+    console.log(result);
     return [null, result.data.payload];
   } catch (err) {
     const message = err.response.data.message;

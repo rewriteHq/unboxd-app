@@ -28,7 +28,7 @@ import { ReactComponent as EyeIcon } from '../../../../assets/img/icons/eye.svg'
 import Logo from '../../../../components/Logo';
 import { useDispatch, useSelector } from 'react-redux';
 import { GlobalStoreState } from 'store/types';
-import { SET_STEP } from '../VerifyUser/redux/types';
+import { SEND_EMAIL, SET_STEP } from '../VerifyUser/redux/types';
 
 const Register = () => {
   const { authenticated } = useSelector(
@@ -81,14 +81,16 @@ const Register = () => {
       return;
     }
 
-    const payload = { ...values };
+    const authData = { ...values };
+    const payload = values.email;
 
     try {
-      const response = await API.post('/auth/signup', payload);
+      const response = await API.post('/auth/signup', authData);
 
       Notify.bottom(response.data.message);
 
       setTimeout(() => history.push('/verify-user'), 500);
+      dispatch({ type: SEND_EMAIL, payload })
       dispatch({ type: SET_STEP })
       Notify.bottom('Check your email for verification OTP');
       setLoading(false);

@@ -12,14 +12,12 @@ export const sendEmail = (payload: any) => (dispatch: any) => {
   dispatch({ type: LOADING_USER });
   API.post('/auth/sendOtp', payload)
     .then((res) => {
-      console.log(res);
-      Notify.bottom('OTP sent to your email');
+      Notify.bottom(res ? res.data.payload.message : 'OTP sent to your email');
       dispatch({ type: CLEAR_ERRORS });
       dispatch({ type: SEND_EMAIL, payload })
       dispatch({ type: SET_STEP })
     })
     .catch((err) => {
-      console.log(err.response);
       dispatch({
         type: SET_ERRORS,
         payload: err.response.data,
