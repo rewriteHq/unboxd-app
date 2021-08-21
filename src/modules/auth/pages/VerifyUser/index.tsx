@@ -25,19 +25,18 @@ const VerifyUser = () => {
   const { authenticated } = useSelector(
     (state: GlobalStoreState) => state.user
   );
-  const { step } = useSelector((state: GlobalStoreState) => state.verifyUser);
+  const { step, email } = useSelector((state: GlobalStoreState) => state.verifyUser);
   const history = useHistory();
 
   if (authenticated) history.push('/dashboard');
   const dispatch = useDispatch();
 
   const [values, setValues] = useState({
-    email: '',
+    email,
     type: 'register ',
     otp: '',
   });
 
-  // const [step, setStep] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,9 +52,7 @@ const VerifyUser = () => {
     setLoading(true);
     const payload = { email: values.email, type: values.type };
     try {
-      console.log(payload);
       await dispatch(sendEmail(payload));
-      // setStep(2);
       dispatch({ type: SET_STEP });
       setLoading(false);
     } catch (error) {}
