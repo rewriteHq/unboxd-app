@@ -122,7 +122,6 @@ const EventForm = ({
     setFile(file);
     setImage(URL.createObjectURL(file));
     setModal(ModalsIndex.NONE);
-    console.log('2', file);
   }, []);
 
   const fromUnsplash = useCallback((imageUrl: string) => {
