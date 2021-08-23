@@ -3,7 +3,8 @@ import { useMemo } from 'react';
 import shortid from 'shortid';
 import { GiftType } from '../../../../../../typings';
 import { GiftThumbList } from '../styles';
-import GiftCard, { EmptyGiftCard } from './GiftCard';
+import { EmptyGiftCard } from './GiftCard';
+import GiftCard from '../../../../../../commons/GiftCard';
 
 interface ComponentProps {
   gifts: GiftType[];
@@ -21,7 +22,9 @@ const GiftList: React.FC<ComponentProps> = ({ gifts, wishlistId }) => {
     <GiftThumbList>
       {giftList.map((gift) =>
         gift ? (
-          <GiftCard key={gift._id} gift={gift} wishlistId={wishlistId} />
+          <GiftCard key={gift._id} gift={gift}>
+            <GiftCard.Menu />
+          </GiftCard>
         ) : (
           <EmptyGiftCard wishlistID={wishlistId} key={shortid.generate()} />
         )

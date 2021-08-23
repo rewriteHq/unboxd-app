@@ -1,4 +1,4 @@
-import { EventActionTypes, SET_WISHLIST, SET_WISHLIST_LOADING, WishlistState } from '../types';
+import { EventActionTypes, SET_WISHLIST, SET_WISHLIST_LOADING, UNSET_WISHLIST, WishlistState } from '../types';
 
 const inititalState: WishlistState = {
   data: null,
@@ -14,6 +14,8 @@ const reducer = (state = inititalState, action: EventActionTypes) => {
         data: action.payload,
         isLoading: false
       };
+    case UNSET_WISHLIST:
+      return inititalState;
     case SET_WISHLIST_LOADING:
       return {
         ...state,

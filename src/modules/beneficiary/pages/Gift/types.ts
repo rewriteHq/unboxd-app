@@ -11,6 +11,6 @@ export type ParamType = {
 
 export type ImageState = {
   modal: boolean;
-  file: File | string;
-  url: string;
+  file?: File | string;
+  url?: string;
 };

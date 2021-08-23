@@ -8,11 +8,13 @@ export const ModalWrapper = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   z-index: 100;
   cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(${Effects.blur}px);
 
-  &::before {
+  /* &::before {
     content: '';
     width: 100%;
     height: 100%;
@@ -22,6 +24,33 @@ export const ModalWrapper = styled.div`
     background: rgba(0, 0, 0, 0.8);
     z-index: -1;
     backdrop-filter: blur(${Effects.blur}px);
+  } */
+`;
+
+export const ModalContent = styled.div<{unsplash?: boolean}>`
+  width: 100%;
+  height: 50vh;
+  max-height: 90vh;
+  background: #2d3039;
+  border-top-left-radius: 0.8rem;
+  border-top-right-radius: 0.8rem;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  transform: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.5);
+
+  @media (min-width: 768px) {
+    width: 65%;
+    min-height: 75vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 1rem;
+    border-radius: 0.8rem;
   }
 `;
 
@@ -32,7 +61,7 @@ export const Head = styled.div`
   height: 70px;
   width: 100%;
   padding: 0 20px;
-  background: white;
+  background: #2d3039;
 `;
 
 export const HeaderTitle = styled.div`
@@ -42,8 +71,9 @@ export const HeaderTitle = styled.div`
   justify-content: center;
 
   p {
-    color: ${Colors.grey};
+    color: ${Colors.white};
     font-size: ${Sizes.small};
+    margin-top: 0.35rem;
   }
 `;
 
@@ -51,8 +81,9 @@ export const ModalMain = styled.div<{ full?: boolean }>`
   display: flex;
   flex-direction: column;
   padding: 20px;
-  background: ${Colors.white};
-  min-height: ${(props) => (props.full ? '100vh' : '75vh')};
+  background: #2d3039;
+  width: 100%;
+  min-height: ${(props) => (props.full ? '100vh' : '50vh')};
 `;
 
 export const ModalBottom = styled.div`

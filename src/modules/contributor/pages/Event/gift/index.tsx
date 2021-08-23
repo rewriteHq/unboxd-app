@@ -199,7 +199,7 @@ const Gift = () => {
     <ContributorLayout>
       <div className="container">
         <GiftCoverTime>
-          <CoverImage src={gift.imageURL} alt={gift.name} />
+          <CoverImage src={gift.coverImage} alt={gift.name} />
 
           <GiftCountdown>
             {daysLeft} {daysLeft > 1 ? 'days ' : 'day'} left
@@ -284,7 +284,7 @@ const Gift = () => {
                 gift._id !== wishlist._id ? (
                   <GiftCard
                     name={gift.name}
-                    image={gift.imageURL}
+                    image={gift.coverImage!}
                     price={gift?.totalCost!}
                     raised={gift?.paid}
                     key={gift._id}

@@ -38,7 +38,8 @@ export interface GiftType {
   name: string;
   cost: number;
   totalCost?: number;
-  imageURL: string;
+  imageURL?: string;
+  coverImage?: string;
 }
 
 export interface WishList {

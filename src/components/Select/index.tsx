@@ -23,7 +23,7 @@ const Select: React.FC<SelectProps> = ({
       <select id={id} required={required} onChange={handleChange}>
         <option></option>
         {items.map((item) => (
-          <option value={item.value}>{item.text}</option>
+          <option key={item.value} value={item.value}>{item.text}</option>
         ))}
       </select>
     </SelectWrapper>

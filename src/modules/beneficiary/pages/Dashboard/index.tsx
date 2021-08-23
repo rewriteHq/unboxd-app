@@ -10,6 +10,7 @@ import { GlobalStoreState } from '../../../../store/types';
 import { getUserWishList } from './redux/actions';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import Colors from 'constants/Colors';
+import { unSetGlobalButtoLink } from 'modules/beneficiary/redux/actions';
 
 const fallbackImage = '/assets/birthday.jpg';
 
@@ -23,6 +24,7 @@ const Dashboard: React.FC<ComponentProps> = () => {
 
   useEffect(() => {
     dispatch(getUserWishList());
+    dispatch(unSetGlobalButtoLink());
   }, [dispatch]);
 
   const openList = useCallback(

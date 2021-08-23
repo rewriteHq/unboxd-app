@@ -9,6 +9,8 @@ function reducer(state = initialState, action: any) {
         ...state,
         link: action.link,
       };
+    case 'UNSET_GLOBAL_APP_BUTTON_LINK':
+      return initialState;
     default:
       return state;
   }

@@ -17,12 +17,7 @@ export const DashboardFilm = styled.div`
   width: 100%;
   height: 50%;
   bottom: 0;
-  background-image: linear-gradient(
-    to top,
-    rgba(255, 255, 255, 1),
-    rgba(255, 255, 255, 0.61),
-    rgba(255, 255, 255, 0)
-  );
+  background: linear-gradient(to top, rgba(22, 24, 29, 1), rgba(34, 36, 44, 0));
   z-index: 2;
 `;
 

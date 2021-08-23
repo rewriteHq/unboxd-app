@@ -22,9 +22,13 @@ export const Button = styled.button`
 
 export const PhotoGrid = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 10px;
   margin: 10px 0;
+  
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
 `;
 
 export const PhotoThumb = styled.a`
@@ -43,4 +47,10 @@ export const PhotoAuthor = styled.p`
   a {
     text-decoration: underline;
   }
+`;
+
+export const Container = styled.div`
+  flex-direction: column;
+  width: 100%;
+  overflow-y: auto;
 `;
