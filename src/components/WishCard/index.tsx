@@ -16,7 +16,7 @@ const WishCard: React.FC<WishCardProps> = ({ title, wishCount, imgSrc, click }) 
       <div className="wish-details">
         <h1>{title}</h1>
         <div className="wish-category">
-          <span className="wish-amount d-flex-center">{wishCount} wishes</span>
+          <span className="wish-amount d-flex-center">{wishCount} wish{wishCount > 1 || wishCount < 1 ? 'es' : ''}</span>
           <span className="wish-icon d-flex-center">
             <Cake />
           </span>

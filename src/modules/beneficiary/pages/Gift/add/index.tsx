@@ -68,7 +68,6 @@ const AddGift = ({ getWishlist }: ComponentProps) => {
 
     getWishlist(id);
     setLoading(false);
-    console.log('now go back');
     history.goBack();
   };
 

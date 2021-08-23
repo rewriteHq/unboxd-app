@@ -13,18 +13,6 @@ export const ModalWrapper = styled.div`
   cursor: pointer;
   background-color: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(${Effects.blur}px);
-
-  /* &::before {
-    content: '';
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: rgba(0, 0, 0, 0.8);
-    z-index: -1;
-    backdrop-filter: blur(${Effects.blur}px);
-  } */
 `;
 
 export const ModalContent = styled.div<{unsplash?: boolean}>`
