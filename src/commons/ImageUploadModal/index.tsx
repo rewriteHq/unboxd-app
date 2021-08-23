@@ -1,7 +1,6 @@
 import { useCallback, useState } from 'react';
-import styled from 'styled-components';
 import ImageModal from '../../components/Modal/ImageModal';
-import { Button, FileInput, FileLabel } from './styles';
+import { Button, Container, FileInput, FileLabel } from './styles';
 import UnsplashModal from './unsplash';
 
 interface ComponentProps {
@@ -69,10 +68,5 @@ const ImageUploadModal = ({
     </>
   );
 };
-
-const Container = styled.div`
-  flex-direction: column;
-  width: 100%;
-`;
 
 export default ImageUploadModal;

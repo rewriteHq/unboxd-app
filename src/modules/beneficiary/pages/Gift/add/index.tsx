@@ -58,7 +58,7 @@ const AddGift = ({ getWishlist }: ComponentProps) => {
 
     payload.append('name', data.title);
     payload.append('cost', data.price);
-    payload.append('image', image.file);
+    payload.append('image', image.url);
 
     const [err] = await addGift({ data: payload, id });
 
@@ -68,6 +68,7 @@ const AddGift = ({ getWishlist }: ComponentProps) => {
 
     getWishlist(id);
     setLoading(false);
+    console.log('now go back');
     history.goBack();
   };
 

@@ -28,6 +28,10 @@ import {
   months,
   getDaysInMonth,
 } from '../../../../../utils/date';
+import { useSelector } from 'react-redux';
+import { GlobalStoreState } from 'store/types';
+import { generateCategoriesSelect } from 'utils/helpers/generateCategoriesSelect';
+import LogoLoader from 'commons/LogoLoader';
 
 enum ModalsIndex {
   NONE = 0,
@@ -41,6 +45,11 @@ const eventParams = {
   edit: { showBack: true, title: 'Edit Event' },
 };
 
+interface CategoriesInterface {
+  value: string;
+  text: string;
+}
+
 const EventForm = ({
   list,
   getCategories,
@@ -50,6 +59,7 @@ const EventForm = ({
   const [image, setImage] = useState('');
   const [file, setFile] = useState<File | string>('');
   const [category, setCategory] = useState<Category | ''>('');
+  const [categoriesArr, setCategoriesArr] = useState<CategoriesInterface[]>([]);
   const [modal, setModal] = useState(ModalsIndex.NONE);
   const [data, setData] = useState({
     headline: '',
@@ -61,13 +71,21 @@ const EventForm = ({
     month: new Date().getMonth(),
     year: new Date().getFullYear(),
   });
+  useEffect(() => {
+    getCategories();
+  }, [getCategories]);
 
   const { id } = useParams<EventParamsType>();
   const history = useHistory();
 
+  const {
+    data: { categories },
+  } = useSelector((state: GlobalStoreState) => state.resources);
+
   useEffect(() => {
-    getCategories();
-  }, [getCategories]);
+    const data = generateCategoriesSelect(categories);
+    setCategoriesArr(data);
+  }, [categories]);
 
   useEffect(() => {
     if (id && type === 'edit') {
@@ -150,6 +168,9 @@ const EventForm = ({
     history.push(nextUrl);
   };
 
+  const handleCategorySelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setCategory((prev) => ({ ...prev,  _id: e.target.value, name: e.target[e.target.selectedIndex].innerText }));
+  };
   const handleYearSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setDate((prev) => ({ ...prev, year: parseInt(e.target.value) }));
   };
@@ -166,74 +187,90 @@ const EventForm = ({
         pageTitle={eventParams[type]['title']}
         showBack={eventParams[type]['showBack']}
       >
-        <DashboardContainer>
-          {image ? (
-            <CoverImage
-              onClick={() => setModal(ModalsIndex.IMAGE)}
-              src={image}
-              alt="cover photo"
-            />
-          ) : (
-            <ImageHolder onClick={() => setModal(ModalsIndex.IMAGE)}>
-              <LogoEmblem />
-              Choose cover image
-            </ImageHolder>
-          )}
-
-          <SpaceBetween>
-            <HeadlineInput
-              placeholder="Type headline here"
-              value={data.headline}
-              name="headline"
-              onChange={handleChange}
-            />
-            {!data.headline && (
-              <PlainButton
-                onClick={() => setModal(ModalsIndex.CATEGORY)}
-                style={{ padding: 0, paddingTop: '5px' }}
-              >
-                See examples
-              </PlainButton>
-            )}
-          </SpaceBetween>
-          <p className="tiny-section-header">When is it happening?</p>
-          <DatePickerWrapper>
-            <Select
-              id="year"
-              items={generateYears(new Date(), 10)}
-              label="Year"
-              handleChange={handleYearSelect}
-              required
-            />
-            <Select
-              id="months"
-              items={months}
-              label="Month"
-              handleChange={handleMonthSelect}
-              required
-            />
-            <Select
-              id="day"
-              items={getDaysInMonth(
-                new Date().getMonth(),
-                new Date().getFullYear()
+        {categories.length > 0 ? (
+          <>
+            <DashboardContainer>
+              {image ? (
+                <CoverImage
+                  onClick={() => setModal(ModalsIndex.IMAGE)}
+                  src={image}
+                  alt="cover photo"
+                />
+              ) : (
+                <ImageHolder onClick={() => setModal(ModalsIndex.IMAGE)}>
+                  <LogoEmblem />
+                  Choose cover image
+                </ImageHolder>
               )}
-              label="Day"
-              handleChange={handleDaySelect}
-              required
-            />
-          </DatePickerWrapper>
-          <Input
-            type="text"
-            name="note"
-            value={data.note}
-            onChange={handleChange}
-            label="Type welcome note"
-          />
-        </DashboardContainer>
-        <PageBottom>
-          <Button onClick={handleSubmit}>Save</Button>
-        </PageBottom>
+
+              <SpaceBetween>
+                <HeadlineInput
+                  placeholder="Type headline here"
+                  value={data.headline}
+                  name="headline"
+                  onChange={handleChange}
+                />
+                {!data.headline && (
+                  <PlainButton
+                    onClick={() => setModal(ModalsIndex.CATEGORY)}
+                    style={{ padding: 0, paddingTop: '5px' }}
+                  >
+                    See examples
+                  </PlainButton>
+                )}
+              </SpaceBetween>
+              <p className="tiny-section-header">
+                What type of event are you creating a wishlist for?
+              </p>
+              <Select
+                id="categories"
+                items={categoriesArr}
+                label="Event type"
+                handleChange={handleCategorySelect}
+                required
+              />
+              <p className="tiny-section-header">When is it happening?</p>
+              <DatePickerWrapper>
+                <Select
+                  id="year"
+                  items={generateYears(new Date(), 10)}
+                  label="Year"
+                  handleChange={handleYearSelect}
+                  required
+                />
+                <Select
+                  id="months"
+                  items={months}
+                  label="Month"
+                  handleChange={handleMonthSelect}
+                  required
+                />
+                <Select
+                  id="day"
+                  items={getDaysInMonth(
+                    new Date().getMonth(),
+                    new Date().getFullYear()
+                  )}
+                  label="Day"
+                  handleChange={handleDaySelect}
+                  required
+                />
+              </DatePickerWrapper>
+              <Input
+                type="text"
+                name="note"
+                value={data.note}
+                onChange={handleChange}
+                label="Type welcome note"
+              />
+            </DashboardContainer>
+            <PageBottom>
+              <Button onClick={handleSubmit}>Save</Button>
+            </PageBottom>
+          </>
+        ) : (
+          <LogoLoader />
+        )}
       </DashboardLayout>
 
       <CategoriesModal

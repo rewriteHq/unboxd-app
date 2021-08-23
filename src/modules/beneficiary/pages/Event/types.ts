@@ -17,3 +17,7 @@ export interface EventFormProps {
 export interface EventParamsType {
   id: string;
 }
+
+export interface PageParams {
+  slug: string;
+}

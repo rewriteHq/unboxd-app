@@ -5,6 +5,7 @@ export const SET_CATEGORIES = 'SET_CATEGORIES';
 export const SET_WISHLIST = 'SET_WISHLIST';
 export const SET_WALLET = 'SET_WALLET';
 export const SET_WISHLIST_LOADING = "SET_WISHLIST_LOADING";
+export const UNSET_WISHLIST = "UNSET_WISHLIST";
 
 export interface Category {
   name: string;
@@ -14,6 +15,10 @@ export interface Category {
 interface SetWishlist {
   type: typeof SET_WISHLIST;
   payload: any;
+}
+
+interface UnSetWishlist {
+  type: typeof UNSET_WISHLIST;
 }
 
 interface SetWallet {
@@ -36,4 +41,4 @@ export interface WalletState {
   error: null;
 }
 
-export type EventActionTypes = SetWishlist | SetWallet | SetWishlistLoading;
+export type EventActionTypes = SetWishlist | UnSetWishlist | SetWallet | SetWishlistLoading;

@@ -43,8 +43,8 @@ const Gift = ({ gifts, getGift }: ComponentProps) => {
 
       setImage((prev) => ({
         modal: prev.modal,
-        file: gift.imageURL,
-        url: gift.imageURL,
+        file: gift.coverImage,
+        url: gift.coverImage,
       }));
     } else {
       getGift(id);

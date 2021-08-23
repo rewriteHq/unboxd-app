@@ -7,6 +7,7 @@ import {
   ModalCenter,
   ModalMain,
   ModalWrapper,
+  ModalContent,
 } from './styles';
 import { ModalComponentProps, ModalHeaderComponentProps } from './types';
 
@@ -15,7 +16,7 @@ const Modal = ({ show, children, onClose }: ModalComponentProps) => {
   useOnClickOutside(ref, onClose, show);
   return show ? (
     <ModalWrapper>
-      <div ref={ref}>{children}</div>
+      <ModalContent ref={ref}>{children}</ModalContent>
     </ModalWrapper>
   ) : null;
 };
@@ -27,7 +28,7 @@ const Header: React.FC<ModalHeaderComponentProps> = ({ goBack, children }) => {
         ←
       </a>
       <HeaderTitle>{children}</HeaderTitle>
-      <div>Finish</div>
+      <div></div>
     </Head>
   );
 };

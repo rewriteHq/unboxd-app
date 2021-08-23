@@ -12,6 +12,7 @@ export const InputField = styled.div<{row?: boolean}>`
   background: ${(props) => props.theme.appPrimaryColor};
   border-radius: 18px;
   height: 64px;
+  min-height: 64px;
   overflow: hidden;
 
   .input-icon {

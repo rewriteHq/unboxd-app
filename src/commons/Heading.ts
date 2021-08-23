@@ -25,7 +25,7 @@ export const PageHeading = styled.h1<{ large?: boolean; centered?: boolean }>`
     `}
 `;
 
-export const PageHeadingSmall = styled.h3<{ centered?: boolean }>`
+export const PageHeadingSmall = styled.h3<{ centered?: boolean, color?: string }>`
   font-size: ${Sizes.twenty}px;
   color: ${Colors.black};
   padding: 10px 0;
@@ -35,4 +35,8 @@ export const PageHeadingSmall = styled.h3<{ centered?: boolean }>`
     css`
       text-align: center;
     `}
+
+  ${({ color }) => color && css`
+    color: ${color};
+  `}
 `;

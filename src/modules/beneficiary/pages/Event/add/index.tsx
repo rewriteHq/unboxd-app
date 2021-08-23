@@ -5,12 +5,15 @@ import { useHistory, useParams } from 'react-router';
 import DashboardLayout from '../../../../../commons/DashboardLayout';
 import NoItem from '../../../../../components/NoItem';
 import { DashboardFilm, DashboardWrapper } from '../../Dashboard/styles';
-import { AddItem, Explainer, Hold } from './styles';
+import { Explainer, Hold } from './styles';
 import * as actions from '../redux/actions';
 import AppState, { WishList } from '../../../../../typings';
 import GiftList from './components/GiftList';
 import HoldModal from './components/HoldModal';
 import { connect } from 'react-redux';
+import { UnboxdAddButton } from 'commons/DashboardLayout/styles';
+import { Link } from 'react-router-dom';
+import { ReactComponent as PlusIcon } from '../../../../../assets/img/icons/plus.svg';
 
 type ParamTypes = {
   id: string;
@@ -104,7 +107,12 @@ const AddEvent = ({ list, getWishlist }: ComponentProps) => {
       ) : (
         renderExplainer(list.gifts.length)
       )}
-      <AddItem to={`/event/add-gift/${id}`}>+</AddItem>
+      <UnboxdAddButton>
+          <div className="under-layer pulsate-fwd"></div>
+          <Link to={`/event/add-gift/${id}`} className="d-flex-center">
+            <PlusIcon />
+          </Link>
+        </UnboxdAddButton>
       <HoldModal show={holdModal} onClose={toggleHoldModal}>
         <Hold>
           <h2>Please hold on</h2>

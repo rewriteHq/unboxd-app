@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import AppWrapper from '../AppWrapper';
 import DashboardSidebar from '../DashboardSidebar';
 import DashboardHeader from './DashboardHeader';
@@ -22,6 +22,7 @@ import { getUserWallet } from '../../modules/beneficiary/pages/Wallet/redux/acti
 import { formatNumber } from '../../utils/helpers/formatNumber';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import Colors from 'constants/Colors';
+import { PageParams } from 'modules/beneficiary/pages/Event/types';
 
 const DashboardLayout: React.FC<LayoutProps> = ({
   children,
@@ -51,6 +52,10 @@ const DashboardLayout: React.FC<LayoutProps> = ({
       dispatch(getUserWishList());
     }
   }, [credentials, dispatch, wishlist]);
+
+  const { pathname } = useLocation();
+  const { slug } = useParams<PageParams>();
+  
   return (
     <>
       <DashboardHeader></DashboardHeader>
@@ -85,12 +90,12 @@ const DashboardLayout: React.FC<LayoutProps> = ({
             children
           )}
         </DashboardContent>
-        <UnboxdAddButton>
+        {(pathname === '/dashboard' || pathname === `/event/${slug}`) && (<UnboxdAddButton>
           <div className="under-layer pulsate-fwd"></div>
           <Link to={link} className="d-flex-center">
             <PlusIcon />
           </Link>
-        </UnboxdAddButton>
+        </UnboxdAddButton>)}
       </AppWrapper>
     </>
   );

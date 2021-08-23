@@ -2,50 +2,50 @@ import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import Colors from '../../../../../constants/Colors';
 
-export const AddItem = styled(Link)`
-  border-radius: 50%;
-  padding: 1.5rem 1.8rem;
-  background-color: ${Colors.grey};
-  position: fixed;
-  bottom: 10vh;
-  right: 20px;
-  z-index: 3;
-`;
-
 export const Explainer = styled.div`
   width: 50%;
   position: fixed;
-  bottom: 15vh;
-  left: 40px;
+  bottom: 20vh;
+  right: 40px;
   z-index: 3;
 
   h3 {
     margin-bottom: 5px;
+  }
+
+  @media (min-width: 768px) {
+    width: 25%;
   }
 `;
 
 export const GiftThumb = styled(Link)`
   display: flex;
   flex-direction: column;
-  border: 1px solid ${Colors.lightGrey};
+  background: ${Colors.navy};
   border-radius: 10px;
-  overflow: hidden;
-  height: 30vh;
+  height: 270px;
+  min-width: 230px;
+  margin: 0.5rem;
+  position: relative;
 `;
 
 const thumbImageStyle = css`
   width: 100%;
-  height: 70%;
+  height: 55%;
 `;
 
 export const GiftThumbImage = styled.img`
   ${thumbImageStyle}
   object-fit: cover;
+  border-radius: 10px 10px 0 0;
 `;
 
 export const EmptyThumbImage = styled.div`
   ${thumbImageStyle}
-  background-color: ${Colors.lightGrey};
+  width: calc(100% - 0.5rem);
+  margin: 0.25rem auto;
+  background-color: ${Colors.darkNavy};
+  border-radius: 10px 10px 0 0;
 `;
 
 export const GiftThumbList = styled.div`

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Effects from '../../../constants/Effects';
 
 export const ModalWrapper = styled.div`
@@ -11,33 +11,56 @@ export const ModalWrapper = styled.div`
   backdrop-filter: blur(${Effects.blur}px);
 `;
 
-export const ModalContent = styled.div`
-  width: 50%;
+export const ModalContent = styled.div<{unsplash?: boolean}>`
+  width: 100%;
   height: 50vh;
+  max-height: 90vh;
   background: #2d3039;
-  border-radius: 1.3rem;
+  border-top-left-radius: 0.8rem;
+  border-top-right-radius: 0.8rem;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.5);
+  left: 0;
+  bottom: 0;
+  transform: none;
   display: flex;
   align-items: center;
+  box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.5);
 
-  @media (max-width: 1024px) {
-    width: 80%;
+  @media (min-width: 768px) {
+    width: 50%;
     max-height: 30rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 0.8rem;
   }
 
-  @media (max-width: 620px) {
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    max-height: 90vh;
-    overflow-y: auto;
-    border-radius: 0;
-    transform: none;
-    border-top-left-radius: 0.8rem;
-    border-top-right-radius: 0.8rem;
-  }
+  ${({ unsplash }) => unsplash && css`
+    overflow-y: hidden;
+    min-height: 90vh;
+    
+    .container {
+      display: flex;
+      overflow-y: auto;
+      height: 100%;
+    }
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 5rem;
+      background: linear-gradient(to top, rgba(22, 24, 29, 1), rgba(34, 36, 44, 0));
+      z-index: 3;
+    }
+    
+    @media (min-width: 768px) {
+      width: 80%;
+      min-height: 75vh;
+      align-items: flex-start;
+      padding: 1.5rem;
+    }
+  `}
 `;

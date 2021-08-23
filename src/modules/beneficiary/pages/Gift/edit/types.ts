@@ -11,6 +11,6 @@ export interface ParamTypes {
 }
 
 export interface ImageType {
-  file: File | string;
-  url: string;
+  file?: File | string;
+  url?: string;
 }

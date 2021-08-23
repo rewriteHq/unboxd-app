@@ -19,7 +19,6 @@ import ExplainerModal from './components/ExplainerModal';
 // import { PlainButton } from '../../../../components/Button/styles';
 import ShareEventModal from '../../../../commons/ShareModal';
 import { setGlobalButtoLink } from '../../redux/actions';
-// import GiftCard from '../../../../components/GiftCard';
 import GiftCard from '../../../../commons/GiftCard';
 import { differenceInDays } from 'date-fns';
 import Skeleton from 'react-loading-skeleton';
@@ -98,7 +97,7 @@ const Event = ({ list, isLoading, getWishlist }: ComponentProps) => {
             <div className="list-header-content">
               <CopyLink onClick={toggleShareModal}>
                 <p>
-                  unboxd.com/{username}/{list?.slug}
+                  unboxd.gifts/{username}/{list?.slug}
                 </p>
                 <span className="copy">copy</span>
               </CopyLink>

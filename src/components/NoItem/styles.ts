@@ -16,7 +16,7 @@ export const NoItemCard = styled.div<ICard>`
   min-height: 158px;
   margin-right: 8px;
   margin-bottom: 16px;
-  background-color: ${Colors.grey};
+  background-color: ${Colors.navy};
   opacity: 0.5;
 
   ${(props) =>

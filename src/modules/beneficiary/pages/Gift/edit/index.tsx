@@ -32,8 +32,8 @@ const EditGift = ({ gifts, getGift }: ComponentProps) => {
       });
 
       setImage({
-        file: gift.imageURL,
-        url: gift.imageURL,
+        file: gift.coverImage,
+        url: gift.coverImage,
       });
     } else {
       getGift(id);
@@ -63,7 +63,7 @@ const EditGift = ({ gifts, getGift }: ComponentProps) => {
 
     payload.append('name', data.title);
     payload.append('cost', data.price);
-    payload.append('image', image.file);
+    payload.append('image', image.file!);
 
     const [err, result] = await updateGift({ data: payload, id });
 
