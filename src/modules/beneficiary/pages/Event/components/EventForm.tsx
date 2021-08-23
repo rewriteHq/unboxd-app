@@ -32,6 +32,7 @@ import { useSelector } from 'react-redux';
 import { GlobalStoreState } from 'store/types';
 import { generateCategoriesSelect } from 'utils/helpers/generateCategoriesSelect';
 import LogoLoader from 'commons/LogoLoader';
+import Notify from '../../../../../utils/notify/notify';
 
 enum ModalsIndex {
   NONE = 0,
@@ -138,7 +139,15 @@ const EventForm = ({
 
   const closeModals = () => setModal(ModalsIndex.NONE);
 
+  const enteredValidHeadline = data.headline.trim() !== '';
+
   const handleSubmit = async () => {
+    if (!enteredValidHeadline) {
+      const message = 'Headline cannot be empty';
+      Notify.bottom(message);
+      return;
+    }
+
     const submitData = {
       date: `${date.year}-${date.month}-${date.day}`,
       slug: slugify(data.headline, {
@@ -175,7 +184,11 @@ const EventForm = ({
   };
 
   const handleCategorySelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setCategory((prev) => ({ ...prev,  _id: e.target.value, name: e.target[e.target.selectedIndex].innerText }));
+    setCategory((prev) => ({
+      ...prev,
+      _id: e.target.value,
+      name: e.target[e.target.selectedIndex].innerText,
+    }));
   };
   const handleYearSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setDate((prev) => ({ ...prev, year: parseInt(e.target.value) }));
