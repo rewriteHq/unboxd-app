@@ -22,7 +22,6 @@ const ImageUploadModal = ({
     (e: React.ChangeEvent<HTMLInputElement>) => {
       if (e.target && e.target.files) {
         fromGallery(e.target.files[0]);
-        console.log('1', e.target.files[0]);
       }
     },
     [fromGallery]
