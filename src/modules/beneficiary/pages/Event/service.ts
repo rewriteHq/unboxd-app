@@ -1,9 +1,8 @@
 import API from '../../../../utils/api';
 import Notify from '../../../../utils/notify/notify';
-import { EventData } from './types';
 
 export const createOrEditEvent = async (
-  data: EventData,
+  data: any,
   type: 'create' | 'edit',
   id: string
 ) => {
