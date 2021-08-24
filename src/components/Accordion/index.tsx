@@ -12,7 +12,7 @@ const Accordion = ({ title, body }: IAccordion) => {
   const toggleContent = () => setShow(!show);
 
   return (
-    <div className="accordion">
+    <>
       <AccordionItem>
         <h3>{title}</h3>
         <Button onClick={toggleContent}>
@@ -20,7 +20,7 @@ const Accordion = ({ title, body }: IAccordion) => {
         </Button>
       </AccordionItem>
       {show && <p>{body}</p>}
-    </div>
+    </>
   );
 };
 
