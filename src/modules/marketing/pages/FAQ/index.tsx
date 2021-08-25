@@ -77,7 +77,7 @@ const Faq = () => {
     },
     {
       title: 'How secure is the unboxd wallet?',
-      body: 'Very secure. We have processed millions of transactions and not a single complaint as been made about missing money.',
+      body: 'Very secure. We have processed millions of transactions and not a single complaint has been made about missing money.',
     },
     {
       title: 'How do I withdraw the contibutions?',
@@ -134,9 +134,11 @@ const Faq = () => {
             ))}
             <BottomWrapper>
               <h4>Next, list the things you need.</h4>
-              Whatever you want your friends and family to help you get, list
-              them all, attach respective features, fill their price and you are
-              almost done.
+              <p>
+                Whatever you want your friends and family to help you get, list
+                them all, attach respective features, fill their price and you
+                are almost done.
+              </p>
             </BottomWrapper>
           </div>
 
@@ -147,11 +149,13 @@ const Faq = () => {
 
             <BottomWrapper>
               <h4>Then, generate a custom link and share your wishlist</h4>
-              Each unboxd event gets a custom link that your loved ones can use
-              to view the items you have listed and then make part or full
-              contribution for you to purchase the item. For even more
-              convenience, unboxd lets you share directly to Whatsapp, Facebook
-              and Twitter.
+              <p>
+                Each unboxd event gets a custom link that your loved ones can
+                use to view the items you have listed and then make part or full
+                contribution for you to purchase the item. For even more
+                convenience, unboxd lets you share directly to Whatsapp,
+                Facebook and Twitter.
+              </p>
             </BottomWrapper>
           </div>
           <div className={toggleState === 3 ? 'active-content' : 'content'}>
@@ -160,13 +164,17 @@ const Faq = () => {
             ))}
             <BottomWrapper>
               <h4>Finally, start practicing the money dance 🕺🏽</h4>
-              After you share your list with your loved ones anywhere in the
-              world, you can begin to receive part or full payment for any of
-              the items on your wishlist. The contributions received will be
-              saved securely in your wallet and be available for immediate
-              transfer once you request to payout.
-              <br /> Hint: Always follow up with your loved ones so your needs
-              remain top of mind.
+              <p>
+                After you share your list with your loved ones anywhere in the
+                world, you can begin to receive part or full payment for any of
+                the items on your wishlist. The contributions received will be
+                saved securely in your wallet and be available for immediate
+                transfer once you request to payout.
+              </p>
+              <p>
+                Hint: Always follow up with your loved ones so your needs remain
+                top of mind.
+              </p>
             </BottomWrapper>
           </div>
           <div className={toggleState === 4 ? 'active-content' : 'content'}>
@@ -175,7 +183,13 @@ const Faq = () => {
             ))}
             <BottomWrapper>
               <SubHeading>Still got questions?</SubHeading>
-              <LinkTo to="https://twitter.com">Ask on twitter</LinkTo>
+              <LinkTo
+                to="https://twitter.com/unboxdgifts"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Ask on twitter
+              </LinkTo>
             </BottomWrapper>
           </div>
         </ContentWrapper>
