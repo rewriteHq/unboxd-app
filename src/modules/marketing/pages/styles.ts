@@ -1,5 +1,6 @@
 import Colors from 'constants/Colors';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Paragraph = styled.p`
   font-size: 18px;
@@ -40,9 +41,83 @@ export const List = styled.ul`
   flex-direction: column;
   margin: 1rem;
 
-  li { 
+  li {
     list-style: disc;
     margin: 0.35rem;
     opacity: 0.7;
   }
+`;
+
+export const Tabsheader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.274);
+  margin-top: 3rem;
+
+  .tabs {
+    color: #ffffff7f;
+    padding: 15px;
+    text-align: center;
+    background: transparent;
+    cursor: pointer;
+    box-sizing: content-box;
+    position: relative;
+    outline: none;
+  }
+
+  .active-tabs {
+    color: #fff;
+    border-radius: 2px;
+    border-bottom: 3px solid #4e9060;
+  }
+
+  .active-tabs::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    height: 5px;
+  }
+`;
+
+export const ContentWrapper = styled.div`
+  .content {
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    display: none;
+  }
+
+  .active-content {
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+`;
+
+export const BottomWrapper = styled.div`
+  margin-top: 10px;
+  .maillink {
+    text-decoration: underline;
+    color: #4e9060;
+  }
+`;
+
+export const Header = styled.h3`
+  font-size: 15px;
+  font-family: inherit;
+`;
+
+export const LinkTo = styled(Link)`
+  color: #31acd2;
+  text-decoration: underline;
+`;
+
+export const SubHeading = styled.span`
+  font-size: 15px;
+  margin-right: 7px;
+  font-weight: bold;
 `;
