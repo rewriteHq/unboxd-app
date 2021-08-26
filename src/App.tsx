@@ -1,12 +1,13 @@
-import { Suspense, lazy } from 'react';
-import { connect } from 'react-redux';
+import { Suspense, lazy, useEffect, useState } from 'react';
+import { connect, useDispatch } from 'react-redux';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { Toaster } from 'react-hot-toast';
 import appThemes from './AppTheme';
-import { checkAuth } from './modules/auth/pages/Login/redux/actions';
+import { checkAuth, logoutUser } from './modules/auth/pages/Login/redux/actions';
 import RoutesHandler from './routes';
 import { useAppThemeContext } from './store/ThemeContex';
+import IdleTimer from './utils/idleTimer';
 
 const Loader = lazy(() => import('./components/PageLoader'));
 
@@ -23,6 +24,25 @@ const App: React.FC<ComponentProps> = ({ checkAuthenticated }) => {
   `;
   checkAuthenticated();
 
+  const [isTimeout, setIsTimeout] = useState(false);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const timer = new IdleTimer({
+      timeout: 10, //expire after 10 seconds
+      onTimeout: () => {
+        setIsTimeout(true);
+      },
+      onExpired: () => {
+        //do something if expired on load
+        setIsTimeout(true);
+      }
+    });
+
+    return () => {
+      timer.cleanUp();
+    };
+  }, []);
+
   return (
     <Suspense fallback={() => <Loader />}>
       <ThemeProvider theme={appThemes[appThemeContext?.theme!]}>
@@ -32,6 +52,7 @@ const App: React.FC<ComponentProps> = ({ checkAuthenticated }) => {
             <RoutesHandler />
           </Switch>
         </Router>
+        {isTimeout && dispatch(logoutUser())}
       </ThemeProvider>
       <Toaster />
     </Suspense>

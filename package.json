@@ -2,7 +2,8 @@
   "name": "app",
   "version": "0.1.0",
   "private": true,
-  "license": "MIT",
+  "license": "UNLICENSED",
+  "author": "Tolu Adesina <tolu@unboxd.gifts>",
   "dependencies": {
     "@styled-icons/icomoon": "^10.18.0",
     "@testing-library/jest-dom": "^5.11.4",

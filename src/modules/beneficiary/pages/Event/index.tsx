@@ -103,7 +103,7 @@ const Event = ({ list, isLoading, getWishlist }: ComponentProps) => {
               </CopyLink>
               <WishlistHeaderEventDetails>
                 <h2>{list?.title}</h2>
-                <span className="days">{daysLeft} days left</span>
+                <span className="days">{daysLeft} day{daysLeft > 1 || daysLeft < 1 ? 's' : ''} left</span>
               </WishlistHeaderEventDetails>
             </div>
             <img src={list?.coverImage} alt="event" />
