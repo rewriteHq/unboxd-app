@@ -147,11 +147,7 @@ const EventForm = ({
       return;
     }
 
-    const payload = {
-      title: data.headline,
-      categoryID: category && category._id,
-      coverImage: file,
-      description: data.note,
+    const submitData = {
       date: `${date.year}-${date.month}-${date.day}`,
       slug: slugify(data.headline, {
         replacement: '-',
@@ -160,6 +156,15 @@ const EventForm = ({
         locale: 'en',
       }),
     };
+
+    const payload = new FormData();
+
+    payload.append('title', data.headline);
+    payload.append('categoryID', category && category._id);
+    payload.append('coverImage', file);
+    payload.append('description', data.note);
+    payload.append('date', submitData.date);
+    payload.append('slug', submitData.slug);
 
     const [err, result] = await createOrEditEvent(payload, type, id);
 
