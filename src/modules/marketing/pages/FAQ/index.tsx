@@ -6,7 +6,7 @@ import {
   ContentWrapper,
   Header,
   BottomWrapper,
-  LinkTo,
+  Link,
   SubHeading,
 } from '../styles';
 
@@ -183,13 +183,13 @@ const Faq = () => {
             ))}
             <BottomWrapper>
               <SubHeading>Still got questions?</SubHeading>
-              <LinkTo
-                to="https://twitter.com/unboxdgifts"
+              <Link
+                href="https://twitter.com/unboxdgifts"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 Ask on twitter
-              </LinkTo>
+              </Link>
             </BottomWrapper>
           </div>
         </ContentWrapper>

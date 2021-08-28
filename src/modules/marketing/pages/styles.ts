@@ -1,6 +1,5 @@
 import Colors from 'constants/Colors';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
 export const Paragraph = styled.p`
   font-size: 18px;
@@ -111,7 +110,7 @@ export const Header = styled.h3`
   font-family: inherit;
 `;
 
-export const LinkTo = styled(Link)`
+export const Link = styled.a`
   color: #31acd2;
   text-decoration: underline;
 `;
