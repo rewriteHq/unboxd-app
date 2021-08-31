@@ -67,6 +67,7 @@ const EventForm = ({
     date: '',
     note: '',
   });
+  const [isAdded, setIsAdded] = useState<{_id: string}> ();
   const [date, setDate] = useState({
     day: new Date().getDay(),
     month: new Date().getMonth(),
@@ -140,7 +141,8 @@ const EventForm = ({
 
   const enteredValidHeadline = data.headline.trim() !== '';
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
     if (!enteredValidHeadline) {
       const message = 'Headline cannot be empty';
       Notify.bottom(message);
@@ -172,15 +174,24 @@ const EventForm = ({
       return err;
     }
 
-    const nextUrl =
-      type === 'create' ? `/event/add/${result._id}` : `/event/${id}`;
+    if (result) {
+      setIsAdded(result);
+    }
 
     if (type === 'edit' && id && getWishlist) {
       getWishlist(id);
     }
 
-    history.push(nextUrl);
   };
+
+  useEffect(() => {
+    if (isAdded) {
+       const nextUrl =
+        type === 'create' ? `/event/add/${isAdded?._id}` : `/event/${id}`;
+      history.push(nextUrl);
+    }
+   
+  }, [history, id, isAdded, type])
 
   const handleCategorySelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCategory((prev) => ({

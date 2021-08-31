@@ -7,7 +7,7 @@ const settings = lazy(() => import('../pages/Dashboard/Settings'));
 
 const event = lazy(() => import('../pages/Event'));
 const createEvent = lazy(() => import('../pages/Event/create'));
-const editEvent = lazy(() => import('../pages/Event/edit'));
+const editEvent = lazy(() => import('../pages/Event/create/edit'));
 const addEvent = lazy(() => import('../pages/Event/add'));
 const addGift = lazy(() => import('../pages/Gift/add'));
 const editGift = lazy(() => import('../pages/Gift/edit'));
