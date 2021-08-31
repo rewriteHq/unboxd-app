@@ -1,8 +1,8 @@
-import AppState, { WishList } from '../../../../../typings';
-import * as actions from '../redux/actions';
-import { getCategories } from '../../../../resources/redux/actions';
+import AppState, { WishList } from '../../../../../../typings';
+import * as actions from '../../redux/actions';
+import { getCategories } from '../../../../../resources/redux/actions';
 import { connect } from 'react-redux';
-import EventForm from '../components/EventForm';
+import EventForm from '../../components/EventForm';
 
 interface ComponentProps {
   list: WishList | null;

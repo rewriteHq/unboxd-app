@@ -94,7 +94,7 @@ const Register = () => {
       dispatch({ type: SET_STEP })
       Notify.bottom('Check your email for verification OTP');
       setLoading(false);
-    } catch (err) {
+    } catch (err: any) {
       const message = err.response.data.message;
       Notify.bottom(message ? message : 'Something happened. Kindly try again');
       setLoading(false);

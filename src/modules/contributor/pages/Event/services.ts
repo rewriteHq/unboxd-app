@@ -7,7 +7,7 @@ export const getWishlistBySlug = async (username: string, slug: string) => {
     const response = await API.get(`${url}`);
 
     return [null, response.data.payload];
-  } catch (err) {
+  } catch (err: any) {
     return handleRequestError(err);
   }
 };
@@ -19,7 +19,7 @@ export const getWishlistById = async (id: string) => {
     const response = await API.get(`${url}/${id}`);
 
     return [null, response.data.payload];
-  } catch (err) {
+  } catch (err: any) {
     return handleRequestError(err);
   }
 };
@@ -32,7 +32,7 @@ export const getGift = async (id: string) => {
     const response = await API.get(`${url}/${id}`);
 
     return [null, response.data.payload];
-  } catch (err) {
+  } catch (err: any) {
     return handleRequestError(err);
   }
 };

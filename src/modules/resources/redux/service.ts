@@ -6,7 +6,7 @@ export const getCategories = async () => {
     const result = await API.get('/category');
     console.log(result);
     return [null, result.data.payload];
-  } catch (err) {
+  } catch (err: any) {
     const message = err.response.data.message;
     Notify.bottom(message ? message : 'Something happened. Kindly try again');
     return [err.response.data];

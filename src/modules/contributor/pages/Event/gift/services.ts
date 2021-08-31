@@ -27,7 +27,7 @@ export const getPaymentReference = async (payload: RequestData) => {
     const response = await API.post(url, payload);
 
     return [null, response.data.payload];
-  } catch (err) {
+  } catch (err: any) {
     return handleRequestError(err);
   }
 };
@@ -39,7 +39,7 @@ export const verifyPayment = async (payload: VerifyTypes) => {
     const response = await API.put(url, payload);
 
     return [null, response.data.payload];
-  } catch (err) {
+  } catch (err: any) {
     return handleRequestError(err);
   }
 };

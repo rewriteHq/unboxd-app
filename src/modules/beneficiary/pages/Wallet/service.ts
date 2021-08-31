@@ -5,7 +5,7 @@ export const getWallet = async () => {
   try {
     const response = await API.get('/wallet/user');
     return [null, response.data.payload];
-  } catch (err) {
+  } catch (err: any) {
     return handleRequestError(err);
   }
 };
