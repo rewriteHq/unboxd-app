@@ -7,6 +7,7 @@ import {
   Form,
   Main,
   MainContainer,
+  Resend,
 } from './styles';
 
 import Button from '../../../../components/Button';
@@ -25,7 +26,9 @@ const VerifyUser = () => {
   const { authenticated } = useSelector(
     (state: GlobalStoreState) => state.user
   );
-  const { step, email } = useSelector((state: GlobalStoreState) => state.verifyUser);
+  const { step, email } = useSelector(
+    (state: GlobalStoreState) => state.verifyUser
+  );
   const history = useHistory();
 
   if (authenticated) history.push('/dashboard');
@@ -45,6 +48,14 @@ const VerifyUser = () => {
       ...values,
       [e.target.name]: e.target.value,
     }));
+  };
+
+  const resendOtp = async () => {
+    const payload = { email: values.email, type: values.type };
+    console.log('payload', payload);
+    try {
+      await dispatch(sendEmail(payload));
+    } catch (error) {}
   };
 
   const handleSendEmail = async (e: any) => {
@@ -122,6 +133,11 @@ const VerifyUser = () => {
                 <Button type="submit" loading={loading} disabled={loading}>
                   Verify Account
                 </Button>
+                {email && (
+                  <Resend>
+                    <p onClick={resendOtp}>Resend Otp</p>
+                  </Resend>
+                )}
               </Form>
             )}
           </div>

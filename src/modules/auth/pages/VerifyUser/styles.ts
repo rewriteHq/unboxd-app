@@ -105,3 +105,18 @@ export const AuthDescriptionFooter = styled.div`
     font-weight: 300;
   }
 `;
+
+export const Resend = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    font-size: 14px;
+    text-align: center;
+    font-weight: 0;
+    text-decoration: underline;
+    opacity: 0.5;
+    cursor: pointer;
+  }
+`;
