@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import { NumberFormatValues } from 'react-number-format';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router';
@@ -13,8 +14,9 @@ import PriceInput from '../../../../components/Input/price';
 import Tab from '../../../../components/Tab';
 import TotalContribution from './components/TotalContribution';
 import { addGift } from './redux/actions';
-import { CoverImage, ImageHolder, ImageWrapper, UploadButton } from './styles';
+import { CoverImage, ImageWrapper, UploadButton } from './styles';
 import { ParamType, ComponentProps, ImageState } from './types';
+import API from '../../../../utils/api';
 
 const tabs = ['Edit details', 'Contributors'];
 enum tabIndex {
@@ -51,6 +53,29 @@ const Gift = ({ gifts, getGift }: ComponentProps) => {
     }
   }, [id, gifts, getGift]);
 
+  const { price, title } = data;
+
+  const handleSubmit = async (e: React.SyntheticEvent) => {
+    e.preventDefault();
+
+    if (title.trim().length === 0 || price.trim().length === 0) {
+      return toast.error('All fields must be provided');
+    }
+
+    const payload = {
+      name: title,
+      cost: price,
+      imageURL: image.url,
+    };
+
+    try {
+      const { data } = await API.put(`/gift/${id}`, payload);
+      return toast.success(data.message);
+    } catch (error) {
+      return toast.error('Something went wrong');
+    }
+  };
+
   const fromGallery = useCallback((file: File) => {
     setImage({ file, url: URL.createObjectURL(file), modal: false });
   }, []);
@@ -75,27 +100,38 @@ const Gift = ({ gifts, getGift }: ComponentProps) => {
         {image.url ? (
           <ImageWrapper>
             <CoverImage src={image.url} alt="Cover Image" />
-            <UploadButton color="white" onClick={toggleImageModal}>
-              Upload new
-            </UploadButton>
+            <UploadButton onClick={toggleImageModal}>Update image</UploadButton>
           </ImageWrapper>
         ) : (
-          <ImageHolder />
+          <ImageWrapper>
+            <CoverImage src={gifts[id]?.imageURL} alt="Cover Image" />
+            <UploadButton onClick={toggleImageModal}>
+              Upload new image
+            </UploadButton>
+          </ImageWrapper>
         )}
         <Tab active={activeTab} tabs={tabs} change={changeActive} />
         {activeTab === tabIndex.edit && (
           <>
-            <Input
-              label="What do you need?"
-              value={data.title}
-              onChange={(e) => setData({ ...data, title: e.target.value })}
-            />
+            <form onSubmit={handleSubmit}>
+              <Input
+                label="What do you need pages"
+                value={
+                  data.title.charAt(0).toUpperCase() +
+                  data.title.slice(1).toLowerCase()
+                }
+                onChange={(e) => setData({ ...data, title: e.target.value })}
+              />
 
-            <PriceInput
-              label="Price"
-              value={data.price}
-              onChange={changePrice}
-            />
+              <PriceInput
+                label="Price"
+                value={data.price}
+                onChange={changePrice}
+              />
+              <PageBottom>
+                <Button>Save</Button>
+              </PageBottom>
+            </form>
           </>
         )}
 
@@ -115,7 +151,6 @@ const Gift = ({ gifts, getGift }: ComponentProps) => {
       />
 
       <PageBottom>
-        {activeTab === tabIndex.edit && <Button>Save</Button>}
         {activeTab === tabIndex.contibutors && <TotalContribution />}
       </PageBottom>
     </DashboardLayout>
