@@ -15,9 +15,9 @@ import Layout from '../../../../Layout';
 import { loginUser } from './redux/actions';
 import { SpaceBetweenHeader } from '../../../../commons/UtilityStyles/Flex';
 import { Auth } from '../../../../components/Header/styles';
-import SocialAuth from '../../../../components/SocialAuth';
-import { ReactComponent as GoogleIcon } from '../../../../assets/img/illustrations/google.svg';
-import { ReactComponent as FacebookIcon } from '../../../../assets/img/illustrations/facebook.svg';
+// import SocialAuth from '../../../../components/SocialAuth';
+// import { ReactComponent as GoogleIcon } from '../../../../assets/img/illustrations/google.svg';
+// import { ReactComponent as FacebookIcon } from '../../../../assets/img/illustrations/facebook.svg';
 import Footer from '../../../../components/Footer';
 import Logo from '../../../../components/Logo';
 import { ReactComponent as LargeHeart } from '../../../../assets/img/illustrations/heart-large.svg';
@@ -112,7 +112,7 @@ const Login = () => {
               </Button>
             </Form>
             <ResetLink />
-            <SocialAuth
+            {/* <SocialAuth
               options={[
                 {
                   text: 'Sign in with Google',
@@ -129,7 +129,7 @@ const Login = () => {
                   icon: FacebookIcon,
                 },
               ]}
-            />
+            /> */}
           </div>
         </Main>
         <Footer />

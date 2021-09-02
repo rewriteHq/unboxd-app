@@ -24,6 +24,7 @@ interface ComponentProps {
   gift: GiftType;
   children?: React.ReactNode;
   onClick?: () => void;
+  wishlistId: string;
 }
 
 interface MenuButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -34,18 +35,21 @@ interface MenuButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 interface MenuProps {
   close: () => void;
   id: string;
+  wishlistId: string;
 }
 
 interface ContextProps {
   show: boolean;
   toggle: () => void;
   gift: GiftType | null;
+  wishlistId: string;
 }
 
 const GiftCardContext = React.createContext<ContextProps>({
   show: false,
   toggle: () => null,
   gift: null,
+  wishlistId: '',
 });
 
 const GiftMenuButton = ({ onClick, active }: MenuButtonProps) => {
@@ -58,14 +62,14 @@ const GiftMenuButton = ({ onClick, active }: MenuButtonProps) => {
   );
 };
 
-const GiftMenu = ({ close, id }: MenuProps) => {
+const GiftMenu = ({ close, id, wishlistId }: MenuProps) => {
   const clickRef = useRef(null);
   useOnClickOutside(clickRef, close);
 
   return (
     <>
       <MenuItems ref={clickRef}>
-        <Link to={`/event/gift/${id}`}>Edit</Link>
+        <Link to={`/event/edit-gift/${wishlistId}/${id}`}>Edit</Link>
         <Link to="event">Hide Item</Link>
         <Link to="event" className="danger">
           Delete
@@ -76,13 +80,13 @@ const GiftMenu = ({ close, id }: MenuProps) => {
   );
 };
 
-const GiftCard = ({ gift, children, onClick }: ComponentProps) => {
+const GiftCard = ({ gift, children, onClick, wishlistId }: ComponentProps) => {
   const [showMenu, setShowMenu] = useState(false);
   const toggleMenu = useCallback(() => setShowMenu((prev) => !prev), []);
 
   const value = useMemo(
-    () => ({ show: showMenu, toggle: toggleMenu, gift }),
-    [showMenu, toggleMenu, gift]
+    () => ({ show: showMenu, toggle: toggleMenu, gift, wishlistId }),
+    [showMenu, toggleMenu, gift, wishlistId]
   );
 
   const percentageRaised = Math.round((gift.paid / gift.cost) * 100);
@@ -110,12 +114,12 @@ const GiftCard = ({ gift, children, onClick }: ComponentProps) => {
 };
 
 const Menu = () => {
-  const { show, toggle, gift } = useContext(GiftCardContext);
+  const { show, toggle, gift, wishlistId } = useContext(GiftCardContext);
 
   return (
     <>
       <GiftMenuButton onClick={toggle} active={show} />
-      {show && <GiftMenu close={toggle} id={gift!._id} />}
+      {show && <GiftMenu close={toggle} id={gift!._id} wishlistId={wishlistId} />}
     </>
   );
 };

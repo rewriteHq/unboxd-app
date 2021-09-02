@@ -12,9 +12,9 @@ import {
   SpaceBetweenHeader,
 } from '../../../../commons/UtilityStyles/Flex';
 import { Auth } from '../../../../components/Header/styles';
-import SocialAuth from '../../../../components/SocialAuth';
-import { ReactComponent as GoogleIcon } from '../../../../assets/img/illustrations/google.svg';
-import { ReactComponent as FacebookIcon } from '../../../../assets/img/illustrations/facebook.svg';
+// import SocialAuth from '../../../../components/SocialAuth';
+// import { ReactComponent as GoogleIcon } from '../../../../assets/img/illustrations/google.svg';
+// import { ReactComponent as FacebookIcon } from '../../../../assets/img/illustrations/facebook.svg';
 import Footer from '../../../../components/Footer';
 import {
   AuthDescriptionFooter,
@@ -183,7 +183,7 @@ const Register = () => {
                 Create account
               </Button>
             </Form>
-            <SocialAuth
+            {/* <SocialAuth
               options={[
                 {
                   text: 'Sign in with Google',
@@ -200,7 +200,7 @@ const Register = () => {
                   icon: FacebookIcon,
                 },
               ]}
-            />
+            /> */}
           </div>
         </Main>
         <Footer />

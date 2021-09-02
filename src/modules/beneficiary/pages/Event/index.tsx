@@ -112,7 +112,7 @@ const Event = ({ list, isLoading, getWishlist }: ComponentProps) => {
           <WishItemsWrapper>
             {list?.gifts.map((gift) =>
               gift.imageURL ? (
-                <GiftCard gift={gift}>
+                <GiftCard gift={gift} wishlistId={list._id}>
                   <GiftCard.Menu />
                 </GiftCard>
               ) : (

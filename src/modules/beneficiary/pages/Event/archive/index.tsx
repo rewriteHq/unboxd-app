@@ -32,7 +32,7 @@ const Archive = ({ list, getWishlist }: ComponentProps) => {
       <DashboardContainer>
         <GiftList>
           {list.gifts.map((gift) => (
-            <GiftCard gift={gift} key={gift._id} />
+            <GiftCard gift={gift} key={gift._id} wishlistId={list._id} />
           ))}
         </GiftList>
       </DashboardContainer>

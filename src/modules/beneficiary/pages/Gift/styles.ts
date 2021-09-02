@@ -6,21 +6,28 @@ import { SpaceBetween } from '../../../../commons/UtilityStyles/Flex';
 const imageStyle = css`
   height: 40vh;
   position: relative;
+  border-radius: 5px;
 `;
 
 export const ImageHolder = styled.div`
   ${imageStyle}
-  background-color: ${Colors.grey};
+  background-color: ${Colors.navy};
 `;
 
 export const UploadButton = styled(BTN)<{ color?: string }>`
-  background-color: ${({ color }) => (color ? color : 'transparent')};
+  background-color: ${({ color }) => (color ? color : 'white')};
+  color: ${Colors.lineBlack};
   border: 1px solid ${Colors.black};
   position: absolute;
   bottom: 10px;
   left: calc(50% - 80px);
   width: unset;
   border-radius: 5px;
+
+  &:hover {
+    color: ${Colors.white};
+  }
+
 `;
 
 export const ImageWrapper = styled.div`
@@ -31,6 +38,7 @@ export const CoverImage = styled.img`
   ${imageStyle}
   width: 100%;
   object-fit: cover;
+  border-radius: 5px;
 `;
 
 export const Total = styled(SpaceBetween)`

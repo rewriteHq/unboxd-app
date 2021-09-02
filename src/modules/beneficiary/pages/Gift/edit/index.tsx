@@ -21,7 +21,7 @@ const EditGift = ({ gifts, getGift }: ComponentProps) => {
   const [data, setData] = useState({ price: '', title: '' });
   const [showImageModal, setImageModal] = useState(false);
   const [image, setImage] = useState<ImageType>({ file: '', url: '' });
-
+  
   useEffect(() => {
     const gift = gifts[id];
 
@@ -32,8 +32,8 @@ const EditGift = ({ gifts, getGift }: ComponentProps) => {
       });
 
       setImage({
-        file: gift.coverImage,
-        url: gift.coverImage,
+        file: gift.imageURL,
+        url: gift.imageURL,
       });
     } else {
       getGift(id);

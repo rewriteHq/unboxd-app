@@ -22,7 +22,7 @@ const GiftList: React.FC<ComponentProps> = ({ gifts, wishlistId }) => {
     <GiftThumbList>
       {giftList.map((gift) =>
         gift ? (
-          <GiftCard key={gift._id} gift={gift}>
+          <GiftCard key={gift._id} gift={gift} wishlistId={wishlistId}>
             <GiftCard.Menu />
           </GiftCard>
         ) : (
