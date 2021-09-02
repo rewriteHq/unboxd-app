@@ -20,6 +20,8 @@ const EditGift = ({ gifts, getGift }: ComponentProps) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const [isEdited, setIsEdited] = useState<{ wishlistId: string }>();
+
+  const [loading, setLoading] = useState(false);
   const [data, setData] = useState({ price: '', title: '' });
   const [showImageModal, setImageModal] = useState(false);
   const [image, setImage] = useState<ImageType>({ file: '', url: '' });
@@ -61,6 +63,7 @@ const EditGift = ({ gifts, getGift }: ComponentProps) => {
   );
 
   const editGift = async () => {
+    setLoading(true);
     const payload = new FormData();
 
     payload.append('name', data.title);
@@ -82,12 +85,13 @@ const EditGift = ({ gifts, getGift }: ComponentProps) => {
     if (isEdited) {
       const nextUrl = `/event/add/${isEdited?.wishlistId}`;
       history.push(nextUrl);
+      setLoading(false);
     }
   }, [history, id, isEdited]);
 
   return (
     <DashboardLayout pageTitle="Edit item" showBack>
-      <DashboardContainer>
+      <DashboardContainer noMinHeight>
         {image.url ? (
           <CoverImage
             src={image.url}
@@ -106,7 +110,7 @@ const EditGift = ({ gifts, getGift }: ComponentProps) => {
         <PriceInput label="Price" value={data.price} onChange={changePrice} />
       </DashboardContainer>
       <PageBottom>
-        <Button onClick={editGift}>Save</Button>
+        <Button onClick={editGift} loading={loading} disabled={loading}>Save</Button>
       </PageBottom>
       <ImageUploadModal
         show={showImageModal}
