@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { NumberFormatValues } from 'react-number-format';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router';
 import DashboardLayout from '../../../../../commons/DashboardLayout';
 import { DashboardContainer } from '../../../../../commons/DashboardLayout/styles';
@@ -10,6 +10,7 @@ import Button from '../../../../../components/Button';
 import Input from '../../../../../components/Input';
 import PriceInput from '../../../../../components/Input/price';
 import { addGift } from '../redux/actions';
+import { getWishlist } from '../../Event/redux/actions';
 import { updateGift } from '../service';
 import { CoverImage, ImageHolder } from '../styles';
 import { ImageType, ParamTypes, ComponentProps } from './types';
@@ -17,11 +18,12 @@ import { ImageType, ParamTypes, ComponentProps } from './types';
 const EditGift = ({ gifts, getGift }: ComponentProps) => {
   const { id } = useParams<ParamTypes>();
   const history = useHistory();
-
+  const dispatch = useDispatch();
+  const [isEdited, setIsEdited] = useState<{ wishlistId: string }>();
   const [data, setData] = useState({ price: '', title: '' });
   const [showImageModal, setImageModal] = useState(false);
   const [image, setImage] = useState<ImageType>({ file: '', url: '' });
-  
+
   useEffect(() => {
     const gift = gifts[id];
 
@@ -66,13 +68,22 @@ const EditGift = ({ gifts, getGift }: ComponentProps) => {
     payload.append('image', image.file!);
 
     const [err, result] = await updateGift({ data: payload, id });
-
+    dispatch(getWishlist(result.wishlistId));
     if (err) {
       return err;
     }
 
-    history.push(`/event/add/${result.wishlistId}`);
+    if (result) {
+      setIsEdited(result);
+    }
   };
+
+  useEffect(() => {
+    if (isEdited) {
+      const nextUrl = `/event/add/${isEdited?.wishlistId}`;
+      history.push(nextUrl);
+    }
+  }, [history, id, isEdited]);
 
   return (
     <DashboardLayout pageTitle="Edit item" showBack>
