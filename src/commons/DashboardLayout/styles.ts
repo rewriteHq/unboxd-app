@@ -1,15 +1,19 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Colors from '../../constants/Colors';
 import Fonts from '../../constants/Fonts';
 import Sizes from '../../constants/Sizes';
 
-export const DashboardContainer = styled.div`
+export const DashboardContainer = styled.div<{ noMinHeight?: boolean}>`
   margin-top: 30px;
   min-height: 75vh;
   .tiny-section-header {
     margin: 15px 0;
     font-size: 12px;
   }
+
+  ${({ noMinHeight }) => noMinHeight && css`
+    min-height: 0;
+  `}
 `;
 
 export const NavItem = styled.li`
