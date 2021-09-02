@@ -34,7 +34,7 @@ const SelectWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 10px 20px;
-  background: ${(props) => props.theme.appSecondaryColor};
+  background: ${(props) => props.theme.appPrimaryColor};
   border-radius: 18px;
   color: ${Colors.yellow};
   flex: 1;

@@ -57,6 +57,7 @@ const EventForm = ({
   getWishlist,
   type,
 }: EventFormProps) => {
+  const [loading, setLoading] = useState(false);
   const [image, setImage] = useState('');
   const [file, setFile] = useState<File | string>('');
   const [category, setCategory] = useState<Category | ''>('');
@@ -142,6 +143,7 @@ const EventForm = ({
   const enteredValidHeadline = data.headline.trim() !== '';
 
   const handleSubmit = async (e: any) => {
+    setLoading(true);
     e.preventDefault();
     if (!enteredValidHeadline) {
       const message = 'Headline cannot be empty';
@@ -181,7 +183,7 @@ const EventForm = ({
     if (type === 'edit' && id && getWishlist) {
       getWishlist(id);
     }
-
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -218,7 +220,7 @@ const EventForm = ({
       >
         {categories.length > 0 ? (
           <>
-            <DashboardContainer>
+            <DashboardContainer noMinHeight>
               {image ? (
                 <CoverImage
                   onClick={() => setModal(ModalsIndex.IMAGE)}
@@ -294,7 +296,7 @@ const EventForm = ({
               />
             </DashboardContainer>
             <PageBottom>
-              <Button onClick={handleSubmit}>Save</Button>
+              <Button onClick={handleSubmit} loading={loading} disabled={loading}>Save</Button>
             </PageBottom>
           </>
         ) : (
