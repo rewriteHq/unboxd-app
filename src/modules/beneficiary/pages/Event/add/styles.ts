@@ -79,3 +79,91 @@ export const Hold = styled.div`
     margin-top: 10px;
   }
 `;
+
+export const WishlistHeader = styled.div`
+  width: 100%;
+  position: relative;
+  height: 235px;
+  border-radius: 28px;
+  overflow: hidden;
+  .list-header-content {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 4;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    display: flex;
+  }
+  img {
+    width: 100%;
+    height: 235px;
+    object-fit: cover;
+  }
+`;
+
+export const CopyLink = styled.div`
+  min-width: 93.7%;
+  max-width: fit-content;
+  background: ${(props) => props.theme.appSecondaryColor};
+  color: ${Colors.yellow};
+  height: 53px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: absolute;
+  z-index: 99;
+  padding: 15px 20px;
+  font-size: 15px;
+  font-weight: normal;
+  cursor: pointer;
+  p {
+    position: relative;
+    overflow: hidden;
+    width: max-content;
+    max-width: 70%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    &::after {
+      content: '';
+      position: absolute;
+      background: linear-gradient(
+        270deg,
+        rgba(22, 24, 29, 0.9) 20.33%,
+        rgba(22, 24, 29, 0.5) 100.71%
+      );
+      width: 30px;
+      height: 100%;
+      right: 0;
+      top: 0;
+    }
+  }
+  .copy {
+    color: #80ba7c;
+    cursor: pointer;
+  }
+  @media (min-width: 767px) {
+    min-width: 335px;
+    max-width: 335px;
+  }
+`;
+
+export const WishlistHeaderEventDetails = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-self: flex-end;
+  padding: 10px;
+  span.days {
+    color: #ffffff;
+    background: #80ba7c;
+    padding: 8px;
+    border-radius: 10px;
+    font-size: 13px;
+  }
+`;
+
+export const WishlistGrid = styled.div`
+  margin-top: 2rem;
+`;

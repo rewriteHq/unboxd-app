@@ -67,8 +67,8 @@ const AddGift = ({ getWishlist }: ComponentProps) => {
     }
 
     getWishlist(id);
-    setLoading(false);
     history.goBack();
+    setLoading(false);
   };
 
   return (
@@ -94,7 +94,7 @@ const AddGift = ({ getWishlist }: ComponentProps) => {
           onChange={(e) => setData({ ...data, title: e.target.value })}
         />
         <PriceInput label="Price" value={data.price} onChange={changePrice} />
-      <Button onClick={createGift} loading={loading}>
+      <Button onClick={createGift} loading={loading} disabled={loading}>
         Save
       </Button>
       </DashboardContainer>

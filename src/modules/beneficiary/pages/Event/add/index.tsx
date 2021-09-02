@@ -5,7 +5,14 @@ import { useHistory, useParams } from 'react-router';
 import DashboardLayout from '../../../../../commons/DashboardLayout';
 import NoItem from '../../../../../components/NoItem';
 import { DashboardFilm, DashboardWrapper } from '../../Dashboard/styles';
-import { Explainer, Hold } from './styles';
+import {
+  CopyLink,
+  Explainer,
+  Hold,
+  WishlistGrid,
+  WishlistHeader,
+  WishlistHeaderEventDetails,
+} from './styles';
 import * as actions from '../redux/actions';
 import AppState, { WishList } from '../../../../../typings';
 import GiftList from './components/GiftList';
@@ -14,6 +21,8 @@ import { connect } from 'react-redux';
 import { UnboxdAddButton } from 'commons/DashboardLayout/styles';
 import { Link } from 'react-router-dom';
 import { ReactComponent as PlusIcon } from '../../../../../assets/img/icons/plus.svg';
+import ShareEventModal from 'commons/ShareModal';
+import { differenceInDays } from 'date-fns';
 
 type ParamTypes = {
   id: string;
@@ -39,6 +48,9 @@ const AddEvent = ({ list, getWishlist }: ComponentProps) => {
 
   const finish = () => setHoldModal(true);
 
+  const [shareModal, setShareModal] = useState(false);
+  const toggleShareModal = () => setShareModal((prev) => !prev);
+
   const navItems = [
     () => (
       <a href="#0" key={shortid.generate()} onClick={finish}>
@@ -46,6 +58,9 @@ const AddEvent = ({ list, getWishlist }: ComponentProps) => {
       </a>
     ),
   ];
+
+  const username = localStorage.getItem('username');
+  const daysLeft = list ? differenceInDays(new Date(list.date), new Date()) : 1;
 
   const toggleHoldModal = () => setHoldModal((prev) => !prev);
 
@@ -89,13 +104,30 @@ const AddEvent = ({ list, getWishlist }: ComponentProps) => {
     <DashboardLayout pageTitle="Add your needs" navItems={navItems} showBack>
       <DashboardWrapper>
         <div className="container">
-          {R.isEmpty(list.gifts) ? (
-            <NoItem />
-          ) : (
-            <GiftList gifts={list.gifts} wishlistId={id} />
-          )}
+          <WishlistHeader>
+            <div className="list-header-content">
+              <CopyLink onClick={toggleShareModal}>
+                <p>
+                  unboxd.gifts/{username}/{list?.slug}
+                </p>
+                <span className="copy">copy</span>
+              </CopyLink>
+              <WishlistHeaderEventDetails>
+                <h2>{list?.title}</h2>
+                <span className="days">{daysLeft} days left</span>
+              </WishlistHeaderEventDetails>
+            </div>
+            <img src={list?.coverImage} alt="event" />
+          </WishlistHeader>
+          <WishlistGrid>
+            {R.isEmpty(list.gifts) ? (
+              <NoItem />
+            ) : (
+              <GiftList gifts={list.gifts} wishlistId={id} />
+            )}
+          </WishlistGrid>
+          {list.gifts.length < 6 && <DashboardFilm />}
         </div>
-        {list.gifts.length < 6 && <DashboardFilm />}
       </DashboardWrapper>
       {R.isEmpty(list.gifts) ? (
         <Explainer>
@@ -108,17 +140,24 @@ const AddEvent = ({ list, getWishlist }: ComponentProps) => {
         renderExplainer(list.gifts.length)
       )}
       <UnboxdAddButton>
-          <div className="under-layer pulsate-fwd"></div>
-          <Link to={`/event/add-gift/${id}`} className="d-flex-center">
-            <PlusIcon />
-          </Link>
-        </UnboxdAddButton>
+        <div className="under-layer pulsate-fwd"></div>
+        <Link to={`/event/add-gift/${id}`} className="d-flex-center">
+          <PlusIcon />
+        </Link>
+      </UnboxdAddButton>
       <HoldModal show={holdModal} onClose={toggleHoldModal}>
         <Hold>
           <h2>Please hold on</h2>
           <p>We are setting up your visual list</p>
         </Hold>
       </HoldModal>
+      {list && (
+        <ShareEventModal
+          show={shareModal}
+          close={toggleShareModal}
+          wishlist={list}
+        />
+      )}
     </DashboardLayout>
   ) : null;
 };

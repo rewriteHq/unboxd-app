@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 import { GlobalStoreState } from 'store/types';
@@ -11,6 +12,7 @@ import { ContentWrapper } from '../styles';
 
 const Profile: React.FC<any> = () => {
   const { credentials } = useSelector((state: GlobalStoreState) => state.user);
+  const [loading, setLoading] = useState(false);
   const [profileImage, setProfileImage] = useState<{
     file: File | null;
     result: ArrayBuffer | string | null;
@@ -18,6 +20,22 @@ const Profile: React.FC<any> = () => {
     file: null,
     result: null,
   });
+
+  const [data, setData] = useState({
+    firstname: '',
+    lastname: '',
+    phone: '',
+  });
+
+  useEffect(() => {
+    if (credentials) {
+      setData({
+        firstname: credentials.firstname,
+        lastname: credentials.lastname,
+        phone: credentials.phone,
+      });
+    }
+  }, [credentials]);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const reader = new FileReader();
@@ -36,21 +54,46 @@ const Profile: React.FC<any> = () => {
     }
   };
 
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const payload = {
+      ...data,
+    };
+
+    console.log('payload data', payload);
+  };
+
   return (
     <DashboardLayout>
       <ContentWrapper>
-        <EditProfileImage
-          id="edit-image"
-          src={profileImage.result as string}
-          onChange={handleImageUpload}
-        />
-        <form>
+        <form onSubmit={handleSubmit}>
+          <EditProfileImage
+            id="edit-image"
+            src={profileImage.result as string}
+            onChange={handleImageUpload}
+          />
           <SpaceBetween>
-            <Input label="Firstname" disabled={true} value={credentials ? credentials.firstname : "Taofeeqat"} />
-            <Input label="Lastname" disabled={true} value={credentials ? credentials.lastname : "Adebayo"} />
+            <Input
+              label="Firstname"
+              value={data.firstname}
+              onChange={(e) => setData({ ...data, firstname: e.target.value })}
+            />
+            <Input
+              label="Lastname"
+              value={data.lastname}
+              onChange={(e) => setData({ ...data, lastname: e.target.value })}
+            />
           </SpaceBetween>
-          <Input label="Phone Number" value={credentials ? credentials.phone : "0803344556677"} />
-          <Button>Save changes</Button>
+          <Input
+            label="Phone Number"
+            value={data.phone}
+            onChange={(e) => setData({ ...data, phone: e.target.value })}
+          />
+          <Button loading={loading} disabled={loading}>
+            Save changes
+          </Button>
         </form>
       </ContentWrapper>
     </DashboardLayout>
