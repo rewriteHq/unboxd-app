@@ -6,6 +6,11 @@ type GiftParams = {
   id: string;
 };
 
+type DeleteParams = {
+  id: string;
+  wishlistId: string;
+}
+
 export const addGift = async ({ data, id }: GiftParams) => {
   try {
     const response = await API.post(`/gift/${id}`, data);
@@ -40,3 +45,15 @@ export const updateGift = async ({ id, data }: GiftParams) => {
     return [err.response.data];
   }
 };
+
+export const deleteGift = async ({ id, wishlistId }: DeleteParams) => {
+  try {
+    const response = await API.delete(`/gift/${wishlistId}/${id}`);
+    Notify.bottom(response.data.message);
+    return [null, response.data.payload];
+  } catch (err: any) {
+    const message = err.response.data.message;
+    Notify.bottom(message ? message : 'Something happened. Kindly try again');
+    return [err.response.data];
+  }
+}

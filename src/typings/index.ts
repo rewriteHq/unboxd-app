@@ -40,6 +40,8 @@ export interface GiftType {
   totalCost?: number;
   imageURL?: string;
   coverImage?: string;
+  isArchived?: boolean;
+  isDeleted?: boolean;
 }
 
 export interface WishList {
@@ -56,6 +58,7 @@ export interface WishList {
   };
   description?: string;
   slug: string;
+  isArchived?: boolean;
 }
 
 export default AppState;

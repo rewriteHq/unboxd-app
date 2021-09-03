@@ -38,9 +38,11 @@ const DashboardLayout: React.FC<LayoutProps> = ({
   );
 
   const {
-    data: { balance },
+    data,
     isLoading,
   } = useSelector((state: GlobalStoreState) => state.wallet);
+
+  const { balance } = data;
 
   useEffect(() => {
     dispatch(getUserWallet());

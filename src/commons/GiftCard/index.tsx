@@ -1,4 +1,5 @@
 import useOnClickOutside from 'hooks/useOnClickOutside';
+import { deleteGift, updateGift } from 'modules/beneficiary/pages/Gift/service';
 import React, {
   ButtonHTMLAttributes,
   useCallback,
@@ -7,7 +8,8 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
 import { GiftType } from '../../typings';
 import ProgressBar from '../Progress';
 import {
@@ -17,6 +19,7 @@ import {
   MenuButton,
   MenuItems,
   MenuOverlay,
+  NoLink,
   Raised,
 } from './style';
 
@@ -34,7 +37,7 @@ interface MenuButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 interface MenuProps {
   close: () => void;
-  id: string;
+  gift: GiftType;
   wishlistId: string;
 }
 
@@ -62,18 +65,48 @@ const GiftMenuButton = ({ onClick, active }: MenuButtonProps) => {
   );
 };
 
-const GiftMenu = ({ close, id, wishlistId }: MenuProps) => {
+const GiftMenu = ({ close, gift, wishlistId }: MenuProps) => {
   const clickRef = useRef(null);
   useOnClickOutside(clickRef, close);
+
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const hideItem = async () => {
+    const payload = {
+      ...gift,
+      isArchived: true,
+    }
+
+    try {
+      await dispatch(updateGift({data: payload, id: gift._id}));
+      history.goBack();
+      close();
+    } catch (err) {
+      return err;
+    }
+
+  };
+
+  const deleteItem = async () => {
+    const [err, result] = await dispatch(deleteGift({id: gift._id, wishlistId}));
+    if (err) {
+      return err;
+    }
+
+    if (result) {
+      history.goBack();
+    }
+  }
 
   return (
     <>
       <MenuItems ref={clickRef}>
-        <Link to={`/event/edit-gift/${wishlistId}/${id}`}>Edit</Link>
-        <Link to="event">Hide Item</Link>
-        <Link to="event" className="danger">
+        <Link to={`/event/edit-gift/${wishlistId}/${gift._id}`}>Edit</Link>
+        <NoLink onClick={hideItem}>Hide Item</NoLink>
+        <NoLink onClick={deleteItem} className="danger">
           Delete
-        </Link>
+        </NoLink>
       </MenuItems>
       <MenuOverlay />
     </>
@@ -119,7 +152,9 @@ const Menu = () => {
   return (
     <>
       <GiftMenuButton onClick={toggle} active={show} />
-      {show && <GiftMenu close={toggle} id={gift!._id} wishlistId={wishlistId} />}
+      {show && (
+        <GiftMenu close={toggle} gift={gift!} wishlistId={wishlistId} />
+      )}
     </>
   );
 };

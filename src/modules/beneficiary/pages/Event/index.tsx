@@ -53,8 +53,7 @@ const Event = ({ list, isLoading, getWishlist }: ComponentProps) => {
   useEffect(() => {
     async function getListDetails() {
       if (!list || list!.slug !== slug) {
-        const data = await getWishlist(slug);
-        console.log(data);
+        await getWishlist(slug);
       }
     }
     getListDetails();
