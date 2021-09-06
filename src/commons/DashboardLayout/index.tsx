@@ -42,11 +42,9 @@ const DashboardLayout: React.FC<LayoutProps> = ({
     isLoading,
   } = useSelector((state: GlobalStoreState) => state.wallet);
 
-  const { balance } = data;
-
   useEffect(() => {
     dispatch(getUserWallet());
-  }, [balance, dispatch]);
+  }, [dispatch]);
 
   useEffect(() => {
     if (!credentials) {
@@ -78,7 +76,7 @@ const DashboardLayout: React.FC<LayoutProps> = ({
                 {isLoading ? (
                   <p>Loading...</p>
                 ) : (
-                  <p>NGN {formatNumber(balance)}</p>
+                  <p>NGN {formatNumber(data?.balance || 0)}</p>
                 )}
               </WalletBalance>
             </DashboardWalletSection>

@@ -2,7 +2,6 @@ import { Suspense, lazy } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
-import { Toaster } from 'react-hot-toast';
 import appThemes from './AppTheme';
 import { checkAuth } from './modules/auth/pages/Login/redux/actions';
 import RoutesHandler from './routes';
@@ -33,7 +32,6 @@ const App: React.FC<ComponentProps> = ({ checkAuthenticated }) => {
           </Switch>
         </Router>
       </ThemeProvider>
-      <Toaster />
     </Suspense>
   );
 };

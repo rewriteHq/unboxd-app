@@ -7,7 +7,7 @@ export const getWishlist = async (id: string) => {
     return [null, response.data.payload];
   } catch (err:any) {
     const message = err.response.data.message;
-    Notify.bottom(message ? message : 'Something happened. Kindly try again');
+    Notify.top(message ? message : 'Something happened. Kindly try again');
     return [err.response.data];
   }
 };

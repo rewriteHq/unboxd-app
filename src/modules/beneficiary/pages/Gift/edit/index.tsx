@@ -76,6 +76,8 @@ const EditGift = ({ gifts, getGift }: ComponentProps) => {
       return err;
     }
 
+    console.log(result);
+    
     if (result) {
       setIsEdited(result);
     }

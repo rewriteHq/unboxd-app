@@ -52,7 +52,7 @@ const Dashboard: React.FC<ComponentProps> = () => {
             <Skeleton height={150} />
           </SkeletonTheme>
         ) : (
-          wishlist.map((wish) => (
+          wishlist?.map((wish) => (
             <WishCard
               key={wish._id}
               title={wish.title}

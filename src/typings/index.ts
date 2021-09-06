@@ -59,6 +59,7 @@ export interface WishList {
   description?: string;
   slug: string;
   isArchived?: boolean;
+  isDeleted?: boolean;
 }
 
 export default AppState;

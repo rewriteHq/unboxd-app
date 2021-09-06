@@ -30,6 +30,7 @@ const Input: React.FC<InputComponentProps> = ({
           inputMode={isPhone ? 'numeric' : 'text'}
           ref={register}
           disabled={isEdit && !show}
+          autoComplete="off"
         />
         {showCallToAction && CallToAction && (
           <span

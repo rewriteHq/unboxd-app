@@ -1,5 +1,7 @@
 import useOnClickOutside from 'hooks/useOnClickOutside';
-import { deleteGift, updateGift } from 'modules/beneficiary/pages/Gift/service';
+import { getWishlistBySlug } from 'modules/beneficiary/pages/Event/redux/actions';
+import { updateGift } from 'modules/beneficiary/pages/Gift/service';
+import { deleteGiftItem } from 'modules/beneficiary/pages/Gift/redux/actions';
 import React, {
   ButtonHTMLAttributes,
   useCallback,
@@ -9,7 +11,7 @@ import React, {
   useState,
 } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { GiftType } from '../../typings';
 import ProgressBar from '../Progress';
 import {
@@ -48,6 +50,10 @@ interface ContextProps {
   wishlistId: string;
 }
 
+type ParamTypes = {
+  slug: string;
+};
+
 const GiftCardContext = React.createContext<ContextProps>({
   show: false,
   toggle: () => null,
@@ -70,34 +76,31 @@ const GiftMenu = ({ close, gift, wishlistId }: MenuProps) => {
   useOnClickOutside(clickRef, close);
 
   const dispatch = useDispatch();
-  const history = useHistory();
+
+  const { slug } = useParams<ParamTypes>();
 
   const hideItem = async () => {
     const payload = {
       ...gift,
       isArchived: true,
-    }
+    };
 
     try {
-      await dispatch(updateGift({data: payload, id: gift._id}));
-      history.goBack();
-      close();
+      await dispatch(updateGift({ data: payload, id: gift._id }))
+      .then(() => {
+        dispatch(getWishlistBySlug(slug));
+        window.location.reload();
+      });
     } catch (err) {
       return err;
     }
-
   };
 
   const deleteItem = async () => {
-    const [err, result] = await dispatch(deleteGift({id: gift._id, wishlistId}));
-    if (err) {
-      return err;
-    }
-
-    if (result) {
-      history.goBack();
-    }
-  }
+    await dispatch(deleteGiftItem({ id: gift._id, wishlistId }));
+  
+    dispatch(getWishlistBySlug(slug));
+  };
 
   return (
     <>
@@ -152,9 +155,7 @@ const Menu = () => {
   return (
     <>
       <GiftMenuButton onClick={toggle} active={show} />
-      {show && (
-        <GiftMenu close={toggle} gift={gift!} wishlistId={wishlistId} />
-      )}
+      {show && <GiftMenu close={toggle} gift={gift!} wishlistId={wishlistId} />}
     </>
   );
 };

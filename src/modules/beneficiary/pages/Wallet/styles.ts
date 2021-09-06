@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Colors from 'constants/Colors';
 import Fonts from 'constants/Fonts';
 
@@ -181,6 +181,7 @@ export const FormContainer = styled.div`
   display: flex;
   width: 100%;
   justify-content: center;
+  max-width: 300px;
 
   form {
     h3 {
@@ -188,12 +189,20 @@ export const FormContainer = styled.div`
       margin-bottom: 1.5rem;
       text-align: center;
     }
-    .walletBalance{
-      font-size: .8rem;
+    .walletBalance {
+      font-size: 0.8rem;
       font-weight: lighter;
-      margin-top: .8rem;
+      margin-top: 0.8rem;
       margin-bottom: 3rem;
     }
+  }
+
+  @media (min-width: 420px) {
+    max-width: 400px;
+  }
+
+  @media (min-width: 768px) {
+    max-width: 500px;
   }
 `;
 
@@ -214,7 +223,7 @@ export const InputGroup = styled.div`
   input {
     background-color: transparent;
     flex: 1;
-    font-size: 1rem;    
+    font-size: 1rem;
     color: ${Colors.white};
 
     ::-webkit-outer-spin-button,
@@ -224,3 +233,50 @@ export const InputGroup = styled.div`
     }
   }
 `;
+
+export const ChooseBankList = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+
+  h3 {
+    font-size: 14px;
+    margin: 1rem 0;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+  }
+`;
+
+export const ListItem = styled.li`
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  margin: 0.5rem 0;
+
+  .icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    background-color: ${Colors.tintOrange};
+    color: ${Colors.burntOrange};
+    margin-right: 1rem;
+  }
+
+  .account {
+    display: flex;
+    flex-direction: column;
+  }
+`;
+
+export const GoBack = styled.span(
+  () => css`
+    margin-right: 1rem;
+  `
+);

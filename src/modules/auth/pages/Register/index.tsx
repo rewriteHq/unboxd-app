@@ -68,14 +68,14 @@ const Register = () => {
     setValid(false);
     
     if (values.phone.length < 11 || values.phone.length > 12) {
-      Notify.bottom('Phone Number must be of the number format. Kindly try again');
+      Notify.top('Phone Number must be of the number format. Kindly try again');
       setLoading(false);
       setValid(false);
       return;
     }
 
     if (values.password.length < 8) {
-      Notify.bottom('Password should be 8 characters or more');
+      Notify.top('Password should be 8 characters or more');
       setLoading(false);
       setValid(false);
       return;
@@ -87,16 +87,16 @@ const Register = () => {
     try {
       const response = await API.post('/auth/signup', authData);
 
-      Notify.bottom(response.data.message);
+      Notify.top(response.data.message);
 
       setTimeout(() => history.push('/verify-user'), 500);
       dispatch({ type: SEND_EMAIL, payload })
       dispatch({ type: SET_STEP })
-      Notify.bottom('Check your email for verification OTP');
+      Notify.top('Check your email for verification OTP');
       setLoading(false);
     } catch (err: any) {
       const message = err.response.data.message;
-      Notify.bottom(message ? message : 'Something happened. Kindly try again');
+      Notify.top(message ? message : 'Something happened. Kindly try again');
       setLoading(false);
       setValid(false);
     }

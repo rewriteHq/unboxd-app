@@ -36,7 +36,7 @@ export const SidebarWrapper = styled.aside`
     }
 
     a.activeLink{
-      background-color: ${Colors.navy};
+      background-color: ${Colors.darkNavy};
     }
     a.logout {
       margin-top: auto;

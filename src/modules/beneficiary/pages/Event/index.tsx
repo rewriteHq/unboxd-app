@@ -107,11 +107,11 @@ const Event = ({ list, isLoading, getWishlist }: ComponentProps) => {
             </div>
             <img src={list?.coverImage} alt="event" />
           </WishlistHeader>
-          <NeedText>Your wishes &#40;{list?.gifts.length}&#41;</NeedText>
+          <NeedText>Your wishes &#40;{list?.gifts?.filter(gift => gift.isArchived !== true).length}&#41;</NeedText>
           <WishItemsWrapper>
-            {list?.gifts.map((gift) =>
+            {list?.gifts?.filter(gift => gift.isArchived !== true).map((gift) =>
               gift.imageURL ? (
-                <GiftCard gift={gift} wishlistId={list._id}>
+                <GiftCard gift={gift} wishlistId={list._id} key={gift._id}>
                   <GiftCard.Menu />
                 </GiftCard>
               ) : (

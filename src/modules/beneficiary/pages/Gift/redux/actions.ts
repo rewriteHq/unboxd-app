@@ -1,7 +1,8 @@
 import { Dispatch } from 'redux';
 import { LOADING_UI } from '../../../../auth/pages/Login/redux/types';
-import { getGift } from '../service';
-import { ADD_GIFT } from './types';
+import { deleteGift, getGift } from '../service';
+import { ADD_GIFT, DeleteParams, DELETE_GIFT } from './types';
+
 
 export const addGift = (id: string) => async (dispatch: Dispatch) => {
   dispatch({ type: LOADING_UI });
@@ -15,4 +16,17 @@ export const addGift = (id: string) => async (dispatch: Dispatch) => {
     type: ADD_GIFT,
     payload: gift,
   });
+};
+
+export const deleteGiftItem = ({id, wishlistId}: DeleteParams) => async (dispatch: Dispatch) => {
+  dispatch({ type: LOADING_UI });
+
+  try {
+    const response = await deleteGift({id, wishlistId});
+    dispatch({ type: DELETE_GIFT })
+    return response;
+  } catch(err: any) {
+    return err
+  }
+
 };

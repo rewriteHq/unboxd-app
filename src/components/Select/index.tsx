@@ -46,6 +46,7 @@ const SelectWrapper = styled.div`
     font-family: Averta-CY;
     margin-top: 0.5rem;
     font-weight: 300;
+    width: 100%;
     option {
       font-weight: 300;
       color: #000000;
