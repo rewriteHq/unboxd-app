@@ -119,7 +119,9 @@ const Menu = () => {
   return (
     <>
       <GiftMenuButton onClick={toggle} active={show} />
-      {show && <GiftMenu close={toggle} id={gift!._id} wishlistId={wishlistId} />}
+      {show && (
+        <GiftMenu close={toggle} id={gift!._id} wishlistId={wishlistId} />
+      )}
     </>
   );
 };

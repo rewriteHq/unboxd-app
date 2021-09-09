@@ -2,9 +2,10 @@ import Styled from 'styled-components';
 import { HeadWrapper } from '../../../../components/Header/styles';
 import { FooterWrapper } from '../../../../components/Footer/styles';
 import Colors from '../../../../constants/Colors';
+import Fonts from '../../../../constants/Fonts';
 import Image from '../../../../assets/img/unboxd-banner-lg.png';
 import SmImage from '../../../../assets/img/unboxd-banner-sm.png';
-import AppImage from '../../../../assets/img/unboxd-app.png';
+import { Link } from 'react-router-dom';
 
 export const HomeHeader = Styled(HeadWrapper)`
   padding: 3rem 0;
@@ -20,9 +21,8 @@ export const HomeHeader = Styled(HeadWrapper)`
 `;
 
 export const HomeFooter = Styled(FooterWrapper)`
-  padding: 3rem 0;
+  padding: .5rem 0;
   opacity: 0.75;
-  border-top: 0.25px solid ${Colors.burntOrange};
   .container {
     display: flex;
     flex-direction: column;
@@ -108,6 +108,194 @@ export const Paragraph = Styled.p`
     max-width: 414px;
     margin: 1.5rem auto;
   }
+`;
+
+export const ListingLink = Styled(Link)`
+    text-decoration: none;
+    background-color: #fff;
+    color: #16181D;
+    padding: 8px 20px;
+    border-radius: 10px;
+    font-weight: 400;
+    font-size: 16px;
+    box-shadow: -1px 2px 5px #fff;
+    font-weight: 700;
+    z-index: 10;
+`;
+
+export const ListingsContainer = Styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 3rem 0 3rem;
+    z-index: 10;
+`;
+
+export const Container = Styled.div`
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+`;
+
+export const UnbxodHeading = Styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5rem;
+    p {
+      font-family: ${Fonts.tertiary};
+      font-size: 25px;
+      z-index: 10;
+    }
+`;
+
+export const GradientWrapper = Styled.div`
+
+
+  position: relative;
+
+&::before{
+  content: '';
+  position: absolute;
+  width: 100vw;
+  max-width: 100vw;
+  margin: 0 calc(-50vw + 50%);
+  height: 100%;
+  bottom: 0;
+}
+
+&::before {
+  background-image: linear-gradient(#16181d 15%, #4e9060);
+}
+
+`;
+
+export const HowItWorksContent = Styled.div`
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: 1fr;   
+    grid-gap: 20px;
+    margin-top: 5rem;
+
+
+    
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .imageWrapper {
+        display: none;
+        
+
+        @media (min-width: 768px) {
+        display: block;
+        grid-column: 1/2;
+        position: relative;
+    }
+    
+        
+    }
+
+    .img {
+        position: absolute;
+    }
+
+    .img-1 {
+        left: 1rem;
+        z-index: 3;
+        width: 60%;
+    }
+    .img-2 {
+        z-index: 2;
+        left: 10rem;
+        top: 1rem;
+        width: 50%;
+    }
+    
+    .img-3 {
+        z-index: 1;
+        left: 17rem;
+        top: 2rem;
+        width: 40%;
+    }
+
+    .contentWrapper {
+      width: 100%;  
+      grid-column: 1/-1;
+      text-align: center;
+      
+        
+
+        @media (min-width: 768px) {
+
+        grid-column: 2/3;
+        width: 90%;   
+        display: flex;
+        flex-direction: column;
+        margin-left: 7rem; 
+        margin-top: 5rem; 
+        text-align: left;
+    }
+
+        .content {
+            display: none;
+        }
+
+        .active-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: min-content min-content 5rem; 
+        }
+
+        span {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 30px;
+            min-width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 1rem;
+            background: ${Colors.tintOrange};
+            color: ${Colors.burntOrange};
+        }
+
+        .spanContainer {
+          display: flex;
+            justify-content: center;
+            align-items: center;
+
+            @media (min-width: 768px) {
+              justify-content: flex-start;
+            }
+        }
+    }
+
+`;
+
+export const Button = Styled.button`
+    background-color: transparent;
+    margin-right: 10px;
+    margin-top: 25px;
+
+    .circleBTN {
+      width: 7px;
+      min-width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      opacity: 0.5;
+      background: ${Colors.tintOrange};
+      color: ${Colors.burntOrange};
+    }
+
+    .btn-active {
+      width: 10px;
+      min-width: 15px;
+      height: 15px;
+      opacity: 1;
+    }
 `;
 
 export const UnorderedList = Styled.ul`
@@ -280,6 +468,131 @@ export const UnboxdCarousel = Styled.div`
   }
 `;
 
+export const UnboxdCarouselBottom = Styled.div`
+  display: flex;
+  flex-direction: column;
+  /* margin-top: 1rem; */
+  margin-left: -20px;
+  margin-right: -20px;
+  margin-bottom: -10px;
+  max-height: 45vh;
+  z-index: 10;
+ 
+  width: 100vw;
+  max-width: 100vw;
+  margin: 0 calc(-50vw + 50%);
+ 
+  
+  position: relative;
+  overflow: hidden;
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    width: 25%;
+    height: 100%;
+    top: 0;
+    z-index: 1;
+  }
+  &::before {
+    left: -1px;
+    /* background: linear-gradient(to right, rgba(22, 24, 29, 1), rgba(34, 36, 44, 0)); */
+  }
+  &::after {
+    right: -1px;
+    /* background: linear-gradient(to left, rgba(22, 24, 29, 1), rgba(34, 36, 44, 0)); */
+  }
+  .carousel-tab {
+    margin: 1.5rem 0;
+    ul {
+      display: flex;
+      width: 100%;
+      overflow: hidden;
+      justify-content: center;
+     
+      .list-item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 0.5rem;
+        white-space: nowrap;
+        font-family: ${Fonts.secondary};
+        color: ${Colors.burntOrangeLite};
+        opacity: 0.133;
+        &.active {
+          color: ${Colors.burntOrangeLite};
+          padding: 5px 10px;
+          border-radius: 7.5px;
+          opacity: 1;
+        }
+      }
+    }
+  }
+  .carousel {
+    display: flex;
+    height: 330px;
+    background-size: 650px;
+    background-repeat: repeat-x;
+    background-position: top center;
+    width: 4800px;
+    -webkit-animation: scroll-grid 180s linear infinite;
+    animation: scroll-grid 180s linear infinite;
+  }
+  .bottom-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 90%;
+    z-index: 2;
+  }
+  @media (min-width: 780px) {
+    max-height: 45vh;
+    .carousel-tab {
+      ul {
+        &::before, &::after {
+          content: '';
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0;
+        }
+        .list-item {
+          font-size: 30px;
+          letter-spacing: 5px;
+          margin: 0 0.95rem;
+        }
+      }
+    }
+    .carousel {
+      height: 500px;
+      background-size: 1420px;
+      width: 5260px;
+      margin-top: 2rem;
+      background-image: url(${Image});
+    }
+  }
+  @-webkit-keyframes scroll-grid {
+    0% {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform:translate3d(0, 0, 0)
+    }
+    100% {
+        -webkit-transform: translate3d(-2420px, 0, 0);
+        transform:translate3d(-2420px, 0, 0)
+    }
+  }
+  @keyframes scroll-grid {
+    0% {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform:translate3d(0, 0, 0)
+    }
+    100% {
+        -webkit-transform: translate3d(-2420px, 0, 0);
+        transform:translate3d(-2420px, 0, 0)
+    }
+  }
+`;
+
 export const GetStarted = Styled.div`
   position: absolute;
   bottom: 3.5rem;
@@ -301,12 +614,76 @@ export const GetStarted = Styled.div`
 
 export const HowItWorks = Styled.div`
   display: flex;
-  margin: 5rem auto;
+  margin: 10rem auto;
+
   .contentContainer {
     display: flex;
     flex-direction: column;
     min-height: 0;
   }
+`;
+
+export const StatisticWrapper = Styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    @media (min-width: 780px) {
+      flex-direction: row;
+  }
+
+    .stat-item {
+      margin-bottom: 35px;
+      z-index: 10;
+
+        @media (min-width: 780px) {
+          margin-left: 40px;
+      }
+
+      .stat-text {
+        text-align: center;
+        z-index: 10;
+      }
+
+    }
+
+    .stat-details {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 10;
+    }
+
+    
+`;
+// center HERE
+export const CenterContent = Styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5rem;
+    z-index: 10;
+    
+
+    @media (min-width: 780px) {
+      margin: 10rem 0 8rem;
+  }
+
+    p {
+        margin-top: 5px;
+        font-size: 22px;
+        text-align: center;
+        z-index: 10;
+
+        @media (min-width: 780px) {
+          width: 50%;
+      }
+        
+    }
+
 `;
 
 export const StatsArea = Styled.div`
@@ -380,18 +757,6 @@ export const StatsArea = Styled.div`
         }
       }
 
-      .image-stat {
-        display: flex;
-        background-image: url(${AppImage});
-        width: 100%;
-        background-position: top center;
-        background-size: cover;
-        background-repeat: no-repeat;
-        margin-bottom: -3.1rem;
-        margin-top: -7rem;
-        margin-right: -1.5rem;
-        margin-left: 1.5rem;
-      }
     }
   }
 
@@ -426,7 +791,7 @@ export const SocialIcon = Styled.a.attrs(() => ({
 
 export const StepTitle = Styled.h3`
   font-size: 24px;
-  margin-bottom: 1rem;
+  margin: 1rem 0;
 `;
 
 export const StepContent = Styled.p`

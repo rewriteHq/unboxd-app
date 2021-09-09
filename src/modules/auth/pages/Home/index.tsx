@@ -18,9 +18,21 @@ const Layout = lazy(() => import('../../../../Layout'));
 
 const Home: React.FC<HomeComponentProps> = () => {
   const steps = [
-    {title: 'Create Wishlist', content: 'With unboxd, you can do more than a bland list on notes. You can add image, price and description'},
-    {title: 'Share Around', content: 'You get a customized link to share your wish on any social platform of choice'},
-    {title: 'Request Payout', content: 'Whether you have raised all that you need or part of it, your money is sent to your local account when you request for it'},
+    {
+      title: 'Create Wishlist',
+      content:
+        'With unboxd, you can do more than a bland list on notes. You can add image, price and description',
+    },
+    {
+      title: 'Share Around',
+      content:
+        'You get a customized link to share your wish on any social platform of choice',
+    },
+    {
+      title: 'Request Payout',
+      content:
+        'Whether you have raised all that you need or part of it, your money is sent to your local account when you request for it',
+    },
   ];
 
   const tabs = [

@@ -1,9 +1,11 @@
 import { lazy } from 'react';
 import RouteType from '../../../routes/types';
 
-const home = lazy(() => import('../pages/Home'));
+// const home = lazy(() => import('../pages/Home'));
+const newhome = lazy(() => import('../pages/Home/new-index'));
 const homeHeader = lazy(() => import('../pages/Home/header'));
-const homeFooter = lazy(() => import('../pages/Home/footer'));
+const newFooter = lazy(() => import('../pages/Home/new-footer'));
+// const homeFooter = lazy(() => import('../pages/Home/footer'));
 
 const login = lazy(() => import('../pages/Login'));
 const authHeader = lazy(() => import('../pages/Login/header'));
@@ -16,9 +18,9 @@ const routes: RouteType[] = [
     path: '/',
     exact: true,
     auth: false,
-    component: home,
+    component: newhome,
     header: homeHeader,
-    footer: homeFooter,
+    footer: newFooter,
   },
   {
     path: '/login',
@@ -47,7 +49,7 @@ const routes: RouteType[] = [
     auth: false,
     component: verifyUser,
     header: authHeader,
-  }
+  },
 ];
 
 export default routes;

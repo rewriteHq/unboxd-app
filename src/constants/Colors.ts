@@ -20,12 +20,13 @@ const Colors = {
   dark: '#303030',
   tintOrange: '#EBD6B7',
   burntOrange: '#734B0F',
+  burntOrangeLite: '#FFDEAD',
   tintGrey: '#A2A2A2',
   offWhite: '#979797',
   realGreen: '#8CC087',
   lineBlack: '#3F3F3F',
   black100: '#838383',
-  black200: "#353535"
+  black200: '#353535',
 };
 
 export default Colors;
