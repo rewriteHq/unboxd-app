@@ -36,6 +36,12 @@
   font-weight: bolder;
 }
 
+@font-face {
+  font-family: 'Autography';
+  src: url('./assets/fonts/Autography.otf') format('opentype');
+  font-weight: normal;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -55,6 +61,7 @@ body {
   font-weight: $font-weight-Regular;
   background: $dark-background;
   color: $white;
+  overflow-x: hidden;
 }
 
 a {
