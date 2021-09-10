@@ -107,7 +107,7 @@ const Login = () => {
                 callToAction={() => <EyeIcon />}
                 required
               />
-              <Button type="submit" loading={loading} disabled={loading}>
+              <Button type="submit" loading={loading || undefined} disabled={loading}>
                 Sign in
               </Button>
             </Form>

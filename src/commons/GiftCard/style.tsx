@@ -45,6 +45,12 @@ export const GiftThumbText = styled.div`
   }
 `;
 
+export const NoLink = styled.button`
+  display: flex;
+  background-color: transparent;
+  border: 0;
+`;
+
 export const MenuButton = styled.button<{ active: boolean }>`
   background-color: ${Colors.white};
   position: absolute;
@@ -95,7 +101,7 @@ export const MenuItems = styled.div`
   color: ${Colors.black};
   overflow: hidden;
 
-  a {
+  a, button {
     padding: 0.7rem 1rem;
     transition: 0.5s ease all;
 

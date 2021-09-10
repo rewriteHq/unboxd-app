@@ -11,11 +11,11 @@ export const createOrEditEvent = async (
 
   try {
     const response = await API[method](url, data);
-    Notify.bottom(response.data.message);
+    Notify.top(response.data.message);
     return [null, response.data.payload];
   } catch (err:any) {
     const message = err.response.data.message;
-    Notify.bottom(message ? message : 'Something happened. Kindly try again');
+    Notify.top(message ? message : 'Something happened. Kindly try again');
     return [err.response.data];
   }
 };
@@ -26,7 +26,7 @@ export const getWishlist = async (id: string) => {
     return [null, response.data.payload];
   } catch (err: any) {
     const message = err.response.data.message;
-    Notify.bottom(message ? message : 'Something happened. Kindly try again');
+    Notify.top(message ? message : 'Something happened. Kindly try again');
     return [err.response.data];
   }
 };
@@ -37,7 +37,7 @@ export const getWishlistBySlug = async (slug: string, username: string) => {
     return [null, response.data.payload];
   } catch (err: any) {
     const message = err.response.data.message;
-    Notify.bottom(message ? message : 'Something happened. Kindly try again');
+    Notify.top(message ? message : 'Something happened. Kindly try again');
     return [err.response.data];
   }
 }

@@ -1,4 +1,4 @@
-import { GiftState, GiftActionTypes, ADD_GIFT } from './types';
+import { GiftState, GiftActionTypes, ADD_GIFT, DELETE_GIFT } from './types';
 
 const initialState: GiftState = {
   data: {},
@@ -12,6 +12,10 @@ function reducer(state = initialState, action: GiftActionTypes) {
         ...state,
         data: { ...state.data, [action.payload._id]: action.payload },
       };
+    case DELETE_GIFT:
+      return {
+        ...state,
+      }
     default:
       return state;
   }

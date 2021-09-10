@@ -12,7 +12,7 @@ export const sendEmail = (payload: any) => (dispatch: any) => {
   dispatch({ type: LOADING_USER });
   API.post('/auth/sendOtp', payload)
     .then((res) => {
-      Notify.bottom(res ? res.data.payload.message : 'OTP sent to your email');
+      Notify.top(res ? res.data.payload.message : 'OTP sent to your email');
       dispatch({ type: CLEAR_ERRORS });
       dispatch({ type: SEND_EMAIL, payload })
       dispatch({ type: SET_STEP })
@@ -22,7 +22,7 @@ export const sendEmail = (payload: any) => (dispatch: any) => {
         type: SET_ERRORS,
         payload: err.response.data,
       });
-      Notify.bottom(err.response.data.message);
+      Notify.top(err.response.data.message);
     });
 };
 
@@ -38,6 +38,6 @@ export const verifyUser = (userData: any, history: any) => (dispatch: any) => {
         type: SET_ERRORS,
         payload: err.response.data,
       });
-      Notify.bottom(err.response.data.message);
+      Notify.top(err.response.data.message);
     });
 };

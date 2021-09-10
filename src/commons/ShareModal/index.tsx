@@ -24,7 +24,7 @@ interface ComponentProps {
 const copyUrl = async (url: string) => {
   try {
     await navigator.clipboard.writeText(url);
-    Notify.bottom('Copied to clipboard');
+    Notify.top('Copied to clipboard');
   } catch (err) {
     return err;
   }
@@ -53,7 +53,8 @@ const shareToTwitter = (url: string, title: string) => {
 };
 
 const ShareEventModal = ({ show, close, wishlist }: ComponentProps) => {
-  const eventUrl = `${process.env.REACT_APP_DOMAIN_NAME}${wishlist.slug}`;
+  const username = localStorage.getItem('username');
+  const eventUrl = `${process.env.REACT_APP_DOMAIN_NAME}${username}/${wishlist.slug}`;
   return (
     <Modal show={show} onClose={close}>
       <Modal.Bottom>

@@ -123,7 +123,7 @@ const AddEvent = ({ list, getWishlist }: ComponentProps) => {
             {R.isEmpty(list.gifts) ? (
               <NoItem />
             ) : (
-              <GiftList gifts={list.gifts} wishlistId={id} />
+              <GiftList gifts={list.gifts.filter(gift => gift.isArchived !== true)} wishlistId={id} />
             )}
           </WishlistGrid>
           {list.gifts.length < 6 && <DashboardFilm />}

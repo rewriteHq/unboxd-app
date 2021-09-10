@@ -55,6 +55,6 @@ export const postReq = (
 
 export const handleRequestError = (err: AxiosError) => {
   const message = err.response && err.response.data.message;
-  Notify.bottom(message ? message : 'Something happened. Kindly try again');
+  Notify.top(message ? message : 'Something happened. Kindly try again');
   return [err.response];
 };

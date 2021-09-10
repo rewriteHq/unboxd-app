@@ -14,9 +14,9 @@ export type GlobalStoreState = {
     list: { data: any | null; error: string | null };
     wallet: { data: any | null; error: string | null };
   };
-
   gifts: { data: any; error: string | null };
   wallet: {
+    banks: any;
     data: { balance: number };
     error: string | null;
     isLoading: boolean;

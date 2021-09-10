@@ -147,7 +147,7 @@ const EventForm = ({
     e.preventDefault();
     if (!enteredValidHeadline) {
       const message = 'Headline cannot be empty';
-      Notify.bottom(message);
+      Notify.top(message);
       return;
     }
 

@@ -33,11 +33,11 @@ const UnsplashModal = ({ show, selectImage, close }: ModalComponentProps) => {
             setPhotos(result.response!.results);
             setLoading(false);
           } else if (result.status === 401) {
-            Notify.bottom('An error occured. Kindly try again later');
+            Notify.top('An error occured. Kindly try again later');
           }
         })
         .catch((err) => {
-          Notify.bottom(err.message);
+          Notify.top(err.message);
         });
     };
 

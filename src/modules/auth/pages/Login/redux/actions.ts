@@ -14,7 +14,7 @@ import { AppDispatch } from '../../../../../store/types';
 export const loginUser = (userData: any, history: any) => (dispatch: any) => {
   dispatch({ type: LOADING_USER });
   API.post('/auth/signin', userData)
-    .then((res) => {
+    .then(res => {
       const token = `Bearer ${res.data.token}`;
       const username = res.data.payload.username;
       const isVerified = res.data.payload.isVerified;
@@ -39,7 +39,7 @@ export const loginUser = (userData: any, history: any) => (dispatch: any) => {
         const notVerified = err.response.data.payload.isVerified;
         if (!notVerified) history.push('/verify-user');
       }
-      Notify.bottom(err.response.data.message);
+      Notify.top(err.response.data.message);
     });
 };
 
@@ -60,6 +60,7 @@ export const getUserData = () => (dispatch: any) => {
 
 export const logoutUser = () => (dispatch: any) => {
   localStorage.removeItem('token');
+  localStorage.clear();
   delete API.defaults.headers.common['Authorization'];
   dispatch({
     type: SET_UNAUTHENTICATED,

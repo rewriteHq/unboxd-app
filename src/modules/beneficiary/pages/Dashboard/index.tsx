@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, useState } from 'react';
 import { ComponentProps } from './types';
 import DashboardLayout from '../../../../commons/DashboardLayout';
 import { MyUnboxdListHeader, WishList } from './styles';
@@ -15,16 +15,19 @@ import { unSetGlobalButtoLink } from 'modules/beneficiary/redux/actions';
 const fallbackImage = '/assets/birthday.jpg';
 
 const Dashboard: React.FC<ComponentProps> = () => {
-  const { data: wishlist, isLoading } = useSelector(
+  const { data: wishlist } = useSelector(
     (state: GlobalStoreState) => state.wishlist
   );
+  const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useDispatch();
   const history = useHistory();
 
   useEffect(() => {
+    setIsLoading(true);
     dispatch(getUserWishList());
     dispatch(unSetGlobalButtoLink());
+    setIsLoading(false);
   }, [dispatch]);
 
   const openList = useCallback(
@@ -49,11 +52,11 @@ const Dashboard: React.FC<ComponentProps> = () => {
             <Skeleton height={150} />
           </SkeletonTheme>
         ) : (
-          wishlist.map((wish) => (
+          wishlist?.map((wish) => (
             <WishCard
               key={wish._id}
               title={wish.title}
-              wishCount={wish.gifts.length}
+              wishCount={wish.gifts.filter(gift => gift.isArchived !== true).length}
               imgSrc={wish.coverImage || fallbackImage}
               click={() => openList(wish.slug)}
             />
